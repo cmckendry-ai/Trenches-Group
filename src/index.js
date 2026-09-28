@@ -2,7 +2,6 @@ var __freeze = Object.freeze;
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(raw || cooked.slice()) }));
-
 // src/http.ts
 function json(data, status = 200, headers = {}) {
   return Response.json(data, {
@@ -50,6 +49,7 @@ var HttpError = class extends Error {
   }
 };
 
+
 // src/auth.ts
 async function secureEqual(a, b) {
   const encoder = new TextEncoder();
@@ -81,6 +81,7 @@ async function requireRunner(request, env) {
 }
 __name(requireRunner, "requireRunner");
 
+
 // src/admin.ts
 var _a;
 function adminHtml() {
@@ -110,10 +111,10 @@ function adminHtml() {
     <section class="panel"><div class="sectionTitle"><div><h2>Prospecting campaigns</h2><div class="sub">Fast discovery \u2192 deterministic filtering \u2192 one-business enrichment. One bad candidate cannot kill a campaign.</div></div><div class="rowBtns"><button class="btn small" id="archiveToggle" onclick="toggleArchived()">Show archived</button><div class="runnerBadge"><span class="dot" id="runnerDot"></span><span id="runnerText">Runner unknown</span></div></div></div><div class="campaignGrid" id="campaignGrid"><div class="empty">No campaigns yet.</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Prospector Job Queue <span class="pill READY">AUTO</span></h2><div class="sub">Rotating city \xD7 category grid. A capped number of due jobs get promoted into real prospecting campaigns automatically on the 2-minute scheduler tick \u2014 this does not bypass the daily cap or backlog limit below.</div></div><div class="rowBtns"><span class="runnerBadge" id="prospectorJobsSummary">Loading\u2026</span><button class="btn small primary" onclick="runProspectorJobsNow()">Run due jobs now</button></div></div><div class="tableWrap" style="max-height:320px"><table style="min-width:900px"><thead><tr><th>City</th><th>Category</th><th>Radius</th><th>Target</th><th>Cadence</th><th>Last run</th><th>Status</th><th></th></tr></thead><tbody id="prospectorJobRows"></tbody></table><div class="empty" id="prospectorJobEmpty">No prospector jobs seeded yet.</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Outreach Lab <span class="pill READY">TEST MODE</span></h2><div class="sub">Twilio plumbing only. Only numbers on the explicit test allowlist can receive SMS. Live prospect outreach is hard-locked.</div></div><div class="runnerBadge"><span class="dot" id="twilioDot"></span><span id="twilioText">Twilio status unknown</span></div></div><div class="toolbar"><input id="oPhone" placeholder="Your test phone, e.g. +16155551234"/><input id="oLabel" placeholder="Label, e.g. Connor iPhone"/><button class="btn" onclick="addTestNumber()">Add test number</button></div><div class="toolbar"><input id="oMessage" value="Trenches test: reply YES, PRICE, CALL ME, or STOP."/><button class="btn primary" onclick="sendTestSms()">Send test SMS</button></div><div style="padding:0 12px 10px"><div class="sub" id="outreachWebhookText"></div><div id="allowlistRows" class="rowBtns" style="margin-top:9px"></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:820px"><thead><tr><th>Time</th><th>Direction</th><th>Phone</th><th>Message</th><th>Intent</th><th>Status</th></tr></thead><tbody id="messageRows"></tbody></table><div class="empty" id="messageEmpty">No outreach test messages yet.</div></div></section>
-    <section class="panel"><div class="sectionTitle"><div><h2>Autonomous Outreach Orchestrator <span class="pill READY">EMAIL + SMS FOUNDATION</span></h2><div class="sub">Google Workspace email can run autonomously after one-time OAuth setup. Gmail replies feed the same conversation brain. SMS stays live-locked until Twilio approval; voice/social adapters remain disabled.</div></div><div class="runnerBadge"><span class="dot" id="gmailDot"></span><span id="gmailText">Gmail status unknown</span></div></div>
+    <section class="panel"><div class="sectionTitle"><div><h2>Autonomous Outreach Orchestrator <span class="pill READY">EMAIL + SMS FOUNDATION</span></h2><div class="sub">Bulk campaigns run through Smartlead. Live conversational replies send through a Cloudflare Email Routing binding. SMS stays live-locked until Twilio approval; voice/social adapters remain disabled.</div></div><div class="runnerBadge"><span class="dot" id="gmailDot"></span><span id="gmailText">Smartlead status unknown</span></div></div>
       <div class="toolbar"><input id="gClientId" placeholder="Smartlead sending mailbox (e.g. connor.trenches@discovertrenchesgroup.com)"/><button class="btn primary" onclick="saveSmartleadMailboxUi()">Save Smartlead mailbox</button></div>
       <div style="padding:0 12px 10px"><div class="sub" id="gmailCallback"></div></div>
-      <div class="toolbar"><span class="dot" id="liveReplyDot"></span><span class="sub" id="liveReplyText"></span><button class="btn primary" onclick="connectLiveReplyUi()">Connect live-reply mailbox</button></div>
+      <div class="toolbar"><span class="dot" id="liveReplyDot"></span><span class="sub" id="liveReplyText"></span></div>
       <div style="padding:0 12px 10px"><div class="sub">Live conversational replies (price/skepticism/etc. answers) send through this mailbox via Gmail API, separate from Smartlead's bulk campaign sends. Sign in as connor.trenches@discovertrenchesgroup.com when prompted.</div></div>
       <div class="toolbar"><input id="emailFromName" placeholder="From name"/><input id="emailPostal" placeholder="Business postal address (required before live email)"/><input id="emailDailyCap" type="number" min="1" max="100" value="10" style="min-width:120px;max-width:150px"/><select id="emailReplyMode"><option value="DRAFT_ONLY">Replies: Draft only</option><option value="AUTO">Replies: Auto-send</option></select><button class="btn" onclick="saveEmailSettingsUi()">Save settings</button></div>
       <div class="toolbar"><button class="btn" id="emailLiveToggle" onclick="toggleEmailLiveUi()">Enable live email</button><button class="btn" id="emailAutoToggle" onclick="toggleEmailAutomationUi()">Enable autonomous sequences</button><button class="btn" onclick="runOrchestratorUi()">Run orchestrator now</button><div class="sub" id="emailModeText"></div></div>
@@ -163,9 +164,8 @@ async function addTestNumber(){try{const phone=document.getElementById('oPhone')
 async function removeTestNumber(enc){try{await api('/api/outreach/test-allowlist/'+encodeURIComponent(decodeURIComponent(enc)),{method:'DELETE',headers:{'X-Actor':'COMMAND_CENTER'}});await loadOutreach()}catch(e){showError(e)}}
 async function sendTestSms(){try{const phone=document.getElementById('oPhone').value.trim(),message=document.getElementById('oMessage').value.trim();if(!phone)throw new Error('Enter an allowlisted test phone number.');if(!message)throw new Error('Enter a test message.');const d=await api('/api/outreach/test-send',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({phone,message})});await loadOutreach();alert('Test SMS queued'+(d.sid?' \xB7 '+d.sid:''))}catch(e){showError(e)}}
 let emailOutreachState=null;
-async function loadEmailOutreach(){const [d,l]=await Promise.all([api('/api/outreach/email/status'),api('/api/leads?limit=200')]);emailOutreachState=d;const dot=document.getElementById('gmailDot'),txt=document.getElementById('gmailText');dot.className='dot '+(d.smartleadMailbox?'on':'off');txt.textContent=d.smartleadMailbox?('Smartlead mailbox \xB7 '+d.smartleadMailbox+(d.smartleadConfigured?'':' \xB7 API key missing')):'Smartlead mailbox not set';document.getElementById('gClientId').value=d.smartleadMailbox||'';document.getElementById('gmailCallback').textContent='Smartlead webhook URL (register this in Smartlead): '+d.webhookUrl+' \xB7 website campaign '+(d.smartleadWebsiteCampaignId||'not created yet')+' \xB7 concierge campaign '+(d.smartleadConciergeCampaignId||'not created yet');const lrDot=document.getElementById('liveReplyDot'),lrTxt=document.getElementById('liveReplyText');lrDot.className='dot '+(d.liveReplyConnected?'on':'off');lrTxt.textContent=d.liveReplyConnected?('Live-reply mailbox connected \xB7 '+d.liveReplyEmail):'Live-reply mailbox '+(d.liveReplyStatus==='ERROR'?'error: '+(d.liveReplyError||'unknown'):'not connected');const s=d.settings||{};document.getElementById('emailFromName').value=s.fromName||'Connor | Trenches Group';document.getElementById('emailPostal').value=s.postalAddress||'';document.getElementById('emailDailyCap').value=s.dailyCap||10;document.getElementById('emailReplyMode').value=s.autoReplyMode||'DRAFT_ONLY';const live=document.getElementById('emailLiveToggle'),auto=document.getElementById('emailAutoToggle');live.textContent=s.emailLiveMode?'Disable live email':'Enable live email';live.className='btn '+(s.emailLiveMode?'danger':'good');auto.textContent=s.orchestratorEnabled?'Pause autonomous sequences':'Enable autonomous sequences';auto.className='btn '+(s.orchestratorEnabled?'danger':'good');document.getElementById('emailModeText').textContent='Live email '+(s.emailLiveMode?'ON':'OFF')+' \xB7 automation '+(s.orchestratorEnabled?'ON':'OFF')+' \xB7 auto replies '+(s.autoReplyMode||'DRAFT_ONLY')+' \xB7 daily cap '+(s.dailyCap||10)+' \xB7 SMS LIVE LOCKED';const a=document.getElementById('emailAllowlistRows');a.innerHTML='';for(const x of(d.allowlist||[])){a.insertAdjacentHTML('beforeend','<span class="pill READY">'+esc(x.label||'Test')+' \xB7 '+esc(x.email)+' <button class="btn small" style="margin-left:6px;padding:2px 5px" data-email-remove="'+esc(encodeURIComponent(x.email))+'">\xD7</button></span>')}if(!(d.allowlist||[]).length)a.innerHTML='<span class="muted">No test email addresses allowlisted.</span>';document.querySelectorAll('[data-email-remove]').forEach(b=>b.addEventListener('click',()=>removeEmailTestAddressUi(b.getAttribute('data-email-remove'))));const sel=document.getElementById('emailTestLead'),cur=sel.value;sel.innerHTML='<option value="">Optional lead to simulate</option>';for(const x of(l.leads||[])){sel.insertAdjacentHTML('beforeend','<option value="'+esc(x.id)+'">'+esc(x.business_name)+' \xB7 '+esc(x.email||'no email')+'</option>')}if(cur&&[...sel.options].some(o=>o.value===cur))sel.value=cur;const rows=document.getElementById('emailMessageRows');rows.innerHTML='';for(const m of(d.recentMessages||[])){const contact=m.direction==='INBOUND'?m.from_email:m.to_email;let raw={};try{raw=JSON.parse(m.raw_json||'{}')}catch{}const outcome=raw.conversationOutcome||'\u2014';const outcomeHtml=outcome==='DEMO_APPROVED'?'<span class="pill COMPLETED">DEMO_APPROVED</span>':esc(outcome);rows.insertAdjacentHTML('beforeend','<tr><td class="muted">'+esc(m.created_at?new Date(m.created_at).toLocaleString():'\u2014')+'</td><td>'+esc(m.direction)+'</td><td>'+esc(m.business_name||'\u2014')+'</td><td>'+esc(contact)+'</td><td>'+esc(m.subject||'\u2014')+'</td><td>'+esc(m.intent||'\u2014')+'</td><td>'+outcomeHtml+'</td><td>'+esc(m.status)+'</td></tr>')}document.getElementById('emailMessageEmpty').style.display=(d.recentMessages||[]).length?'none':'block';const sr=document.getElementById('sequenceRows');sr.innerHTML='';for(const q of(d.sequences||[])){sr.insertAdjacentHTML('beforeend','<tr><td>'+esc(q.business_name)+'</td><td>'+esc(q.priority||'\u2014')+'</td><td>'+esc(q.strategy)+'</td><td>'+esc(q.status)+'</td><td>'+esc(q.current_step)+'</td><td class="muted">'+esc(q.next_action_at?new Date(q.next_action_at).toLocaleString():'\u2014')+'</td></tr>')}document.getElementById('sequenceEmpty').style.display=(d.sequences||[]).length?'none':'block'}
+async function loadEmailOutreach(){const [d,l]=await Promise.all([api('/api/outreach/email/status'),api('/api/leads?limit=200')]);emailOutreachState=d;const dot=document.getElementById('gmailDot'),txt=document.getElementById('gmailText');dot.className='dot '+(d.smartleadMailbox?'on':'off');txt.textContent=d.smartleadMailbox?('Smartlead mailbox \xB7 '+d.smartleadMailbox+(d.smartleadConfigured?'':' \xB7 API key missing')):'Smartlead mailbox not set';document.getElementById('gClientId').value=d.smartleadMailbox||'';document.getElementById('gmailCallback').textContent='Smartlead webhook URL (register this in Smartlead): '+d.webhookUrl+' \xB7 website campaign '+(d.smartleadWebsiteCampaignId||'not created yet')+' \xB7 concierge campaign '+(d.smartleadConciergeCampaignId||'not created yet');const lrDot=document.getElementById('liveReplyDot'),lrTxt=document.getElementById('liveReplyText');lrDot.className='dot '+(d.liveReplyConnected?'on':'off');lrTxt.textContent=d.liveReplyConnected?('Live-reply binding connected \xB7 sends as '+d.liveReplyEmail):'Live-reply send_email binding not configured'+(d.liveReplyError?': '+d.liveReplyError:'');const s=d.settings||{};document.getElementById('emailFromName').value=s.fromName||'Connor | Trenches Group';document.getElementById('emailPostal').value=s.postalAddress||'';document.getElementById('emailDailyCap').value=s.dailyCap||10;document.getElementById('emailReplyMode').value=s.autoReplyMode||'DRAFT_ONLY';const live=document.getElementById('emailLiveToggle'),auto=document.getElementById('emailAutoToggle');live.textContent=s.emailLiveMode?'Disable live email':'Enable live email';live.className='btn '+(s.emailLiveMode?'danger':'good');auto.textContent=s.orchestratorEnabled?'Pause autonomous sequences':'Enable autonomous sequences';auto.className='btn '+(s.orchestratorEnabled?'danger':'good');document.getElementById('emailModeText').textContent='Live email '+(s.emailLiveMode?'ON':'OFF')+' \xB7 automation '+(s.orchestratorEnabled?'ON':'OFF')+' \xB7 auto replies '+(s.autoReplyMode||'DRAFT_ONLY')+' \xB7 daily cap '+(s.dailyCap||10)+' \xB7 SMS LIVE LOCKED';const a=document.getElementById('emailAllowlistRows');a.innerHTML='';for(const x of(d.allowlist||[])){a.insertAdjacentHTML('beforeend','<span class="pill READY">'+esc(x.label||'Test')+' \xB7 '+esc(x.email)+' <button class="btn small" style="margin-left:6px;padding:2px 5px" data-email-remove="'+esc(encodeURIComponent(x.email))+'">\xD7</button></span>')}if(!(d.allowlist||[]).length)a.innerHTML='<span class="muted">No test email addresses allowlisted.</span>';document.querySelectorAll('[data-email-remove]').forEach(b=>b.addEventListener('click',()=>removeEmailTestAddressUi(b.getAttribute('data-email-remove'))));const sel=document.getElementById('emailTestLead'),cur=sel.value;sel.innerHTML='<option value="">Optional lead to simulate</option>';for(const x of(l.leads||[])){sel.insertAdjacentHTML('beforeend','<option value="'+esc(x.id)+'">'+esc(x.business_name)+' \xB7 '+esc(x.email||'no email')+'</option>')}if(cur&&[...sel.options].some(o=>o.value===cur))sel.value=cur;const rows=document.getElementById('emailMessageRows');rows.innerHTML='';for(const m of(d.recentMessages||[])){const contact=m.direction==='INBOUND'?m.from_email:m.to_email;let raw={};try{raw=JSON.parse(m.raw_json||'{}')}catch{}const outcome=raw.conversationOutcome||'\u2014';const outcomeHtml=outcome==='DEMO_APPROVED'?'<span class="pill COMPLETED">DEMO_APPROVED</span>':esc(outcome);rows.insertAdjacentHTML('beforeend','<tr><td class="muted">'+esc(m.created_at?new Date(m.created_at).toLocaleString():'\u2014')+'</td><td>'+esc(m.direction)+'</td><td>'+esc(m.business_name||'\u2014')+'</td><td>'+esc(contact)+'</td><td>'+esc(m.subject||'\u2014')+'</td><td>'+esc(m.intent||'\u2014')+'</td><td>'+outcomeHtml+'</td><td>'+esc(m.status)+'</td></tr>')}document.getElementById('emailMessageEmpty').style.display=(d.recentMessages||[]).length?'none':'block';const sr=document.getElementById('sequenceRows');sr.innerHTML='';for(const q of(d.sequences||[])){sr.insertAdjacentHTML('beforeend','<tr><td>'+esc(q.business_name)+'</td><td>'+esc(q.priority||'\u2014')+'</td><td>'+esc(q.strategy)+'</td><td>'+esc(q.status)+'</td><td>'+esc(q.current_step)+'</td><td class="muted">'+esc(q.next_action_at?new Date(q.next_action_at).toLocaleString():'\u2014')+'</td></tr>')}document.getElementById('sequenceEmpty').style.display=(d.sequences||[]).length?'none':'block'}
 async function saveSmartleadMailboxUi(){try{const smartleadMailbox=document.getElementById('gClientId').value.trim();if(!smartleadMailbox)throw new Error('Enter the Smartlead sending mailbox address.');await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({smartleadMailbox})});await loadEmailOutreach();alert('Smartlead mailbox saved. Make sure it is connected as an email account inside Smartlead before enrolling leads.')}catch(e){showError(e)}}
-async function connectLiveReplyUi(){try{const d=await api('/api/outreach/email/live-reply/oauth/start',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});if(!d.authUrl)throw new Error('No Google authorization URL returned.');window.open(d.authUrl,'_blank','noopener')}catch(e){showError(e)}}
 async function saveEmailSettingsUi(){try{await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({fromName:document.getElementById('emailFromName').value.trim(),postalAddress:document.getElementById('emailPostal').value.trim(),dailyCap:Number(document.getElementById('emailDailyCap').value||10),autoReplyMode:document.getElementById('emailReplyMode').value})});await loadEmailOutreach()}catch(e){showError(e)}}
 async function toggleEmailLiveUi(){try{const on=!!(emailOutreachState&&emailOutreachState.settings&&emailOutreachState.settings.emailLiveMode);if(!on&&!confirm('Enable LIVE autonomous email to qualified leads? Only verified emails, A/B priority, suppression checks, and the daily cap will be eligible.'))return;await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({liveMode:!on})});await loadEmailOutreach()}catch(e){showError(e)}}
 async function toggleEmailAutomationUi(){try{const on=!!(emailOutreachState&&emailOutreachState.settings&&emailOutreachState.settings.orchestratorEnabled);if(!on&&!confirm('Enable autonomous email sequences? The live-email switch must also be ON before real prospects can be enrolled/sent.'))return;await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({orchestratorEnabled:!on})});await loadEmailOutreach()}catch(e){showError(e)}}
@@ -230,10 +230,10 @@ if(adminKey){document.getElementById('login').style.display='none';refreshAll().
     <section class="panel"><div class="sectionTitle"><div><h2>Prospecting campaigns</h2><div class="sub">Fast discovery \u2192 deterministic filtering \u2192 one-business enrichment. One bad candidate cannot kill a campaign.</div></div><div class="rowBtns"><button class="btn small" id="archiveToggle" onclick="toggleArchived()">Show archived</button><div class="runnerBadge"><span class="dot" id="runnerDot"></span><span id="runnerText">Runner unknown</span></div></div></div><div class="campaignGrid" id="campaignGrid"><div class="empty">No campaigns yet.</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Prospector Job Queue <span class="pill READY">AUTO</span></h2><div class="sub">Rotating city \xD7 category grid. A capped number of due jobs get promoted into real prospecting campaigns automatically on the 2-minute scheduler tick \u2014 this does not bypass the daily cap or backlog limit below.</div></div><div class="rowBtns"><span class="runnerBadge" id="prospectorJobsSummary">Loading\u2026</span><button class="btn small primary" onclick="runProspectorJobsNow()">Run due jobs now</button></div></div><div class="tableWrap" style="max-height:320px"><table style="min-width:900px"><thead><tr><th>City</th><th>Category</th><th>Radius</th><th>Target</th><th>Cadence</th><th>Last run</th><th>Status</th><th></th></tr></thead><tbody id="prospectorJobRows"></tbody></table><div class="empty" id="prospectorJobEmpty">No prospector jobs seeded yet.</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Outreach Lab <span class="pill READY">TEST MODE</span></h2><div class="sub">Twilio plumbing only. Only numbers on the explicit test allowlist can receive SMS. Live prospect outreach is hard-locked.</div></div><div class="runnerBadge"><span class="dot" id="twilioDot"></span><span id="twilioText">Twilio status unknown</span></div></div><div class="toolbar"><input id="oPhone" placeholder="Your test phone, e.g. +16155551234"/><input id="oLabel" placeholder="Label, e.g. Connor iPhone"/><button class="btn" onclick="addTestNumber()">Add test number</button></div><div class="toolbar"><input id="oMessage" value="Trenches test: reply YES, PRICE, CALL ME, or STOP."/><button class="btn primary" onclick="sendTestSms()">Send test SMS</button></div><div style="padding:0 12px 10px"><div class="sub" id="outreachWebhookText"></div><div id="allowlistRows" class="rowBtns" style="margin-top:9px"></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:820px"><thead><tr><th>Time</th><th>Direction</th><th>Phone</th><th>Message</th><th>Intent</th><th>Status</th></tr></thead><tbody id="messageRows"></tbody></table><div class="empty" id="messageEmpty">No outreach test messages yet.</div></div></section>
-    <section class="panel"><div class="sectionTitle"><div><h2>Autonomous Outreach Orchestrator <span class="pill READY">EMAIL + SMS FOUNDATION</span></h2><div class="sub">Google Workspace email can run autonomously after one-time OAuth setup. Gmail replies feed the same conversation brain. SMS stays live-locked until Twilio approval; voice/social adapters remain disabled.</div></div><div class="runnerBadge"><span class="dot" id="gmailDot"></span><span id="gmailText">Gmail status unknown</span></div></div>
+    <section class="panel"><div class="sectionTitle"><div><h2>Autonomous Outreach Orchestrator <span class="pill READY">EMAIL + SMS FOUNDATION</span></h2><div class="sub">Bulk campaigns run through Smartlead. Live conversational replies send through a Cloudflare Email Routing binding. SMS stays live-locked until Twilio approval; voice/social adapters remain disabled.</div></div><div class="runnerBadge"><span class="dot" id="gmailDot"></span><span id="gmailText">Smartlead status unknown</span></div></div>
       <div class="toolbar"><input id="gClientId" placeholder="Smartlead sending mailbox (e.g. connor.trenches@discovertrenchesgroup.com)"/><button class="btn primary" onclick="saveSmartleadMailboxUi()">Save Smartlead mailbox</button></div>
       <div style="padding:0 12px 10px"><div class="sub" id="gmailCallback"></div></div>
-      <div class="toolbar"><span class="dot" id="liveReplyDot"></span><span class="sub" id="liveReplyText"></span><button class="btn primary" onclick="connectLiveReplyUi()">Connect live-reply mailbox</button></div>
+      <div class="toolbar"><span class="dot" id="liveReplyDot"></span><span class="sub" id="liveReplyText"></span></div>
       <div style="padding:0 12px 10px"><div class="sub">Live conversational replies (price/skepticism/etc. answers) send through this mailbox via Gmail API, separate from Smartlead's bulk campaign sends. Sign in as connor.trenches@discovertrenchesgroup.com when prompted.</div></div>
       <div class="toolbar"><input id="emailFromName" placeholder="From name"/><input id="emailPostal" placeholder="Business postal address (required before live email)"/><input id="emailDailyCap" type="number" min="1" max="100" value="10" style="min-width:120px;max-width:150px"/><select id="emailReplyMode"><option value="DRAFT_ONLY">Replies: Draft only</option><option value="AUTO">Replies: Auto-send</option></select><button class="btn" onclick="saveEmailSettingsUi()">Save settings</button></div>
       <div class="toolbar"><button class="btn" id="emailLiveToggle" onclick="toggleEmailLiveUi()">Enable live email</button><button class="btn" id="emailAutoToggle" onclick="toggleEmailAutomationUi()">Enable autonomous sequences</button><button class="btn" onclick="runOrchestratorUi()">Run orchestrator now</button><div class="sub" id="emailModeText"></div></div>
@@ -283,9 +283,8 @@ async function addTestNumber(){try{const phone=document.getElementById('oPhone')
 async function removeTestNumber(enc){try{await api('/api/outreach/test-allowlist/'+encodeURIComponent(decodeURIComponent(enc)),{method:'DELETE',headers:{'X-Actor':'COMMAND_CENTER'}});await loadOutreach()}catch(e){showError(e)}}
 async function sendTestSms(){try{const phone=document.getElementById('oPhone').value.trim(),message=document.getElementById('oMessage').value.trim();if(!phone)throw new Error('Enter an allowlisted test phone number.');if(!message)throw new Error('Enter a test message.');const d=await api('/api/outreach/test-send',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({phone,message})});await loadOutreach();alert('Test SMS queued'+(d.sid?' \xB7 '+d.sid:''))}catch(e){showError(e)}}
 let emailOutreachState=null;
-async function loadEmailOutreach(){const [d,l]=await Promise.all([api('/api/outreach/email/status'),api('/api/leads?limit=200')]);emailOutreachState=d;const dot=document.getElementById('gmailDot'),txt=document.getElementById('gmailText');dot.className='dot '+(d.smartleadMailbox?'on':'off');txt.textContent=d.smartleadMailbox?('Smartlead mailbox \xB7 '+d.smartleadMailbox+(d.smartleadConfigured?'':' \xB7 API key missing')):'Smartlead mailbox not set';document.getElementById('gClientId').value=d.smartleadMailbox||'';document.getElementById('gmailCallback').textContent='Smartlead webhook URL (register this in Smartlead): '+d.webhookUrl+' \xB7 website campaign '+(d.smartleadWebsiteCampaignId||'not created yet')+' \xB7 concierge campaign '+(d.smartleadConciergeCampaignId||'not created yet');const lrDot=document.getElementById('liveReplyDot'),lrTxt=document.getElementById('liveReplyText');lrDot.className='dot '+(d.liveReplyConnected?'on':'off');lrTxt.textContent=d.liveReplyConnected?('Live-reply mailbox connected \xB7 '+d.liveReplyEmail):'Live-reply mailbox '+(d.liveReplyStatus==='ERROR'?'error: '+(d.liveReplyError||'unknown'):'not connected');const s=d.settings||{};document.getElementById('emailFromName').value=s.fromName||'Connor | Trenches Group';document.getElementById('emailPostal').value=s.postalAddress||'';document.getElementById('emailDailyCap').value=s.dailyCap||10;document.getElementById('emailReplyMode').value=s.autoReplyMode||'DRAFT_ONLY';const live=document.getElementById('emailLiveToggle'),auto=document.getElementById('emailAutoToggle');live.textContent=s.emailLiveMode?'Disable live email':'Enable live email';live.className='btn '+(s.emailLiveMode?'danger':'good');auto.textContent=s.orchestratorEnabled?'Pause autonomous sequences':'Enable autonomous sequences';auto.className='btn '+(s.orchestratorEnabled?'danger':'good');document.getElementById('emailModeText').textContent='Live email '+(s.emailLiveMode?'ON':'OFF')+' \xB7 automation '+(s.orchestratorEnabled?'ON':'OFF')+' \xB7 auto replies '+(s.autoReplyMode||'DRAFT_ONLY')+' \xB7 daily cap '+(s.dailyCap||10)+' \xB7 SMS LIVE LOCKED';const a=document.getElementById('emailAllowlistRows');a.innerHTML='';for(const x of(d.allowlist||[])){a.insertAdjacentHTML('beforeend','<span class="pill READY">'+esc(x.label||'Test')+' \xB7 '+esc(x.email)+' <button class="btn small" style="margin-left:6px;padding:2px 5px" data-email-remove="'+esc(encodeURIComponent(x.email))+'">\xD7</button></span>')}if(!(d.allowlist||[]).length)a.innerHTML='<span class="muted">No test email addresses allowlisted.</span>';document.querySelectorAll('[data-email-remove]').forEach(b=>b.addEventListener('click',()=>removeEmailTestAddressUi(b.getAttribute('data-email-remove'))));const sel=document.getElementById('emailTestLead'),cur=sel.value;sel.innerHTML='<option value="">Optional lead to simulate</option>';for(const x of(l.leads||[])){sel.insertAdjacentHTML('beforeend','<option value="'+esc(x.id)+'">'+esc(x.business_name)+' \xB7 '+esc(x.email||'no email')+'</option>')}if(cur&&[...sel.options].some(o=>o.value===cur))sel.value=cur;const rows=document.getElementById('emailMessageRows');rows.innerHTML='';for(const m of(d.recentMessages||[])){const contact=m.direction==='INBOUND'?m.from_email:m.to_email;let raw={};try{raw=JSON.parse(m.raw_json||'{}')}catch{}const outcome=raw.conversationOutcome||'\u2014';const outcomeHtml=outcome==='DEMO_APPROVED'?'<span class="pill COMPLETED">DEMO_APPROVED</span>':esc(outcome);rows.insertAdjacentHTML('beforeend','<tr><td class="muted">'+esc(m.created_at?new Date(m.created_at).toLocaleString():'\u2014')+'</td><td>'+esc(m.direction)+'</td><td>'+esc(m.business_name||'\u2014')+'</td><td>'+esc(contact)+'</td><td>'+esc(m.subject||'\u2014')+'</td><td>'+esc(m.intent||'\u2014')+'</td><td>'+outcomeHtml+'</td><td>'+esc(m.status)+'</td></tr>')}document.getElementById('emailMessageEmpty').style.display=(d.recentMessages||[]).length?'none':'block';const sr=document.getElementById('sequenceRows');sr.innerHTML='';for(const q of(d.sequences||[])){sr.insertAdjacentHTML('beforeend','<tr><td>'+esc(q.business_name)+'</td><td>'+esc(q.priority||'\u2014')+'</td><td>'+esc(q.strategy)+'</td><td>'+esc(q.status)+'</td><td>'+esc(q.current_step)+'</td><td class="muted">'+esc(q.next_action_at?new Date(q.next_action_at).toLocaleString():'\u2014')+'</td></tr>')}document.getElementById('sequenceEmpty').style.display=(d.sequences||[]).length?'none':'block'}
+async function loadEmailOutreach(){const [d,l]=await Promise.all([api('/api/outreach/email/status'),api('/api/leads?limit=200')]);emailOutreachState=d;const dot=document.getElementById('gmailDot'),txt=document.getElementById('gmailText');dot.className='dot '+(d.smartleadMailbox?'on':'off');txt.textContent=d.smartleadMailbox?('Smartlead mailbox \xB7 '+d.smartleadMailbox+(d.smartleadConfigured?'':' \xB7 API key missing')):'Smartlead mailbox not set';document.getElementById('gClientId').value=d.smartleadMailbox||'';document.getElementById('gmailCallback').textContent='Smartlead webhook URL (register this in Smartlead): '+d.webhookUrl+' \xB7 website campaign '+(d.smartleadWebsiteCampaignId||'not created yet')+' \xB7 concierge campaign '+(d.smartleadConciergeCampaignId||'not created yet');const lrDot=document.getElementById('liveReplyDot'),lrTxt=document.getElementById('liveReplyText');lrDot.className='dot '+(d.liveReplyConnected?'on':'off');lrTxt.textContent=d.liveReplyConnected?('Live-reply binding connected \xB7 sends as '+d.liveReplyEmail):'Live-reply send_email binding not configured'+(d.liveReplyError?': '+d.liveReplyError:'');const s=d.settings||{};document.getElementById('emailFromName').value=s.fromName||'Connor | Trenches Group';document.getElementById('emailPostal').value=s.postalAddress||'';document.getElementById('emailDailyCap').value=s.dailyCap||10;document.getElementById('emailReplyMode').value=s.autoReplyMode||'DRAFT_ONLY';const live=document.getElementById('emailLiveToggle'),auto=document.getElementById('emailAutoToggle');live.textContent=s.emailLiveMode?'Disable live email':'Enable live email';live.className='btn '+(s.emailLiveMode?'danger':'good');auto.textContent=s.orchestratorEnabled?'Pause autonomous sequences':'Enable autonomous sequences';auto.className='btn '+(s.orchestratorEnabled?'danger':'good');document.getElementById('emailModeText').textContent='Live email '+(s.emailLiveMode?'ON':'OFF')+' \xB7 automation '+(s.orchestratorEnabled?'ON':'OFF')+' \xB7 auto replies '+(s.autoReplyMode||'DRAFT_ONLY')+' \xB7 daily cap '+(s.dailyCap||10)+' \xB7 SMS LIVE LOCKED';const a=document.getElementById('emailAllowlistRows');a.innerHTML='';for(const x of(d.allowlist||[])){a.insertAdjacentHTML('beforeend','<span class="pill READY">'+esc(x.label||'Test')+' \xB7 '+esc(x.email)+' <button class="btn small" style="margin-left:6px;padding:2px 5px" data-email-remove="'+esc(encodeURIComponent(x.email))+'">\xD7</button></span>')}if(!(d.allowlist||[]).length)a.innerHTML='<span class="muted">No test email addresses allowlisted.</span>';document.querySelectorAll('[data-email-remove]').forEach(b=>b.addEventListener('click',()=>removeEmailTestAddressUi(b.getAttribute('data-email-remove'))));const sel=document.getElementById('emailTestLead'),cur=sel.value;sel.innerHTML='<option value="">Optional lead to simulate</option>';for(const x of(l.leads||[])){sel.insertAdjacentHTML('beforeend','<option value="'+esc(x.id)+'">'+esc(x.business_name)+' \xB7 '+esc(x.email||'no email')+'</option>')}if(cur&&[...sel.options].some(o=>o.value===cur))sel.value=cur;const rows=document.getElementById('emailMessageRows');rows.innerHTML='';for(const m of(d.recentMessages||[])){const contact=m.direction==='INBOUND'?m.from_email:m.to_email;let raw={};try{raw=JSON.parse(m.raw_json||'{}')}catch{}const outcome=raw.conversationOutcome||'\u2014';const outcomeHtml=outcome==='DEMO_APPROVED'?'<span class="pill COMPLETED">DEMO_APPROVED</span>':esc(outcome);rows.insertAdjacentHTML('beforeend','<tr><td class="muted">'+esc(m.created_at?new Date(m.created_at).toLocaleString():'\u2014')+'</td><td>'+esc(m.direction)+'</td><td>'+esc(m.business_name||'\u2014')+'</td><td>'+esc(contact)+'</td><td>'+esc(m.subject||'\u2014')+'</td><td>'+esc(m.intent||'\u2014')+'</td><td>'+outcomeHtml+'</td><td>'+esc(m.status)+'</td></tr>')}document.getElementById('emailMessageEmpty').style.display=(d.recentMessages||[]).length?'none':'block';const sr=document.getElementById('sequenceRows');sr.innerHTML='';for(const q of(d.sequences||[])){sr.insertAdjacentHTML('beforeend','<tr><td>'+esc(q.business_name)+'</td><td>'+esc(q.priority||'\u2014')+'</td><td>'+esc(q.strategy)+'</td><td>'+esc(q.status)+'</td><td>'+esc(q.current_step)+'</td><td class="muted">'+esc(q.next_action_at?new Date(q.next_action_at).toLocaleString():'\u2014')+'</td></tr>')}document.getElementById('sequenceEmpty').style.display=(d.sequences||[]).length?'none':'block'}
 async function saveSmartleadMailboxUi(){try{const smartleadMailbox=document.getElementById('gClientId').value.trim();if(!smartleadMailbox)throw new Error('Enter the Smartlead sending mailbox address.');await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({smartleadMailbox})});await loadEmailOutreach();alert('Smartlead mailbox saved. Make sure it is connected as an email account inside Smartlead before enrolling leads.')}catch(e){showError(e)}}
-async function connectLiveReplyUi(){try{const d=await api('/api/outreach/email/live-reply/oauth/start',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});if(!d.authUrl)throw new Error('No Google authorization URL returned.');window.open(d.authUrl,'_blank','noopener')}catch(e){showError(e)}}
 async function saveEmailSettingsUi(){try{await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({fromName:document.getElementById('emailFromName').value.trim(),postalAddress:document.getElementById('emailPostal').value.trim(),dailyCap:Number(document.getElementById('emailDailyCap').value||10),autoReplyMode:document.getElementById('emailReplyMode').value})});await loadEmailOutreach()}catch(e){showError(e)}}
 async function toggleEmailLiveUi(){try{const on=!!(emailOutreachState&&emailOutreachState.settings&&emailOutreachState.settings.emailLiveMode);if(!on&&!confirm('Enable LIVE autonomous email to qualified leads? Only verified emails, A/B priority, suppression checks, and the daily cap will be eligible.'))return;await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({liveMode:!on})});await loadEmailOutreach()}catch(e){showError(e)}}
 async function toggleEmailAutomationUi(){try{const on=!!(emailOutreachState&&emailOutreachState.settings&&emailOutreachState.settings.orchestratorEnabled);if(!on&&!confirm('Enable autonomous email sequences? The live-email switch must also be ON before real prospects can be enrolled/sent.'))return;await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({orchestratorEnabled:!on})});await loadEmailOutreach()}catch(e){showError(e)}}
@@ -322,6 +321,7 @@ if(adminKey){document.getElementById('login').style.display='none';refreshAll().
 </body></html>`])));
 }
 __name(adminHtml, "adminHtml");
+
 
 // src/state-machine.ts
 var ALWAYS = ["OPTED_OUT", "HUMAN_REVIEW", "ERROR"];
@@ -399,6 +399,7 @@ function allowedTransitions(from) {
   return TRANSITIONS[from];
 }
 __name(allowedTransitions, "allowedTransitions");
+
 
 // src/db.ts
 function nowIso() {
@@ -600,6 +601,7 @@ async function globalAutomationPaused(db) {
   return row?.value === "true";
 }
 __name(globalAutomationPaused, "globalAutomationPaused");
+
 
 // src/phase2.ts
 var HIGH_TICKET_TERMS = [
@@ -1049,6 +1051,7 @@ async function loadResearchInput(db, leadId) {
 }
 __name(loadResearchInput, "loadResearchInput");
 
+
 // src/requalify.ts
 async function requalifyStuckLeads(db, queue, options) {
   const limit = Math.min(Math.max(options.limit ?? 50, 1), 200);
@@ -1112,6 +1115,7 @@ async function requalifyStuckLeads(db, queue, options) {
 }
 __name(requalifyStuckLeads, "requalifyStuckLeads");
 
+
 // src/types.ts
 var LEAD_STATES = [
   "NEW",
@@ -1146,6 +1150,7 @@ var LEAD_STATES = [
   "ERROR",
   "LOST"
 ];
+
 
 // src/lead-admin.ts
 var STOP_STATES = /* @__PURE__ */ new Set(["DISQUALIFIED", "OPTED_OUT", "NOT_INTERESTED", "BAD_NUMBER", "DUPLICATE", "LOST"]);
@@ -1272,6 +1277,7 @@ async function reAuditExistingWebsiteGaps(db, actor) {
   return { scanned, eligible, disqualified, review, unchanged };
 }
 __name(reAuditExistingWebsiteGaps, "reAuditExistingWebsiteGaps");
+
 
 // src/validation.ts
 function requiredString(value, field, max = 250) {
@@ -1557,6 +1563,7 @@ function parseProspectorJobCreate(body) {
   };
 }
 __name(parseProspectorJobCreate, "parseProspectorJobCreate");
+
 
 // src/campaigns.ts
 function normalizeLocationItem(value) {
@@ -2056,6 +2063,7 @@ async function campaignCandidateRows(db, campaignId) {
 }
 __name(campaignCandidateRows, "campaignCandidateRows");
 
+
 // src/prospector-jobs.ts
 async function getFlagInt(db, key, fallback) {
   const row = await db.prepare("SELECT value FROM system_flags WHERE key = ?").bind(key).first();
@@ -2154,6 +2162,7 @@ async function runDueProspectorJobs(db, env) {
 }
 __name(runDueProspectorJobs, "runDueProspectorJobs");
 
+
 // src/orgo.ts
 var RUNNER_START_COMMAND = `set -eu
 RUNNER_DIR="$HOME/trenches/runner"
@@ -2240,6 +2249,7 @@ async function wakeOrgoProspector(env) {
 }
 __name(wakeOrgoProspector, "wakeOrgoProspector");
 
+
 // src/leases.ts
 async function acquireLease(db, name, holder, ttlSeconds) {
   const now = nowIso();
@@ -2284,6 +2294,7 @@ async function bumpCounter(db, name, by = 1) {
   `).bind(name, by, nowIso()).run();
 }
 __name(bumpCounter, "bumpCounter");
+
 
 // src/optout.ts
 function toE164Safe(value) {
@@ -2378,6 +2389,7 @@ async function optOutLead(db, input) {
   return { suppressed: statements.length, sequencesCancelled, transitioned };
 }
 __name(optOutLead, "optOutLead");
+
 
 // src/conversation.ts
 function industryNoun(lead) {
@@ -2700,6 +2712,7 @@ async function setDraftStatus(db, id, status, actor) {
 }
 __name(setDraftStatus, "setDraftStatus");
 
+
 // src/correspondence.ts
 var PERSONAL_SIGNATURE = "-Connor";
 function cleanNewlines(value) {
@@ -2753,6 +2766,7 @@ ${PERSONAL_SIGNATURE}`;
   return `${text}${suffix}`;
 }
 __name(formatSmsCorrespondence, "formatSmsCorrespondence");
+
 
 // src/twilio.ts
 function twilioConfigured(env) {
@@ -3035,6 +3049,7 @@ async function buildLeadOpener(db, lead) {
 }
 __name(buildLeadOpener, "buildLeadOpener");
 
+
 // src/reaper.ts
 async function flagNumber(db, key, fallback) {
   const row = await db.prepare(`SELECT value FROM system_flags WHERE key = ?`).bind(key).first();
@@ -3169,6 +3184,7 @@ async function localDayStartIso(db, at = /* @__PURE__ */ new Date()) {
   return new Date(localMidnightUtc).toISOString();
 }
 __name(localDayStartIso, "localDayStartIso");
+
 
 // src/smartlead.ts
 var SMARTLEAD_BASE = "https://server.smartlead.ai/api/v1";
@@ -3322,6 +3338,7 @@ async function enrollLeadInSmartlead(env, lead, track, postalAddress) {
 }
 __name(enrollLeadInSmartlead, "enrollLeadInSmartlead");
 
+
 // src/concierge.ts
 var DISQUALIFIED_FOR_GOOD_WEBSITE_PATTERNS = [
   "%Modern website%",
@@ -3351,6 +3368,7 @@ async function enrollEligibleConciergeLeads(env, limit, postalAddress) {
 }
 __name(enrollEligibleConciergeLeads, "enrollEligibleConciergeLeads");
 
+
 // src/email.ts
 function bytesToBase64Url(bytes) {
   let binary = "";
@@ -3358,147 +3376,12 @@ function bytesToBase64Url(bytes) {
   return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
 }
 __name(bytesToBase64Url, "bytesToBase64Url");
-function base64UrlToArrayBuffer(value) {
-  const padded = value.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat((4 - value.length % 4) % 4);
-  const binary = atob(padded);
-  const buffer = new ArrayBuffer(binary.length);
-  const out = new Uint8Array(buffer);
-  for (let i = 0; i < binary.length; i += 1) out[i] = binary.charCodeAt(i);
-  return buffer;
-}
-__name(base64UrlToArrayBuffer, "base64UrlToArrayBuffer");
-function utf8ToBase64Url(value) {
-  return bytesToBase64Url(new TextEncoder().encode(value));
-}
-__name(utf8ToBase64Url, "utf8ToBase64Url");
 function cleanHeader(value) {
   return value.replace(/[\r\n]+/g, " ").trim();
 }
 __name(cleanHeader, "cleanHeader");
-var GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
-var GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
-var GMAIL_API = "https://gmail.googleapis.com/gmail/v1/users/me";
-var GMAIL_SEND_SCOPE = "https://www.googleapis.com/auth/gmail.send";
-var LIVE_REPLY_CONNECTION_ID = "live_reply";
-function envSecret(env, key) {
-  const value = env[key];
-  if (!value) throw new HttpError(503, "OUTREACH_SECRET_MISSING", `${key} is not configured.`);
-  return value;
-}
-__name(envSecret, "envSecret");
-async function encryptionKey(env) {
-  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(envSecret(env, "CREDENTIAL_ENCRYPTION_KEY")));
-  return await crypto.subtle.importKey("raw", digest, { name: "AES-GCM" }, false, ["encrypt", "decrypt"]);
-}
-__name(encryptionKey, "encryptionKey");
-async function encryptSecret(env, value) {
-  const iv = crypto.getRandomValues(new Uint8Array(12));
-  const ciphertext = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await encryptionKey(env), new TextEncoder().encode(value)));
-  return `${bytesToBase64Url(iv)}.${bytesToBase64Url(ciphertext)}`;
-}
-__name(encryptSecret, "encryptSecret");
-async function decryptSecret(env, value) {
-  const [ivRaw, cipherRaw] = value.split(".");
-  if (!ivRaw || !cipherRaw) throw new HttpError(500, "CREDENTIAL_DECRYPT_FAILED", "Stored credential is invalid.");
-  const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: base64UrlToArrayBuffer(ivRaw) }, await encryptionKey(env), base64UrlToArrayBuffer(cipherRaw));
-  return new TextDecoder().decode(plain);
-}
-__name(decryptSecret, "decryptSecret");
-async function getGoogleCredentialRow(db) {
-  return await db.prepare(`SELECT client_id, encrypted_client_secret FROM outreach_provider_credentials WHERE provider='GOOGLE_GMAIL'`).first();
-}
-__name(getGoogleCredentialRow, "getGoogleCredentialRow");
-async function getLiveReplyConnection(db) {
-  return await db.prepare(`SELECT * FROM gmail_connections WHERE id=?`).bind(LIVE_REPLY_CONNECTION_ID).first();
-}
-__name(getLiveReplyConnection, "getLiveReplyConnection");
-async function startLiveReplyOAuth(db, env) {
-  const creds = await getGoogleCredentialRow(db);
-  if (!creds?.client_id || !creds.encrypted_client_secret) throw new HttpError(409, "GOOGLE_OAUTH_NOT_CONFIGURED", "Google OAuth client is not configured.");
-  const state = crypto.randomUUID();
-  const ts = nowIso();
-  const expires = new Date(Date.now() + 10 * 6e4).toISOString();
-  await db.prepare(`INSERT INTO oauth_states(state,provider,expires_at,created_at) VALUES(?,'LIVE_REPLY_GMAIL',?,?)`).bind(state, expires, ts).run();
-  const callbackUrl = `${env.PUBLIC_BASE_URL}/integrations/gmail/oauth/callback`;
-  const params = new URLSearchParams({
-    client_id: creds.client_id,
-    redirect_uri: callbackUrl,
-    response_type: "code",
-    scope: GMAIL_SEND_SCOPE,
-    access_type: "offline",
-    prompt: "consent",
-    include_granted_scopes: "true",
-    login_hint: "connor.trenches@discovertrenchesgroup.com",
-    state
-  });
-  return { authUrl: `${GOOGLE_AUTH_URL}?${params.toString()}`, callbackUrl };
-}
-__name(startLiveReplyOAuth, "startLiveReplyOAuth");
-async function exchangeLiveReplyAuthorizationCode(db, env, code) {
-  const creds = await getGoogleCredentialRow(db);
-  if (!creds?.client_id || !creds.encrypted_client_secret) throw new HttpError(409, "GOOGLE_OAUTH_NOT_CONFIGURED", "Google OAuth client is not configured.");
-  const clientSecret = await decryptSecret(env, creds.encrypted_client_secret);
-  const response = await fetch(GOOGLE_TOKEN_URL, {
-    method: "POST",
-    headers: { "content-type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      code,
-      client_id: creds.client_id,
-      client_secret: clientSecret,
-      redirect_uri: `${env.PUBLIC_BASE_URL}/integrations/gmail/oauth/callback`,
-      grant_type: "authorization_code"
-    }).toString()
-  });
-  const data = await response.json();
-  if (!response.ok || typeof data.access_token !== "string") throw new HttpError(502, "GOOGLE_OAUTH_EXCHANGE_FAILED", String(data.error_description || data.error || "Google OAuth exchange failed."));
-  if (typeof data.refresh_token !== "string") throw new HttpError(409, "GOOGLE_REFRESH_TOKEN_MISSING", "Google did not return a refresh token. Reconnect and approve offline access.");
-  return { accessToken: data.access_token, refreshToken: data.refresh_token };
-}
-__name(exchangeLiveReplyAuthorizationCode, "exchangeLiveReplyAuthorizationCode");
-async function handleLiveReplyOAuthCallback(request, env) {
-  const url = new URL(request.url);
-  const state = url.searchParams.get("state") || "";
-  const code = url.searchParams.get("code") || "";
-  const error = url.searchParams.get("error");
-  if (error) return new Response(`<h1>Live-reply mailbox connection failed</h1><p>${cleanHeader(error)}</p>`, { status: 400, headers: { "content-type": "text/html; charset=utf-8" } });
-  const stateRow = await env.DB.prepare(`SELECT state,expires_at FROM oauth_states WHERE state=? AND provider='LIVE_REPLY_GMAIL'`).bind(state).first();
-  if (!stateRow || new Date(stateRow.expires_at).getTime() < Date.now()) throw new HttpError(400, "OAUTH_STATE_INVALID", "OAuth state is invalid or expired.");
-  await env.DB.prepare(`DELETE FROM oauth_states WHERE state=?`).bind(state).run();
-  if (!code) throw new HttpError(400, "OAUTH_CODE_MISSING", "Google did not provide an authorization code.");
-  const token = await exchangeLiveReplyAuthorizationCode(env.DB, env, code);
-  const profileResponse = await fetch(`${GMAIL_API}/profile`, { headers: { authorization: `Bearer ${token.accessToken}` } });
-  const profile = await profileResponse.json();
-  if (!profileResponse.ok || typeof profile.emailAddress !== "string") throw new HttpError(502, "GMAIL_PROFILE_FAILED", "Could not read the connected mailbox profile.");
-  const connectedEmail = profile.emailAddress.toLowerCase();
-  const ts = nowIso();
-  await env.DB.prepare(`
-    INSERT INTO gmail_connections(id,email_address,encrypted_refresh_token,scopes,status,connected_at,last_error,updated_at)
-    VALUES(?,?,?,?,'CONNECTED',?,NULL,?)
-    ON CONFLICT(id) DO UPDATE SET email_address=excluded.email_address,encrypted_refresh_token=excluded.encrypted_refresh_token,scopes=excluded.scopes,status='CONNECTED',last_error=NULL,updated_at=excluded.updated_at
-  `).bind(LIVE_REPLY_CONNECTION_ID, connectedEmail, await encryptSecret(env, token.refreshToken), GMAIL_SEND_SCOPE, ts, ts).run();
-  await recordEvent(env.DB, { eventId: newId("evt"), eventType: "LIVE_REPLY_MAILBOX_CONNECTED", eventData: { email: connectedEmail }, source: "LIVE_REPLY", actor: "ADMIN" });
-  const mismatchWarning = connectedEmail !== "connor.trenches@discovertrenchesgroup.com" ? `<p style="color:#b00"><strong>Warning:</strong> this connected as ${cleanHeader(connectedEmail)}, not connor.trenches@discovertrenchesgroup.com. Reconnect with the right account, or update the Smartlead mailbox setting to match.</p>` : "";
-  return new Response(`<!doctype html><meta charset="utf-8"><title>Live-reply mailbox connected</title><body style="font-family:system-ui;padding:40px"><h1>Live-reply mailbox connected</h1><p>${cleanHeader(connectedEmail)} will now send live conversational replies.</p>${mismatchWarning}<p>You can close this tab and return to the Command Center.</p></body>`, { headers: { "content-type": "text/html; charset=utf-8" } });
-}
-__name(handleLiveReplyOAuthCallback, "handleLiveReplyOAuthCallback");
-async function liveReplyAccessToken(db, env) {
-  const [creds, connection] = await Promise.all([getGoogleCredentialRow(db), getLiveReplyConnection(db)]);
-  if (!creds?.client_id || !creds.encrypted_client_secret || !connection?.encrypted_refresh_token) throw new HttpError(409, "LIVE_REPLY_MAILBOX_NOT_CONNECTED", "The live-reply mailbox is not connected.");
-  const clientSecret = await decryptSecret(env, creds.encrypted_client_secret);
-  const refreshToken = await decryptSecret(env, connection.encrypted_refresh_token);
-  const response = await fetch(GOOGLE_TOKEN_URL, {
-    method: "POST",
-    headers: { "content-type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ client_id: creds.client_id, client_secret: clientSecret, refresh_token: refreshToken, grant_type: "refresh_token" }).toString()
-  });
-  const data = await response.json();
-  if (!response.ok || typeof data.access_token !== "string") {
-    await db.prepare(`UPDATE gmail_connections SET status='ERROR',last_error=?,updated_at=? WHERE id=?`).bind(String(data.error_description || data.error || "Token refresh failed").slice(0, 1e3), nowIso(), LIVE_REPLY_CONNECTION_ID).run();
-    throw new HttpError(502, "LIVE_REPLY_TOKEN_REFRESH_FAILED", "Could not refresh the live-reply mailbox token. Reconnect it from the Command Center.");
-  }
-  return data.access_token;
-}
-__name(liveReplyAccessToken, "liveReplyAccessToken");
+import { EmailMessage } from "cloudflare:email";
+var LIVE_REPLY_FROM_ADDRESS = "connor.trenches@discovertrenchesgroup.com";
 function buildMime(input) {
   const headers = [
     `From: ${cleanHeader(input.fromName)} <${cleanHeader(input.fromEmail)}>`,
@@ -3637,9 +3520,8 @@ async function storeEmailMessage(db, input) {
 __name(storeEmailMessage, "storeEmailMessage");
 async function sendLiveReply(env, input) {
   if (await globalAutomationPaused(env.DB)) throw new HttpError(409, "GLOBAL_AUTOMATION_PAUSED", "Global automation is paused.");
-  const connection = await getLiveReplyConnection(env.DB);
-  if (!connection || connection.status !== "CONNECTED") throw new HttpError(409, "LIVE_REPLY_MAILBOX_NOT_CONNECTED", "The live-reply mailbox is not connected.");
-  const mailbox = connection.email_address;
+  if (!env.SEND_EMAIL) throw new HttpError(409, "LIVE_REPLY_MAILBOX_NOT_CONNECTED", "The live-reply send_email binding is not configured.");
+  const mailbox = LIVE_REPLY_FROM_ADDRESS;
   const to = normalizedEmail(input.to);
   const s = await settings(env.DB);
   const testOnly = input.testOnly !== false;
@@ -3674,14 +3556,7 @@ Unsubscribe: ${unsubscribeUrl}`;
   const rfcMessageId = `<${crypto.randomUUID()}@discovertrenchesgroup.com>`;
   const mime = buildMime({ fromName: s.fromName, fromEmail: mailbox, to, subject: input.subject, body, rfcMessageId, unsubscribeUrl });
   try {
-    const accessToken = await liveReplyAccessToken(env.DB, env);
-    const response = await fetch(`${GMAIL_API}/messages/send`, {
-      method: "POST",
-      headers: { authorization: `Bearer ${accessToken}`, "content-type": "application/json" },
-      body: JSON.stringify({ raw: utf8ToBase64Url(mime) })
-    });
-    const data = await response.json();
-    if (!response.ok) throw new Error(String(data.error?.message || "Gmail send failed"));
+    await env.SEND_EMAIL.send(new EmailMessage(mailbox, to, mime));
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);
     const id2 = await storeEmailMessage(env.DB, { leadId: lead?.id, direction: "OUTBOUND", from: mailbox, to, subject: input.subject, body, status: "FAILED", intent: input.intent, isTest: testOnly, errorMessage: msg });
@@ -3838,14 +3713,13 @@ async function runAutonomousOutreach(env) {
 }
 __name(runAutonomousOutreach, "runAutonomousOutreach");
 async function emailOutreachStatus(db, env) {
-  const [allow, messages, sequences, s, campaigns, secret, liveReply] = await Promise.all([
+  const [allow, messages, sequences, s, campaigns, secret] = await Promise.all([
     db.prepare(`SELECT email,label,created_at FROM outreach_email_test_allowlist ORDER BY created_at DESC LIMIT 50`).all(),
     db.prepare(`SELECT m.*,l.business_name FROM outreach_email_messages m LEFT JOIN leads l ON l.id=m.lead_id ORDER BY m.created_at DESC LIMIT 40`).all(),
     db.prepare(`SELECT q.*,l.business_name,l.priority FROM outreach_sequences q JOIN leads l ON l.id=q.lead_id ORDER BY q.created_at DESC LIMIT 40`).all(),
     settings(db),
     campaignStatus(db),
-    webhookSecret(db),
-    getLiveReplyConnection(db)
+    webhookSecret(db)
   ]);
   return {
     smartleadConfigured: Boolean(env.SMARTLEAD_API_KEY),
@@ -3853,11 +3727,10 @@ async function emailOutreachStatus(db, env) {
     smartleadWebsiteCampaignId: campaigns.websiteCampaignId,
     smartleadConciergeCampaignId: campaigns.conciergeCampaignId,
     webhookUrl: `${env.PUBLIC_BASE_URL}/integrations/smartlead/webhook/${secret}`,
-    liveReplyConnected: liveReply?.status === "CONNECTED",
-    liveReplyEmail: liveReply?.email_address || null,
-    liveReplyStatus: liveReply?.status || "DISCONNECTED",
-    liveReplyError: liveReply?.last_error || null,
-    liveReplyCallbackUrl: `${env.PUBLIC_BASE_URL}/integrations/gmail/oauth/callback`,
+    liveReplyConnected: Boolean(env.SEND_EMAIL),
+    liveReplyEmail: LIVE_REPLY_FROM_ADDRESS,
+    liveReplyStatus: env.SEND_EMAIL ? "CONNECTED" : "DISCONNECTED",
+    liveReplyError: env.SEND_EMAIL ? null : "send_email binding is not configured on this Worker.",
     settings: s,
     allowlist: allow.results,
     recentMessages: messages.results,
@@ -3888,6 +3761,7 @@ async function sendEmailTest(env, input) {
   return await sendLiveReply(env, { to: input.email, subject: input.subject || "Trenches OS email test", body: input.message || "Trenches email test.", leadId: input.leadId, testOnly: true, intent: "TEST" });
 }
 __name(sendEmailTest, "sendEmailTest");
+
 
 // src/demo.ts
 function boolFlag(value, fallback) {
@@ -4264,6 +4138,7 @@ async function serveDemoQuote(db, slug, request) {
 }
 __name(serveDemoQuote, "serveDemoQuote");
 
+
 // src/routes.ts
 function actorFromRequest(request) {
   return request.headers.get("x-actor")?.slice(0, 120) || "ADMIN";
@@ -4400,9 +4275,6 @@ async function handleRequest(request, env) {
     if (decodeURIComponent(smartleadWebhookMatch[1]) !== expected) throw new HttpError(404, "NOT_FOUND", "Not found.");
     const payload = await readJsonObject(request);
     return json(await processSmartleadWebhookEvent(env, payload));
-  }
-  if (request.method === "GET" && path === "/integrations/gmail/oauth/callback") {
-    return await handleLiveReplyOAuthCallback(request, env);
   }
   const unsubscribeMatch = path.match(/^\/unsubscribe\/email\/([^/]+)$/);
   if (unsubscribeMatch && (request.method === "GET" || request.method === "POST")) {
@@ -4618,9 +4490,6 @@ async function handleRequest(request, env) {
       smartleadMailbox: typeof body.smartleadMailbox === "string" ? body.smartleadMailbox : void 0
     }, actor);
     return json(await emailOutreachStatus(env.DB, env));
-  }
-  if (request.method === "POST" && path === "/api/outreach/email/live-reply/oauth/start") {
-    return json(await startLiveReplyOAuth(env.DB, env));
   }
   if (request.method === "POST" && path === "/api/outreach/email/test-allowlist") {
     const body = await readJsonObject(request);
@@ -5067,6 +4936,7 @@ async function handleRequest(request, env) {
 }
 __name(handleRequest, "handleRequest");
 
+
 // src/workflow.ts
 import { WorkflowEntrypoint } from "cloudflare:workers";
 var LeadLifecycleWorkflow = class extends WorkflowEntrypoint {
@@ -5173,6 +5043,7 @@ var LeadLifecycleWorkflow = class extends WorkflowEntrypoint {
     };
   }
 };
+
 
 // src/index.ts
 function log(level, event, data = {}) {

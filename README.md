@@ -35,16 +35,47 @@ This baseline was recovered directly from the **live Cloudflare deployment**
   `wrangler secret put` again only if the worker is ever redeployed from a
   fresh account.
 
-## Actual state of the email migration (as of this commit)
+## Actual state of the email migration
 
-Contrary to earlier session notes claiming Gmail was fully removed:
+As of the initial recovery commit, contrary to earlier session notes claiming
+Gmail was fully removed:
 
-- **Bulk outreach** genuinely runs through Smartlead (`src/smartlead.ts` /
-  `recovered/smartlead.js`) — campaign creation, sequences, webhook
-  registration.
+- **Bulk outreach** genuinely runs through Smartlead (`recovered/smartlead.js`)
+  — campaign creation, sequences, webhook registration.
 - **Live conversational replies** (`sendLiveReply` in `recovered/email.js`)
-  still send through **Gmail API with OAuth**, not a Cloudflare Email
-  Binding. There's a live `/integrations/gmail/oauth/callback` route and a
+  still sent through **Gmail API with OAuth**, not a Cloudflare Email
+  Binding. There was a live `/integrations/gmail/oauth/callback` route and a
   `gmail_connections` D1 table backing it.
 - The email-voice recapitalization fix (`formatEmailCorrespondence` in
-  `recovered/correspondence.js`) is live and correct.
+  `recovered/correspondence.js`) was already live and correct.
+
+### Gmail cutover (this branch, not yet deployed)
+
+`sendLiveReply` now sends via a Cloudflare Workers `send_email` binding
+(`env.SEND_EMAIL` + `EmailMessage` from `cloudflare:email`) instead of Gmail
+OAuth. Removed entirely: the OAuth start/callback routes, `gmail_connections`
+lookups, and the AES credential-encryption helpers that existed only to store
+the Google OAuth client secret and refresh token. `buildMime` is unchanged
+and reused directly as the raw MIME payload passed to `EmailMessage`.
+
+**This is not safe to deploy yet.** Two things need to be true first, neither
+of which could be confirmed in the recovery session (no Cloudflare zone/DNS
+tool was available):
+
+1. `discovertrenchesgroup.com` needs Workers email sending enabled —
+   `npx wrangler email sending enable discovertrenchesgroup.com` — which was
+   previously blocked because the domain's nameservers stayed at
+   Zapmail/Google Cloud DNS rather than Cloudflare.
+2. `wrangler.jsonc`'s `send_email` binding is the only new binding here; the
+   `queues`/`workflows` resource names in that file are still TODO
+   placeholders inferred from the bundle, not confirmed against the account.
+
+Until #1 is confirmed, deploying this will make `sendLiveReply` fail closed
+(`env.SEND_EMAIL` undefined -> `LIVE_REPLY_MAILBOX_NOT_CONNECTED`) rather than
+silently misbehave, but live conversational replies will stop going out
+entirely until it's sorted out. Don't run `wrangler deploy` from this branch
+without checking that first.
+
+The `gmail_connections` and `outreach_provider_credentials` D1 tables are now
+dead (nothing reads or writes them) but were left in place rather than
+migrated away, to keep this change scoped to the email-sending path.

@@ -37,7 +37,14 @@
 
   "vars": {
     "PUBLIC_BASE_URL": "https://trenches-os-api.cmckendry-ai.workers.dev"
-  }
+  },
+
+  // Requires discovertrenchesgroup.com to have Email Routing / Workers email
+  // sending enabled first (`wrangler email sending enable discovertrenchesgroup.com`).
+  // NOT confirmed this session -- see README.
+  "send_email": [
+    { "name": "SEND_EMAIL" }
+  ]
 
   // Secrets (already set live via `wrangler secret put`, not stored here):
   // ADMIN_API_KEY, ORGO_API_KEY, ORGO_COMPUTER_ID, PROSPECT_INGEST_KEY,

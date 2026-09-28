@@ -134,9 +134,6 @@ async function handleRequest(request, env) {
     const payload = await readJsonObject(request);
     return json(await processSmartleadWebhookEvent(env, payload));
   }
-  if (request.method === "GET" && path === "/integrations/gmail/oauth/callback") {
-    return await handleLiveReplyOAuthCallback(request, env);
-  }
   const unsubscribeMatch = path.match(/^\/unsubscribe\/email\/([^/]+)$/);
   if (unsubscribeMatch && (request.method === "GET" || request.method === "POST")) {
     return await handleEmailUnsubscribe(env, decodeURIComponent(unsubscribeMatch[1]));
@@ -351,9 +348,6 @@ async function handleRequest(request, env) {
       smartleadMailbox: typeof body.smartleadMailbox === "string" ? body.smartleadMailbox : void 0
     }, actor);
     return json(await emailOutreachStatus(env.DB, env));
-  }
-  if (request.method === "POST" && path === "/api/outreach/email/live-reply/oauth/start") {
-    return json(await startLiveReplyOAuth(env.DB, env));
   }
   if (request.method === "POST" && path === "/api/outreach/email/test-allowlist") {
     const body = await readJsonObject(request);
