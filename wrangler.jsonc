@@ -1,0 +1,46 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "trenches-os-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-16",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // TODO: not independently verifiable this session (no Cloudflare Queues/Workflows
+  // API tool was available) -- confirm binding names/resource names against the
+  // live worker settings in the dashboard or `wrangler deployments status` before
+  // relying on this file to redeploy from scratch.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "trenches-production",
+      "database_id": "2261ffe8-712f-4b07-aec2-73bba0ad155e"
+    }
+  ],
+
+  "queues": {
+    "producers": [
+      { "queue": "TODO-confirm-queue-name", "binding": "EVENTS_QUEUE" }
+    ],
+    "consumers": [
+      { "queue": "TODO-confirm-queue-name" },
+      { "queue": "TODO-confirm-queue-name-dlq" }
+    ]
+  },
+
+  "workflows": [
+    {
+      "name": "TODO-confirm-workflow-name",
+      "binding": "LEAD_WORKFLOW",
+      "class_name": "LeadLifecycleWorkflow"
+    }
+  ],
+
+  "vars": {
+    "PUBLIC_BASE_URL": "https://trenches-os-api.cmckendry-ai.workers.dev"
+  }
+
+  // Secrets (already set live via `wrangler secret put`, not stored here):
+  // ADMIN_API_KEY, ORGO_API_KEY, ORGO_COMPUTER_ID, PROSPECT_INGEST_KEY,
+  // RUNNER_API_KEY, SMARTLEAD_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN,
+  // TWILIO_MESSAGING_SERVICE_SID
+}
