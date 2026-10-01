@@ -6,15 +6,15 @@ the repo. Write it at the end of every session.
 ## 2026-10-01 (later)
 
 - Repo: restructured as a monorepo. API moved to `trenches-os-api/`. Live
-  bundles for `trenches-site`, `chatbot-worker`, the three Vivid workers and
+  bundles for `trenches-site`, `chatbot-worker`, two Vivid workers and
   `fenloservices-site` recovered into `<name>/dist/index.js` with READMEs.
   D1 schema exported to `trenches-os-api/migrations/0000_baseline.sql`.
   Added `docs/DECISIONS.md`, `runner/README.md` (placeholder), root
   `README.md`, `.gitignore`, and a manual-only deploy workflow that refuses
   to run until `wrangler.jsonc` is complete.
 - Not recovered (needs desktop or dashboard): `runner.py` and its `.env`;
-  static assets behind `env.ASSETS` for `trenches-site` and
-  `vivid-lightscapes`; binding configs for every worker except the API.
+  `vivid-lightscapes` (assets-only worker, the API returns an empty body);
+  static assets behind `env.ASSETS` for `trenches-site`; binding configs for every worker except the API.
 - Prod: no changes. No flags moved.
 
 ## 2026-10-01
