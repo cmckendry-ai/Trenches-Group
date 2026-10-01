@@ -45,22 +45,22 @@ function formString(form, name) {
 }
 __name(formString, "formString");
 function classifyInbound(body, optOutType) {
-  const text = body.trim().toLowerCase();
+  const text2 = body.trim().toLowerCase();
   const oot = (optOutType || "").toUpperCase();
-  if (oot === "STOP" || /^(stop|stopall|unsubscribe|cancel|end|quit|revoke|optout)$/i.test(text)) return "OPT_OUT";
-  if (oot === "START" || /^(start|unstop)$/i.test(text)) return "OPT_IN";
-  if (oot === "HELP" || /^(help|info)$/i.test(text)) return "HELP";
-  if (/\b(lawyer|attorney|report you|reporting you|harassment|harassing|pissed|angry|furious|sue|lawsuit)\b/i.test(text)) return "ANGRY";
-  if (/\b(already have (a )?(website|site)|we have (a )?(website|site)|got (a )?(website|site)|have our own site)\b/i.test(text)) return "HAS_WEBSITE";
-  if (/\b(not interested|no thanks|no thank you|don't contact|do not contact|leave me alone)\b/i.test(text)) return "NOT_INTERESTED";
-  if (/\b(how much|price|pricing|cost|rate|rates)\b/i.test(text)) return "PRICE";
-  if (/\b(who is this|who are you|what company|who's this)\b/i.test(text)) return "WHO_IS_THIS";
-  if (/\b(call me|give me a call|phone me|can you call)\b/i.test(text)) return "CALL_ME";
-  if (/\b(bot|robot|automated|automation|ai|artificial intelligence|real person|human)\b/i.test(text) && /\b(are you|is this|this a|you a|automated|automation|bot|robot|ai|human|real person)\b/i.test(text)) return "AUTOMATION_QUESTION";
-  if (/\b(scam|fake|spam|legit|legitimate|what(?:'s| is) the catch|whats the catch|is there a catch|too good to be true|why (?:is|would) (?:it|this) free|why free|how do you make money|what do you get out of this)\b/i.test(text)) return "SKEPTICAL";
-  if (/^(yes|yeah|yep|yup|sure|okay|ok|absolutely|go ahead|why not|interested|sounds good|send it|please do|do it|let's do it|lets do it)\b/i.test(text)) return "INTERESTED";
-  if (text.includes("?")) return "QUESTION";
-  return text ? "UNKNOWN" : "UNKNOWN";
+  if (oot === "STOP" || /^(stop|stopall|unsubscribe|cancel|end|quit|revoke|optout)$/i.test(text2)) return "OPT_OUT";
+  if (oot === "START" || /^(start|unstop)$/i.test(text2)) return "OPT_IN";
+  if (oot === "HELP" || /^(help|info)$/i.test(text2)) return "HELP";
+  if (/\b(lawyer|attorney|report you|reporting you|harassment|harassing|pissed|angry|furious|sue|lawsuit)\b/i.test(text2)) return "ANGRY";
+  if (/\b(already have (a )?(website|site)|we have (a )?(website|site)|got (a )?(website|site)|have our own site)\b/i.test(text2)) return "HAS_WEBSITE";
+  if (/\b(not interested|no thanks|no thank you|don't contact|do not contact|leave me alone)\b/i.test(text2)) return "NOT_INTERESTED";
+  if (/\b(how much|price|pricing|cost|rate|rates)\b/i.test(text2)) return "PRICE";
+  if (/\b(who is this|who are you|what company|who's this)\b/i.test(text2)) return "WHO_IS_THIS";
+  if (/\b(call me|give me a call|phone me|can you call)\b/i.test(text2)) return "CALL_ME";
+  if (/\b(bot|robot|automated|automation|ai|artificial intelligence|real person|human)\b/i.test(text2) && /\b(are you|is this|this a|you a|automated|automation|bot|robot|ai|human|real person)\b/i.test(text2)) return "AUTOMATION_QUESTION";
+  if (/\b(scam|fake|spam|legit|legitimate|what(?:'s| is) the catch|whats the catch|is there a catch|too good to be true|why (?:is|would) (?:it|this) free|why free|how do you make money|what do you get out of this)\b/i.test(text2)) return "SKEPTICAL";
+  if (/^(yes|yeah|yep|yup|sure|okay|ok|absolutely|go ahead|why not|interested|sounds good|send it|please do|do it|let's do it|lets do it)\b/i.test(text2)) return "INTERESTED";
+  if (text2.includes("?")) return "QUESTION";
+  return text2 ? "UNKNOWN" : "UNKNOWN";
 }
 __name(classifyInbound, "classifyInbound");
 async function findLeadByPhone(db, phone) {
@@ -271,10 +271,10 @@ async function buildLeadOpener(db, lead) {
   const research = await db.prepare("SELECT primary_service FROM lead_research WHERE lead_id = ? LIMIT 1").bind(lead.id).first();
   let service = (research?.primary_service || lead.industry || "service").trim().toLowerCase();
   if (service.length > 44) service = service.slice(0, 44).trim();
-  let text = `Hey, do y'all still do ${service} in ${lead.city}? Found you on Google.`;
-  text = formatSmsCorrespondence(text, 160);
-  if (text.length > 160) text = formatSmsCorrespondence(`Hey, do y'all still work in ${lead.city}? Found you on Google.`, 160);
-  return text;
+  let text2 = `Hey, do y'all still do ${service} in ${lead.city}? Found you on Google.`;
+  text2 = formatSmsCorrespondence(text2, 160);
+  if (text2.length > 160) text2 = formatSmsCorrespondence(`Hey, do y'all still work in ${lead.city}? Found you on Google.`, 160);
+  return text2;
 }
 __name(buildLeadOpener, "buildLeadOpener");
 

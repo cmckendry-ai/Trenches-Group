@@ -1,3 +1,4 @@
+var CONCIERGE_CAL_URL2 = "https://cal.com/trenchesgroup/ai-discovery-call";
 var DISQUALIFIED_FOR_GOOD_WEBSITE_PATTERNS = [
   "%Modern website%",
   "%Average functional website%",
@@ -25,4 +26,19 @@ async function enrollEligibleConciergeLeads(env, limit, postalAddress) {
   return enrolled;
 }
 __name(enrollEligibleConciergeLeads, "enrollEligibleConciergeLeads");
+async function conciergeStatus(db) {
+  const [eligible, sequences] = await Promise.all([
+    db.prepare(`
+      SELECT COUNT(*) AS n FROM leads l
+      WHERE l.current_state='DISQUALIFIED'
+        AND (${DISQUALIFIED_FOR_GOOD_WEBSITE_PATTERNS.map(() => "l.qualification_reason LIKE ?").join(" OR ")})
+        AND l.email IS NOT NULL AND trim(l.email)<>''
+        AND l.email_verified=1
+        AND NOT EXISTS(SELECT 1 FROM outreach_sequences q WHERE q.lead_id=l.id AND q.status IN ('ACTIVE','PAUSED'))
+    `).bind(...DISQUALIFIED_FOR_GOOD_WEBSITE_PATTERNS).first(),
+    db.prepare(`SELECT q.*, l.business_name FROM outreach_sequences q JOIN leads l ON l.id=q.lead_id WHERE q.strategy='SMARTLEAD_CONCIERGE' ORDER BY q.created_at DESC LIMIT 50`).all()
+  ]);
+  return { stillEligible: eligible?.n ?? 0, sequences: sequences.results, bookingUrl: CONCIERGE_CAL_URL2 };
+}
+__name(conciergeStatus, "conciergeStatus");
 

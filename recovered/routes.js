@@ -127,15 +127,18 @@ async function handleRequest(request, env) {
   if (request.method === "POST" && path === "/integrations/twilio/status") {
     return await handleTwilioStatus(request, env);
   }
+  if (request.method === "POST" && path === "/integrations/stripe/webhook") {
+    return await handleStripeWebhook(env, request);
+  }
+  if (request.method === "GET" && path === "/integrations/gmail/oauth/callback") {
+    return await handleGmailConnectCallback(request, env);
+  }
   const smartleadWebhookMatch = path.match(/^\/integrations\/smartlead\/webhook\/([^/]+)$/);
   if (smartleadWebhookMatch && request.method === "POST") {
     const expected = await webhookSecret(env.DB);
     if (decodeURIComponent(smartleadWebhookMatch[1]) !== expected) throw new HttpError(404, "NOT_FOUND", "Not found.");
     const payload = await readJsonObject(request);
     return json(await processSmartleadWebhookEvent(env, payload));
-  }
-  if (request.method === "GET" && path === "/integrations/gmail/oauth/callback") {
-    return await handleLiveReplyOAuthCallback(request, env);
   }
   const unsubscribeMatch = path.match(/^\/unsubscribe\/email\/([^/]+)$/);
   if (unsubscribeMatch && (request.method === "GET" || request.method === "POST")) {
@@ -148,6 +151,15 @@ async function handleRequest(request, env) {
   const demoQuoteMatch = path.match(/^\/demo\/([^/]+)\/quote$/);
   if (demoQuoteMatch && request.method === "GET") {
     return await serveDemoQuote(env.DB, decodeURIComponent(demoQuoteMatch[1]), request);
+  }
+  const demoCheckoutSuccessMatch = path.match(/^\/demo\/([^/]+)\/checkout\/success$/);
+  if (demoCheckoutSuccessMatch && request.method === "GET") {
+    return serveCheckoutSuccess(decodeURIComponent(demoCheckoutSuccessMatch[1]));
+  }
+  const demoCheckoutMatch = path.match(/^\/demo\/([^/]+)\/checkout$/);
+  if (demoCheckoutMatch && request.method === "GET") {
+    const domainAddon = url.searchParams.get("domain") === "yes";
+    return await startCheckout(env, decodeURIComponent(demoCheckoutMatch[1]), domainAddon);
   }
   const publicDemoMatch = path.match(/^\/demo\/([^/]+)$/);
   if (publicDemoMatch && request.method === "GET") {
@@ -267,9 +279,9 @@ async function handleRequest(request, env) {
       FROM leads l LEFT JOIN demo_sites ds ON ds.lead_id=l.id AND ds.status IN ('READY','PUBLISHED')
       ORDER BY l.updated_at DESC`).all();
     const csvCell = /* @__PURE__ */ __name((value) => {
-      let text = String(value ?? "").replace(/[\r\n]+/g, " ").trim();
-      if (/^[=+\-@]/.test(text)) text = `'${text}`;
-      return `"${text.replaceAll('"', '""')}"`;
+      let text2 = String(value ?? "").replace(/[\r\n]+/g, " ").trim();
+      if (/^[=+\-@]/.test(text2)) text2 = `'${text2}`;
+      return `"${text2.replaceAll('"', '""')}"`;
     }, "csvCell");
     const headers = ["Name", "Category", "City", "State", "Rating", "Reviews", "Current-site URL", "Website gap", "Gap detail", "Pitch hook", "Concept link", "Stage", "Priority", "Last updated"];
     const origin = url.origin;
@@ -300,6 +312,21 @@ async function handleRequest(request, env) {
       "cache-control": "no-store",
       "x-content-type-options": "nosniff"
     } });
+  }
+  if (request.method === "GET" && path === "/api/quotes/mailbox") return json(await mailboxStatus(env));
+  if (request.method === "POST" && path === "/api/quotes/mailbox/connect") return json(await startGmailConnect(env));
+  if (path === "/api/quotes") {
+    if (request.method === "GET") return json({ quotes: await listQuotes(env.DB, url.searchParams.get("leadId")) });
+    if (request.method === "POST") return json({ quote: await createQuote(env.DB, await readJsonObject(request), actor) }, 201);
+  }
+  const quoteMatch = path.match(/^\/api\/quotes\/([^/]+)(?:\/(send|status))?$/);
+  if (quoteMatch) {
+    const quoteId = decodeURIComponent(quoteMatch[1]);
+    const action = quoteMatch[2];
+    if (!action && request.method === "GET") return json(await getQuoteDetail(env, quoteId));
+    if (!action && request.method === "PATCH") return json({ quote: await updateQuote(env.DB, quoteId, await readJsonObject(request), actor) });
+    if (action === "send" && request.method === "POST") return json(await sendQuote(env, quoteId, await readJsonObject(request), actor));
+    if (action === "status" && request.method === "POST") return json({ quote: await setQuoteStatus(env.DB, quoteId, (await readJsonObject(request)).status, actor) });
   }
   if (request.method === "GET" && path === "/api/demos/status") {
     return json(await demoStatus(env.DB, env));
@@ -337,6 +364,9 @@ async function handleRequest(request, env) {
   if (request.method === "GET" && path === "/api/outreach/email/status") {
     return json(await emailOutreachStatus(env.DB, env));
   }
+  if (request.method === "GET" && path === "/api/outreach/concierge/status") {
+    return json(await conciergeStatus(env.DB));
+  }
   if (request.method === "POST" && path === "/api/outreach/email/settings") {
     const body = await readJsonObject(request);
     await updateEmailSettings(env.DB, {
@@ -351,9 +381,6 @@ async function handleRequest(request, env) {
       smartleadMailbox: typeof body.smartleadMailbox === "string" ? body.smartleadMailbox : void 0
     }, actor);
     return json(await emailOutreachStatus(env.DB, env));
-  }
-  if (request.method === "POST" && path === "/api/outreach/email/live-reply/oauth/start") {
-    return json(await startLiveReplyOAuth(env.DB, env));
   }
   if (request.method === "POST" && path === "/api/outreach/email/test-allowlist") {
     const body = await readJsonObject(request);
@@ -453,7 +480,9 @@ async function handleRequest(request, env) {
     return json(result, result.rejected === result.received ? 422 : 202);
   }
   if (request.method === "GET" && path === "/api/campaigns") {
-    return json({ campaigns: await listCampaigns(env.DB, 100, url.searchParams.get("archived") === "true") });
+    const offeringParam = url.searchParams.get("offering");
+    const offering = offeringParam === "WEBSITE" || offeringParam === "CONCIERGE" ? offeringParam : void 0;
+    return json({ campaigns: await listCampaigns(env.DB, 100, url.searchParams.get("archived") === "true", offering) });
   }
   if (request.method === "POST" && path === "/api/campaigns") {
     const input = parseCampaignCreate(await readJsonObject(request));
@@ -470,7 +499,9 @@ async function handleRequest(request, env) {
     return json(await getRunnerStatus(env.DB));
   }
   if (request.method === "GET" && path === "/api/prospector-jobs") {
-    return json({ jobs: await listProspectorJobs(env.DB) });
+    const offeringParam = url.searchParams.get("offering");
+    const offering = offeringParam === "WEBSITE" || offeringParam === "CONCIERGE" ? offeringParam : void 0;
+    return json({ jobs: await listProspectorJobs(env.DB, offering) });
   }
   if (request.method === "POST" && path === "/api/prospector-jobs") {
     const input = parseProspectorJobCreate(await readJsonObject(request));

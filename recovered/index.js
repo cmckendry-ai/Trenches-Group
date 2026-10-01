@@ -76,13 +76,14 @@ var index_default = {
         });
         const prospectorJobs = await runDueProspectorJobs(env.DB, env);
         await keepRunnerAlive(env);
-        const [followups, outreach, demoConsentRepair, demoApprovedRepair] = await Promise.all([
+        const [followups, outreach, demoConsentRepair, demoApprovedRepair, quoteViewAlerts] = await Promise.all([
           processDueFollowups(env.DB, false),
           runAutonomousOutreach(env),
           repairDemoConsentHandoffs(env.DB),
-          reconcileApprovedDemoJobs(env.DB)
+          reconcileApprovedDemoJobs(env.DB),
+          sendFirstViewAlerts(env)
         ]);
-        return { reaped, deferred, prospectorJobs, followups, outreach, demoConsentRepair, demoApprovedRepair };
+        return { reaped, deferred, prospectorJobs, followups, outreach, demoConsentRepair, demoApprovedRepair, quoteViewAlerts };
       });
       const repaired = outcome?.demoApprovedRepair?.requeued ?? 0;
       const reclaimed = outcome?.reaped?.reclaimed ?? 0;

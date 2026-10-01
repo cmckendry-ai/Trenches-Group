@@ -56,7 +56,7 @@ async function uniqueSlug(db, businessName2) {
   return `${base}-${crypto.randomUUID().slice(0, 8)}`;
 }
 __name(uniqueSlug, "uniqueSlug");
-async function tryTransition(db, leadId, to, reason) {
+async function tryTransition2(db, leadId, to, reason) {
   try {
     await transitionLead(db, leadId, to, "SYSTEM", reason, "DEMO");
   } catch (error) {
@@ -71,7 +71,7 @@ async function tryTransition(db, leadId, to, reason) {
     });
   }
 }
-__name(tryTransition, "tryTransition");
+__name(tryTransition2, "tryTransition");
 async function demoLeadBlockReason(db, lead, stage) {
   if (await isSuppressed(db, lead.phone, lead.email)) return "Lead/contact is suppressed.";
   if (lead.automation_paused) return "Automation is paused for this lead.";
@@ -123,14 +123,14 @@ async function ensureDemoJob(db, leadId, actor = "SYSTEM") {
     const ts2 = nowIso();
     await db.prepare(`UPDATE demo_jobs SET status='PENDING',attempt_count=0,qa_attempt_count=0,next_retry_at=NULL,claimed_by=NULL,claimed_at=NULL,started_at=NULL,completed_at=NULL,last_error=NULL,model=?,updated_at=? WHERE id=?`).bind(settings2.builderModel, ts2, stale.id).run();
     await recordEvent(db, { eventId: newId("evt"), leadId, eventType: "DEMO_BUILD_REQUEUED", eventData: { demoJobId: stale.id, previousStatus: stale.status, model: settings2.builderModel }, source: "DEMO", actor });
-    if (lead.current_state === "DEMO_APPROVED") await tryTransition(db, leadId, "DEMO_BUILDING", "Demo build re-queued after prospect approval.");
+    if (lead.current_state === "DEMO_APPROVED") await tryTransition2(db, leadId, "DEMO_BUILDING", "Demo build re-queued after prospect approval.");
     return { jobId: stale.id, created: false, requeued: true };
   }
   const id = newId("demo");
   const ts = nowIso();
   await db.prepare(`INSERT INTO demo_jobs(id,lead_id,status,attempt_count,max_attempts,qa_attempt_count,max_qa_attempts,model,created_at,updated_at) VALUES(?,?,'PENDING',0,3,0,2,?,?,?)`).bind(id, leadId, settings2.builderModel, ts, ts).run();
   await recordEvent(db, { eventId: newId("evt"), leadId, eventType: "DEMO_BUILD_QUEUED", eventData: { demoJobId: id, model: settings2.builderModel }, source: "DEMO", actor });
-  if (lead.current_state === "DEMO_APPROVED") await tryTransition(db, leadId, "DEMO_BUILDING", "Demo build queued after prospect approval.");
+  if (lead.current_state === "DEMO_APPROVED") await tryTransition2(db, leadId, "DEMO_BUILDING", "Demo build queued after prospect approval.");
   return { jobId: id, created: true };
 }
 __name(ensureDemoJob, "ensureDemoJob");
@@ -193,21 +193,23 @@ async function tryDeliverDemoEmail(env, site, lead) {
   if (!lead.email) return { sent: false, reason: "Lead has no email." };
   const settings2 = await demoSettings(env.DB);
   if (!settings2.autoDeliverEmail) return { sent: false, reason: "Auto-deliver email disabled." };
-  const recent = await env.DB.prepare(`SELECT subject FROM outreach_email_messages WHERE lead_id=? ORDER BY created_at DESC LIMIT 1`).bind(lead.id).first();
   const url = `${env.PUBLIC_BASE_URL}/demo/${site.slug}`;
-  const subject = recent?.subject?.toLowerCase().startsWith("re:") ? recent.subject : `Re: ${recent?.subject || "that free website preview"}`;
-  const body = `Hey \u2014 got that preview put together for y\u2019all. Here it is:
+  try {
+    await notifyConnor(env, {
+      subject: `Demo ready: ${lead.business_name}`,
+      text: `${lead.business_name} (${lead.email}) has a QA-passed demo ready:
 
 ${url}
 
-Take a look when you get a minute and let me know what you think. \u2014 Connor`;
-  try {
-    const result = await sendLiveReply(env, { to: lead.email, subject, body, leadId: lead.id, testOnly: false, intent: "DEMO_READY" });
+Send it to them from Smartlead -- nothing here sends on your behalf.`,
+      leadId: lead.id,
+      failureEventType: "DEMO_NOTIFICATION_FAILED"
+    });
     const ts = nowIso();
     await env.DB.prepare(`UPDATE demo_sites SET status='PUBLISHED',published_at=COALESCE(published_at,?),updated_at=? WHERE id=?`).bind(ts, ts, site.id).run();
-    await env.DB.prepare(`INSERT INTO demo_events(id,demo_site_id,lead_id,event_type,metadata_json,created_at) VALUES(?,?,?,'DEMO_SENT',?,?)`).bind(newId("de"), site.id, lead.id, JSON.stringify({ email: lead.email, messageId: result.id }), ts).run();
+    await env.DB.prepare(`INSERT INTO demo_events(id,demo_site_id,lead_id,event_type,metadata_json,created_at) VALUES(?,?,?,'DEMO_SENT',?,?)`).bind(newId("de"), site.id, lead.id, JSON.stringify({ email: lead.email }), ts).run();
     await recordEvent(env.DB, { eventId: newId("evt"), leadId: lead.id, eventType: "DEMO_SENT", eventData: { demoSiteId: site.id, url, email: lead.email }, source: "DEMO", actor: "SYSTEM" });
-    if (lead.current_state === "DEMO_READY") await tryTransition(env.DB, lead.id, "DEMO_SENT", "QA-passed demo delivered by email.");
+    if (lead.current_state === "DEMO_READY") await tryTransition2(env.DB, lead.id, "DEMO_SENT", "QA-passed demo ready; Connor notified to deliver via Smartlead.");
     return { sent: true };
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
@@ -245,9 +247,9 @@ async function completeDemoJob(env, jobId, input) {
     env.DB.prepare(`INSERT INTO demo_events(id,demo_site_id,lead_id,event_type,metadata_json,created_at) VALUES(?,?,?,'QA_PASSED',?,?)`).bind(newId("de"), siteId, lead.id, JSON.stringify({ qaScore: input.qaScore }), ts)
   ]);
   await recordEvent(env.DB, { eventId: newId("evt"), leadId: lead.id, eventType: "DEMO_QA_PASSED", eventData: { demoJobId: jobId, demoSiteId: siteId, slug, qaScore: input.qaScore }, source: "DEMO", actor: "RUNNER" });
-  if (lead.current_state === "DEMO_BUILDING") await tryTransition(env.DB, lead.id, "DEMO_QA", "Demo build generated; QA passed by runner.");
+  if (lead.current_state === "DEMO_BUILDING") await tryTransition2(env.DB, lead.id, "DEMO_QA", "Demo build generated; QA passed by runner.");
   const refreshed = await getLead(env.DB, lead.id);
-  if (refreshed?.current_state === "DEMO_QA") await tryTransition(env.DB, lead.id, "DEMO_READY", "Demo QA passed and preview is published.");
+  if (refreshed?.current_state === "DEMO_QA") await tryTransition2(env.DB, lead.id, "DEMO_READY", "Demo QA passed and preview is published.");
   const site = await env.DB.prepare("SELECT * FROM demo_sites WHERE id=?").bind(siteId).first();
   if (!site) throw new Error("Demo site failed to persist.");
   const delivery = settings2.requireApproval ? { sent: false, reason: "Awaiting Command Center approval." } : await tryDeliverDemoEmail(env, site, await getLead(env.DB, lead.id) ?? lead);
@@ -266,7 +268,7 @@ async function failDemoJob(db, jobId, error, retryable = true) {
   await recordEvent(db, { eventId: newId("evt"), leadId: job.lead_id, eventType: canRetry ? "DEMO_BUILD_RETRY_SCHEDULED" : "DEMO_BUILD_FAILED", eventData: { demoJobId: jobId, attempt, max, nextRetryAt: next, error: error.slice(0, 800) }, source: "DEMO", actor: "RUNNER" });
   if (!canRetry) {
     const lead = await getLead(db, job.lead_id);
-    if (lead?.current_state === "DEMO_BUILDING" || lead?.current_state === "DEMO_QA") await tryTransition(db, lead.id, "HUMAN_REVIEW", "Demo builder exhausted retries.");
+    if (lead?.current_state === "DEMO_BUILDING" || lead?.current_state === "DEMO_QA") await tryTransition2(db, lead.id, "HUMAN_REVIEW", "Demo builder exhausted retries.");
   }
   return { status: canRetry ? "RETRY_SCHEDULED" : "FAILED", attempt, max, nextRetryAt: next };
 }
@@ -322,7 +324,7 @@ async function serveDemo(db, slug, request) {
     db.prepare(`INSERT INTO demo_events(id,demo_site_id,lead_id,event_type,metadata_json,created_at) VALUES(?,?,?,'VIEW',?,?)`).bind(newId("de"), site.id, site.lead_id, JSON.stringify({ ua: request.headers.get("user-agent")?.slice(0, 300) || null }), ts)
   ]);
   const lead = await getLead(db, site.lead_id);
-  if (lead?.current_state === "DEMO_SENT") await tryTransition(db, lead.id, "DEMO_VIEWED", "Prospect opened live demo preview.");
+  if (lead?.current_state === "DEMO_SENT") await tryTransition2(db, lead.id, "DEMO_VIEWED", "Prospect opened live demo preview.");
   return new Response(site.html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; img-src data:; font-src data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; connect-src 'none'; script-src 'none'", "x-frame-options": "DENY", "referrer-policy": "no-referrer" } });
 }
 __name(serveDemo, "serveDemo");
@@ -335,11 +337,23 @@ async function handleDemoCta(db, slug) {
     db.prepare(`INSERT INTO demo_events(id,demo_site_id,lead_id,event_type,metadata_json,created_at) VALUES(?,?,?,'CTA_CLICK','{}',?)`).bind(newId("de"), site.id, site.lead_id, ts)
   ]);
   const lead = await getLead(db, site.lead_id);
-  if (lead && (lead.current_state === "DEMO_SENT" || lead.current_state === "DEMO_VIEWED")) await tryTransition(db, lead.id, "PRICING_VIEWED", "Prospect clicked the demo conversion CTA.");
+  if (lead && (lead.current_state === "DEMO_SENT" || lead.current_state === "DEMO_VIEWED")) await tryTransition2(db, lead.id, "PRICING_VIEWED", "Prospect clicked the demo conversion CTA.");
   await recordEvent(db, { eventId: newId("evt"), leadId: site.lead_id, eventType: "DEMO_CTA_CLICKED", eventData: { demoSiteId: site.id, slug }, source: "DEMO", actor: "PROSPECT" });
-  return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Next step</title><body style="margin:0;background:#0b0d10;color:#f6f7f8;font-family:system-ui;display:grid;place-items:center;min-height:100vh"><main style="max-width:680px;padding:40px;text-align:center"><div style="font-size:12px;letter-spacing:.14em;color:#c9f24d">TRENCHES GROUP</div><h1 style="font-size:42px;margin:12px 0">Glad y\u2019all like it.</h1><p style="color:#aeb6c3;font-size:18px;line-height:1.6">Your interest is recorded. The next step is pricing, agreement, and launch setup. That checkout flow is the next Trenches OS phase.</p><a href="/demo/${encodeURIComponent(slug)}" style="display:inline-block;margin-top:18px;color:#0b0d10;background:#c9f24d;padding:13px 18px;border-radius:8px;text-decoration:none;font-weight:800">Back to preview</a></main></body>`, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-frame-options": "DENY", "referrer-policy": "no-referrer" } });
+  const buyBase = `/demo/${encodeURIComponent(slug)}/checkout`;
+  return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Next step</title><body style="margin:0;background:#0b0d10;color:#f6f7f8;font-family:system-ui;display:grid;place-items:center;min-height:100vh"><main style="max-width:680px;padding:40px;text-align:center"><div style="font-size:12px;letter-spacing:.14em;color:#c9f24d">TRENCHES GROUP</div><h1 style="font-size:42px;margin:12px 0">Glad y\u2019all like it.</h1><p style="color:#aeb6c3;font-size:18px;line-height:1.6">$500 flat for the full website build, including up to 2 rounds of adjustments before launch. Do you also need help setting up and publishing a domain?</p><div style="display:grid;gap:10px;max-width:380px;margin:24px auto 0"><a href="${buyBase}?domain=yes" style="display:block;padding:16px;border-radius:10px;background:#c9f24d;color:#0b0d10;text-decoration:none;font-weight:800">Yes \u2014 add domain setup ($125)</a><a href="${buyBase}?domain=no" style="display:block;padding:16px;border-radius:10px;border:1px solid #394250;color:#fff;text-decoration:none;font-weight:800">No, I already have one</a></div><a href="/demo/${encodeURIComponent(slug)}" style="display:inline-block;margin-top:22px;color:#aeb6c3;font-size:13px">Back to preview</a></main></body>`, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-frame-options": "DENY", "referrer-policy": "no-referrer" } });
 }
 __name(handleDemoCta, "handleDemoCta");
+async function startCheckout(env, slug, domainAddon) {
+  const site = await env.DB.prepare(`SELECT * FROM demo_sites WHERE slug=? AND status IN ('READY','PUBLISHED')`).bind(slug).first();
+  if (!site) return new Response("Demo not found.", { status: 404 });
+  const url = await createCheckoutSession(env, slug, site.lead_id, domainAddon);
+  return new Response(null, { status: 302, headers: { location: url } });
+}
+__name(startCheckout, "startCheckout");
+function serveCheckoutSuccess(slug) {
+  return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Payment received</title><body style="margin:0;background:#0b0d10;color:#f6f7f8;font-family:system-ui;display:grid;place-items:center;min-height:100vh"><main style="max-width:640px;padding:40px;text-align:center"><div style="font-size:12px;letter-spacing:.14em;color:#c9f24d">TRENCHES GROUP</div><h1 style="font-size:36px;margin:12px 0">Payment received \u2014 thank you.</h1><p style="color:#aeb6c3;font-size:18px;line-height:1.6">We'll be in touch shortly to kick off the build. You'll get up to 2 rounds of adjustments before launch.</p><a href="/demo/${encodeURIComponent(slug)}" style="display:inline-block;margin-top:18px;color:#0b0d10;background:#c9f24d;padding:13px 18px;border-radius:8px;text-decoration:none;font-weight:800">Back to preview</a></main></body>`, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-frame-options": "DENY", "referrer-policy": "no-referrer" } });
+}
+__name(serveCheckoutSuccess, "serveCheckoutSuccess");
 async function createStaticDemoPreview(db, leadId, actor = "COMMAND_CENTER") {
   const lead = await getLead(db, leadId);
   if (!lead) throw new HttpError(404, "LEAD_NOT_FOUND", "Lead not found.");

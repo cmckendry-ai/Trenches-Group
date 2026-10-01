@@ -270,6 +270,10 @@ function parseDiscoveryBatch(body) {
 }
 __name(parseDiscoveryBatch, "parseDiscoveryBatch");
 function parseProspectorJobCreate(body) {
+  const offeringRaw = optionalString(body.offering, "offering", 20);
+  if (offeringRaw && !["WEBSITE", "CONCIERGE"].includes(offeringRaw.toUpperCase())) {
+    throw new HttpError(400, "VALIDATION_ERROR", "offering must be WEBSITE or CONCIERGE.");
+  }
   return {
     city: requiredString(body.city, "city", 120),
     state: requiredString(body.state, "state", 40),
@@ -277,7 +281,8 @@ function parseProspectorJobCreate(body) {
     radiusMiles: optionalNumber(body.radiusMiles, "radiusMiles", 1, 100),
     targetCount: optionalNumber(body.targetCount, "targetCount", 1, 300),
     cadenceDays: optionalNumber(body.cadenceDays, "cadenceDays", 1, 365),
-    active: optionalBoolean(body.active, "active")
+    active: optionalBoolean(body.active, "active"),
+    offering: offeringRaw?.toUpperCase()
   };
 }
 __name(parseProspectorJobCreate, "parseProspectorJobCreate");

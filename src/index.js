@@ -93,38 +93,41 @@ function adminHtml() {
   <title>Trenches Command Center</title>
   <style>
     :root{color-scheme:dark;--bg:#090a0c;--panel:#121419;--panel2:#181b21;--line:#2a3039;--text:#f5f6f8;--muted:#9ca5b4;--accent:#d8ff3e;--danger:#ff6363;--good:#58df8d;--warn:#ffc14d}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}.shell{max-width:1500px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:18px}.brand{display:flex;gap:12px;align-items:center}.mark{width:40px;height:40px;border:2px solid var(--accent);display:grid;place-items:center;font-weight:900;color:var(--accent)}h1{font-size:20px;margin:0}.sub{font-size:12px;color:var(--muted);margin-top:3px}.actions,.rowBtns{display:flex;gap:8px;flex-wrap:wrap}.btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:8px;cursor:pointer}.btn:hover{border-color:#596270}.btn.primary{background:var(--accent);border-color:var(--accent);color:#0a0b06;font-weight:850}.btn.danger{background:#2a1618;border-color:#703238;color:#ffd0d0}.btn.good{background:#11271a;border-color:#2f6541;color:#c5ffd7}.btn.small{padding:6px 9px;font-size:12px}.status{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px}.dot{width:9px;height:9px;border-radius:50%;background:#6c7380}.dot.on{background:var(--good);box-shadow:0 0 0 3px rgba(88,223,141,.12)}.dot.off{background:var(--danger)}.metrics{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-bottom:16px}.metric,.panel{background:var(--panel);border:1px solid var(--line);border-radius:11px}.metric{padding:14px}.metric .n{font-size:25px;font-weight:850}.metric .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line)}.sectionTitle h2{font-size:15px;margin:0}.runnerBadge{font-size:12px;color:var(--muted)}.campaignGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px}.campaign{border:1px solid #252b34;background:#0e1115;border-radius:9px;padding:12px}.campaignHead{display:flex;justify-content:space-between;gap:10px}.campaignName{font-weight:800}.campaignMeta{font-size:12px;color:var(--muted);line-height:1.5;margin-top:5px}.progress{height:7px;background:#222830;border-radius:999px;overflow:hidden;margin:10px 0}.progress>span{display:block;height:100%;background:var(--accent)}.pill{display:inline-flex;padding:4px 7px;border:1px solid #343b47;border-radius:999px;font-size:10px;white-space:nowrap}.pill.A{color:#d9ffba;border-color:#4d7133}.pill.B{color:#e7f3ff;border-color:#496078}.pill.RUNNING{color:#c5ffd7;border-color:#315f43}.pill.READY{color:#ffe1a6;border-color:#7b6030}.pill.FAILED,.pill.ERROR{color:#ffc4c4;border-color:#70373b}.pill.COMPLETED{color:#c5ffd7;border-color:#315f43}.toolbar{display:flex;gap:9px;align-items:center;padding:12px;border-bottom:1px solid var(--line);flex-wrap:wrap}.toolbar input,.toolbar select,.modal input,.modal textarea,.modal select{background:#0d0f13;border:1px solid var(--line);color:var(--text);padding:9px 10px;border-radius:8px;outline:none}.toolbar input{min-width:260px;flex:1}.tableWrap{overflow:auto;max-height:54vh}table{width:100%;border-collapse:collapse;min-width:1020px}th,td{padding:11px 12px;border-bottom:1px solid #22262e;font-size:13px;text-align:left}th{position:sticky;top:0;background:#11141a;color:#aeb5c1;text-transform:uppercase;font-size:10px;letter-spacing:.06em}.business{font-weight:750}.muted{color:var(--muted)}.right{text-align:right}.empty{text-align:center;padding:30px;color:var(--muted)}.overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-start;justify-content:center;padding:5vh 16px;z-index:20;overflow:auto}.overlay.open{display:flex}.modal{width:min(760px,100%);background:#101319;border:1px solid #323845;border-radius:12px;padding:18px}.modal h2{margin:0 0 13px;font-size:18px}.modal label{display:block;font-size:10px;color:var(--muted);margin:10px 0 5px;text-transform:uppercase;letter-spacing:.06em}.modal input,.modal textarea,.modal select{width:100%}.modal textarea{min-height:90px;resize:vertical}.modal .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.modalFooter{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.detailGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;margin:12px 0}.detailItem{padding:7px 0;border-bottom:1px solid #222832}.detailItem b{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;margin-bottom:3px}.timeline{border-top:1px solid var(--line);padding-top:12px;max-height:300px;overflow:auto}.event{padding:8px 0;border-bottom:1px solid #21252d}.eventHead{display:flex;justify-content:space-between;font-size:12px}.eventData{font-size:11px;color:#aeb5c1;margin-top:4px;white-space:pre-wrap}.login{position:fixed;inset:0;background:#08090b;display:grid;place-items:center;z-index:50}.loginCard{width:min(430px,92vw);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px}.loginCard input{width:100%;margin:12px 0;background:#0b0d10;border:1px solid var(--line);color:#fff;padding:11px;border-radius:8px}.errorBar{display:none;background:#33191b;color:#ffd0d0;border:1px solid #6f3034;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px}.stack{display:grid;gap:14px}@media(max-width:1050px){.metrics{grid-template-columns:repeat(3,1fr)}.campaignGrid{grid-template-columns:1fr 1fr}}@media(max-width:700px){.shell{padding:12px}.top{align-items:flex-start;flex-direction:column}.metrics{grid-template-columns:repeat(2,1fr)}.campaignGrid{grid-template-columns:1fr}.modal .grid2,.detailGrid{grid-template-columns:1fr}.actions{width:100%}.btn{flex:1}.tableWrap{max-height:50vh}}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}.shell{max-width:1500px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:18px}.brand{display:flex;gap:12px;align-items:center}.mark{width:40px;height:40px;border:2px solid var(--accent);display:grid;place-items:center;font-weight:900;color:var(--accent)}h1{font-size:20px;margin:0}.sub{font-size:12px;color:var(--muted);margin-top:3px}.actions,.rowBtns{display:flex;gap:8px;flex-wrap:wrap}.btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:8px;cursor:pointer}.btn:hover{border-color:#596270}.btn.primary{background:var(--accent);border-color:var(--accent);color:#0a0b06;font-weight:850}.btn.danger{background:#2a1618;border-color:#703238;color:#ffd0d0}.btn.good{background:#11271a;border-color:#2f6541;color:#c5ffd7}.btn.small{padding:6px 9px;font-size:12px}.status{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px}.dot{width:9px;height:9px;border-radius:50%;background:#6c7380}.dot.on{background:var(--good);box-shadow:0 0 0 3px rgba(88,223,141,.12)}.dot.off{background:var(--danger)}.modeBar{display:flex;gap:8px;margin-bottom:14px}.modeBtn{flex:1;padding:12px;font-weight:800;text-align:center;border-radius:9px}.modeBtn.active{background:var(--accent);border-color:var(--accent);color:#0a0b06}.metrics{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-bottom:16px}.metric,.panel{background:var(--panel);border:1px solid var(--line);border-radius:11px}.metric{padding:14px}.metric .n{font-size:25px;font-weight:850}.metric .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line)}.sectionTitle h2{font-size:15px;margin:0}.runnerBadge{font-size:12px;color:var(--muted)}.campaignGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px}.campaign{border:1px solid #252b34;background:#0e1115;border-radius:9px;padding:12px}.campaignHead{display:flex;justify-content:space-between;gap:10px}.campaignName{font-weight:800}.campaignMeta{font-size:12px;color:var(--muted);line-height:1.5;margin-top:5px}.progress{height:7px;background:#222830;border-radius:999px;overflow:hidden;margin:10px 0}.progress>span{display:block;height:100%;background:var(--accent)}.pill{display:inline-flex;padding:4px 7px;border:1px solid #343b47;border-radius:999px;font-size:10px;white-space:nowrap}.pill.A{color:#d9ffba;border-color:#4d7133}.pill.B{color:#e7f3ff;border-color:#496078}.pill.RUNNING{color:#c5ffd7;border-color:#315f43}.pill.READY{color:#ffe1a6;border-color:#7b6030}.pill.FAILED,.pill.ERROR{color:#ffc4c4;border-color:#70373b}.pill.COMPLETED{color:#c5ffd7;border-color:#315f43}.toolbar{display:flex;gap:9px;align-items:center;padding:12px;border-bottom:1px solid var(--line);flex-wrap:wrap}.toolbar input,.toolbar select,.modal input,.modal textarea,.modal select{background:#0d0f13;border:1px solid var(--line);color:var(--text);padding:9px 10px;border-radius:8px;outline:none}.toolbar input{min-width:260px;flex:1}.tableWrap{overflow:auto;max-height:54vh}table{width:100%;border-collapse:collapse;min-width:1020px}th,td{padding:11px 12px;border-bottom:1px solid #22262e;font-size:13px;text-align:left}th{position:sticky;top:0;background:#11141a;color:#aeb5c1;text-transform:uppercase;font-size:10px;letter-spacing:.06em}.business{font-weight:750}.muted{color:var(--muted)}.right{text-align:right}.empty{text-align:center;padding:30px;color:var(--muted)}.overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-start;justify-content:center;padding:5vh 16px;z-index:20;overflow:auto}.overlay.open{display:flex}.modal{width:min(760px,100%);background:#101319;border:1px solid #323845;border-radius:12px;padding:18px}.modal h2{margin:0 0 13px;font-size:18px}.modal label{display:block;font-size:10px;color:var(--muted);margin:10px 0 5px;text-transform:uppercase;letter-spacing:.06em}.modal input,.modal textarea,.modal select{width:100%}.modal textarea{min-height:90px;resize:vertical}.modal .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.modalFooter{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.detailGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;margin:12px 0}.detailItem{padding:7px 0;border-bottom:1px solid #222832}.detailItem b{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;margin-bottom:3px}.timeline{border-top:1px solid var(--line);padding-top:12px;max-height:300px;overflow:auto}.event{padding:8px 0;border-bottom:1px solid #21252d}.eventHead{display:flex;justify-content:space-between;font-size:12px}.eventData{font-size:11px;color:#aeb5c1;margin-top:4px;white-space:pre-wrap}.login{position:fixed;inset:0;background:#08090b;display:grid;place-items:center;z-index:50}.loginCard{width:min(430px,92vw);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px}.loginCard input{width:100%;margin:12px 0;background:#0b0d10;border:1px solid var(--line);color:#fff;padding:11px;border-radius:8px}.errorBar{display:none;background:#33191b;color:#ffd0d0;border:1px solid #6f3034;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px}.stack{display:grid;gap:14px}.qItem{display:grid;grid-template-columns:1fr 70px 110px 110px 34px;gap:6px;margin-bottom:6px;align-items:center}.qSend{display:grid;grid-template-columns:2fr 1fr auto;gap:8px;align-items:center}.qStats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0}@media(max-width:700px){.qItem{grid-template-columns:1fr 1fr}.qItem .qiDesc{grid-column:1/-1}.qSend,.qStats{grid-template-columns:1fr 1fr}}@media(max-width:1050px){.metrics{grid-template-columns:repeat(3,1fr)}.campaignGrid{grid-template-columns:1fr 1fr}}@media(max-width:700px){.shell{padding:12px}.top{align-items:flex-start;flex-direction:column}.metrics{grid-template-columns:repeat(2,1fr)}.campaignGrid{grid-template-columns:1fr}.modal .grid2,.detailGrid{grid-template-columns:1fr}.actions{width:100%}.btn{flex:1}.tableWrap{max-height:50vh}}
   </style>
 </head>
 <body>
 <div class="login" id="login"><div class="loginCard"><h2>Trenches Command Center</h2><p class="muted">Enter the admin key created during the original deployment.</p><input id="keyInput" type="password" autocomplete="current-password" placeholder="Admin key"/><button class="btn primary" onclick="login()">Sign in</button><div class="errorBar" id="loginError"></div></div></div>
 <div class="shell">
   <div class="top"><div class="brand"><div class="mark">TG</div><div><h1>Trenches Command Center</h1><div class="sub">Phase 4A v22 \xB7 Website Gap Gate + Manual Lead Control</div></div></div><div class="actions"><button class="btn" onclick="refreshAll()">Refresh</button><button class="btn danger" id="globalToggle" onclick="toggleGlobal()">Pause all automation</button><button class="btn primary" onclick="openCampaign()">+ Prospecting campaign</button></div></div>
+  <div class="modeBar"><button class="btn modeBtn" id="modeWebsiteBtn" onclick="setMode('WEBSITE')">Website Business</button><button class="btn modeBtn" id="modeConciergeBtn" onclick="setMode('CONCIERGE')">AI Concierge Business</button></div>
   <div class="errorBar" id="errorBar"></div>
   <div class="metrics"><div class="metric"><div class="n" id="mTotal">\u2014</div><div class="l">Total leads</div></div><div class="metric"><div class="n" id="mQualified">\u2014</div><div class="l">Qualified</div></div><div class="metric"><div class="n" id="mPriority">\u2014</div><div class="l">Priority A/B</div></div><div class="metric"><div class="n" id="mCampaigns">\u2014</div><div class="l">Campaigns</div></div><div class="metric"><div class="n" id="mHuman">\u2014</div><div class="l">Human review</div></div><div class="metric"><div class="n" id="mWon">\u2014</div><div class="l">Customers</div></div></div>
 
   <div class="stack">
-    <section class="panel"><div class="sectionTitle"><div><h2>Operator Dashboard <span class="pill READY">PHASE 5</span></h2><div class="sub">Your highest-value next actions. Uses existing Command Center data only\u2014no new provider calls.</div></div><div class="runnerBadge" id="operatorSummary">Loading priorities\u2026</div></div><div class="campaignGrid" id="operatorGrid"><div class="empty">Loading operator priorities\u2026</div></div></section>
+    <section class="panel"><div class="sectionTitle"><div><h2>Quotes &amp; Estimates</h2><div class="sub">Build a quote, send it to any email, and see every open and view. Clients see it on trenchesgroup.com and in their client portal.</div></div><div class="rowBtns" style="align-items:center"><span class="runnerBadge" id="quoteMailbox">Checking mailbox\u2026</span><span class="runnerBadge" id="quoteSummary">Loading\u2026</span><button class="btn primary" onclick="openQuote(null)">+ New quote</button></div></div><div class="tableWrap" style="max-height:420px"><table style="min-width:1000px"><thead><tr><th>Quote</th><th>Client</th><th>Title</th><th>Total</th><th>Status</th><th>Sent to</th><th>Opens</th><th>Views</th><th>Last viewed</th><th></th></tr></thead><tbody id="quoteRows"></tbody></table><div class="empty" id="quoteEmpty">No quotes yet. Click + New quote to build your first one.</div></div></section>
+    <section class="panel" data-mode="WEBSITE"><div class="sectionTitle"><div><h2>Operator Dashboard <span class="pill READY">PHASE 5</span></h2><div class="sub">Your highest-value next actions. Uses existing Command Center data only\u2014no new provider calls.</div></div><div class="runnerBadge" id="operatorSummary">Loading priorities\u2026</div></div><div class="campaignGrid" id="operatorGrid"><div class="empty">Loading operator priorities\u2026</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Prospect Tracker <span class="pill READY">PHASE 7</span></h2><div class="sub">Export your Command Center prospects for a client-ready tracker. Includes opportunity, pitch hook, concept link, and current stage\u2014no Airtable account required.</div></div><button class="btn primary" onclick="downloadProspectTracker()">Download tracker CSV</button></div><div style="padding:12px 14px" class="sub">Use the CSV in Excel, Google Sheets, or import it into Airtable later if you choose. Your source of truth remains Command Center.</div></section>
-    <section class="panel"><div class="sectionTitle"><div><h2>Client Launch Board <span class="pill READY">PHASE 8</span></h2><div class="sub">The handoff from live demo to customer. Review the next commercial or onboarding action without adding another system.</div></div><div class="runnerBadge" id="launchSummary">Loading launch work\u2026</div></div><div class="campaignGrid" id="launchGrid"><div class="empty">Loading client launch work\u2026</div></div></section>
+    <section class="panel" data-mode="WEBSITE"><div class="sectionTitle"><div><h2>Client Launch Board <span class="pill READY">PHASE 8</span></h2><div class="sub">The handoff from live demo to customer. Review the next commercial or onboarding action without adding another system.</div></div><div class="runnerBadge" id="launchSummary">Loading launch work\u2026</div></div><div class="campaignGrid" id="launchGrid"><div class="empty">Loading client launch work\u2026</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Prospecting campaigns</h2><div class="sub">Fast discovery \u2192 deterministic filtering \u2192 one-business enrichment. One bad candidate cannot kill a campaign.</div></div><div class="rowBtns"><button class="btn small" id="archiveToggle" onclick="toggleArchived()">Show archived</button><div class="runnerBadge"><span class="dot" id="runnerDot"></span><span id="runnerText">Runner unknown</span></div></div></div><div class="campaignGrid" id="campaignGrid"><div class="empty">No campaigns yet.</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Prospector Job Queue <span class="pill READY">AUTO</span></h2><div class="sub">Rotating city \xD7 category grid. A capped number of due jobs get promoted into real prospecting campaigns automatically on the 2-minute scheduler tick \u2014 this does not bypass the daily cap or backlog limit below.</div></div><div class="rowBtns"><span class="runnerBadge" id="prospectorJobsSummary">Loading\u2026</span><button class="btn small primary" onclick="runProspectorJobsNow()">Run due jobs now</button></div></div><div class="tableWrap" style="max-height:320px"><table style="min-width:900px"><thead><tr><th>City</th><th>Category</th><th>Radius</th><th>Target</th><th>Cadence</th><th>Last run</th><th>Status</th><th></th></tr></thead><tbody id="prospectorJobRows"></tbody></table><div class="empty" id="prospectorJobEmpty">No prospector jobs seeded yet.</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Outreach Lab <span class="pill READY">TEST MODE</span></h2><div class="sub">Twilio plumbing only. Only numbers on the explicit test allowlist can receive SMS. Live prospect outreach is hard-locked.</div></div><div class="runnerBadge"><span class="dot" id="twilioDot"></span><span id="twilioText">Twilio status unknown</span></div></div><div class="toolbar"><input id="oPhone" placeholder="Your test phone, e.g. +16155551234"/><input id="oLabel" placeholder="Label, e.g. Connor iPhone"/><button class="btn" onclick="addTestNumber()">Add test number</button></div><div class="toolbar"><input id="oMessage" value="Trenches test: reply YES, PRICE, CALL ME, or STOP."/><button class="btn primary" onclick="sendTestSms()">Send test SMS</button></div><div style="padding:0 12px 10px"><div class="sub" id="outreachWebhookText"></div><div id="allowlistRows" class="rowBtns" style="margin-top:9px"></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:820px"><thead><tr><th>Time</th><th>Direction</th><th>Phone</th><th>Message</th><th>Intent</th><th>Status</th></tr></thead><tbody id="messageRows"></tbody></table><div class="empty" id="messageEmpty">No outreach test messages yet.</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Autonomous Outreach Orchestrator <span class="pill READY">EMAIL + SMS FOUNDATION</span></h2><div class="sub">Google Workspace email can run autonomously after one-time OAuth setup. Gmail replies feed the same conversation brain. SMS stays live-locked until Twilio approval; voice/social adapters remain disabled.</div></div><div class="runnerBadge"><span class="dot" id="gmailDot"></span><span id="gmailText">Gmail status unknown</span></div></div>
       <div class="toolbar"><input id="gClientId" placeholder="Smartlead sending mailbox (e.g. connor.trenches@discovertrenchesgroup.com)"/><button class="btn primary" onclick="saveSmartleadMailboxUi()">Save Smartlead mailbox</button></div>
       <div style="padding:0 12px 10px"><div class="sub" id="gmailCallback"></div></div>
-      <div class="toolbar"><span class="dot" id="liveReplyDot"></span><span class="sub" id="liveReplyText"></span><button class="btn primary" onclick="connectLiveReplyUi()">Connect live-reply mailbox</button></div>
+      <div class="toolbar"><span class="dot on"></span><span class="sub" id="replyModelText">Replies are human-in-the-loop: answer leads directly in Smartlead. Genuine replies (not bounces/autoresponders) email a heads-up here.</span></div>
       <div style="padding:0 12px 10px"><div class="sub">Live conversational replies (price/skepticism/etc. answers) send through this mailbox via Gmail API, separate from Smartlead's bulk campaign sends. Sign in as connor.trenches@discovertrenchesgroup.com when prompted.</div></div>
       <div class="toolbar"><input id="emailFromName" placeholder="From name"/><input id="emailPostal" placeholder="Business postal address (required before live email)"/><input id="emailDailyCap" type="number" min="1" max="100" value="10" style="min-width:120px;max-width:150px"/><select id="emailReplyMode"><option value="DRAFT_ONLY">Replies: Draft only</option><option value="AUTO">Replies: Auto-send</option></select><button class="btn" onclick="saveEmailSettingsUi()">Save settings</button></div>
       <div class="toolbar"><button class="btn" id="emailLiveToggle" onclick="toggleEmailLiveUi()">Enable live email</button><button class="btn" id="emailAutoToggle" onclick="toggleEmailAutomationUi()">Enable autonomous sequences</button><button class="btn" onclick="runOrchestratorUi()">Run orchestrator now</button><div class="sub" id="emailModeText"></div></div>
+      <div class="toolbar"><button class="btn" id="websiteTrackToggle" onclick="toggleWebsiteTrackUi()">Website outreach</button><button class="btn" id="conciergeTrackToggle" onclick="toggleConciergeTrackUi()">Concierge outreach</button><div class="sub">Independent per-pitch switches \u2014 each can run without the other, on top of the live-email/automation switches above.</div></div>
       <div class="toolbar"><input id="emailTestAddress" placeholder="Test email address"/><input id="emailTestLabel" placeholder="Label"/><button class="btn" onclick="addEmailTestAddressUi()">Allowlist test email</button><select id="emailTestLead" style="min-width:280px;flex:1"><option value="">Optional lead to simulate</option></select></div>
       <div class="toolbar"><input id="emailTestSubject" value="quick question about your business"/><input id="emailTestBody" value="Hey \u2014 Trenches OS email test. Reply YES, PRICE, WHAT'S THE CATCH, or UNSUBSCRIBE."/><button class="btn primary" onclick="sendEmailTestUi()">Send test email</button></div>
       <div style="padding:0 12px 10px"><div id="emailAllowlistRows" class="rowBtns"></div></div>
       <div class="sectionTitle"><div><h2>Email activity</h2><div class="sub">Inbound replies are polled automatically and mapped back to the lead/thread.</div></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:980px"><thead><tr><th>Time</th><th>Direction</th><th>Business</th><th>Email</th><th>Subject</th><th>Intent</th><th>Outcome</th><th>Status</th></tr></thead><tbody id="emailMessageRows"></tbody></table><div class="empty" id="emailMessageEmpty">No email activity yet.</div></div>
       <div class="sectionTitle"><div><h2>Autonomous sequences</h2><div class="sub">Priority A/B + VALID + verified email. Daily cap and suppression rules apply.</div></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:900px"><thead><tr><th>Business</th><th>Priority</th><th>Strategy</th><th>Status</th><th>Step</th><th>Next action</th></tr></thead><tbody id="sequenceRows"></tbody></table><div class="empty" id="sequenceEmpty">No autonomous email sequences yet.</div></div>
     </section>
-    <section class="panel"><div class="sectionTitle"><div><h2>Conversation Test Bench <span class="pill READY">DRAFT ONLY</span></h2><div class="sub">No real prospect messages are sent. Normal replies keep the conversation moving toward a free live-preview demo; opt-outs still stop immediately.</div></div><div class="runnerBadge">Live auto-replies locked</div></div><div class="toolbar"><select id="simLead" style="min-width:320px;flex:1"></select><input id="simMessage" value="Yes, what is this about?" placeholder="Simulated prospect reply"/><button class="btn primary" onclick="simulateConversation()">Simulate reply</button></div><div class="toolbar"><button class="btn" onclick="makeOpenerDraft()">Draft opener</button><button class="btn" onclick="scheduleFollowupsUi()">Schedule 24h / 72h / 7d follow-ups</button><button class="btn" onclick="runFollowupsUi()">Draft due follow-ups now</button><div class="sub" id="simResult" style="flex:1"></div></div><div class="sectionTitle"><div><h2>Reply drafts</h2><div class="sub">Human-reviewable drafts only. Approving a draft does not send SMS in Phase 3B.</div></div></div><div class="tableWrap" style="max-height:300px"><table style="min-width:1000px"><thead><tr><th>Time</th><th>Business</th><th>Intent</th><th>Draft</th><th>Confidence</th><th>Status</th><th>Actions</th></tr></thead><tbody id="draftRows"></tbody></table><div class="empty" id="draftEmpty">No conversation drafts yet.</div></div><div class="sectionTitle"><div><h2>Follow-up queue</h2><div class="sub">The scheduler creates drafts when follow-ups become due; it does not auto-send.</div></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:900px"><thead><tr><th>Business</th><th>Step</th><th>Due</th><th>Status</th><th>Message</th></tr></thead><tbody id="followupRows"></tbody></table><div class="empty" id="followupEmpty">No follow-ups scheduled.</div></div><div class="sectionTitle"><div><h2>Human escalation</h2><div class="sub">CALL ME and angry/sensitive replies are surfaced here. Normal questions and unknown replies stay conversational instead of failing.</div></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:900px"><thead><tr><th>Time</th><th>Business</th><th>Priority</th><th>Reason</th><th>Recommended action</th><th>Status</th><th></th></tr></thead><tbody id="escalationRows"></tbody></table><div class="empty" id="escalationEmpty">No escalations.</div></div></section>
-    <section class="panel"><div class="sectionTitle"><div><h2>Demo Fulfillment <span class="pill READY">PHASE 4</span></h2><div class="sub">Command Center balances website builds across available providers, applies deterministic and independent QA, then waits for your approval before delivery.</div></div><div class="runnerBadge"><span class="dot on"></span><span id="demoModeText">Loading demo automation\u2026</span></div></div><div class="toolbar"><select id="demoLead" style="min-width:320px;flex:1"></select><button class="btn primary" onclick="queueDemoUi()">Queue demo build</button><button class="btn" onclick="configureDemoQualityUi()">Quality controls</button><button class="btn" id="demoAutoToggle" onclick="toggleDemoAutomation()">Toggle auto build</button><button class="btn" id="demoDeliverToggle" onclick="toggleDemoDelivery()">Toggle auto delivery</button></div><div class="toolbar"><select id="staticDemoLead" style="min-width:320px;flex:1"><option value="">Choose any active lead for a no-cost sample\u2026</option></select><button class="btn good" onclick="createStaticDemoUi()">Create no-cost sample</button><div class="sub">Uses a static, clearly labeled concept\u2014no AI call or email delivery.</div></div><div class="tableWrap" style="max-height:320px"><table style="min-width:1100px"><thead><tr><th>Business</th><th>Job / Builder</th><th>State</th><th>QA</th><th>Views</th><th>CTA</th><th>Preview</th><th>Delivery</th></tr></thead><tbody id="demoRows"></tbody></table><div class="empty" id="demoEmpty">No demos yet.</div></div></section>
+    <section class="panel" data-mode="WEBSITE"><div class="sectionTitle"><div><h2>Conversation Test Bench <span class="pill READY">DRAFT ONLY</span></h2><div class="sub">No real prospect messages are sent. Normal replies keep the conversation moving toward a free live-preview demo; opt-outs still stop immediately.</div></div><div class="runnerBadge">Live auto-replies locked</div></div><div class="toolbar"><select id="simLead" style="min-width:320px;flex:1"></select><input id="simMessage" value="Yes, what is this about?" placeholder="Simulated prospect reply"/><button class="btn primary" onclick="simulateConversation()">Simulate reply</button></div><div class="toolbar"><button class="btn" onclick="makeOpenerDraft()">Draft opener</button><button class="btn" onclick="scheduleFollowupsUi()">Schedule 24h / 72h / 7d follow-ups</button><button class="btn" onclick="runFollowupsUi()">Draft due follow-ups now</button><div class="sub" id="simResult" style="flex:1"></div></div><div class="sectionTitle"><div><h2>Reply drafts</h2><div class="sub">Human-reviewable drafts only. Approving a draft does not send SMS in Phase 3B.</div></div></div><div class="tableWrap" style="max-height:300px"><table style="min-width:1000px"><thead><tr><th>Time</th><th>Business</th><th>Intent</th><th>Draft</th><th>Confidence</th><th>Status</th><th>Actions</th></tr></thead><tbody id="draftRows"></tbody></table><div class="empty" id="draftEmpty">No conversation drafts yet.</div></div><div class="sectionTitle"><div><h2>Follow-up queue</h2><div class="sub">The scheduler creates drafts when follow-ups become due; it does not auto-send.</div></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:900px"><thead><tr><th>Business</th><th>Step</th><th>Due</th><th>Status</th><th>Message</th></tr></thead><tbody id="followupRows"></tbody></table><div class="empty" id="followupEmpty">No follow-ups scheduled.</div></div><div class="sectionTitle"><div><h2>Human escalation</h2><div class="sub">CALL ME and angry/sensitive replies are surfaced here. Normal questions and unknown replies stay conversational instead of failing.</div></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:900px"><thead><tr><th>Time</th><th>Business</th><th>Priority</th><th>Reason</th><th>Recommended action</th><th>Status</th><th></th></tr></thead><tbody id="escalationRows"></tbody></table><div class="empty" id="escalationEmpty">No escalations.</div></div></section>
+    <section class="panel" data-mode="WEBSITE"><div class="sectionTitle"><div><h2>Demo Fulfillment <span class="pill READY">PHASE 4</span></h2><div class="sub">Command Center balances website builds across available providers, applies deterministic and independent QA, then waits for your approval before delivery.</div></div><div class="runnerBadge"><span class="dot on"></span><span id="demoModeText">Loading demo automation\u2026</span></div></div><div class="toolbar"><select id="demoLead" style="min-width:320px;flex:1"></select><button class="btn primary" onclick="queueDemoUi()">Queue demo build</button><button class="btn" onclick="configureDemoQualityUi()">Quality controls</button><button class="btn" id="demoAutoToggle" onclick="toggleDemoAutomation()">Toggle auto build</button><button class="btn" id="demoDeliverToggle" onclick="toggleDemoDelivery()">Toggle auto delivery</button></div><div class="toolbar"><select id="staticDemoLead" style="min-width:320px;flex:1"><option value="">Choose any active lead for a no-cost sample\u2026</option></select><button class="btn good" onclick="createStaticDemoUi()">Create no-cost sample</button><div class="sub">Uses a static, clearly labeled concept\u2014no AI call or email delivery.</div></div><div class="tableWrap" style="max-height:320px"><table style="min-width:1100px"><thead><tr><th>Business</th><th>Job / Builder</th><th>State</th><th>QA</th><th>Views</th><th>CTA</th><th>Preview</th><th>Delivery</th></tr></thead><tbody id="demoRows"></tbody></table><div class="empty" id="demoEmpty">No demos yet.</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Lead pipeline</h2><div class="sub" id="systemText">Loading system status\u2026</div></div><div class="rowBtns"><button class="btn" onclick="reAuditWebsiteGapsUi()">Re-audit website gaps</button><button class="btn" onclick="openImport()">Manual research import</button></div></div><div class="toolbar"><input id="search" placeholder="Search business, city, phone, email" oninput="debouncedLoad()"/><select id="stateFilter" onchange="loadLeads()"><option value="">All states</option><option>QUALIFIED</option><option>HUMAN_REVIEW</option><option>DISQUALIFIED</option><option>RESEARCHING</option><option>QUALIFYING</option></select><select id="priorityFilter" onchange="loadLeads()"><option value="">All priorities</option><option>A</option><option>B</option><option>C</option><option>PASS</option></select></div><div class="tableWrap"><table><thead><tr><th>Business</th><th>Location</th><th>Industry</th><th>Gap</th><th>Score</th><th>Priority</th><th>State</th><th>Phone</th><th>Updated</th><th></th></tr></thead><tbody id="leadRows"></tbody></table><div class="empty" id="leadEmpty">No leads yet.</div></div></section>
   </div>
 </div>
@@ -133,28 +136,33 @@ function adminHtml() {
 
 <div class="overlay" id="campaignDetailOverlay" onclick="overlayClose(event,'campaignDetailOverlay')"><div class="modal" id="campaignDetail"></div></div>
 <div class="overlay" id="leadDetailOverlay" onclick="overlayClose(event,'leadDetailOverlay')"><div class="modal" id="leadDetail"></div></div>
+<div class="overlay" id="quoteOverlay" onclick="overlayClose(event,'quoteOverlay')"><div class="modal" id="quoteModal" style="width:min(900px,100%)"></div></div>
 <div class="overlay" id="importOverlay" onclick="overlayClose(event,'importOverlay')"><div class="modal"><h2>Manual researched prospect import</h2><div class="sub">Fallback/testing only. Native campaigns should normally populate leads automatically.</div><label>JSON batch</label><textarea id="importJson" style="min-height:310px;font-family:ui-monospace,Consolas,monospace;font-size:12px"></textarea><div class="modalFooter"><button class="btn" onclick="loadSampleImport()">Load sample</button><button class="btn" onclick="closeOverlay('importOverlay')">Cancel</button><button class="btn primary" onclick="importProspects()">Validate & import</button></div></div></div>
 <script>
 let adminKey=sessionStorage.getItem('trenches_admin_key')||'';let globalPaused=false;let timer=null;let showArchived=false;
+let businessMode=(function(){try{return localStorage.getItem('trenches_mode')==='CONCIERGE'?'CONCIERGE':'WEBSITE'}catch(e){return 'WEBSITE'}})();
+function setMode(mode){businessMode=mode;try{localStorage.setItem('trenches_mode',mode)}catch(e){}applyModeVisibility();refreshAll().catch(()=>{})}
+function applyModeVisibility(){document.querySelectorAll('[data-mode]').forEach(el=>{el.style.display=el.getAttribute('data-mode')===businessMode?'':'none'});const wb=document.getElementById('modeWebsiteBtn'),cb=document.getElementById('modeConciergeBtn');if(wb)wb.className='btn modeBtn'+(businessMode==='WEBSITE'?' active':'');if(cb)cb.className='btn modeBtn'+(businessMode==='CONCIERGE'?' active':'')}
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 async function api(path,opts={}){const h=new Headers(opts.headers||{});h.set('Authorization','Bearer '+adminKey);if(opts.body&&!h.has('Content-Type'))h.set('Content-Type','application/json');const r=await fetch(path,{...opts,headers:h});let b={};try{b=await r.json()}catch{}if(r.status===401){logout();throw new Error('Admin key rejected.')}if(!r.ok)throw new Error(b?.error?.message||('Request failed: '+r.status));return b}
 async function downloadProspectTracker(){try{const r=await fetch('/api/tracker/export.csv',{headers:{Authorization:'Bearer '+adminKey}});if(r.status===401){logout();throw new Error('Admin key rejected.')}if(!r.ok)throw new Error('Tracker export failed: '+r.status);const blob=await r.blob(),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='trenches-prospect-tracker.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),500)}catch(e){showError(e)}}
 function showError(e){const b=document.getElementById('errorBar');b.textContent=e instanceof Error?e.message:String(e);b.style.display='block';setTimeout(()=>b.style.display='none',9000)}
-async function login(){const k=document.getElementById('keyInput').value.trim();if(!k)return;adminKey=k;try{await api('/api/system/status');sessionStorage.setItem('trenches_admin_key',k);document.getElementById('login').style.display='none';await refreshAll()}catch(e){adminKey='';document.getElementById('loginError').textContent=e.message;document.getElementById('loginError').style.display='block'}}function logout(){sessionStorage.removeItem('trenches_admin_key');adminKey='';document.getElementById('login').style.display='grid'}
-async function refreshAll(){try{await Promise.all([loadDashboard(),loadSystem(),loadRunner(),loadCampaigns(),loadProspectorJobs(),loadOutreach(),loadEmailOutreach(),loadConversation(),loadDemos(),loadLeads(),loadOperatorDesk(),loadLaunchBoard()])}catch(e){showError(e)}}
+async function login(){const k=document.getElementById('keyInput').value.trim();if(!k)return;adminKey=k;try{await api('/api/system/status');sessionStorage.setItem('trenches_admin_key',k);document.getElementById('login').style.display='none';await refreshAll();applyDeepLink()}catch(e){adminKey='';document.getElementById('loginError').textContent=e.message;document.getElementById('loginError').style.display='block'}}function logout(){sessionStorage.removeItem('trenches_admin_key');adminKey='';document.getElementById('login').style.display='grid'}
+function applyDeepLink(){try{const p=new URLSearchParams(location.search),leadId=p.get('leadId');if(leadId)openLead(encodeURIComponent(leadId))}catch(e){}}
+async function refreshAll(){try{await Promise.all([loadDashboard(),loadSystem(),loadRunner(),loadCampaigns(),loadProspectorJobs(),loadOutreach(),loadEmailOutreach(),loadConversation(),loadDemos(),loadLeads(),loadOperatorDesk(),loadLaunchBoard(),loadQuotes(),loadQuoteMailbox()])}catch(e){showError(e)}}
 async function loadDashboard(){const d=await api('/api/dashboard'),c=d.counts||{};document.getElementById('mTotal').textContent=d.total??0;document.getElementById('mQualified').textContent=(c.QUALIFIED||0)+(c.OUTREACH_READY||0);document.getElementById('mPriority').textContent=(d.priorityCounts?.A||0)+(d.priorityCounts?.B||0);document.getElementById('mCampaigns').textContent=Object.values(d.campaigns||{}).reduce((a,b)=>a+Number(b||0),0);document.getElementById('mHuman').textContent=d.humanRequired||0;document.getElementById('mWon').textContent=(c.WON||0)+(c.ACTIVE_CUSTOMER||0)}
 async function loadOperatorDesk(){const [leadData,demoData]=await Promise.all([api('/api/leads?limit=200'),api('/api/demos/status')]),sites=new Map((demoData.sites||[]).map(x=>[x.lead_id,x])),jobs=new Map((demoData.jobs||[]).map(x=>[x.lead_id,x])),leads=(leadData.leads||[]).filter(x=>!['DISQUALIFIED','OPTED_OUT','DUPLICATE','LOST','ACTIVE_CUSTOMER'].includes(x.current_state)).sort((a,b)=>Number(b.opportunity_score||0)-Number(a.opportunity_score||0)).slice(0,6),grid=document.getElementById('operatorGrid');grid.innerHTML='';let ready=0,review=0;for(const l of leads){const site=sites.get(l.id),job=jobs.get(l.id),preview=site?'<a class="btn small good" target="_blank" rel="noopener" href="'+esc((demoData.publicBaseUrl||'')+'/demo/'+site.slug)+'">See new website</a><a class="btn small" target="_blank" rel="noopener" href="'+esc((demoData.publicBaseUrl||'')+'/demo/'+site.slug+'/quote')+'">Try quote flow</a>':'';const action=site?'Review preview':(l.current_state==='HUMAN_REVIEW'?'Resolve review':job?(job.status==='FAILED'?'Fix build path':'Build in progress'):(l.current_state==='DEMO_APPROVED'?'Queue demo':'Advance outreach'));if(site)ready++;if(l.current_state==='HUMAN_REVIEW'||job?.status==='FAILED')review++;grid.insertAdjacentHTML('beforeend','<div class="campaign"><div class="campaignHead"><div><div class="campaignName">'+esc(l.business_name)+'</div><div class="campaignMeta">'+esc(l.city)+', '+esc(l.state)+' \xB7 '+esc(l.industry)+'</div></div><span class="pill '+esc(l.priority||'READY')+'">'+esc(l.priority||'\u2014')+'</span></div><div class="campaignMeta" style="margin-top:10px">'+esc(l.website||'No website recorded')+'</div><div class="campaignMeta">Score '+esc(l.opportunity_score??'\u2014')+' \xB7 '+esc(l.current_state)+'</div><div class="campaignMeta" style="color:var(--accent);margin-top:7px">Next: '+esc(action)+'</div><div class="rowBtns" style="margin-top:10px"><button class="btn small" data-operator-lead="'+esc(encodeURIComponent(l.id))+'">Open lead</button>'+preview+'</div></div>')}if(!leads.length)grid.innerHTML='<div class="empty">No active priority leads yet. Start a prospecting campaign or review your lead pipeline.</div>';document.getElementById('operatorSummary').textContent=ready+' preview'+(ready===1?'':'s')+' ready \xB7 '+review+' need review';document.querySelectorAll('[data-operator-lead]').forEach(b=>b.addEventListener('click',()=>openLead(b.getAttribute('data-operator-lead'))))}
 async function loadLaunchBoard(){const [leadData,demoData]=await Promise.all([api('/api/leads?limit=200'),api('/api/demos/status')]),sites=new Map((demoData.sites||[]).map(x=>[x.lead_id,x])),commercial=new Set(['DEMO_READY','DEMO_SENT','DEMO_VIEWED','PRICING_VIEWED','CHECKOUT_STARTED','WON','ONBOARDING','LIVE','ACTIVE_CUSTOMER']),leads=(leadData.leads||[]).filter(x=>commercial.has(x.current_state)||sites.has(x.id)).sort((a,b)=>Number(b.opportunity_score||0)-Number(a.opportunity_score||0)).slice(0,9),grid=document.getElementById('launchGrid');grid.innerHTML='';let proposal=0,onboarding=0;for(const l of leads){const site=sites.get(l.id),state=l.current_state,action=['PRICING_VIEWED','CHECKOUT_STARTED'].includes(state)?'Send proposal / close terms':['WON','ONBOARDING'].includes(state)?'Collect onboarding details':state==='LIVE'?'Confirm launch handoff':state==='ACTIVE_CUSTOMER'?'Manage active customer':site?'Approve and send preview':'Advance to a live demo';if(['PRICING_VIEWED','CHECKOUT_STARTED'].includes(state))proposal++;if(['WON','ONBOARDING','LIVE'].includes(state))onboarding++;const preview=site?'<a class="btn small good" target="_blank" rel="noopener" href="'+esc((demoData.publicBaseUrl||'')+'/demo/'+site.slug)+'">Open preview</a>':'';grid.insertAdjacentHTML('beforeend','<div class="campaign"><div class="campaignHead"><div><div class="campaignName">'+esc(l.business_name)+'</div><div class="campaignMeta">'+esc(l.city)+', '+esc(l.state)+'</div></div><span class="pill '+esc(l.priority||'READY')+'">'+esc(l.priority||'\u2014')+'</span></div><div class="campaignMeta" style="margin-top:10px">Stage: <b>'+esc(state)+'</b></div><div class="campaignMeta" style="color:var(--accent);margin-top:7px">Next: '+esc(action)+'</div><div class="rowBtns" style="margin-top:10px"><button class="btn small" data-launch-lead="'+esc(encodeURIComponent(l.id))+'">Open lead</button>'+preview+'</div></div>')}if(!leads.length)grid.innerHTML='<div class="empty">No commercial handoffs yet. A lead will appear here once a preview is ready or the sales process advances.</div>';document.getElementById('launchSummary').textContent=proposal+' proposal'+(proposal===1?'':'s')+' \xB7 '+onboarding+' onboarding';document.querySelectorAll('[data-launch-lead]').forEach(b=>b.addEventListener('click',()=>openLead(b.getAttribute('data-launch-lead'))))}
 async function loadSystem(){const d=await api('/api/system/status');globalPaused=!!d.globalAutomationPaused;document.getElementById('systemText').textContent=globalPaused?'Automation paused':(d.outreachEnabled?'System online \xB7 outreach enabled':'System online \xB7 outreach locked');const b=document.getElementById('globalToggle');b.textContent=globalPaused?'Resume all automation':'Pause all automation';b.className='btn '+(globalPaused?'good':'danger')}
 async function loadRunner(){const d=await api('/api/runner/status');const dot=document.getElementById('runnerDot'),text=document.getElementById('runnerText');dot.className='dot '+(d.online?'on':'off');if(d.online){const r=d.runner||{};let ps='';try{const m=JSON.parse(r.metadata_json||'{}');if(Array.isArray(m.providers))ps=' \xB7 '+m.providers.join('/')}catch{}text.textContent='Orgo runner online'+ps+(r.claude_version?' \xB7 Claude '+r.claude_version:'')}else{text.textContent='Orgo runner offline / sleeping'}}
-async function loadCampaigns(){const d=await api('/api/campaigns'+(showArchived?'?archived=true':'')),g=document.getElementById('campaignGrid');g.innerHTML='';document.getElementById('archiveToggle').textContent=showArchived?'Show active':'Show archived';if(!d.campaigns?.length){g.innerHTML='<div class="empty">'+(showArchived?'No archived campaigns.':'No campaigns yet. Create your first real prospecting campaign.')+'</div>';return}for(const c of d.campaigns){const target=c.requested_count||0,done=c.enriched||0,pct=target?Math.min(100,Math.round(done/target*100)):0,loc=campaignGeo(c);const counts='Enriched '+done+' / '+target+' \xB7 Raw '+(c.raw_discovered||0)+' \xB7 Queued '+(c.queued||0)+' \xB7 Failed '+(c.enrichment_failed||0);const priorities='A '+(c.priority_a||0)+' \xB7 B '+(c.priority_b||0)+' \xB7 C '+(c.priority_c||0)+' \xB7 PASS '+(c.priority_pass||0),providers='Discover '+(c.discovery_provider||'CLAUDE')+' \xB7 Enrich '+(c.enrichment_provider||'CLAUDE')+' \xB7 Fallback '+(Number(c.fallback_enabled)!==0?'ON':'OFF');g.insertAdjacentHTML('beforeend','<div class="campaign"><div class="campaignHead"><div><div class="campaignName">'+esc(c.industry)+'</div><div class="campaignMeta">'+esc(loc)+'</div></div><span class="pill '+esc(c.status)+'">'+esc(c.archived_at?'ARCHIVED':c.status)+'</span></div><div class="progress"><span style="width:'+pct+'%"></span></div><div class="campaignMeta">'+esc(counts)+'</div><div class="campaignMeta">'+esc(priorities)+' \xB7 Filtered '+(c.filtered||0)+' \xB7 Duplicates '+(c.deduped||0)+'</div><div class="campaignMeta">'+esc(providers)+'</div>'+(c.last_error?'<div class="campaignMeta" style="color:#ffbcbc">Last issue: '+esc(c.last_error)+'</div>':'')+'<div class="rowBtns" style="margin-top:10px"><button class="btn small" data-campaign="'+esc(encodeURIComponent(c.id))+'">Open</button>'+(!c.archived_at&&(c.status==='RUNNING'||c.status==='READY')?'<button class="btn small" data-pause="'+esc(encodeURIComponent(c.id))+'">Pause</button>':'')+(!c.archived_at&&c.status==='PAUSED'?'<button class="btn small good" data-resume="'+esc(encodeURIComponent(c.id))+'">Resume</button>':'')+(c.archived_at?'<button class="btn small good" data-restore="'+esc(encodeURIComponent(c.id))+'">Restore</button>':'<button class="btn small" data-archive="'+esc(encodeURIComponent(c.id))+'">Archive</button>')+'</div></div>')}document.querySelectorAll('[data-campaign]').forEach(b=>b.addEventListener('click',()=>openCampaignDetail(b.getAttribute('data-campaign'))));document.querySelectorAll('[data-pause]').forEach(b=>b.addEventListener('click',()=>campaignAction(b.getAttribute('data-pause'),'pause')));document.querySelectorAll('[data-resume]').forEach(b=>b.addEventListener('click',()=>campaignAction(b.getAttribute('data-resume'),'resume')));document.querySelectorAll('[data-archive]').forEach(b=>b.addEventListener('click',()=>archiveAction(b.getAttribute('data-archive'),'archive')));document.querySelectorAll('[data-restore]').forEach(b=>b.addEventListener('click',()=>archiveAction(b.getAttribute('data-restore'),'restore')))}
+async function loadCampaigns(){const qp=new URLSearchParams();if(showArchived)qp.set('archived','true');qp.set('offering',businessMode);const d=await api('/api/campaigns?'+qp.toString()),g=document.getElementById('campaignGrid');g.innerHTML='';document.getElementById('archiveToggle').textContent=showArchived?'Show active':'Show archived';if(!d.campaigns?.length){g.innerHTML='<div class="empty">'+(showArchived?'No archived campaigns.':'No campaigns yet. Create your first real prospecting campaign.')+'</div>';return}for(const c of d.campaigns){const target=c.requested_count||0,done=c.enriched||0,pct=target?Math.min(100,Math.round(done/target*100)):0,loc=campaignGeo(c);const counts='Enriched '+done+' / '+target+' \xB7 Raw '+(c.raw_discovered||0)+' \xB7 Queued '+(c.queued||0)+' \xB7 Failed '+(c.enrichment_failed||0);const priorities='A '+(c.priority_a||0)+' \xB7 B '+(c.priority_b||0)+' \xB7 C '+(c.priority_c||0)+' \xB7 PASS '+(c.priority_pass||0),providers='Discover '+(c.discovery_provider||'CLAUDE')+' \xB7 Enrich '+(c.enrichment_provider||'CLAUDE')+' \xB7 Fallback '+(Number(c.fallback_enabled)!==0?'ON':'OFF');g.insertAdjacentHTML('beforeend','<div class="campaign"><div class="campaignHead"><div><div class="campaignName">'+esc(c.industry)+'</div><div class="campaignMeta">'+esc(loc)+'</div></div><span class="pill '+esc(c.status)+'">'+esc(c.archived_at?'ARCHIVED':c.status)+'</span></div><div class="progress"><span style="width:'+pct+'%"></span></div><div class="campaignMeta">'+esc(counts)+'</div><div class="campaignMeta">'+esc(priorities)+' \xB7 Filtered '+(c.filtered||0)+' \xB7 Duplicates '+(c.deduped||0)+'</div><div class="campaignMeta">'+esc(providers)+'</div>'+(c.last_error?'<div class="campaignMeta" style="color:#ffbcbc">Last issue: '+esc(c.last_error)+'</div>':'')+'<div class="rowBtns" style="margin-top:10px"><button class="btn small" data-campaign="'+esc(encodeURIComponent(c.id))+'">Open</button>'+(!c.archived_at&&(c.status==='RUNNING'||c.status==='READY')?'<button class="btn small" data-pause="'+esc(encodeURIComponent(c.id))+'">Pause</button>':'')+(!c.archived_at&&c.status==='PAUSED'?'<button class="btn small good" data-resume="'+esc(encodeURIComponent(c.id))+'">Resume</button>':'')+(c.archived_at?'<button class="btn small good" data-restore="'+esc(encodeURIComponent(c.id))+'">Restore</button>':'<button class="btn small" data-archive="'+esc(encodeURIComponent(c.id))+'">Archive</button>')+'</div></div>')}document.querySelectorAll('[data-campaign]').forEach(b=>b.addEventListener('click',()=>openCampaignDetail(b.getAttribute('data-campaign'))));document.querySelectorAll('[data-pause]').forEach(b=>b.addEventListener('click',()=>campaignAction(b.getAttribute('data-pause'),'pause')));document.querySelectorAll('[data-resume]').forEach(b=>b.addEventListener('click',()=>campaignAction(b.getAttribute('data-resume'),'resume')));document.querySelectorAll('[data-archive]').forEach(b=>b.addEventListener('click',()=>archiveAction(b.getAttribute('data-archive'),'archive')));document.querySelectorAll('[data-restore]').forEach(b=>b.addEventListener('click',()=>archiveAction(b.getAttribute('data-restore'),'restore')))}
 function campaignGeo(c){return c.center_location&&c.radius_miles?(c.center_location+' \xB7 '+c.radius_miles+' mi radius'):((c.geography||[]).join(' \xB7 '))}
 function toggleArchived(){showArchived=!showArchived;loadCampaigns().catch(showError)}
 function openCampaign(){document.getElementById('campaignOverlay').classList.add('open');document.getElementById('cIndustry').focus()}function closeOverlay(id){document.getElementById(id).classList.remove('open')}function overlayClose(e,id){if(e.target.id===id)closeOverlay(id)}
-async function createCampaign(){try{const centerLocation=document.getElementById('cCenterLocation').value.trim(),radiusMiles=Number(document.getElementById('cRadiusMiles').value);if(!centerLocation)throw new Error('Center city/location is required.');if(!Number.isFinite(radiusMiles)||radiusMiles<1||radiusMiles>100)throw new Error('Radius must be between 1 and 100 miles.');const payload={industry:document.getElementById('cIndustry').value.trim(),centerLocation,radiusMiles,targetCount:Number(document.getElementById('cTarget').value),model:document.getElementById('cModel').value,discoveryProvider:document.getElementById('cDiscoveryProvider').value,enrichmentProvider:document.getElementById('cEnrichmentProvider').value,fallbackEnabled:document.getElementById('cFallback').value==='true',notes:document.getElementById('cNotes').value.trim()||undefined};const mr=document.getElementById('cMinRating').value,mv=document.getElementById('cMinReviews').value;if(mr!=='')payload.minRating=Number(mr);if(mv!=='')payload.minReviews=Number(mv);const d=await api('/api/campaigns',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify(payload)});closeOverlay('campaignOverlay');await refreshAll();alert('Campaign created for '+centerLocation+' \xB7 '+radiusMiles+' mi radius. Orgo wake: '+(d.orgo?.attempted?(d.orgo.status||'requested'):'not configured'))}catch(e){showError(e)}}
+async function createCampaign(){try{const centerLocation=document.getElementById('cCenterLocation').value.trim(),radiusMiles=Number(document.getElementById('cRadiusMiles').value);if(!centerLocation)throw new Error('Center city/location is required.');if(!Number.isFinite(radiusMiles)||radiusMiles<1||radiusMiles>100)throw new Error('Radius must be between 1 and 100 miles.');const payload={industry:document.getElementById('cIndustry').value.trim(),centerLocation,radiusMiles,targetCount:Number(document.getElementById('cTarget').value),model:document.getElementById('cModel').value,discoveryProvider:document.getElementById('cDiscoveryProvider').value,enrichmentProvider:document.getElementById('cEnrichmentProvider').value,fallbackEnabled:document.getElementById('cFallback').value==='true',notes:document.getElementById('cNotes').value.trim()||undefined,offering:businessMode};const mr=document.getElementById('cMinRating').value,mv=document.getElementById('cMinReviews').value;if(mr!=='')payload.minRating=Number(mr);if(mv!=='')payload.minReviews=Number(mv);const d=await api('/api/campaigns',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify(payload)});closeOverlay('campaignOverlay');await refreshAll();alert('Campaign created for '+centerLocation+' \xB7 '+radiusMiles+' mi radius. Orgo wake: '+(d.orgo?.attempted?(d.orgo.status||'requested'):'not configured'))}catch(e){showError(e)}}
 async function campaignAction(enc,action){try{await api('/api/campaigns/'+encodeURIComponent(decodeURIComponent(enc))+'/'+action,{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});await refreshAll()}catch(e){showError(e)}}
 async function archiveAction(enc,action){try{if(action==='archive'&&!confirm('Archive this campaign? Its leads and history will be preserved.'))return;await api('/api/campaigns/'+encodeURIComponent(decodeURIComponent(enc))+'/'+action,{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});await refreshAll()}catch(e){showError(e)}}
-async function loadProspectorJobs(){const d=await api('/api/prospector-jobs'),jobs=d.jobs||[],tbody=document.getElementById('prospectorJobRows'),active=jobs.filter(j=>j.active).length;document.getElementById('prospectorJobsSummary').textContent=jobs.length+' jobs \xB7 '+active+' active \xB7 '+(jobs.length-active)+' paused';if(!jobs.length){tbody.innerHTML='';document.getElementById('prospectorJobEmpty').style.display='block';return}document.getElementById('prospectorJobEmpty').style.display='none';tbody.innerHTML=jobs.map(j=>'<tr><td>'+esc(j.city)+', '+esc(j.state)+'</td><td>'+esc(j.category)+'</td><td>'+esc(j.radius_miles)+' mi</td><td>'+esc(j.target_count)+'</td><td>'+esc(j.cadence_days)+'d</td><td>'+esc(j.last_run_at?new Date(j.last_run_at).toLocaleString():'Never')+'</td><td><span class="pill '+(j.active?'READY':'FAILED')+'">'+(j.active?'ACTIVE':'PAUSED')+'</span></td><td><button class="btn small" data-jobtoggle="'+esc(encodeURIComponent(j.id))+'" data-jobactive="'+(j.active?'1':'0')+'">'+(j.active?'Pause':'Resume')+'</button></td></tr>').join('');tbody.querySelectorAll('[data-jobtoggle]').forEach(b=>b.addEventListener('click',()=>prospectorJobAction(b.getAttribute('data-jobtoggle'),b.getAttribute('data-jobactive')==='1'?'pause':'resume')))}
+async function loadProspectorJobs(){const d=await api('/api/prospector-jobs?offering='+businessMode),jobs=d.jobs||[],tbody=document.getElementById('prospectorJobRows'),active=jobs.filter(j=>j.active).length;document.getElementById('prospectorJobsSummary').textContent=jobs.length+' jobs \xB7 '+active+' active \xB7 '+(jobs.length-active)+' paused';if(!jobs.length){tbody.innerHTML='';document.getElementById('prospectorJobEmpty').style.display='block';return}document.getElementById('prospectorJobEmpty').style.display='none';tbody.innerHTML=jobs.map(j=>'<tr><td>'+esc(j.city)+', '+esc(j.state)+'</td><td>'+esc(j.category)+'</td><td>'+esc(j.radius_miles)+' mi</td><td>'+esc(j.target_count)+'</td><td>'+esc(j.cadence_days)+'d</td><td>'+esc(j.last_run_at?new Date(j.last_run_at).toLocaleString():'Never')+'</td><td><span class="pill '+(j.active?'READY':'FAILED')+'">'+(j.active?'ACTIVE':'PAUSED')+'</span></td><td><button class="btn small" data-jobtoggle="'+esc(encodeURIComponent(j.id))+'" data-jobactive="'+(j.active?'1':'0')+'">'+(j.active?'Pause':'Resume')+'</button></td></tr>').join('');tbody.querySelectorAll('[data-jobtoggle]').forEach(b=>b.addEventListener('click',()=>prospectorJobAction(b.getAttribute('data-jobtoggle'),b.getAttribute('data-jobactive')==='1'?'pause':'resume')))}
 async function prospectorJobAction(enc,action){try{await api('/api/prospector-jobs/'+encodeURIComponent(decodeURIComponent(enc))+'/'+action,{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});await loadProspectorJobs()}catch(e){showError(e)}}
 async function runProspectorJobsNow(){try{const d=await api('/api/prospector-jobs/run-due',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});if(!d.ran){alert('No campaigns created: '+(d.reason||'nothing due'))}else{alert('Created '+d.created.length+' new campaign(s): '+d.created.map(c=>c.category+' @ '+c.city).join(', '))}await refreshAll()}catch(e){showError(e)}}
 async function openCampaignDetail(enc){try{const d=await api('/api/campaigns/'+encodeURIComponent(decodeURIComponent(enc))),c=d.campaign,leads=d.leads||[],cands=d.candidates||[];const rows=leads.map(l=>'<tr><td>'+esc(l.business_name)+'</td><td>'+esc(l.city)+', '+esc(l.state)+'</td><td>'+esc(l.opportunity_score??'\u2014')+'</td><td>'+esc(l.priority||'\u2014')+'</td><td>'+esc(l.current_state)+'</td></tr>').join('')||'<tr><td colspan="5" class="muted">No enriched prospects linked yet.</td></tr>';const candRows=cands.slice(0,100).map(x=>'<tr><td>'+esc(x.business_name)+'</td><td>'+esc(x.target_match)+'</td><td>'+esc(x.status)+'</td><td>'+esc(x.google_rating??'\u2014')+' / '+esc(x.google_reviews??'\u2014')+'</td><td>'+esc(x.retry_count||0)+'</td></tr>').join('')||'<tr><td colspan="5" class="muted">No discovery candidates yet.</td></tr>';document.getElementById('campaignDetail').innerHTML='<div style="display:flex;justify-content:space-between;gap:12px"><div><h2>'+esc(c.industry)+'</h2><div class="muted">'+esc(campaignGeo(c))+'</div></div><button class="btn small" id="campaignClose">Close</button></div><div class="detailGrid"><div class="detailItem"><b>Status</b>'+esc(c.archived_at?'ARCHIVED \xB7 '+c.status:c.status)+'</div><div class="detailItem"><b>Stage</b>'+esc(c.last_stage||'\u2014')+'</div><div class="detailItem"><b>Target / Enriched</b>'+esc((c.requested_count||0)+' / '+(c.enriched||0))+'</div><div class="detailItem"><b>Raw discovered</b>'+esc(c.raw_discovered||0)+'</div><div class="detailItem"><b>Deduped / Filtered</b>'+esc((c.deduped||0)+' / '+(c.filtered||0))+'</div><div class="detailItem"><b>Queued / Enriching / Failed</b>'+esc((c.queued||0)+' / '+(c.enriching||0)+' / '+(c.enrichment_failed||0))+'</div><div class="detailItem"><b>Priority A/B/C/PASS</b>'+esc((c.priority_a||0)+' / '+(c.priority_b||0)+' / '+(c.priority_c||0)+' / '+(c.priority_pass||0))+'</div><div class="detailItem"><b>Discovery passes</b>'+esc(c.discovery_passes||0)+'</div><div class="detailItem"><b>Provider routing</b>'+esc((c.discovery_provider||'CLAUDE')+' discovery \xB7 '+(c.enrichment_provider||'CLAUDE')+' enrichment \xB7 fallback '+(Number(c.fallback_enabled)!==0?'ON':'OFF'))+'</div></div><h3 style="font-size:13px">Provider usage</h3><div class="tableWrap" style="max-height:180px"><table style="min-width:560px"><thead><tr><th>Provider</th><th>Stage</th><th>Status</th><th>Jobs</th><th>Est. API cost</th></tr></thead><tbody>'+((c.provider_usage||[]).map(u=>'<tr><td>'+esc(u.provider)+'</td><td>'+esc(u.stage)+'</td><td>'+esc(u.status)+'</td><td>'+esc(u.jobs)+'</td><td>'+esc(Number(u.estimated_cost_usd||0)>0?'$'+Number(u.estimated_cost_usd).toFixed(3):'\u2014')+'</td></tr>').join('')||'<tr><td colspan="5" class="muted">No provider jobs recorded yet.</td></tr>')+'</tbody></table></div><h3 style="font-size:13px">Enriched leads</h3><div class="tableWrap" style="max-height:250px"><table style="min-width:620px"><thead><tr><th>Business</th><th>Location</th><th>Score</th><th>Priority</th><th>State</th></tr></thead><tbody>'+rows+'</tbody></table></div><h3 style="font-size:13px;margin-top:16px">Discovery candidates</h3><div class="tableWrap" style="max-height:250px"><table style="min-width:620px"><thead><tr><th>Business</th><th>Match</th><th>Status</th><th>Rating / Reviews</th><th>Retries</th></tr></thead><tbody>'+candRows+'</tbody></table></div>';document.getElementById('campaignClose').onclick=()=>closeOverlay('campaignDetailOverlay');document.getElementById('campaignDetailOverlay').classList.add('open')}catch(e){showError(e)}}
@@ -163,12 +171,13 @@ async function addTestNumber(){try{const phone=document.getElementById('oPhone')
 async function removeTestNumber(enc){try{await api('/api/outreach/test-allowlist/'+encodeURIComponent(decodeURIComponent(enc)),{method:'DELETE',headers:{'X-Actor':'COMMAND_CENTER'}});await loadOutreach()}catch(e){showError(e)}}
 async function sendTestSms(){try{const phone=document.getElementById('oPhone').value.trim(),message=document.getElementById('oMessage').value.trim();if(!phone)throw new Error('Enter an allowlisted test phone number.');if(!message)throw new Error('Enter a test message.');const d=await api('/api/outreach/test-send',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({phone,message})});await loadOutreach();alert('Test SMS queued'+(d.sid?' \xB7 '+d.sid:''))}catch(e){showError(e)}}
 let emailOutreachState=null;
-async function loadEmailOutreach(){const [d,l]=await Promise.all([api('/api/outreach/email/status'),api('/api/leads?limit=200')]);emailOutreachState=d;const dot=document.getElementById('gmailDot'),txt=document.getElementById('gmailText');dot.className='dot '+(d.smartleadMailbox?'on':'off');txt.textContent=d.smartleadMailbox?('Smartlead mailbox \xB7 '+d.smartleadMailbox+(d.smartleadConfigured?'':' \xB7 API key missing')):'Smartlead mailbox not set';document.getElementById('gClientId').value=d.smartleadMailbox||'';document.getElementById('gmailCallback').textContent='Smartlead webhook URL (register this in Smartlead): '+d.webhookUrl+' \xB7 website campaign '+(d.smartleadWebsiteCampaignId||'not created yet')+' \xB7 concierge campaign '+(d.smartleadConciergeCampaignId||'not created yet');const lrDot=document.getElementById('liveReplyDot'),lrTxt=document.getElementById('liveReplyText');lrDot.className='dot '+(d.liveReplyConnected?'on':'off');lrTxt.textContent=d.liveReplyConnected?('Live-reply mailbox connected \xB7 '+d.liveReplyEmail):'Live-reply mailbox '+(d.liveReplyStatus==='ERROR'?'error: '+(d.liveReplyError||'unknown'):'not connected');const s=d.settings||{};document.getElementById('emailFromName').value=s.fromName||'Connor | Trenches Group';document.getElementById('emailPostal').value=s.postalAddress||'';document.getElementById('emailDailyCap').value=s.dailyCap||10;document.getElementById('emailReplyMode').value=s.autoReplyMode||'DRAFT_ONLY';const live=document.getElementById('emailLiveToggle'),auto=document.getElementById('emailAutoToggle');live.textContent=s.emailLiveMode?'Disable live email':'Enable live email';live.className='btn '+(s.emailLiveMode?'danger':'good');auto.textContent=s.orchestratorEnabled?'Pause autonomous sequences':'Enable autonomous sequences';auto.className='btn '+(s.orchestratorEnabled?'danger':'good');document.getElementById('emailModeText').textContent='Live email '+(s.emailLiveMode?'ON':'OFF')+' \xB7 automation '+(s.orchestratorEnabled?'ON':'OFF')+' \xB7 auto replies '+(s.autoReplyMode||'DRAFT_ONLY')+' \xB7 daily cap '+(s.dailyCap||10)+' \xB7 SMS LIVE LOCKED';const a=document.getElementById('emailAllowlistRows');a.innerHTML='';for(const x of(d.allowlist||[])){a.insertAdjacentHTML('beforeend','<span class="pill READY">'+esc(x.label||'Test')+' \xB7 '+esc(x.email)+' <button class="btn small" style="margin-left:6px;padding:2px 5px" data-email-remove="'+esc(encodeURIComponent(x.email))+'">\xD7</button></span>')}if(!(d.allowlist||[]).length)a.innerHTML='<span class="muted">No test email addresses allowlisted.</span>';document.querySelectorAll('[data-email-remove]').forEach(b=>b.addEventListener('click',()=>removeEmailTestAddressUi(b.getAttribute('data-email-remove'))));const sel=document.getElementById('emailTestLead'),cur=sel.value;sel.innerHTML='<option value="">Optional lead to simulate</option>';for(const x of(l.leads||[])){sel.insertAdjacentHTML('beforeend','<option value="'+esc(x.id)+'">'+esc(x.business_name)+' \xB7 '+esc(x.email||'no email')+'</option>')}if(cur&&[...sel.options].some(o=>o.value===cur))sel.value=cur;const rows=document.getElementById('emailMessageRows');rows.innerHTML='';for(const m of(d.recentMessages||[])){const contact=m.direction==='INBOUND'?m.from_email:m.to_email;let raw={};try{raw=JSON.parse(m.raw_json||'{}')}catch{}const outcome=raw.conversationOutcome||'\u2014';const outcomeHtml=outcome==='DEMO_APPROVED'?'<span class="pill COMPLETED">DEMO_APPROVED</span>':esc(outcome);rows.insertAdjacentHTML('beforeend','<tr><td class="muted">'+esc(m.created_at?new Date(m.created_at).toLocaleString():'\u2014')+'</td><td>'+esc(m.direction)+'</td><td>'+esc(m.business_name||'\u2014')+'</td><td>'+esc(contact)+'</td><td>'+esc(m.subject||'\u2014')+'</td><td>'+esc(m.intent||'\u2014')+'</td><td>'+outcomeHtml+'</td><td>'+esc(m.status)+'</td></tr>')}document.getElementById('emailMessageEmpty').style.display=(d.recentMessages||[]).length?'none':'block';const sr=document.getElementById('sequenceRows');sr.innerHTML='';for(const q of(d.sequences||[])){sr.insertAdjacentHTML('beforeend','<tr><td>'+esc(q.business_name)+'</td><td>'+esc(q.priority||'\u2014')+'</td><td>'+esc(q.strategy)+'</td><td>'+esc(q.status)+'</td><td>'+esc(q.current_step)+'</td><td class="muted">'+esc(q.next_action_at?new Date(q.next_action_at).toLocaleString():'\u2014')+'</td></tr>')}document.getElementById('sequenceEmpty').style.display=(d.sequences||[]).length?'none':'block'}
+async function loadEmailOutreach(){const [d,l]=await Promise.all([api('/api/outreach/email/status'),api('/api/leads?limit=200')]);emailOutreachState=d;const dot=document.getElementById('gmailDot'),txt=document.getElementById('gmailText');dot.className='dot '+(d.smartleadMailbox?'on':'off');txt.textContent=d.smartleadMailbox?('Smartlead mailbox \xB7 '+d.smartleadMailbox+(d.smartleadConfigured?'':' \xB7 API key missing')):'Smartlead mailbox not set';document.getElementById('gClientId').value=d.smartleadMailbox||'';document.getElementById('gmailCallback').textContent='Smartlead webhook URL (register this in Smartlead): '+d.webhookUrl+' \xB7 website campaign '+(d.smartleadWebsiteCampaignId||'not created yet')+' \xB7 concierge campaign '+(d.smartleadConciergeCampaignId||'not created yet');document.getElementById('replyModelText').textContent='Replies are human-in-the-loop: answer leads directly in Smartlead. Genuine replies notify '+(d.notifyEmail||'you')+'.';const s=d.settings||{};document.getElementById('emailFromName').value=s.fromName||'Connor | Trenches Group';document.getElementById('emailPostal').value=s.postalAddress||'';document.getElementById('emailDailyCap').value=s.dailyCap||10;document.getElementById('emailReplyMode').value=s.autoReplyMode||'DRAFT_ONLY';const live=document.getElementById('emailLiveToggle'),auto=document.getElementById('emailAutoToggle');live.textContent=s.emailLiveMode?'Disable live email':'Enable live email';live.className='btn '+(s.emailLiveMode?'danger':'good');auto.textContent=s.orchestratorEnabled?'Pause autonomous sequences':'Enable autonomous sequences';auto.className='btn '+(s.orchestratorEnabled?'danger':'good');document.getElementById('emailModeText').textContent='Live email '+(s.emailLiveMode?'ON':'OFF')+' \xB7 automation '+(s.orchestratorEnabled?'ON':'OFF')+' \xB7 auto replies '+(s.autoReplyMode||'DRAFT_ONLY')+' \xB7 daily cap '+(s.dailyCap||10)+' \xB7 SMS LIVE LOCKED';const websiteToggle=document.getElementById('websiteTrackToggle'),conciergeToggle=document.getElementById('conciergeTrackToggle');const websiteOn=s.websiteEnabled!==false,conciergeOn=s.conciergeEnabled!==false;websiteToggle.textContent='Website outreach: '+(websiteOn?'ON':'OFF');websiteToggle.className='btn '+(websiteOn?'good':'danger');conciergeToggle.textContent='Concierge outreach: '+(conciergeOn?'ON':'OFF');conciergeToggle.className='btn '+(conciergeOn?'good':'danger');const a=document.getElementById('emailAllowlistRows');a.innerHTML='';for(const x of(d.allowlist||[])){a.insertAdjacentHTML('beforeend','<span class="pill READY">'+esc(x.label||'Test')+' \xB7 '+esc(x.email)+' <button class="btn small" style="margin-left:6px;padding:2px 5px" data-email-remove="'+esc(encodeURIComponent(x.email))+'">\xD7</button></span>')}if(!(d.allowlist||[]).length)a.innerHTML='<span class="muted">No test email addresses allowlisted.</span>';document.querySelectorAll('[data-email-remove]').forEach(b=>b.addEventListener('click',()=>removeEmailTestAddressUi(b.getAttribute('data-email-remove'))));const sel=document.getElementById('emailTestLead'),cur=sel.value;sel.innerHTML='<option value="">Optional lead to simulate</option>';for(const x of(l.leads||[])){sel.insertAdjacentHTML('beforeend','<option value="'+esc(x.id)+'">'+esc(x.business_name)+' \xB7 '+esc(x.email||'no email')+'</option>')}if(cur&&[...sel.options].some(o=>o.value===cur))sel.value=cur;const rows=document.getElementById('emailMessageRows');rows.innerHTML='';for(const m of(d.recentMessages||[])){const contact=m.direction==='INBOUND'?m.from_email:m.to_email;let raw={};try{raw=JSON.parse(m.raw_json||'{}')}catch{}const outcome=raw.conversationOutcome||'\u2014';const outcomeHtml=outcome==='DEMO_APPROVED'?'<span class="pill COMPLETED">DEMO_APPROVED</span>':esc(outcome);rows.insertAdjacentHTML('beforeend','<tr><td class="muted">'+esc(m.created_at?new Date(m.created_at).toLocaleString():'\u2014')+'</td><td>'+esc(m.direction)+'</td><td>'+esc(m.business_name||'\u2014')+'</td><td>'+esc(contact)+'</td><td>'+esc(m.subject||'\u2014')+'</td><td>'+esc(m.intent||'\u2014')+'</td><td>'+outcomeHtml+'</td><td>'+esc(m.status)+'</td></tr>')}document.getElementById('emailMessageEmpty').style.display=(d.recentMessages||[]).length?'none':'block';const sr=document.getElementById('sequenceRows');sr.innerHTML='';const modeSequences=(d.sequences||[]).filter(q=>businessMode==='CONCIERGE'?q.strategy==='SMARTLEAD_CONCIERGE':q.strategy!=='SMARTLEAD_CONCIERGE');for(const q of modeSequences){sr.insertAdjacentHTML('beforeend','<tr><td>'+esc(q.business_name)+'</td><td>'+esc(q.priority||'\u2014')+'</td><td>'+esc(q.strategy)+'</td><td>'+esc(q.status)+'</td><td>'+esc(q.current_step)+'</td><td class="muted">'+esc(q.next_action_at?new Date(q.next_action_at).toLocaleString():'\u2014')+'</td></tr>')}document.getElementById('sequenceEmpty').style.display=modeSequences.length?'none':'block'}
 async function saveSmartleadMailboxUi(){try{const smartleadMailbox=document.getElementById('gClientId').value.trim();if(!smartleadMailbox)throw new Error('Enter the Smartlead sending mailbox address.');await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({smartleadMailbox})});await loadEmailOutreach();alert('Smartlead mailbox saved. Make sure it is connected as an email account inside Smartlead before enrolling leads.')}catch(e){showError(e)}}
-async function connectLiveReplyUi(){try{const d=await api('/api/outreach/email/live-reply/oauth/start',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});if(!d.authUrl)throw new Error('No Google authorization URL returned.');window.open(d.authUrl,'_blank','noopener')}catch(e){showError(e)}}
 async function saveEmailSettingsUi(){try{await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({fromName:document.getElementById('emailFromName').value.trim(),postalAddress:document.getElementById('emailPostal').value.trim(),dailyCap:Number(document.getElementById('emailDailyCap').value||10),autoReplyMode:document.getElementById('emailReplyMode').value})});await loadEmailOutreach()}catch(e){showError(e)}}
 async function toggleEmailLiveUi(){try{const on=!!(emailOutreachState&&emailOutreachState.settings&&emailOutreachState.settings.emailLiveMode);if(!on&&!confirm('Enable LIVE autonomous email to qualified leads? Only verified emails, A/B priority, suppression checks, and the daily cap will be eligible.'))return;await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({liveMode:!on})});await loadEmailOutreach()}catch(e){showError(e)}}
 async function toggleEmailAutomationUi(){try{const on=!!(emailOutreachState&&emailOutreachState.settings&&emailOutreachState.settings.orchestratorEnabled);if(!on&&!confirm('Enable autonomous email sequences? The live-email switch must also be ON before real prospects can be enrolled/sent.'))return;await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({orchestratorEnabled:!on})});await loadEmailOutreach()}catch(e){showError(e)}}
+async function toggleWebsiteTrackUi(){try{const on=!!(emailOutreachState&&emailOutreachState.settings&&emailOutreachState.settings.websiteEnabled!==false);await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({websiteEnabled:!on})});await loadEmailOutreach()}catch(e){showError(e)}}
+async function toggleConciergeTrackUi(){try{const on=!!(emailOutreachState&&emailOutreachState.settings&&emailOutreachState.settings.conciergeEnabled!==false);await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({conciergeEnabled:!on})});await loadEmailOutreach()}catch(e){showError(e)}}
 async function addEmailTestAddressUi(){try{const email=document.getElementById('emailTestAddress').value.trim(),label=document.getElementById('emailTestLabel').value.trim();if(!email)throw new Error('Enter a test email address.');await api('/api/outreach/email/test-allowlist',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({email,label})});await loadEmailOutreach()}catch(e){showError(e)}}
 async function removeEmailTestAddressUi(enc){try{await api('/api/outreach/email/test-allowlist/'+encodeURIComponent(decodeURIComponent(enc)),{method:'DELETE',headers:{'X-Actor':'COMMAND_CENTER'}});await loadEmailOutreach()}catch(e){showError(e)}}
 async function sendEmailTestUi(){try{const email=document.getElementById('emailTestAddress').value.trim(),subject=document.getElementById('emailTestSubject').value.trim(),message=document.getElementById('emailTestBody').value.trim(),leadId=document.getElementById('emailTestLead').value||undefined;if(!email)throw new Error('Enter an allowlisted test email.');const d=await api('/api/outreach/email/test-send',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({email,subject,message,leadId})});alert('Test email sent'+(d.providerMessageId?' \xB7 '+d.providerMessageId:''));await loadEmailOutreach()}catch(e){showError(e)}}
@@ -189,8 +198,35 @@ async function scheduleFollowupsUi(){try{const leadId=selectedSimLead();await ap
 async function runFollowupsUi(){try{const d=await api('/api/outreach/followups/run',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({force:true})});document.getElementById('simResult').textContent='Follow-up drafts created: '+d.drafted+' \xB7 skipped '+d.skipped;await loadConversation()}catch(e){showError(e)}}
 async function draftAction(id,action){try{await api('/api/outreach/drafts/'+encodeURIComponent(id)+'/'+action,{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});await loadConversation()}catch(e){showError(e)}}
 async function resolveEscalationUi(id){try{await api('/api/outreach/escalations/'+encodeURIComponent(id)+'/resolve',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});await Promise.all([loadConversation(),loadLeads()])}catch(e){showError(e)}}
+let quoteLeads=[],quoteState=null;
+const QPILL={DRAFT:'',SENT:'READY',VIEWED:'RUNNING',ACCEPTED:'COMPLETED',DECLINED:'FAILED',VOID:'FAILED'};
+const QEVT={CREATED:'Quote created',UPDATED:'Quote edited',SENT:'Emailed',SEND_FAILED:'Email failed',EMAIL_OPENED:'Email opened',VIEWED:'Estimate viewed',PORTAL_SIGNUP:'Created client portal account',MARKED_ACCEPTED:'Marked accepted',MARKED_DECLINED:'Marked declined',MARKED_VOID:'Voided'};
+function qMoney(c){return '$'+(Number(c||0)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function qTotal(q){const a=[];if(q.one_time_cents>0||!q.monthly_cents)a.push(qMoney(q.one_time_cents));if(q.monthly_cents>0)a.push(qMoney(q.monthly_cents)+'/mo');return a.join(' + ')}
+function qWhen(v){return v?new Date(v).toLocaleString():'\u2014'}
+function qVal(id){const el=document.getElementById(id);return el?el.value.trim():''}
+function qPill(s){return '<span class="pill '+esc(QPILL[s]||'')+'">'+esc(s)+'</span>'}
+async function loadQuotes(){const d=await api('/api/quotes'),qs=d.quotes||[],rows=document.getElementById('quoteRows');rows.innerHTML=qs.map(q=>'<tr><td><b>'+esc(q.quote_number)+'</b></td><td><div class="business">'+esc(q.business_name)+'</div><div class="muted">'+esc(q.contact_name||'')+'</div></td><td>'+esc(q.title)+'</td><td>'+esc(qTotal(q))+'</td><td>'+qPill(q.status)+'</td><td class="muted">'+esc(q.sent_to||'\u2014')+'</td><td>'+esc(q.open_count||0)+'</td><td>'+esc(q.view_count||0)+'</td><td class="muted">'+esc(qWhen(q.last_viewed_at))+'</td><td class="right"><button class="btn small" data-quote="'+esc(q.id)+'">Open</button></td></tr>').join('');document.getElementById('quoteEmpty').style.display=qs.length?'none':'block';document.getElementById('quoteSummary').textContent=qs.length+' quotes \xB7 '+qs.filter(q=>q.first_sent_at).length+' sent \xB7 '+qs.filter(q=>q.view_count>0).length+' viewed';rows.querySelectorAll('[data-quote]').forEach(b=>b.addEventListener('click',()=>openQuote(b.getAttribute('data-quote'))))}
+async function loadQuoteMailbox(){const el=document.getElementById('quoteMailbox');try{const d=await api('/api/quotes/mailbox');el.innerHTML=d.connected?'<span class="dot on"></span> Sending as '+esc(d.email):'<span class="dot off"></span> Google not connected <button class="btn small primary" id="quoteConnect">Connect Google</button>';const b=document.getElementById('quoteConnect');if(b)b.onclick=connectQuoteMailbox}catch(e){el.textContent=e.message}}
+async function connectQuoteMailbox(){try{const d=await api('/api/quotes/mailbox/connect',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});window.open(d.authUrl,'_blank','noopener');document.getElementById('quoteMailbox').textContent='Finish signing in with Google in the new tab, then click Refresh.'}catch(e){showError(e)}}
+async function loadLeadQuotes(leadId){const box=document.getElementById('leadQuotes');if(!box)return;try{const d=await api('/api/quotes?leadId='+encodeURIComponent(leadId)),qs=d.quotes||[];box.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b>Quotes</b><button class="btn small primary" id="leadNewQuote">+ New quote for this lead</button></div>'+(qs.length?qs.map(q=>'<div class="event" style="cursor:pointer" data-lead-quote="'+esc(q.id)+'"><div class="eventHead"><b>'+esc(q.quote_number)+' \xB7 '+esc(q.title)+'</b>'+qPill(q.status)+'</div><div class="eventData">'+esc(qTotal(q))+' \xB7 opens '+esc(q.open_count||0)+' \xB7 views '+esc(q.view_count||0)+(q.last_viewed_at?' \xB7 last viewed '+esc(qWhen(q.last_viewed_at)):'')+'</div></div>').join(''):'<div class="muted">No quotes for this lead yet.</div>');document.getElementById('leadNewQuote').onclick=()=>openQuote(null,leadId);box.querySelectorAll('[data-lead-quote]').forEach(el=>el.addEventListener('click',()=>openQuote(el.getAttribute('data-lead-quote'))))}catch(e){box.textContent=e.message}}
+async function openQuote(id,leadId){try{const [ld,detail]=await Promise.all([api('/api/leads?limit=200'),id?api('/api/quotes/'+encodeURIComponent(id)):Promise.resolve(null)]);quoteLeads=ld.leads||[];quoteState=detail;const want=leadId||(detail&&detail.quote.lead_id);if(want&&!quoteLeads.some(l=>l.id===want)){try{quoteLeads.unshift((await api('/api/leads/'+encodeURIComponent(want))).lead)}catch(e){}}renderQuoteModal(leadId||'');document.getElementById('quoteOverlay').classList.add('open')}catch(e){showError(e)}}
+function qItemRow(it){return '<div class="qItem"><input class="qiDesc" placeholder="Description, e.g. 5-page website build" value="'+esc(it.description||'')+'"/><input class="qiQty" type="number" min="0" step="any" title="Quantity" value="'+esc(it.quantity||1)+'"/><input class="qiPrice" type="number" min="0" step="0.01" placeholder="Price $" value="'+(it.unitCents?esc((it.unitCents/100).toFixed(2)):'')+'"/><select class="qiBilling"><option value="ONE_TIME">One-time</option><option value="MONTHLY"'+(it.billing==='MONTHLY'?' selected':'')+'>Monthly</option></select><button class="btn small" data-qremove="1" title="Remove line">\xD7</button></div>'}
+function qRecalc(){let one=0,mon=0;document.querySelectorAll('#qItems .qItem').forEach(r=>{const c=Math.round(Number(r.querySelector('.qiQty').value||0)*Math.round(Number(r.querySelector('.qiPrice').value||0)*100));if(r.querySelector('.qiBilling').value==='MONTHLY')mon+=c;else one+=c});const el=document.getElementById('qTotals');if(el)el.textContent='Total: '+qMoney(one)+(mon?' + '+qMoney(mon)+'/mo':'')}
+function qLeadChanged(){const l=quoteLeads.find(x=>x.id===qVal('qLead'));if(!l)return;document.getElementById('qBusiness').value=l.business_name||'';const s=document.getElementById('qSendEmail');if(s&&l.email)s.value=l.email}
+function renderQuoteModal(prefillLeadId){const d=quoteState,q=d?d.quote:{status:'DRAFT',line_items:[]},isNew=!d,leadId=q.lead_id||prefillLeadId||'',lead=quoteLeads.find(l=>l.id===leadId),items=(q.line_items&&q.line_items.length)?q.line_items:[{description:'',quantity:1,unitCents:0,billing:'ONE_TIME'}],sends=d?d.sends||[]:[],events=d?d.events||[]:[],sendTo=sends.length?sends[0].email:((lead&&lead.email)||'');
+let h='<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><div><h2 style="margin-bottom:6px">'+(isNew?'New quote':esc(q.quote_number)+' \xB7 '+esc(q.title))+'</h2>'+(isNew?'':qPill(q.status))+'</div><button class="btn small" id="quoteClose">Close</button></div>';
+if(!isNew){h+='<div class="qStats">'+[['Emails sent',sends.filter(s=>s.status==='SENT').length],['Email opens*',q.open_count||0],['Estimate views',q.view_count||0],['Last viewed',q.last_viewed_at?qWhen(q.last_viewed_at):'Not yet']].map(x=>'<div class="metric" style="padding:10px"><div class="n" style="font-size:17px">'+esc(x[1])+'</div><div class="l">'+esc(x[0])+'</div></div>').join('')+'</div>';if(sends.length)h+='<div class="tableWrap" style="max-height:200px"><table style="min-width:680px"><thead><tr><th>Sent to</th><th>Sent</th><th>Opens</th><th>Views</th><th>Last viewed</th><th>Portal invite</th><th></th></tr></thead><tbody>'+sends.map(s=>'<tr><td>'+esc(s.email)+(s.status==='FAILED'?' '+qPill('FAILED'):'')+'</td><td class="muted">'+esc(qWhen(s.sent_at))+'</td><td>'+esc(s.open_count||0)+'</td><td>'+esc(s.view_count||0)+'</td><td class="muted">'+esc(qWhen(s.last_viewed_at))+'</td><td>'+(s.included_invite?'Included':'\u2014')+'</td><td><button class="btn small" data-copy-link="'+esc(s.view_url)+'" title="Paste into your own email if needed. Opening it yourself counts as a view.">Copy link</button></td></tr>').join('')+'</tbody></table></div>';h+='<div class="sub" style="margin:6px 0 10px">*Opens are approximate (some email apps block or pre-load images). Estimate views are exact.</div>';if(events.length)h+='<details style="margin-bottom:6px"><summary class="sub" style="cursor:pointer">Activity timeline ('+events.length+')</summary><div class="timeline" style="max-height:220px">'+events.map(ev=>'<div class="event"><div class="eventHead"><b>'+esc(QEVT[ev.event_type]||ev.event_type)+'</b><span class="muted">'+esc(qWhen(ev.created_at))+'</span></div><div class="eventData">'+esc([ev.email,ev.source].filter(Boolean).join(' \xB7 '))+'</div></div>').join('')+'</div></details>'}
+const leadOpts='<option value="">No linked lead (enter client manually)</option>'+quoteLeads.map(l=>'<option value="'+esc(l.id)+'"'+(l.id===leadId?' selected':'')+'>'+esc(l.business_name)+' \xB7 '+esc(l.city)+', '+esc(l.state)+(l.email?' \xB7 '+esc(l.email):'')+'</option>').join('');
+h+='<label>Linked lead</label><select id="qLead">'+leadOpts+'</select><div class="grid2"><div><label>Business name</label><input id="qBusiness" value="'+esc(q.business_name||(lead?lead.business_name:''))+'"/></div><div><label>Contact name</label><input id="qContact" value="'+esc(q.contact_name||'')+'"/></div></div><label>Quote title</label><input id="qTitle" placeholder="e.g. Website build + monthly care plan" value="'+esc(q.title||'')+'"/><label>Message to client (optional)</label><textarea id="qMessage" placeholder="Thanks for the call today. Here is the estimate we discussed.">'+esc(q.message||'')+'</textarea><label>Line items (description \xB7 qty \xB7 price \xB7 billing)</label><div id="qItems">'+items.map(qItemRow).join('')+'</div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><button class="btn small" id="qAddItem">+ Add line</button><div id="qTotals" style="font-weight:800"></div></div><div class="grid2"><div><label>Valid until (optional)</label><input id="qValid" type="date" value="'+esc(q.valid_until||'')+'"/></div><div></div></div><label>Terms (optional)</label><textarea id="qTerms" style="min-height:60px" placeholder="50% deposit to start, balance at launch.">'+esc(q.terms||'')+'</textarea>';
+if(q.status!=='VOID')h+='<div style="border:1px solid var(--accent);border-radius:9px;padding:12px;margin-top:14px"><div style="font-weight:800;margin-bottom:8px">Send this quote to\u2026</div><div class="qSend"><input id="qSendEmail" type="email" placeholder="client@business.com" value="'+esc(sendTo)+'"/><input id="qSendName" placeholder="Their name (optional)" value="'+esc(q.contact_name||'')+'"/><button class="btn primary" id="quoteSaveSend">Save &amp; send</button></div><div class="sub" style="margin-top:6px">Sends from your Google Workspace mailbox, so it shows in your Sent folder and replies come straight to you. Clients without a portal account also get a pre-approved signup link.</div></div>';
+h+='<div class="modalFooter" style="justify-content:space-between"><div class="rowBtns">'+(isNew||q.status==='VOID'?'':'<button class="btn small good" data-qstatus="ACCEPTED">Mark accepted</button><button class="btn small" data-qstatus="DECLINED">Mark declined</button><button class="btn small danger" data-qstatus="VOID">Void</button>')+'</div><button class="btn" id="quoteSave">'+(isNew?'Save draft':'Save changes')+'</button></div>';
+const m=document.getElementById('quoteModal');m.innerHTML=h;m.oninput=qRecalc;m.onchange=qRecalc;m.onclick=e=>{const t=e.target;if(!(t instanceof Element))return;if(t.hasAttribute('data-qremove')){const rows=document.querySelectorAll('#qItems .qItem');if(rows.length>1)t.closest('.qItem').remove();qRecalc()}else if(t.hasAttribute('data-copy-link')){navigator.clipboard.writeText(t.getAttribute('data-copy-link')).then(()=>{t.textContent='Copied'})}else if(t.hasAttribute('data-qstatus'))quoteStatus(t.getAttribute('data-qstatus'))};document.getElementById('quoteClose').onclick=()=>closeOverlay('quoteOverlay');document.getElementById('qAddItem').onclick=()=>{document.getElementById('qItems').insertAdjacentHTML('beforeend',qItemRow({quantity:1,billing:'ONE_TIME'}));qRecalc()};document.getElementById('qLead').onchange=qLeadChanged;document.getElementById('quoteSave').onclick=()=>saveQuote(false);const ss=document.getElementById('quoteSaveSend');if(ss)ss.onclick=()=>saveQuote(true);qRecalc()}
+function quotePayload(){const lineItems=[...document.querySelectorAll('#qItems .qItem')].map(r=>({description:r.querySelector('.qiDesc').value.trim(),quantity:Number(r.querySelector('.qiQty').value||1),unitCents:Math.round(Number(r.querySelector('.qiPrice').value||0)*100),billing:r.querySelector('.qiBilling').value})).filter(i=>i.description||i.unitCents);return{leadId:qVal('qLead')||null,businessName:qVal('qBusiness'),contactName:qVal('qContact')||null,title:qVal('qTitle'),message:qVal('qMessage')||null,terms:qVal('qTerms')||null,validUntil:qVal('qValid')||null,lineItems}}
+async function saveQuote(send){const buttons=[...document.querySelectorAll('#quoteModal button')];try{const body=quotePayload(),email=qVal('qSendEmail'),name=qVal('qSendName');if(send){if(!email)throw new Error('Enter the email address to send this quote to.');if(!body.lineItems.length)throw new Error('Add at least one line item before sending.');if(!confirm('Send "'+(body.title||'this quote')+'" to '+email+'?'))return}buttons.forEach(b=>b.disabled=true);const hdr={'X-Actor':'COMMAND_CENTER'};let id=quoteState?quoteState.quote.id:null;const saved=id?await api('/api/quotes/'+encodeURIComponent(id),{method:'PATCH',headers:hdr,body:JSON.stringify(body)}):await api('/api/quotes',{method:'POST',headers:hdr,body:JSON.stringify(body)});id=saved.quote.id;let note='';if(send){try{const s=await api('/api/quotes/'+encodeURIComponent(id)+'/send',{method:'POST',headers:hdr,body:JSON.stringify({email,name:name||undefined})});note='Sent to '+s.email+(s.includedInvite?' with a pre-approved portal signup link.':'. They already have a portal account, so it is in their portal too.')}catch(e){note='Quote saved, but the email failed: '+e.message}}quoteState=await api('/api/quotes/'+encodeURIComponent(id));renderQuoteModal('');await loadQuotes();if(note)alert(note)}catch(e){alert(e.message)}finally{buttons.forEach(b=>b.disabled=false)}}
+async function quoteStatus(status){const labels={ACCEPTED:'Mark this quote accepted?',DECLINED:'Mark this quote declined?',VOID:'Void this quote? It disappears from the client portal and can no longer be sent.'};if(!confirm(labels[status]))return;try{const id=quoteState.quote.id;await api('/api/quotes/'+encodeURIComponent(id)+'/status',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({status})});quoteState=await api('/api/quotes/'+encodeURIComponent(id));renderQuoteModal('');await loadQuotes()}catch(e){alert(e.message)}}
 function debouncedLoad(){clearTimeout(timer);timer=setTimeout(loadLeads,250)}async function loadLeads(){const p=new URLSearchParams({limit:'200'}),q=document.getElementById('search').value.trim(),s=document.getElementById('stateFilter').value,pr=document.getElementById('priorityFilter').value;if(q)p.set('q',q);if(s)p.set('state',s);if(pr)p.set('priority',pr);const d=await api('/api/leads?'+p),rows=document.getElementById('leadRows');rows.innerHTML='';document.getElementById('leadEmpty').style.display=d.leads.length?'none':'block';for(const l of d.leads){const gap=l.website_gap_status||'UNKNOWN',gapClass=gap==='ELIGIBLE'?'COMPLETED':gap==='INELIGIBLE'?'FAILED':gap==='MANUAL_OVERRIDE'?'READY':'';rows.insertAdjacentHTML('beforeend','<tr><td><div class="business">'+esc(l.business_name)+'</div><div class="muted">'+esc(l.website||'No website recorded')+'</div></td><td>'+esc(l.city)+', '+esc(l.state)+'</td><td>'+esc(l.industry)+'</td><td><span class="pill '+gapClass+'">'+esc(gap)+'</span></td><td>'+esc(l.opportunity_score??'\u2014')+'</td><td><span class="pill '+esc(l.priority||'')+'">'+esc(l.priority||'\u2014')+'</span></td><td>'+esc(l.current_state)+'</td><td>'+esc(l.phone||'\u2014')+'</td><td class="muted">'+esc(l.updated_at?new Date(l.updated_at).toLocaleString():'\u2014')+'</td><td class="right"><button class="btn small" data-lead="'+esc(encodeURIComponent(l.id))+'">Open</button></td></tr>')}document.querySelectorAll('[data-lead]').forEach(b=>b.addEventListener('click',()=>openLead(b.getAttribute('data-lead'))))}
-async function openLead(enc){try{const id=decodeURIComponent(enc),[d,e]=await Promise.all([api('/api/leads/'+encodeURIComponent(id)),api('/api/leads/'+encodeURIComponent(id)+'/events')]),l=d.lead,events=e.events||[],states=d.manualStateOptions||[];const details=[['Industry',l.industry],['Location',l.city+', '+l.state],['Phone',l.phone||'\u2014'],['Email',l.email||'\u2014'],['Website',l.website||'\u2014'],['Website status',l.website_status||'UNKNOWN'],['Website quality',l.website_quality||'UNKNOWN'],['Website gap',l.website_gap_status||'UNKNOWN'],['Gap reason',l.website_gap_reason||'\u2014'],['Google rating',l.google_rating??'\u2014'],['Reviews',l.google_reviews??'\u2014'],['Validation',l.validation_status||'PENDING'],['Sources',l.research_source_count??0],['Score',l.opportunity_score??'\u2014'],['Priority',l.priority||'\u2014'],['Qualification',l.qualification_reason||'\u2014'],['Outreach',l.outreach_eligible?'Eligible':'LOCKED'],['State',l.current_state],['Last manual change',l.manual_state_reason||'\u2014']].map(x=>'<div class="detailItem"><b>'+esc(x[0])+'</b>'+esc(x[1])+'</div>').join('');const timeline=events.map(ev=>'<div class="event"><div class="eventHead"><b>'+esc(ev.event_type)+'</b><span class="muted">'+esc(new Date(ev.created_at).toLocaleString())+'</span></div><div class="eventData">'+esc(ev.old_state&&ev.new_state?(ev.old_state+' \u2192 '+ev.new_state):'')+(ev.event_data_json&&ev.event_data_json!=='{}'?'<br>'+esc(ev.event_data_json):'')+'</div></div>').join('');const opts=states.map(x=>'<option value="'+esc(x)+'" '+(x===l.current_state?'selected':'')+'>'+esc(x)+'</option>').join('');const quick=l.current_state==='DISQUALIFIED'?'<button class="btn good" id="leadRestore">Restore to human review</button>':'<button class="btn danger" id="leadDisqualify">Disqualify</button>';document.getElementById('leadDetail').innerHTML='<div style="display:flex;justify-content:space-between;gap:12px"><div><h2>'+esc(l.business_name)+'</h2><div class="muted">'+esc(l.id)+'</div></div><button class="btn small" id="leadClose">Close</button></div><div class="detailGrid">'+details+'</div><div style="border:1px solid var(--line);border-radius:9px;padding:12px;margin:12px 0"><div style="font-weight:800;margin-bottom:8px">Manual lead control</div><div class="sub">Manual changes are audited. Disqualifying cancels active outreach/follow-ups/demo jobs. Setting an advanced state can explicitly override the website-gap gate.</div><div class="grid2" style="display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-top:10px"><select id="manualLeadState" style="background:#0d0f13;border:1px solid var(--line);color:var(--text);padding:9px;border-radius:8px">'+opts+'</select><input id="manualLeadReason" style="background:#0d0f13;border:1px solid var(--line);color:var(--text);padding:9px;border-radius:8px" placeholder="Reason required, e.g. website manually verified outdated"/></div><div class="rowBtns" style="margin-top:10px"><button class="btn primary" id="applyManualState">Apply status</button>'+quick+'</div></div><div class="timeline">'+timeline+'</div>';document.getElementById('leadClose').onclick=()=>closeOverlay('leadDetailOverlay');document.getElementById('applyManualState').onclick=()=>manualLeadStateUi(id);const dq=document.getElementById('leadDisqualify');if(dq)dq.onclick=()=>disqualifyLeadUi(id);const rs=document.getElementById('leadRestore');if(rs)rs.onclick=()=>restoreLeadUi(id);document.getElementById('leadDetailOverlay').classList.add('open')}catch(e){showError(e)}}
+async function openLead(enc){try{const id=decodeURIComponent(enc),[d,e]=await Promise.all([api('/api/leads/'+encodeURIComponent(id)),api('/api/leads/'+encodeURIComponent(id)+'/events')]),l=d.lead,events=e.events||[],states=d.manualStateOptions||[];const details=[['Industry',l.industry],['Location',l.city+', '+l.state],['Phone',l.phone||'\u2014'],['Email',l.email||'\u2014'],['Website',l.website||'\u2014'],['Website status',l.website_status||'UNKNOWN'],['Website quality',l.website_quality||'UNKNOWN'],['Website gap',l.website_gap_status||'UNKNOWN'],['Gap reason',l.website_gap_reason||'\u2014'],['Google rating',l.google_rating??'\u2014'],['Reviews',l.google_reviews??'\u2014'],['Validation',l.validation_status||'PENDING'],['Sources',l.research_source_count??0],['Score',l.opportunity_score??'\u2014'],['Priority',l.priority||'\u2014'],['Qualification',l.qualification_reason||'\u2014'],['Outreach',l.outreach_eligible?'Eligible':'LOCKED'],['State',l.current_state],['Last manual change',l.manual_state_reason||'\u2014']].map(x=>'<div class="detailItem"><b>'+esc(x[0])+'</b>'+esc(x[1])+'</div>').join('');const timeline=events.map(ev=>'<div class="event"><div class="eventHead"><b>'+esc(ev.event_type)+'</b><span class="muted">'+esc(new Date(ev.created_at).toLocaleString())+'</span></div><div class="eventData">'+esc(ev.old_state&&ev.new_state?(ev.old_state+' \u2192 '+ev.new_state):'')+(ev.event_data_json&&ev.event_data_json!=='{}'?'<br>'+esc(ev.event_data_json):'')+'</div></div>').join('');const opts=states.map(x=>'<option value="'+esc(x)+'" '+(x===l.current_state?'selected':'')+'>'+esc(x)+'</option>').join('');const quick=l.current_state==='DISQUALIFIED'?'<button class="btn good" id="leadRestore">Restore to human review</button>':'<button class="btn danger" id="leadDisqualify">Disqualify</button>';document.getElementById('leadDetail').innerHTML='<div style="display:flex;justify-content:space-between;gap:12px"><div><h2>'+esc(l.business_name)+'</h2><div class="muted">'+esc(l.id)+'</div></div><button class="btn small" id="leadClose">Close</button></div><div class="detailGrid">'+details+'</div><div style="border:1px solid var(--line);border-radius:9px;padding:12px;margin:12px 0"><div style="font-weight:800;margin-bottom:8px">Manual lead control</div><div class="sub">Manual changes are audited. Disqualifying cancels active outreach/follow-ups/demo jobs. Setting an advanced state can explicitly override the website-gap gate.</div><div class="grid2" style="display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-top:10px"><select id="manualLeadState" style="background:#0d0f13;border:1px solid var(--line);color:var(--text);padding:9px;border-radius:8px">'+opts+'</select><input id="manualLeadReason" style="background:#0d0f13;border:1px solid var(--line);color:var(--text);padding:9px;border-radius:8px" placeholder="Reason required, e.g. website manually verified outdated"/></div><div class="rowBtns" style="margin-top:10px"><button class="btn primary" id="applyManualState">Apply status</button>'+quick+'</div></div><div id="leadQuotes" style="border:1px solid var(--line);border-radius:9px;padding:12px;margin:12px 0"><div class="muted">Loading quotes\u2026</div></div><div class="timeline">'+timeline+'</div>';document.getElementById('leadClose').onclick=()=>closeOverlay('leadDetailOverlay');document.getElementById('applyManualState').onclick=()=>manualLeadStateUi(id);const dq=document.getElementById('leadDisqualify');if(dq)dq.onclick=()=>disqualifyLeadUi(id);const rs=document.getElementById('leadRestore');if(rs)rs.onclick=()=>restoreLeadUi(id);loadLeadQuotes(id);document.getElementById('leadDetailOverlay').classList.add('open')}catch(e){showError(e)}}
 async function manualLeadStateUi(id){try{const to=document.getElementById('manualLeadState').value,reason=document.getElementById('manualLeadReason').value.trim();if(!reason)throw new Error('Enter a reason for the manual status change.');if(!confirm('Set this lead to '+to+'? This is an audited admin override.'))return;await api('/api/leads/'+encodeURIComponent(id)+'/manual-state',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({to,reason})});closeOverlay('leadDetailOverlay');await refreshAll()}catch(e){showError(e)}}
 async function disqualifyLeadUi(id){try{const reasons=['Modern / good website \u2014 no opportunity','Wrong industry','Outside target geography','Poor reputation','Franchise / too large','Duplicate','Closed / not operating','Bad contact information','Not a fit','Other'],choice=prompt('Disqualification reason:
 
@@ -202,7 +238,9 @@ async function restoreLeadUi(id){try{const reason=prompt('Why are you restoring 
 async function reAuditWebsiteGapsUi(){try{if(!confirm('Re-audit existing early-stage leads using the new hard website-gap rule? Modern/good sites will be disqualified. Manually overridden leads will be preserved.'))return;const d=await api('/api/leads/website-gap/re-audit',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});alert('Website-gap re-audit complete. Scanned '+d.scanned+' \xB7 eligible '+d.eligible+' \xB7 disqualified '+d.disqualified+' \xB7 review '+d.review+' \xB7 unchanged '+d.unchanged);await refreshAll()}catch(e){showError(e)}}
 function openImport(){document.getElementById('importOverlay').classList.add('open');if(!document.getElementById('importJson').value.trim())loadSampleImport()}function loadSampleImport(){document.getElementById('importJson').value=JSON.stringify({source:'MANUAL_TEST',prospects:[{externalId:'sample-tree-002',businessName:'Sample Tree Service',industry:'Tree Service',city:'Murfreesboro',state:'TN',phone:'6155550101',phoneType:'MOBILE',websiteQuality:'NONE',googleUrl:'https://example.com/google-profile',googleRating:4.9,googleReviewCount:180,isOperating:true,isLocalIndependent:true,isSupplier:false,isFranchiseHq:false,primaryService:'Tree Removal',services:['Tree Removal'],sources:[{url:'https://example.com/google-profile',type:'GOOGLE_BUSINESS'}],researchConfidence:.95}]},null,2)}async function importProspects(){try{const d=await api('/api/prospects/import',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:document.getElementById('importJson').value});closeOverlay('importOverlay');await refreshAll();alert('Received '+d.received+' \xB7 accepted '+d.accepted+' \xB7 duplicates '+d.duplicates+' \xB7 rejected '+d.rejected)}catch(e){showError(e)}}
 async function toggleGlobal(){if(!globalPaused&&!confirm('Pause ALL Trenches automation?'))return;try{await api(globalPaused?'/api/system/resume':'/api/system/pause',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});await refreshAll()}catch(e){showError(e)}}
-if(adminKey){document.getElementById('login').style.display='none';refreshAll().catch(()=>logout())}else{document.getElementById('keyInput').addEventListener('keydown',e=>{if(e.key==='Enter')login()})}setInterval(()=>{if(adminKey){loadRunner().catch(()=>{});loadCampaigns().catch(()=>{});loadProspectorJobs().catch(()=>{});loadOutreach().catch(()=>{});loadEmailOutreach().catch(()=>{});loadConversation().catch(()=>{});loadDemos().catch(()=>{});loadOperatorDesk().catch(()=>{});loadLaunchBoard().catch(()=>{})}},15000);
+(function(){try{const p=new URLSearchParams(location.search),state=p.get('state'),q=p.get('q');if(state)document.getElementById('stateFilter').value=state;if(q)document.getElementById('search').value=q}catch(e){}})();
+applyModeVisibility();
+if(adminKey){document.getElementById('login').style.display='none';refreshAll().then(applyDeepLink).catch(()=>logout())}else{document.getElementById('keyInput').addEventListener('keydown',e=>{if(e.key==='Enter')login()})}setInterval(()=>{if(adminKey){loadRunner().catch(()=>{});loadCampaigns().catch(()=>{});loadProspectorJobs().catch(()=>{});loadOutreach().catch(()=>{});loadEmailOutreach().catch(()=>{});loadConversation().catch(()=>{});loadDemos().catch(()=>{});loadOperatorDesk().catch(()=>{});loadLaunchBoard().catch(()=>{});loadQuotes().catch(()=>{})}},15000);
 <\/script>
 </body></html>`], [`<!doctype html>
 <html lang="en">
@@ -213,38 +251,41 @@ if(adminKey){document.getElementById('login').style.display='none';refreshAll().
   <title>Trenches Command Center</title>
   <style>
     :root{color-scheme:dark;--bg:#090a0c;--panel:#121419;--panel2:#181b21;--line:#2a3039;--text:#f5f6f8;--muted:#9ca5b4;--accent:#d8ff3e;--danger:#ff6363;--good:#58df8d;--warn:#ffc14d}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}.shell{max-width:1500px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:18px}.brand{display:flex;gap:12px;align-items:center}.mark{width:40px;height:40px;border:2px solid var(--accent);display:grid;place-items:center;font-weight:900;color:var(--accent)}h1{font-size:20px;margin:0}.sub{font-size:12px;color:var(--muted);margin-top:3px}.actions,.rowBtns{display:flex;gap:8px;flex-wrap:wrap}.btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:8px;cursor:pointer}.btn:hover{border-color:#596270}.btn.primary{background:var(--accent);border-color:var(--accent);color:#0a0b06;font-weight:850}.btn.danger{background:#2a1618;border-color:#703238;color:#ffd0d0}.btn.good{background:#11271a;border-color:#2f6541;color:#c5ffd7}.btn.small{padding:6px 9px;font-size:12px}.status{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px}.dot{width:9px;height:9px;border-radius:50%;background:#6c7380}.dot.on{background:var(--good);box-shadow:0 0 0 3px rgba(88,223,141,.12)}.dot.off{background:var(--danger)}.metrics{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-bottom:16px}.metric,.panel{background:var(--panel);border:1px solid var(--line);border-radius:11px}.metric{padding:14px}.metric .n{font-size:25px;font-weight:850}.metric .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line)}.sectionTitle h2{font-size:15px;margin:0}.runnerBadge{font-size:12px;color:var(--muted)}.campaignGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px}.campaign{border:1px solid #252b34;background:#0e1115;border-radius:9px;padding:12px}.campaignHead{display:flex;justify-content:space-between;gap:10px}.campaignName{font-weight:800}.campaignMeta{font-size:12px;color:var(--muted);line-height:1.5;margin-top:5px}.progress{height:7px;background:#222830;border-radius:999px;overflow:hidden;margin:10px 0}.progress>span{display:block;height:100%;background:var(--accent)}.pill{display:inline-flex;padding:4px 7px;border:1px solid #343b47;border-radius:999px;font-size:10px;white-space:nowrap}.pill.A{color:#d9ffba;border-color:#4d7133}.pill.B{color:#e7f3ff;border-color:#496078}.pill.RUNNING{color:#c5ffd7;border-color:#315f43}.pill.READY{color:#ffe1a6;border-color:#7b6030}.pill.FAILED,.pill.ERROR{color:#ffc4c4;border-color:#70373b}.pill.COMPLETED{color:#c5ffd7;border-color:#315f43}.toolbar{display:flex;gap:9px;align-items:center;padding:12px;border-bottom:1px solid var(--line);flex-wrap:wrap}.toolbar input,.toolbar select,.modal input,.modal textarea,.modal select{background:#0d0f13;border:1px solid var(--line);color:var(--text);padding:9px 10px;border-radius:8px;outline:none}.toolbar input{min-width:260px;flex:1}.tableWrap{overflow:auto;max-height:54vh}table{width:100%;border-collapse:collapse;min-width:1020px}th,td{padding:11px 12px;border-bottom:1px solid #22262e;font-size:13px;text-align:left}th{position:sticky;top:0;background:#11141a;color:#aeb5c1;text-transform:uppercase;font-size:10px;letter-spacing:.06em}.business{font-weight:750}.muted{color:var(--muted)}.right{text-align:right}.empty{text-align:center;padding:30px;color:var(--muted)}.overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-start;justify-content:center;padding:5vh 16px;z-index:20;overflow:auto}.overlay.open{display:flex}.modal{width:min(760px,100%);background:#101319;border:1px solid #323845;border-radius:12px;padding:18px}.modal h2{margin:0 0 13px;font-size:18px}.modal label{display:block;font-size:10px;color:var(--muted);margin:10px 0 5px;text-transform:uppercase;letter-spacing:.06em}.modal input,.modal textarea,.modal select{width:100%}.modal textarea{min-height:90px;resize:vertical}.modal .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.modalFooter{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.detailGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;margin:12px 0}.detailItem{padding:7px 0;border-bottom:1px solid #222832}.detailItem b{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;margin-bottom:3px}.timeline{border-top:1px solid var(--line);padding-top:12px;max-height:300px;overflow:auto}.event{padding:8px 0;border-bottom:1px solid #21252d}.eventHead{display:flex;justify-content:space-between;font-size:12px}.eventData{font-size:11px;color:#aeb5c1;margin-top:4px;white-space:pre-wrap}.login{position:fixed;inset:0;background:#08090b;display:grid;place-items:center;z-index:50}.loginCard{width:min(430px,92vw);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px}.loginCard input{width:100%;margin:12px 0;background:#0b0d10;border:1px solid var(--line);color:#fff;padding:11px;border-radius:8px}.errorBar{display:none;background:#33191b;color:#ffd0d0;border:1px solid #6f3034;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px}.stack{display:grid;gap:14px}@media(max-width:1050px){.metrics{grid-template-columns:repeat(3,1fr)}.campaignGrid{grid-template-columns:1fr 1fr}}@media(max-width:700px){.shell{padding:12px}.top{align-items:flex-start;flex-direction:column}.metrics{grid-template-columns:repeat(2,1fr)}.campaignGrid{grid-template-columns:1fr}.modal .grid2,.detailGrid{grid-template-columns:1fr}.actions{width:100%}.btn{flex:1}.tableWrap{max-height:50vh}}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}.shell{max-width:1500px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:18px}.brand{display:flex;gap:12px;align-items:center}.mark{width:40px;height:40px;border:2px solid var(--accent);display:grid;place-items:center;font-weight:900;color:var(--accent)}h1{font-size:20px;margin:0}.sub{font-size:12px;color:var(--muted);margin-top:3px}.actions,.rowBtns{display:flex;gap:8px;flex-wrap:wrap}.btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:8px;cursor:pointer}.btn:hover{border-color:#596270}.btn.primary{background:var(--accent);border-color:var(--accent);color:#0a0b06;font-weight:850}.btn.danger{background:#2a1618;border-color:#703238;color:#ffd0d0}.btn.good{background:#11271a;border-color:#2f6541;color:#c5ffd7}.btn.small{padding:6px 9px;font-size:12px}.status{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px}.dot{width:9px;height:9px;border-radius:50%;background:#6c7380}.dot.on{background:var(--good);box-shadow:0 0 0 3px rgba(88,223,141,.12)}.dot.off{background:var(--danger)}.modeBar{display:flex;gap:8px;margin-bottom:14px}.modeBtn{flex:1;padding:12px;font-weight:800;text-align:center;border-radius:9px}.modeBtn.active{background:var(--accent);border-color:var(--accent);color:#0a0b06}.metrics{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin-bottom:16px}.metric,.panel{background:var(--panel);border:1px solid var(--line);border-radius:11px}.metric{padding:14px}.metric .n{font-size:25px;font-weight:850}.metric .l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}.sectionTitle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line)}.sectionTitle h2{font-size:15px;margin:0}.runnerBadge{font-size:12px;color:var(--muted)}.campaignGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px}.campaign{border:1px solid #252b34;background:#0e1115;border-radius:9px;padding:12px}.campaignHead{display:flex;justify-content:space-between;gap:10px}.campaignName{font-weight:800}.campaignMeta{font-size:12px;color:var(--muted);line-height:1.5;margin-top:5px}.progress{height:7px;background:#222830;border-radius:999px;overflow:hidden;margin:10px 0}.progress>span{display:block;height:100%;background:var(--accent)}.pill{display:inline-flex;padding:4px 7px;border:1px solid #343b47;border-radius:999px;font-size:10px;white-space:nowrap}.pill.A{color:#d9ffba;border-color:#4d7133}.pill.B{color:#e7f3ff;border-color:#496078}.pill.RUNNING{color:#c5ffd7;border-color:#315f43}.pill.READY{color:#ffe1a6;border-color:#7b6030}.pill.FAILED,.pill.ERROR{color:#ffc4c4;border-color:#70373b}.pill.COMPLETED{color:#c5ffd7;border-color:#315f43}.toolbar{display:flex;gap:9px;align-items:center;padding:12px;border-bottom:1px solid var(--line);flex-wrap:wrap}.toolbar input,.toolbar select,.modal input,.modal textarea,.modal select{background:#0d0f13;border:1px solid var(--line);color:var(--text);padding:9px 10px;border-radius:8px;outline:none}.toolbar input{min-width:260px;flex:1}.tableWrap{overflow:auto;max-height:54vh}table{width:100%;border-collapse:collapse;min-width:1020px}th,td{padding:11px 12px;border-bottom:1px solid #22262e;font-size:13px;text-align:left}th{position:sticky;top:0;background:#11141a;color:#aeb5c1;text-transform:uppercase;font-size:10px;letter-spacing:.06em}.business{font-weight:750}.muted{color:var(--muted)}.right{text-align:right}.empty{text-align:center;padding:30px;color:var(--muted)}.overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-start;justify-content:center;padding:5vh 16px;z-index:20;overflow:auto}.overlay.open{display:flex}.modal{width:min(760px,100%);background:#101319;border:1px solid #323845;border-radius:12px;padding:18px}.modal h2{margin:0 0 13px;font-size:18px}.modal label{display:block;font-size:10px;color:var(--muted);margin:10px 0 5px;text-transform:uppercase;letter-spacing:.06em}.modal input,.modal textarea,.modal select{width:100%}.modal textarea{min-height:90px;resize:vertical}.modal .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.modalFooter{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.detailGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;margin:12px 0}.detailItem{padding:7px 0;border-bottom:1px solid #222832}.detailItem b{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;margin-bottom:3px}.timeline{border-top:1px solid var(--line);padding-top:12px;max-height:300px;overflow:auto}.event{padding:8px 0;border-bottom:1px solid #21252d}.eventHead{display:flex;justify-content:space-between;font-size:12px}.eventData{font-size:11px;color:#aeb5c1;margin-top:4px;white-space:pre-wrap}.login{position:fixed;inset:0;background:#08090b;display:grid;place-items:center;z-index:50}.loginCard{width:min(430px,92vw);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px}.loginCard input{width:100%;margin:12px 0;background:#0b0d10;border:1px solid var(--line);color:#fff;padding:11px;border-radius:8px}.errorBar{display:none;background:#33191b;color:#ffd0d0;border:1px solid #6f3034;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px}.stack{display:grid;gap:14px}.qItem{display:grid;grid-template-columns:1fr 70px 110px 110px 34px;gap:6px;margin-bottom:6px;align-items:center}.qSend{display:grid;grid-template-columns:2fr 1fr auto;gap:8px;align-items:center}.qStats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0}@media(max-width:700px){.qItem{grid-template-columns:1fr 1fr}.qItem .qiDesc{grid-column:1/-1}.qSend,.qStats{grid-template-columns:1fr 1fr}}@media(max-width:1050px){.metrics{grid-template-columns:repeat(3,1fr)}.campaignGrid{grid-template-columns:1fr 1fr}}@media(max-width:700px){.shell{padding:12px}.top{align-items:flex-start;flex-direction:column}.metrics{grid-template-columns:repeat(2,1fr)}.campaignGrid{grid-template-columns:1fr}.modal .grid2,.detailGrid{grid-template-columns:1fr}.actions{width:100%}.btn{flex:1}.tableWrap{max-height:50vh}}
   </style>
 </head>
 <body>
 <div class="login" id="login"><div class="loginCard"><h2>Trenches Command Center</h2><p class="muted">Enter the admin key created during the original deployment.</p><input id="keyInput" type="password" autocomplete="current-password" placeholder="Admin key"/><button class="btn primary" onclick="login()">Sign in</button><div class="errorBar" id="loginError"></div></div></div>
 <div class="shell">
   <div class="top"><div class="brand"><div class="mark">TG</div><div><h1>Trenches Command Center</h1><div class="sub">Phase 4A v22 \xB7 Website Gap Gate + Manual Lead Control</div></div></div><div class="actions"><button class="btn" onclick="refreshAll()">Refresh</button><button class="btn danger" id="globalToggle" onclick="toggleGlobal()">Pause all automation</button><button class="btn primary" onclick="openCampaign()">+ Prospecting campaign</button></div></div>
+  <div class="modeBar"><button class="btn modeBtn" id="modeWebsiteBtn" onclick="setMode('WEBSITE')">Website Business</button><button class="btn modeBtn" id="modeConciergeBtn" onclick="setMode('CONCIERGE')">AI Concierge Business</button></div>
   <div class="errorBar" id="errorBar"></div>
   <div class="metrics"><div class="metric"><div class="n" id="mTotal">\u2014</div><div class="l">Total leads</div></div><div class="metric"><div class="n" id="mQualified">\u2014</div><div class="l">Qualified</div></div><div class="metric"><div class="n" id="mPriority">\u2014</div><div class="l">Priority A/B</div></div><div class="metric"><div class="n" id="mCampaigns">\u2014</div><div class="l">Campaigns</div></div><div class="metric"><div class="n" id="mHuman">\u2014</div><div class="l">Human review</div></div><div class="metric"><div class="n" id="mWon">\u2014</div><div class="l">Customers</div></div></div>
 
   <div class="stack">
-    <section class="panel"><div class="sectionTitle"><div><h2>Operator Dashboard <span class="pill READY">PHASE 5</span></h2><div class="sub">Your highest-value next actions. Uses existing Command Center data only\u2014no new provider calls.</div></div><div class="runnerBadge" id="operatorSummary">Loading priorities\u2026</div></div><div class="campaignGrid" id="operatorGrid"><div class="empty">Loading operator priorities\u2026</div></div></section>
+    <section class="panel"><div class="sectionTitle"><div><h2>Quotes &amp; Estimates</h2><div class="sub">Build a quote, send it to any email, and see every open and view. Clients see it on trenchesgroup.com and in their client portal.</div></div><div class="rowBtns" style="align-items:center"><span class="runnerBadge" id="quoteMailbox">Checking mailbox\u2026</span><span class="runnerBadge" id="quoteSummary">Loading\u2026</span><button class="btn primary" onclick="openQuote(null)">+ New quote</button></div></div><div class="tableWrap" style="max-height:420px"><table style="min-width:1000px"><thead><tr><th>Quote</th><th>Client</th><th>Title</th><th>Total</th><th>Status</th><th>Sent to</th><th>Opens</th><th>Views</th><th>Last viewed</th><th></th></tr></thead><tbody id="quoteRows"></tbody></table><div class="empty" id="quoteEmpty">No quotes yet. Click + New quote to build your first one.</div></div></section>
+    <section class="panel" data-mode="WEBSITE"><div class="sectionTitle"><div><h2>Operator Dashboard <span class="pill READY">PHASE 5</span></h2><div class="sub">Your highest-value next actions. Uses existing Command Center data only\u2014no new provider calls.</div></div><div class="runnerBadge" id="operatorSummary">Loading priorities\u2026</div></div><div class="campaignGrid" id="operatorGrid"><div class="empty">Loading operator priorities\u2026</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Prospect Tracker <span class="pill READY">PHASE 7</span></h2><div class="sub">Export your Command Center prospects for a client-ready tracker. Includes opportunity, pitch hook, concept link, and current stage\u2014no Airtable account required.</div></div><button class="btn primary" onclick="downloadProspectTracker()">Download tracker CSV</button></div><div style="padding:12px 14px" class="sub">Use the CSV in Excel, Google Sheets, or import it into Airtable later if you choose. Your source of truth remains Command Center.</div></section>
-    <section class="panel"><div class="sectionTitle"><div><h2>Client Launch Board <span class="pill READY">PHASE 8</span></h2><div class="sub">The handoff from live demo to customer. Review the next commercial or onboarding action without adding another system.</div></div><div class="runnerBadge" id="launchSummary">Loading launch work\u2026</div></div><div class="campaignGrid" id="launchGrid"><div class="empty">Loading client launch work\u2026</div></div></section>
+    <section class="panel" data-mode="WEBSITE"><div class="sectionTitle"><div><h2>Client Launch Board <span class="pill READY">PHASE 8</span></h2><div class="sub">The handoff from live demo to customer. Review the next commercial or onboarding action without adding another system.</div></div><div class="runnerBadge" id="launchSummary">Loading launch work\u2026</div></div><div class="campaignGrid" id="launchGrid"><div class="empty">Loading client launch work\u2026</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Prospecting campaigns</h2><div class="sub">Fast discovery \u2192 deterministic filtering \u2192 one-business enrichment. One bad candidate cannot kill a campaign.</div></div><div class="rowBtns"><button class="btn small" id="archiveToggle" onclick="toggleArchived()">Show archived</button><div class="runnerBadge"><span class="dot" id="runnerDot"></span><span id="runnerText">Runner unknown</span></div></div></div><div class="campaignGrid" id="campaignGrid"><div class="empty">No campaigns yet.</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Prospector Job Queue <span class="pill READY">AUTO</span></h2><div class="sub">Rotating city \xD7 category grid. A capped number of due jobs get promoted into real prospecting campaigns automatically on the 2-minute scheduler tick \u2014 this does not bypass the daily cap or backlog limit below.</div></div><div class="rowBtns"><span class="runnerBadge" id="prospectorJobsSummary">Loading\u2026</span><button class="btn small primary" onclick="runProspectorJobsNow()">Run due jobs now</button></div></div><div class="tableWrap" style="max-height:320px"><table style="min-width:900px"><thead><tr><th>City</th><th>Category</th><th>Radius</th><th>Target</th><th>Cadence</th><th>Last run</th><th>Status</th><th></th></tr></thead><tbody id="prospectorJobRows"></tbody></table><div class="empty" id="prospectorJobEmpty">No prospector jobs seeded yet.</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Outreach Lab <span class="pill READY">TEST MODE</span></h2><div class="sub">Twilio plumbing only. Only numbers on the explicit test allowlist can receive SMS. Live prospect outreach is hard-locked.</div></div><div class="runnerBadge"><span class="dot" id="twilioDot"></span><span id="twilioText">Twilio status unknown</span></div></div><div class="toolbar"><input id="oPhone" placeholder="Your test phone, e.g. +16155551234"/><input id="oLabel" placeholder="Label, e.g. Connor iPhone"/><button class="btn" onclick="addTestNumber()">Add test number</button></div><div class="toolbar"><input id="oMessage" value="Trenches test: reply YES, PRICE, CALL ME, or STOP."/><button class="btn primary" onclick="sendTestSms()">Send test SMS</button></div><div style="padding:0 12px 10px"><div class="sub" id="outreachWebhookText"></div><div id="allowlistRows" class="rowBtns" style="margin-top:9px"></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:820px"><thead><tr><th>Time</th><th>Direction</th><th>Phone</th><th>Message</th><th>Intent</th><th>Status</th></tr></thead><tbody id="messageRows"></tbody></table><div class="empty" id="messageEmpty">No outreach test messages yet.</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Autonomous Outreach Orchestrator <span class="pill READY">EMAIL + SMS FOUNDATION</span></h2><div class="sub">Google Workspace email can run autonomously after one-time OAuth setup. Gmail replies feed the same conversation brain. SMS stays live-locked until Twilio approval; voice/social adapters remain disabled.</div></div><div class="runnerBadge"><span class="dot" id="gmailDot"></span><span id="gmailText">Gmail status unknown</span></div></div>
       <div class="toolbar"><input id="gClientId" placeholder="Smartlead sending mailbox (e.g. connor.trenches@discovertrenchesgroup.com)"/><button class="btn primary" onclick="saveSmartleadMailboxUi()">Save Smartlead mailbox</button></div>
       <div style="padding:0 12px 10px"><div class="sub" id="gmailCallback"></div></div>
-      <div class="toolbar"><span class="dot" id="liveReplyDot"></span><span class="sub" id="liveReplyText"></span><button class="btn primary" onclick="connectLiveReplyUi()">Connect live-reply mailbox</button></div>
+      <div class="toolbar"><span class="dot on"></span><span class="sub" id="replyModelText">Replies are human-in-the-loop: answer leads directly in Smartlead. Genuine replies (not bounces/autoresponders) email a heads-up here.</span></div>
       <div style="padding:0 12px 10px"><div class="sub">Live conversational replies (price/skepticism/etc. answers) send through this mailbox via Gmail API, separate from Smartlead's bulk campaign sends. Sign in as connor.trenches@discovertrenchesgroup.com when prompted.</div></div>
       <div class="toolbar"><input id="emailFromName" placeholder="From name"/><input id="emailPostal" placeholder="Business postal address (required before live email)"/><input id="emailDailyCap" type="number" min="1" max="100" value="10" style="min-width:120px;max-width:150px"/><select id="emailReplyMode"><option value="DRAFT_ONLY">Replies: Draft only</option><option value="AUTO">Replies: Auto-send</option></select><button class="btn" onclick="saveEmailSettingsUi()">Save settings</button></div>
       <div class="toolbar"><button class="btn" id="emailLiveToggle" onclick="toggleEmailLiveUi()">Enable live email</button><button class="btn" id="emailAutoToggle" onclick="toggleEmailAutomationUi()">Enable autonomous sequences</button><button class="btn" onclick="runOrchestratorUi()">Run orchestrator now</button><div class="sub" id="emailModeText"></div></div>
+      <div class="toolbar"><button class="btn" id="websiteTrackToggle" onclick="toggleWebsiteTrackUi()">Website outreach</button><button class="btn" id="conciergeTrackToggle" onclick="toggleConciergeTrackUi()">Concierge outreach</button><div class="sub">Independent per-pitch switches \u2014 each can run without the other, on top of the live-email/automation switches above.</div></div>
       <div class="toolbar"><input id="emailTestAddress" placeholder="Test email address"/><input id="emailTestLabel" placeholder="Label"/><button class="btn" onclick="addEmailTestAddressUi()">Allowlist test email</button><select id="emailTestLead" style="min-width:280px;flex:1"><option value="">Optional lead to simulate</option></select></div>
       <div class="toolbar"><input id="emailTestSubject" value="quick question about your business"/><input id="emailTestBody" value="Hey \u2014 Trenches OS email test. Reply YES, PRICE, WHAT'S THE CATCH, or UNSUBSCRIBE."/><button class="btn primary" onclick="sendEmailTestUi()">Send test email</button></div>
       <div style="padding:0 12px 10px"><div id="emailAllowlistRows" class="rowBtns"></div></div>
       <div class="sectionTitle"><div><h2>Email activity</h2><div class="sub">Inbound replies are polled automatically and mapped back to the lead/thread.</div></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:980px"><thead><tr><th>Time</th><th>Direction</th><th>Business</th><th>Email</th><th>Subject</th><th>Intent</th><th>Outcome</th><th>Status</th></tr></thead><tbody id="emailMessageRows"></tbody></table><div class="empty" id="emailMessageEmpty">No email activity yet.</div></div>
       <div class="sectionTitle"><div><h2>Autonomous sequences</h2><div class="sub">Priority A/B + VALID + verified email. Daily cap and suppression rules apply.</div></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:900px"><thead><tr><th>Business</th><th>Priority</th><th>Strategy</th><th>Status</th><th>Step</th><th>Next action</th></tr></thead><tbody id="sequenceRows"></tbody></table><div class="empty" id="sequenceEmpty">No autonomous email sequences yet.</div></div>
     </section>
-    <section class="panel"><div class="sectionTitle"><div><h2>Conversation Test Bench <span class="pill READY">DRAFT ONLY</span></h2><div class="sub">No real prospect messages are sent. Normal replies keep the conversation moving toward a free live-preview demo; opt-outs still stop immediately.</div></div><div class="runnerBadge">Live auto-replies locked</div></div><div class="toolbar"><select id="simLead" style="min-width:320px;flex:1"></select><input id="simMessage" value="Yes, what is this about?" placeholder="Simulated prospect reply"/><button class="btn primary" onclick="simulateConversation()">Simulate reply</button></div><div class="toolbar"><button class="btn" onclick="makeOpenerDraft()">Draft opener</button><button class="btn" onclick="scheduleFollowupsUi()">Schedule 24h / 72h / 7d follow-ups</button><button class="btn" onclick="runFollowupsUi()">Draft due follow-ups now</button><div class="sub" id="simResult" style="flex:1"></div></div><div class="sectionTitle"><div><h2>Reply drafts</h2><div class="sub">Human-reviewable drafts only. Approving a draft does not send SMS in Phase 3B.</div></div></div><div class="tableWrap" style="max-height:300px"><table style="min-width:1000px"><thead><tr><th>Time</th><th>Business</th><th>Intent</th><th>Draft</th><th>Confidence</th><th>Status</th><th>Actions</th></tr></thead><tbody id="draftRows"></tbody></table><div class="empty" id="draftEmpty">No conversation drafts yet.</div></div><div class="sectionTitle"><div><h2>Follow-up queue</h2><div class="sub">The scheduler creates drafts when follow-ups become due; it does not auto-send.</div></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:900px"><thead><tr><th>Business</th><th>Step</th><th>Due</th><th>Status</th><th>Message</th></tr></thead><tbody id="followupRows"></tbody></table><div class="empty" id="followupEmpty">No follow-ups scheduled.</div></div><div class="sectionTitle"><div><h2>Human escalation</h2><div class="sub">CALL ME and angry/sensitive replies are surfaced here. Normal questions and unknown replies stay conversational instead of failing.</div></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:900px"><thead><tr><th>Time</th><th>Business</th><th>Priority</th><th>Reason</th><th>Recommended action</th><th>Status</th><th></th></tr></thead><tbody id="escalationRows"></tbody></table><div class="empty" id="escalationEmpty">No escalations.</div></div></section>
-    <section class="panel"><div class="sectionTitle"><div><h2>Demo Fulfillment <span class="pill READY">PHASE 4</span></h2><div class="sub">Command Center balances website builds across available providers, applies deterministic and independent QA, then waits for your approval before delivery.</div></div><div class="runnerBadge"><span class="dot on"></span><span id="demoModeText">Loading demo automation\u2026</span></div></div><div class="toolbar"><select id="demoLead" style="min-width:320px;flex:1"></select><button class="btn primary" onclick="queueDemoUi()">Queue demo build</button><button class="btn" onclick="configureDemoQualityUi()">Quality controls</button><button class="btn" id="demoAutoToggle" onclick="toggleDemoAutomation()">Toggle auto build</button><button class="btn" id="demoDeliverToggle" onclick="toggleDemoDelivery()">Toggle auto delivery</button></div><div class="toolbar"><select id="staticDemoLead" style="min-width:320px;flex:1"><option value="">Choose any active lead for a no-cost sample\u2026</option></select><button class="btn good" onclick="createStaticDemoUi()">Create no-cost sample</button><div class="sub">Uses a static, clearly labeled concept\u2014no AI call or email delivery.</div></div><div class="tableWrap" style="max-height:320px"><table style="min-width:1100px"><thead><tr><th>Business</th><th>Job / Builder</th><th>State</th><th>QA</th><th>Views</th><th>CTA</th><th>Preview</th><th>Delivery</th></tr></thead><tbody id="demoRows"></tbody></table><div class="empty" id="demoEmpty">No demos yet.</div></div></section>
+    <section class="panel" data-mode="WEBSITE"><div class="sectionTitle"><div><h2>Conversation Test Bench <span class="pill READY">DRAFT ONLY</span></h2><div class="sub">No real prospect messages are sent. Normal replies keep the conversation moving toward a free live-preview demo; opt-outs still stop immediately.</div></div><div class="runnerBadge">Live auto-replies locked</div></div><div class="toolbar"><select id="simLead" style="min-width:320px;flex:1"></select><input id="simMessage" value="Yes, what is this about?" placeholder="Simulated prospect reply"/><button class="btn primary" onclick="simulateConversation()">Simulate reply</button></div><div class="toolbar"><button class="btn" onclick="makeOpenerDraft()">Draft opener</button><button class="btn" onclick="scheduleFollowupsUi()">Schedule 24h / 72h / 7d follow-ups</button><button class="btn" onclick="runFollowupsUi()">Draft due follow-ups now</button><div class="sub" id="simResult" style="flex:1"></div></div><div class="sectionTitle"><div><h2>Reply drafts</h2><div class="sub">Human-reviewable drafts only. Approving a draft does not send SMS in Phase 3B.</div></div></div><div class="tableWrap" style="max-height:300px"><table style="min-width:1000px"><thead><tr><th>Time</th><th>Business</th><th>Intent</th><th>Draft</th><th>Confidence</th><th>Status</th><th>Actions</th></tr></thead><tbody id="draftRows"></tbody></table><div class="empty" id="draftEmpty">No conversation drafts yet.</div></div><div class="sectionTitle"><div><h2>Follow-up queue</h2><div class="sub">The scheduler creates drafts when follow-ups become due; it does not auto-send.</div></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:900px"><thead><tr><th>Business</th><th>Step</th><th>Due</th><th>Status</th><th>Message</th></tr></thead><tbody id="followupRows"></tbody></table><div class="empty" id="followupEmpty">No follow-ups scheduled.</div></div><div class="sectionTitle"><div><h2>Human escalation</h2><div class="sub">CALL ME and angry/sensitive replies are surfaced here. Normal questions and unknown replies stay conversational instead of failing.</div></div></div><div class="tableWrap" style="max-height:260px"><table style="min-width:900px"><thead><tr><th>Time</th><th>Business</th><th>Priority</th><th>Reason</th><th>Recommended action</th><th>Status</th><th></th></tr></thead><tbody id="escalationRows"></tbody></table><div class="empty" id="escalationEmpty">No escalations.</div></div></section>
+    <section class="panel" data-mode="WEBSITE"><div class="sectionTitle"><div><h2>Demo Fulfillment <span class="pill READY">PHASE 4</span></h2><div class="sub">Command Center balances website builds across available providers, applies deterministic and independent QA, then waits for your approval before delivery.</div></div><div class="runnerBadge"><span class="dot on"></span><span id="demoModeText">Loading demo automation\u2026</span></div></div><div class="toolbar"><select id="demoLead" style="min-width:320px;flex:1"></select><button class="btn primary" onclick="queueDemoUi()">Queue demo build</button><button class="btn" onclick="configureDemoQualityUi()">Quality controls</button><button class="btn" id="demoAutoToggle" onclick="toggleDemoAutomation()">Toggle auto build</button><button class="btn" id="demoDeliverToggle" onclick="toggleDemoDelivery()">Toggle auto delivery</button></div><div class="toolbar"><select id="staticDemoLead" style="min-width:320px;flex:1"><option value="">Choose any active lead for a no-cost sample\u2026</option></select><button class="btn good" onclick="createStaticDemoUi()">Create no-cost sample</button><div class="sub">Uses a static, clearly labeled concept\u2014no AI call or email delivery.</div></div><div class="tableWrap" style="max-height:320px"><table style="min-width:1100px"><thead><tr><th>Business</th><th>Job / Builder</th><th>State</th><th>QA</th><th>Views</th><th>CTA</th><th>Preview</th><th>Delivery</th></tr></thead><tbody id="demoRows"></tbody></table><div class="empty" id="demoEmpty">No demos yet.</div></div></section>
     <section class="panel"><div class="sectionTitle"><div><h2>Lead pipeline</h2><div class="sub" id="systemText">Loading system status\u2026</div></div><div class="rowBtns"><button class="btn" onclick="reAuditWebsiteGapsUi()">Re-audit website gaps</button><button class="btn" onclick="openImport()">Manual research import</button></div></div><div class="toolbar"><input id="search" placeholder="Search business, city, phone, email" oninput="debouncedLoad()"/><select id="stateFilter" onchange="loadLeads()"><option value="">All states</option><option>QUALIFIED</option><option>HUMAN_REVIEW</option><option>DISQUALIFIED</option><option>RESEARCHING</option><option>QUALIFYING</option></select><select id="priorityFilter" onchange="loadLeads()"><option value="">All priorities</option><option>A</option><option>B</option><option>C</option><option>PASS</option></select></div><div class="tableWrap"><table><thead><tr><th>Business</th><th>Location</th><th>Industry</th><th>Gap</th><th>Score</th><th>Priority</th><th>State</th><th>Phone</th><th>Updated</th><th></th></tr></thead><tbody id="leadRows"></tbody></table><div class="empty" id="leadEmpty">No leads yet.</div></div></section>
   </div>
 </div>
@@ -253,28 +294,33 @@ if(adminKey){document.getElementById('login').style.display='none';refreshAll().
 
 <div class="overlay" id="campaignDetailOverlay" onclick="overlayClose(event,'campaignDetailOverlay')"><div class="modal" id="campaignDetail"></div></div>
 <div class="overlay" id="leadDetailOverlay" onclick="overlayClose(event,'leadDetailOverlay')"><div class="modal" id="leadDetail"></div></div>
+<div class="overlay" id="quoteOverlay" onclick="overlayClose(event,'quoteOverlay')"><div class="modal" id="quoteModal" style="width:min(900px,100%)"></div></div>
 <div class="overlay" id="importOverlay" onclick="overlayClose(event,'importOverlay')"><div class="modal"><h2>Manual researched prospect import</h2><div class="sub">Fallback/testing only. Native campaigns should normally populate leads automatically.</div><label>JSON batch</label><textarea id="importJson" style="min-height:310px;font-family:ui-monospace,Consolas,monospace;font-size:12px"></textarea><div class="modalFooter"><button class="btn" onclick="loadSampleImport()">Load sample</button><button class="btn" onclick="closeOverlay('importOverlay')">Cancel</button><button class="btn primary" onclick="importProspects()">Validate & import</button></div></div></div>
 <script>
 let adminKey=sessionStorage.getItem('trenches_admin_key')||'';let globalPaused=false;let timer=null;let showArchived=false;
+let businessMode=(function(){try{return localStorage.getItem('trenches_mode')==='CONCIERGE'?'CONCIERGE':'WEBSITE'}catch(e){return 'WEBSITE'}})();
+function setMode(mode){businessMode=mode;try{localStorage.setItem('trenches_mode',mode)}catch(e){}applyModeVisibility();refreshAll().catch(()=>{})}
+function applyModeVisibility(){document.querySelectorAll('[data-mode]').forEach(el=>{el.style.display=el.getAttribute('data-mode')===businessMode?'':'none'});const wb=document.getElementById('modeWebsiteBtn'),cb=document.getElementById('modeConciergeBtn');if(wb)wb.className='btn modeBtn'+(businessMode==='WEBSITE'?' active':'');if(cb)cb.className='btn modeBtn'+(businessMode==='CONCIERGE'?' active':'')}
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 async function api(path,opts={}){const h=new Headers(opts.headers||{});h.set('Authorization','Bearer '+adminKey);if(opts.body&&!h.has('Content-Type'))h.set('Content-Type','application/json');const r=await fetch(path,{...opts,headers:h});let b={};try{b=await r.json()}catch{}if(r.status===401){logout();throw new Error('Admin key rejected.')}if(!r.ok)throw new Error(b?.error?.message||('Request failed: '+r.status));return b}
 async function downloadProspectTracker(){try{const r=await fetch('/api/tracker/export.csv',{headers:{Authorization:'Bearer '+adminKey}});if(r.status===401){logout();throw new Error('Admin key rejected.')}if(!r.ok)throw new Error('Tracker export failed: '+r.status);const blob=await r.blob(),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='trenches-prospect-tracker.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),500)}catch(e){showError(e)}}
 function showError(e){const b=document.getElementById('errorBar');b.textContent=e instanceof Error?e.message:String(e);b.style.display='block';setTimeout(()=>b.style.display='none',9000)}
-async function login(){const k=document.getElementById('keyInput').value.trim();if(!k)return;adminKey=k;try{await api('/api/system/status');sessionStorage.setItem('trenches_admin_key',k);document.getElementById('login').style.display='none';await refreshAll()}catch(e){adminKey='';document.getElementById('loginError').textContent=e.message;document.getElementById('loginError').style.display='block'}}function logout(){sessionStorage.removeItem('trenches_admin_key');adminKey='';document.getElementById('login').style.display='grid'}
-async function refreshAll(){try{await Promise.all([loadDashboard(),loadSystem(),loadRunner(),loadCampaigns(),loadProspectorJobs(),loadOutreach(),loadEmailOutreach(),loadConversation(),loadDemos(),loadLeads(),loadOperatorDesk(),loadLaunchBoard()])}catch(e){showError(e)}}
+async function login(){const k=document.getElementById('keyInput').value.trim();if(!k)return;adminKey=k;try{await api('/api/system/status');sessionStorage.setItem('trenches_admin_key',k);document.getElementById('login').style.display='none';await refreshAll();applyDeepLink()}catch(e){adminKey='';document.getElementById('loginError').textContent=e.message;document.getElementById('loginError').style.display='block'}}function logout(){sessionStorage.removeItem('trenches_admin_key');adminKey='';document.getElementById('login').style.display='grid'}
+function applyDeepLink(){try{const p=new URLSearchParams(location.search),leadId=p.get('leadId');if(leadId)openLead(encodeURIComponent(leadId))}catch(e){}}
+async function refreshAll(){try{await Promise.all([loadDashboard(),loadSystem(),loadRunner(),loadCampaigns(),loadProspectorJobs(),loadOutreach(),loadEmailOutreach(),loadConversation(),loadDemos(),loadLeads(),loadOperatorDesk(),loadLaunchBoard(),loadQuotes(),loadQuoteMailbox()])}catch(e){showError(e)}}
 async function loadDashboard(){const d=await api('/api/dashboard'),c=d.counts||{};document.getElementById('mTotal').textContent=d.total??0;document.getElementById('mQualified').textContent=(c.QUALIFIED||0)+(c.OUTREACH_READY||0);document.getElementById('mPriority').textContent=(d.priorityCounts?.A||0)+(d.priorityCounts?.B||0);document.getElementById('mCampaigns').textContent=Object.values(d.campaigns||{}).reduce((a,b)=>a+Number(b||0),0);document.getElementById('mHuman').textContent=d.humanRequired||0;document.getElementById('mWon').textContent=(c.WON||0)+(c.ACTIVE_CUSTOMER||0)}
 async function loadOperatorDesk(){const [leadData,demoData]=await Promise.all([api('/api/leads?limit=200'),api('/api/demos/status')]),sites=new Map((demoData.sites||[]).map(x=>[x.lead_id,x])),jobs=new Map((demoData.jobs||[]).map(x=>[x.lead_id,x])),leads=(leadData.leads||[]).filter(x=>!['DISQUALIFIED','OPTED_OUT','DUPLICATE','LOST','ACTIVE_CUSTOMER'].includes(x.current_state)).sort((a,b)=>Number(b.opportunity_score||0)-Number(a.opportunity_score||0)).slice(0,6),grid=document.getElementById('operatorGrid');grid.innerHTML='';let ready=0,review=0;for(const l of leads){const site=sites.get(l.id),job=jobs.get(l.id),preview=site?'<a class="btn small good" target="_blank" rel="noopener" href="'+esc((demoData.publicBaseUrl||'')+'/demo/'+site.slug)+'">See new website</a><a class="btn small" target="_blank" rel="noopener" href="'+esc((demoData.publicBaseUrl||'')+'/demo/'+site.slug+'/quote')+'">Try quote flow</a>':'';const action=site?'Review preview':(l.current_state==='HUMAN_REVIEW'?'Resolve review':job?(job.status==='FAILED'?'Fix build path':'Build in progress'):(l.current_state==='DEMO_APPROVED'?'Queue demo':'Advance outreach'));if(site)ready++;if(l.current_state==='HUMAN_REVIEW'||job?.status==='FAILED')review++;grid.insertAdjacentHTML('beforeend','<div class="campaign"><div class="campaignHead"><div><div class="campaignName">'+esc(l.business_name)+'</div><div class="campaignMeta">'+esc(l.city)+', '+esc(l.state)+' \xB7 '+esc(l.industry)+'</div></div><span class="pill '+esc(l.priority||'READY')+'">'+esc(l.priority||'\u2014')+'</span></div><div class="campaignMeta" style="margin-top:10px">'+esc(l.website||'No website recorded')+'</div><div class="campaignMeta">Score '+esc(l.opportunity_score??'\u2014')+' \xB7 '+esc(l.current_state)+'</div><div class="campaignMeta" style="color:var(--accent);margin-top:7px">Next: '+esc(action)+'</div><div class="rowBtns" style="margin-top:10px"><button class="btn small" data-operator-lead="'+esc(encodeURIComponent(l.id))+'">Open lead</button>'+preview+'</div></div>')}if(!leads.length)grid.innerHTML='<div class="empty">No active priority leads yet. Start a prospecting campaign or review your lead pipeline.</div>';document.getElementById('operatorSummary').textContent=ready+' preview'+(ready===1?'':'s')+' ready \xB7 '+review+' need review';document.querySelectorAll('[data-operator-lead]').forEach(b=>b.addEventListener('click',()=>openLead(b.getAttribute('data-operator-lead'))))}
 async function loadLaunchBoard(){const [leadData,demoData]=await Promise.all([api('/api/leads?limit=200'),api('/api/demos/status')]),sites=new Map((demoData.sites||[]).map(x=>[x.lead_id,x])),commercial=new Set(['DEMO_READY','DEMO_SENT','DEMO_VIEWED','PRICING_VIEWED','CHECKOUT_STARTED','WON','ONBOARDING','LIVE','ACTIVE_CUSTOMER']),leads=(leadData.leads||[]).filter(x=>commercial.has(x.current_state)||sites.has(x.id)).sort((a,b)=>Number(b.opportunity_score||0)-Number(a.opportunity_score||0)).slice(0,9),grid=document.getElementById('launchGrid');grid.innerHTML='';let proposal=0,onboarding=0;for(const l of leads){const site=sites.get(l.id),state=l.current_state,action=['PRICING_VIEWED','CHECKOUT_STARTED'].includes(state)?'Send proposal / close terms':['WON','ONBOARDING'].includes(state)?'Collect onboarding details':state==='LIVE'?'Confirm launch handoff':state==='ACTIVE_CUSTOMER'?'Manage active customer':site?'Approve and send preview':'Advance to a live demo';if(['PRICING_VIEWED','CHECKOUT_STARTED'].includes(state))proposal++;if(['WON','ONBOARDING','LIVE'].includes(state))onboarding++;const preview=site?'<a class="btn small good" target="_blank" rel="noopener" href="'+esc((demoData.publicBaseUrl||'')+'/demo/'+site.slug)+'">Open preview</a>':'';grid.insertAdjacentHTML('beforeend','<div class="campaign"><div class="campaignHead"><div><div class="campaignName">'+esc(l.business_name)+'</div><div class="campaignMeta">'+esc(l.city)+', '+esc(l.state)+'</div></div><span class="pill '+esc(l.priority||'READY')+'">'+esc(l.priority||'\u2014')+'</span></div><div class="campaignMeta" style="margin-top:10px">Stage: <b>'+esc(state)+'</b></div><div class="campaignMeta" style="color:var(--accent);margin-top:7px">Next: '+esc(action)+'</div><div class="rowBtns" style="margin-top:10px"><button class="btn small" data-launch-lead="'+esc(encodeURIComponent(l.id))+'">Open lead</button>'+preview+'</div></div>')}if(!leads.length)grid.innerHTML='<div class="empty">No commercial handoffs yet. A lead will appear here once a preview is ready or the sales process advances.</div>';document.getElementById('launchSummary').textContent=proposal+' proposal'+(proposal===1?'':'s')+' \xB7 '+onboarding+' onboarding';document.querySelectorAll('[data-launch-lead]').forEach(b=>b.addEventListener('click',()=>openLead(b.getAttribute('data-launch-lead'))))}
 async function loadSystem(){const d=await api('/api/system/status');globalPaused=!!d.globalAutomationPaused;document.getElementById('systemText').textContent=globalPaused?'Automation paused':(d.outreachEnabled?'System online \xB7 outreach enabled':'System online \xB7 outreach locked');const b=document.getElementById('globalToggle');b.textContent=globalPaused?'Resume all automation':'Pause all automation';b.className='btn '+(globalPaused?'good':'danger')}
 async function loadRunner(){const d=await api('/api/runner/status');const dot=document.getElementById('runnerDot'),text=document.getElementById('runnerText');dot.className='dot '+(d.online?'on':'off');if(d.online){const r=d.runner||{};let ps='';try{const m=JSON.parse(r.metadata_json||'{}');if(Array.isArray(m.providers))ps=' \xB7 '+m.providers.join('/')}catch{}text.textContent='Orgo runner online'+ps+(r.claude_version?' \xB7 Claude '+r.claude_version:'')}else{text.textContent='Orgo runner offline / sleeping'}}
-async function loadCampaigns(){const d=await api('/api/campaigns'+(showArchived?'?archived=true':'')),g=document.getElementById('campaignGrid');g.innerHTML='';document.getElementById('archiveToggle').textContent=showArchived?'Show active':'Show archived';if(!d.campaigns?.length){g.innerHTML='<div class="empty">'+(showArchived?'No archived campaigns.':'No campaigns yet. Create your first real prospecting campaign.')+'</div>';return}for(const c of d.campaigns){const target=c.requested_count||0,done=c.enriched||0,pct=target?Math.min(100,Math.round(done/target*100)):0,loc=campaignGeo(c);const counts='Enriched '+done+' / '+target+' \xB7 Raw '+(c.raw_discovered||0)+' \xB7 Queued '+(c.queued||0)+' \xB7 Failed '+(c.enrichment_failed||0);const priorities='A '+(c.priority_a||0)+' \xB7 B '+(c.priority_b||0)+' \xB7 C '+(c.priority_c||0)+' \xB7 PASS '+(c.priority_pass||0),providers='Discover '+(c.discovery_provider||'CLAUDE')+' \xB7 Enrich '+(c.enrichment_provider||'CLAUDE')+' \xB7 Fallback '+(Number(c.fallback_enabled)!==0?'ON':'OFF');g.insertAdjacentHTML('beforeend','<div class="campaign"><div class="campaignHead"><div><div class="campaignName">'+esc(c.industry)+'</div><div class="campaignMeta">'+esc(loc)+'</div></div><span class="pill '+esc(c.status)+'">'+esc(c.archived_at?'ARCHIVED':c.status)+'</span></div><div class="progress"><span style="width:'+pct+'%"></span></div><div class="campaignMeta">'+esc(counts)+'</div><div class="campaignMeta">'+esc(priorities)+' \xB7 Filtered '+(c.filtered||0)+' \xB7 Duplicates '+(c.deduped||0)+'</div><div class="campaignMeta">'+esc(providers)+'</div>'+(c.last_error?'<div class="campaignMeta" style="color:#ffbcbc">Last issue: '+esc(c.last_error)+'</div>':'')+'<div class="rowBtns" style="margin-top:10px"><button class="btn small" data-campaign="'+esc(encodeURIComponent(c.id))+'">Open</button>'+(!c.archived_at&&(c.status==='RUNNING'||c.status==='READY')?'<button class="btn small" data-pause="'+esc(encodeURIComponent(c.id))+'">Pause</button>':'')+(!c.archived_at&&c.status==='PAUSED'?'<button class="btn small good" data-resume="'+esc(encodeURIComponent(c.id))+'">Resume</button>':'')+(c.archived_at?'<button class="btn small good" data-restore="'+esc(encodeURIComponent(c.id))+'">Restore</button>':'<button class="btn small" data-archive="'+esc(encodeURIComponent(c.id))+'">Archive</button>')+'</div></div>')}document.querySelectorAll('[data-campaign]').forEach(b=>b.addEventListener('click',()=>openCampaignDetail(b.getAttribute('data-campaign'))));document.querySelectorAll('[data-pause]').forEach(b=>b.addEventListener('click',()=>campaignAction(b.getAttribute('data-pause'),'pause')));document.querySelectorAll('[data-resume]').forEach(b=>b.addEventListener('click',()=>campaignAction(b.getAttribute('data-resume'),'resume')));document.querySelectorAll('[data-archive]').forEach(b=>b.addEventListener('click',()=>archiveAction(b.getAttribute('data-archive'),'archive')));document.querySelectorAll('[data-restore]').forEach(b=>b.addEventListener('click',()=>archiveAction(b.getAttribute('data-restore'),'restore')))}
+async function loadCampaigns(){const qp=new URLSearchParams();if(showArchived)qp.set('archived','true');qp.set('offering',businessMode);const d=await api('/api/campaigns?'+qp.toString()),g=document.getElementById('campaignGrid');g.innerHTML='';document.getElementById('archiveToggle').textContent=showArchived?'Show active':'Show archived';if(!d.campaigns?.length){g.innerHTML='<div class="empty">'+(showArchived?'No archived campaigns.':'No campaigns yet. Create your first real prospecting campaign.')+'</div>';return}for(const c of d.campaigns){const target=c.requested_count||0,done=c.enriched||0,pct=target?Math.min(100,Math.round(done/target*100)):0,loc=campaignGeo(c);const counts='Enriched '+done+' / '+target+' \xB7 Raw '+(c.raw_discovered||0)+' \xB7 Queued '+(c.queued||0)+' \xB7 Failed '+(c.enrichment_failed||0);const priorities='A '+(c.priority_a||0)+' \xB7 B '+(c.priority_b||0)+' \xB7 C '+(c.priority_c||0)+' \xB7 PASS '+(c.priority_pass||0),providers='Discover '+(c.discovery_provider||'CLAUDE')+' \xB7 Enrich '+(c.enrichment_provider||'CLAUDE')+' \xB7 Fallback '+(Number(c.fallback_enabled)!==0?'ON':'OFF');g.insertAdjacentHTML('beforeend','<div class="campaign"><div class="campaignHead"><div><div class="campaignName">'+esc(c.industry)+'</div><div class="campaignMeta">'+esc(loc)+'</div></div><span class="pill '+esc(c.status)+'">'+esc(c.archived_at?'ARCHIVED':c.status)+'</span></div><div class="progress"><span style="width:'+pct+'%"></span></div><div class="campaignMeta">'+esc(counts)+'</div><div class="campaignMeta">'+esc(priorities)+' \xB7 Filtered '+(c.filtered||0)+' \xB7 Duplicates '+(c.deduped||0)+'</div><div class="campaignMeta">'+esc(providers)+'</div>'+(c.last_error?'<div class="campaignMeta" style="color:#ffbcbc">Last issue: '+esc(c.last_error)+'</div>':'')+'<div class="rowBtns" style="margin-top:10px"><button class="btn small" data-campaign="'+esc(encodeURIComponent(c.id))+'">Open</button>'+(!c.archived_at&&(c.status==='RUNNING'||c.status==='READY')?'<button class="btn small" data-pause="'+esc(encodeURIComponent(c.id))+'">Pause</button>':'')+(!c.archived_at&&c.status==='PAUSED'?'<button class="btn small good" data-resume="'+esc(encodeURIComponent(c.id))+'">Resume</button>':'')+(c.archived_at?'<button class="btn small good" data-restore="'+esc(encodeURIComponent(c.id))+'">Restore</button>':'<button class="btn small" data-archive="'+esc(encodeURIComponent(c.id))+'">Archive</button>')+'</div></div>')}document.querySelectorAll('[data-campaign]').forEach(b=>b.addEventListener('click',()=>openCampaignDetail(b.getAttribute('data-campaign'))));document.querySelectorAll('[data-pause]').forEach(b=>b.addEventListener('click',()=>campaignAction(b.getAttribute('data-pause'),'pause')));document.querySelectorAll('[data-resume]').forEach(b=>b.addEventListener('click',()=>campaignAction(b.getAttribute('data-resume'),'resume')));document.querySelectorAll('[data-archive]').forEach(b=>b.addEventListener('click',()=>archiveAction(b.getAttribute('data-archive'),'archive')));document.querySelectorAll('[data-restore]').forEach(b=>b.addEventListener('click',()=>archiveAction(b.getAttribute('data-restore'),'restore')))}
 function campaignGeo(c){return c.center_location&&c.radius_miles?(c.center_location+' \xB7 '+c.radius_miles+' mi radius'):((c.geography||[]).join(' \xB7 '))}
 function toggleArchived(){showArchived=!showArchived;loadCampaigns().catch(showError)}
 function openCampaign(){document.getElementById('campaignOverlay').classList.add('open');document.getElementById('cIndustry').focus()}function closeOverlay(id){document.getElementById(id).classList.remove('open')}function overlayClose(e,id){if(e.target.id===id)closeOverlay(id)}
-async function createCampaign(){try{const centerLocation=document.getElementById('cCenterLocation').value.trim(),radiusMiles=Number(document.getElementById('cRadiusMiles').value);if(!centerLocation)throw new Error('Center city/location is required.');if(!Number.isFinite(radiusMiles)||radiusMiles<1||radiusMiles>100)throw new Error('Radius must be between 1 and 100 miles.');const payload={industry:document.getElementById('cIndustry').value.trim(),centerLocation,radiusMiles,targetCount:Number(document.getElementById('cTarget').value),model:document.getElementById('cModel').value,discoveryProvider:document.getElementById('cDiscoveryProvider').value,enrichmentProvider:document.getElementById('cEnrichmentProvider').value,fallbackEnabled:document.getElementById('cFallback').value==='true',notes:document.getElementById('cNotes').value.trim()||undefined};const mr=document.getElementById('cMinRating').value,mv=document.getElementById('cMinReviews').value;if(mr!=='')payload.minRating=Number(mr);if(mv!=='')payload.minReviews=Number(mv);const d=await api('/api/campaigns',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify(payload)});closeOverlay('campaignOverlay');await refreshAll();alert('Campaign created for '+centerLocation+' \xB7 '+radiusMiles+' mi radius. Orgo wake: '+(d.orgo?.attempted?(d.orgo.status||'requested'):'not configured'))}catch(e){showError(e)}}
+async function createCampaign(){try{const centerLocation=document.getElementById('cCenterLocation').value.trim(),radiusMiles=Number(document.getElementById('cRadiusMiles').value);if(!centerLocation)throw new Error('Center city/location is required.');if(!Number.isFinite(radiusMiles)||radiusMiles<1||radiusMiles>100)throw new Error('Radius must be between 1 and 100 miles.');const payload={industry:document.getElementById('cIndustry').value.trim(),centerLocation,radiusMiles,targetCount:Number(document.getElementById('cTarget').value),model:document.getElementById('cModel').value,discoveryProvider:document.getElementById('cDiscoveryProvider').value,enrichmentProvider:document.getElementById('cEnrichmentProvider').value,fallbackEnabled:document.getElementById('cFallback').value==='true',notes:document.getElementById('cNotes').value.trim()||undefined,offering:businessMode};const mr=document.getElementById('cMinRating').value,mv=document.getElementById('cMinReviews').value;if(mr!=='')payload.minRating=Number(mr);if(mv!=='')payload.minReviews=Number(mv);const d=await api('/api/campaigns',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify(payload)});closeOverlay('campaignOverlay');await refreshAll();alert('Campaign created for '+centerLocation+' \xB7 '+radiusMiles+' mi radius. Orgo wake: '+(d.orgo?.attempted?(d.orgo.status||'requested'):'not configured'))}catch(e){showError(e)}}
 async function campaignAction(enc,action){try{await api('/api/campaigns/'+encodeURIComponent(decodeURIComponent(enc))+'/'+action,{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});await refreshAll()}catch(e){showError(e)}}
 async function archiveAction(enc,action){try{if(action==='archive'&&!confirm('Archive this campaign? Its leads and history will be preserved.'))return;await api('/api/campaigns/'+encodeURIComponent(decodeURIComponent(enc))+'/'+action,{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});await refreshAll()}catch(e){showError(e)}}
-async function loadProspectorJobs(){const d=await api('/api/prospector-jobs'),jobs=d.jobs||[],tbody=document.getElementById('prospectorJobRows'),active=jobs.filter(j=>j.active).length;document.getElementById('prospectorJobsSummary').textContent=jobs.length+' jobs \xB7 '+active+' active \xB7 '+(jobs.length-active)+' paused';if(!jobs.length){tbody.innerHTML='';document.getElementById('prospectorJobEmpty').style.display='block';return}document.getElementById('prospectorJobEmpty').style.display='none';tbody.innerHTML=jobs.map(j=>'<tr><td>'+esc(j.city)+', '+esc(j.state)+'</td><td>'+esc(j.category)+'</td><td>'+esc(j.radius_miles)+' mi</td><td>'+esc(j.target_count)+'</td><td>'+esc(j.cadence_days)+'d</td><td>'+esc(j.last_run_at?new Date(j.last_run_at).toLocaleString():'Never')+'</td><td><span class="pill '+(j.active?'READY':'FAILED')+'">'+(j.active?'ACTIVE':'PAUSED')+'</span></td><td><button class="btn small" data-jobtoggle="'+esc(encodeURIComponent(j.id))+'" data-jobactive="'+(j.active?'1':'0')+'">'+(j.active?'Pause':'Resume')+'</button></td></tr>').join('');tbody.querySelectorAll('[data-jobtoggle]').forEach(b=>b.addEventListener('click',()=>prospectorJobAction(b.getAttribute('data-jobtoggle'),b.getAttribute('data-jobactive')==='1'?'pause':'resume')))}
+async function loadProspectorJobs(){const d=await api('/api/prospector-jobs?offering='+businessMode),jobs=d.jobs||[],tbody=document.getElementById('prospectorJobRows'),active=jobs.filter(j=>j.active).length;document.getElementById('prospectorJobsSummary').textContent=jobs.length+' jobs \xB7 '+active+' active \xB7 '+(jobs.length-active)+' paused';if(!jobs.length){tbody.innerHTML='';document.getElementById('prospectorJobEmpty').style.display='block';return}document.getElementById('prospectorJobEmpty').style.display='none';tbody.innerHTML=jobs.map(j=>'<tr><td>'+esc(j.city)+', '+esc(j.state)+'</td><td>'+esc(j.category)+'</td><td>'+esc(j.radius_miles)+' mi</td><td>'+esc(j.target_count)+'</td><td>'+esc(j.cadence_days)+'d</td><td>'+esc(j.last_run_at?new Date(j.last_run_at).toLocaleString():'Never')+'</td><td><span class="pill '+(j.active?'READY':'FAILED')+'">'+(j.active?'ACTIVE':'PAUSED')+'</span></td><td><button class="btn small" data-jobtoggle="'+esc(encodeURIComponent(j.id))+'" data-jobactive="'+(j.active?'1':'0')+'">'+(j.active?'Pause':'Resume')+'</button></td></tr>').join('');tbody.querySelectorAll('[data-jobtoggle]').forEach(b=>b.addEventListener('click',()=>prospectorJobAction(b.getAttribute('data-jobtoggle'),b.getAttribute('data-jobactive')==='1'?'pause':'resume')))}
 async function prospectorJobAction(enc,action){try{await api('/api/prospector-jobs/'+encodeURIComponent(decodeURIComponent(enc))+'/'+action,{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});await loadProspectorJobs()}catch(e){showError(e)}}
 async function runProspectorJobsNow(){try{const d=await api('/api/prospector-jobs/run-due',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});if(!d.ran){alert('No campaigns created: '+(d.reason||'nothing due'))}else{alert('Created '+d.created.length+' new campaign(s): '+d.created.map(c=>c.category+' @ '+c.city).join(', '))}await refreshAll()}catch(e){showError(e)}}
 async function openCampaignDetail(enc){try{const d=await api('/api/campaigns/'+encodeURIComponent(decodeURIComponent(enc))),c=d.campaign,leads=d.leads||[],cands=d.candidates||[];const rows=leads.map(l=>'<tr><td>'+esc(l.business_name)+'</td><td>'+esc(l.city)+', '+esc(l.state)+'</td><td>'+esc(l.opportunity_score??'\u2014')+'</td><td>'+esc(l.priority||'\u2014')+'</td><td>'+esc(l.current_state)+'</td></tr>').join('')||'<tr><td colspan="5" class="muted">No enriched prospects linked yet.</td></tr>';const candRows=cands.slice(0,100).map(x=>'<tr><td>'+esc(x.business_name)+'</td><td>'+esc(x.target_match)+'</td><td>'+esc(x.status)+'</td><td>'+esc(x.google_rating??'\u2014')+' / '+esc(x.google_reviews??'\u2014')+'</td><td>'+esc(x.retry_count||0)+'</td></tr>').join('')||'<tr><td colspan="5" class="muted">No discovery candidates yet.</td></tr>';document.getElementById('campaignDetail').innerHTML='<div style="display:flex;justify-content:space-between;gap:12px"><div><h2>'+esc(c.industry)+'</h2><div class="muted">'+esc(campaignGeo(c))+'</div></div><button class="btn small" id="campaignClose">Close</button></div><div class="detailGrid"><div class="detailItem"><b>Status</b>'+esc(c.archived_at?'ARCHIVED \xB7 '+c.status:c.status)+'</div><div class="detailItem"><b>Stage</b>'+esc(c.last_stage||'\u2014')+'</div><div class="detailItem"><b>Target / Enriched</b>'+esc((c.requested_count||0)+' / '+(c.enriched||0))+'</div><div class="detailItem"><b>Raw discovered</b>'+esc(c.raw_discovered||0)+'</div><div class="detailItem"><b>Deduped / Filtered</b>'+esc((c.deduped||0)+' / '+(c.filtered||0))+'</div><div class="detailItem"><b>Queued / Enriching / Failed</b>'+esc((c.queued||0)+' / '+(c.enriching||0)+' / '+(c.enrichment_failed||0))+'</div><div class="detailItem"><b>Priority A/B/C/PASS</b>'+esc((c.priority_a||0)+' / '+(c.priority_b||0)+' / '+(c.priority_c||0)+' / '+(c.priority_pass||0))+'</div><div class="detailItem"><b>Discovery passes</b>'+esc(c.discovery_passes||0)+'</div><div class="detailItem"><b>Provider routing</b>'+esc((c.discovery_provider||'CLAUDE')+' discovery \xB7 '+(c.enrichment_provider||'CLAUDE')+' enrichment \xB7 fallback '+(Number(c.fallback_enabled)!==0?'ON':'OFF'))+'</div></div><h3 style="font-size:13px">Provider usage</h3><div class="tableWrap" style="max-height:180px"><table style="min-width:560px"><thead><tr><th>Provider</th><th>Stage</th><th>Status</th><th>Jobs</th><th>Est. API cost</th></tr></thead><tbody>'+((c.provider_usage||[]).map(u=>'<tr><td>'+esc(u.provider)+'</td><td>'+esc(u.stage)+'</td><td>'+esc(u.status)+'</td><td>'+esc(u.jobs)+'</td><td>'+esc(Number(u.estimated_cost_usd||0)>0?'$'+Number(u.estimated_cost_usd).toFixed(3):'\u2014')+'</td></tr>').join('')||'<tr><td colspan="5" class="muted">No provider jobs recorded yet.</td></tr>')+'</tbody></table></div><h3 style="font-size:13px">Enriched leads</h3><div class="tableWrap" style="max-height:250px"><table style="min-width:620px"><thead><tr><th>Business</th><th>Location</th><th>Score</th><th>Priority</th><th>State</th></tr></thead><tbody>'+rows+'</tbody></table></div><h3 style="font-size:13px;margin-top:16px">Discovery candidates</h3><div class="tableWrap" style="max-height:250px"><table style="min-width:620px"><thead><tr><th>Business</th><th>Match</th><th>Status</th><th>Rating / Reviews</th><th>Retries</th></tr></thead><tbody>'+candRows+'</tbody></table></div>';document.getElementById('campaignClose').onclick=()=>closeOverlay('campaignDetailOverlay');document.getElementById('campaignDetailOverlay').classList.add('open')}catch(e){showError(e)}}
@@ -283,12 +329,13 @@ async function addTestNumber(){try{const phone=document.getElementById('oPhone')
 async function removeTestNumber(enc){try{await api('/api/outreach/test-allowlist/'+encodeURIComponent(decodeURIComponent(enc)),{method:'DELETE',headers:{'X-Actor':'COMMAND_CENTER'}});await loadOutreach()}catch(e){showError(e)}}
 async function sendTestSms(){try{const phone=document.getElementById('oPhone').value.trim(),message=document.getElementById('oMessage').value.trim();if(!phone)throw new Error('Enter an allowlisted test phone number.');if(!message)throw new Error('Enter a test message.');const d=await api('/api/outreach/test-send',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({phone,message})});await loadOutreach();alert('Test SMS queued'+(d.sid?' \xB7 '+d.sid:''))}catch(e){showError(e)}}
 let emailOutreachState=null;
-async function loadEmailOutreach(){const [d,l]=await Promise.all([api('/api/outreach/email/status'),api('/api/leads?limit=200')]);emailOutreachState=d;const dot=document.getElementById('gmailDot'),txt=document.getElementById('gmailText');dot.className='dot '+(d.smartleadMailbox?'on':'off');txt.textContent=d.smartleadMailbox?('Smartlead mailbox \xB7 '+d.smartleadMailbox+(d.smartleadConfigured?'':' \xB7 API key missing')):'Smartlead mailbox not set';document.getElementById('gClientId').value=d.smartleadMailbox||'';document.getElementById('gmailCallback').textContent='Smartlead webhook URL (register this in Smartlead): '+d.webhookUrl+' \xB7 website campaign '+(d.smartleadWebsiteCampaignId||'not created yet')+' \xB7 concierge campaign '+(d.smartleadConciergeCampaignId||'not created yet');const lrDot=document.getElementById('liveReplyDot'),lrTxt=document.getElementById('liveReplyText');lrDot.className='dot '+(d.liveReplyConnected?'on':'off');lrTxt.textContent=d.liveReplyConnected?('Live-reply mailbox connected \xB7 '+d.liveReplyEmail):'Live-reply mailbox '+(d.liveReplyStatus==='ERROR'?'error: '+(d.liveReplyError||'unknown'):'not connected');const s=d.settings||{};document.getElementById('emailFromName').value=s.fromName||'Connor | Trenches Group';document.getElementById('emailPostal').value=s.postalAddress||'';document.getElementById('emailDailyCap').value=s.dailyCap||10;document.getElementById('emailReplyMode').value=s.autoReplyMode||'DRAFT_ONLY';const live=document.getElementById('emailLiveToggle'),auto=document.getElementById('emailAutoToggle');live.textContent=s.emailLiveMode?'Disable live email':'Enable live email';live.className='btn '+(s.emailLiveMode?'danger':'good');auto.textContent=s.orchestratorEnabled?'Pause autonomous sequences':'Enable autonomous sequences';auto.className='btn '+(s.orchestratorEnabled?'danger':'good');document.getElementById('emailModeText').textContent='Live email '+(s.emailLiveMode?'ON':'OFF')+' \xB7 automation '+(s.orchestratorEnabled?'ON':'OFF')+' \xB7 auto replies '+(s.autoReplyMode||'DRAFT_ONLY')+' \xB7 daily cap '+(s.dailyCap||10)+' \xB7 SMS LIVE LOCKED';const a=document.getElementById('emailAllowlistRows');a.innerHTML='';for(const x of(d.allowlist||[])){a.insertAdjacentHTML('beforeend','<span class="pill READY">'+esc(x.label||'Test')+' \xB7 '+esc(x.email)+' <button class="btn small" style="margin-left:6px;padding:2px 5px" data-email-remove="'+esc(encodeURIComponent(x.email))+'">\xD7</button></span>')}if(!(d.allowlist||[]).length)a.innerHTML='<span class="muted">No test email addresses allowlisted.</span>';document.querySelectorAll('[data-email-remove]').forEach(b=>b.addEventListener('click',()=>removeEmailTestAddressUi(b.getAttribute('data-email-remove'))));const sel=document.getElementById('emailTestLead'),cur=sel.value;sel.innerHTML='<option value="">Optional lead to simulate</option>';for(const x of(l.leads||[])){sel.insertAdjacentHTML('beforeend','<option value="'+esc(x.id)+'">'+esc(x.business_name)+' \xB7 '+esc(x.email||'no email')+'</option>')}if(cur&&[...sel.options].some(o=>o.value===cur))sel.value=cur;const rows=document.getElementById('emailMessageRows');rows.innerHTML='';for(const m of(d.recentMessages||[])){const contact=m.direction==='INBOUND'?m.from_email:m.to_email;let raw={};try{raw=JSON.parse(m.raw_json||'{}')}catch{}const outcome=raw.conversationOutcome||'\u2014';const outcomeHtml=outcome==='DEMO_APPROVED'?'<span class="pill COMPLETED">DEMO_APPROVED</span>':esc(outcome);rows.insertAdjacentHTML('beforeend','<tr><td class="muted">'+esc(m.created_at?new Date(m.created_at).toLocaleString():'\u2014')+'</td><td>'+esc(m.direction)+'</td><td>'+esc(m.business_name||'\u2014')+'</td><td>'+esc(contact)+'</td><td>'+esc(m.subject||'\u2014')+'</td><td>'+esc(m.intent||'\u2014')+'</td><td>'+outcomeHtml+'</td><td>'+esc(m.status)+'</td></tr>')}document.getElementById('emailMessageEmpty').style.display=(d.recentMessages||[]).length?'none':'block';const sr=document.getElementById('sequenceRows');sr.innerHTML='';for(const q of(d.sequences||[])){sr.insertAdjacentHTML('beforeend','<tr><td>'+esc(q.business_name)+'</td><td>'+esc(q.priority||'\u2014')+'</td><td>'+esc(q.strategy)+'</td><td>'+esc(q.status)+'</td><td>'+esc(q.current_step)+'</td><td class="muted">'+esc(q.next_action_at?new Date(q.next_action_at).toLocaleString():'\u2014')+'</td></tr>')}document.getElementById('sequenceEmpty').style.display=(d.sequences||[]).length?'none':'block'}
+async function loadEmailOutreach(){const [d,l]=await Promise.all([api('/api/outreach/email/status'),api('/api/leads?limit=200')]);emailOutreachState=d;const dot=document.getElementById('gmailDot'),txt=document.getElementById('gmailText');dot.className='dot '+(d.smartleadMailbox?'on':'off');txt.textContent=d.smartleadMailbox?('Smartlead mailbox \xB7 '+d.smartleadMailbox+(d.smartleadConfigured?'':' \xB7 API key missing')):'Smartlead mailbox not set';document.getElementById('gClientId').value=d.smartleadMailbox||'';document.getElementById('gmailCallback').textContent='Smartlead webhook URL (register this in Smartlead): '+d.webhookUrl+' \xB7 website campaign '+(d.smartleadWebsiteCampaignId||'not created yet')+' \xB7 concierge campaign '+(d.smartleadConciergeCampaignId||'not created yet');document.getElementById('replyModelText').textContent='Replies are human-in-the-loop: answer leads directly in Smartlead. Genuine replies notify '+(d.notifyEmail||'you')+'.';const s=d.settings||{};document.getElementById('emailFromName').value=s.fromName||'Connor | Trenches Group';document.getElementById('emailPostal').value=s.postalAddress||'';document.getElementById('emailDailyCap').value=s.dailyCap||10;document.getElementById('emailReplyMode').value=s.autoReplyMode||'DRAFT_ONLY';const live=document.getElementById('emailLiveToggle'),auto=document.getElementById('emailAutoToggle');live.textContent=s.emailLiveMode?'Disable live email':'Enable live email';live.className='btn '+(s.emailLiveMode?'danger':'good');auto.textContent=s.orchestratorEnabled?'Pause autonomous sequences':'Enable autonomous sequences';auto.className='btn '+(s.orchestratorEnabled?'danger':'good');document.getElementById('emailModeText').textContent='Live email '+(s.emailLiveMode?'ON':'OFF')+' \xB7 automation '+(s.orchestratorEnabled?'ON':'OFF')+' \xB7 auto replies '+(s.autoReplyMode||'DRAFT_ONLY')+' \xB7 daily cap '+(s.dailyCap||10)+' \xB7 SMS LIVE LOCKED';const websiteToggle=document.getElementById('websiteTrackToggle'),conciergeToggle=document.getElementById('conciergeTrackToggle');const websiteOn=s.websiteEnabled!==false,conciergeOn=s.conciergeEnabled!==false;websiteToggle.textContent='Website outreach: '+(websiteOn?'ON':'OFF');websiteToggle.className='btn '+(websiteOn?'good':'danger');conciergeToggle.textContent='Concierge outreach: '+(conciergeOn?'ON':'OFF');conciergeToggle.className='btn '+(conciergeOn?'good':'danger');const a=document.getElementById('emailAllowlistRows');a.innerHTML='';for(const x of(d.allowlist||[])){a.insertAdjacentHTML('beforeend','<span class="pill READY">'+esc(x.label||'Test')+' \xB7 '+esc(x.email)+' <button class="btn small" style="margin-left:6px;padding:2px 5px" data-email-remove="'+esc(encodeURIComponent(x.email))+'">\xD7</button></span>')}if(!(d.allowlist||[]).length)a.innerHTML='<span class="muted">No test email addresses allowlisted.</span>';document.querySelectorAll('[data-email-remove]').forEach(b=>b.addEventListener('click',()=>removeEmailTestAddressUi(b.getAttribute('data-email-remove'))));const sel=document.getElementById('emailTestLead'),cur=sel.value;sel.innerHTML='<option value="">Optional lead to simulate</option>';for(const x of(l.leads||[])){sel.insertAdjacentHTML('beforeend','<option value="'+esc(x.id)+'">'+esc(x.business_name)+' \xB7 '+esc(x.email||'no email')+'</option>')}if(cur&&[...sel.options].some(o=>o.value===cur))sel.value=cur;const rows=document.getElementById('emailMessageRows');rows.innerHTML='';for(const m of(d.recentMessages||[])){const contact=m.direction==='INBOUND'?m.from_email:m.to_email;let raw={};try{raw=JSON.parse(m.raw_json||'{}')}catch{}const outcome=raw.conversationOutcome||'\u2014';const outcomeHtml=outcome==='DEMO_APPROVED'?'<span class="pill COMPLETED">DEMO_APPROVED</span>':esc(outcome);rows.insertAdjacentHTML('beforeend','<tr><td class="muted">'+esc(m.created_at?new Date(m.created_at).toLocaleString():'\u2014')+'</td><td>'+esc(m.direction)+'</td><td>'+esc(m.business_name||'\u2014')+'</td><td>'+esc(contact)+'</td><td>'+esc(m.subject||'\u2014')+'</td><td>'+esc(m.intent||'\u2014')+'</td><td>'+outcomeHtml+'</td><td>'+esc(m.status)+'</td></tr>')}document.getElementById('emailMessageEmpty').style.display=(d.recentMessages||[]).length?'none':'block';const sr=document.getElementById('sequenceRows');sr.innerHTML='';const modeSequences=(d.sequences||[]).filter(q=>businessMode==='CONCIERGE'?q.strategy==='SMARTLEAD_CONCIERGE':q.strategy!=='SMARTLEAD_CONCIERGE');for(const q of modeSequences){sr.insertAdjacentHTML('beforeend','<tr><td>'+esc(q.business_name)+'</td><td>'+esc(q.priority||'\u2014')+'</td><td>'+esc(q.strategy)+'</td><td>'+esc(q.status)+'</td><td>'+esc(q.current_step)+'</td><td class="muted">'+esc(q.next_action_at?new Date(q.next_action_at).toLocaleString():'\u2014')+'</td></tr>')}document.getElementById('sequenceEmpty').style.display=modeSequences.length?'none':'block'}
 async function saveSmartleadMailboxUi(){try{const smartleadMailbox=document.getElementById('gClientId').value.trim();if(!smartleadMailbox)throw new Error('Enter the Smartlead sending mailbox address.');await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({smartleadMailbox})});await loadEmailOutreach();alert('Smartlead mailbox saved. Make sure it is connected as an email account inside Smartlead before enrolling leads.')}catch(e){showError(e)}}
-async function connectLiveReplyUi(){try{const d=await api('/api/outreach/email/live-reply/oauth/start',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});if(!d.authUrl)throw new Error('No Google authorization URL returned.');window.open(d.authUrl,'_blank','noopener')}catch(e){showError(e)}}
 async function saveEmailSettingsUi(){try{await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({fromName:document.getElementById('emailFromName').value.trim(),postalAddress:document.getElementById('emailPostal').value.trim(),dailyCap:Number(document.getElementById('emailDailyCap').value||10),autoReplyMode:document.getElementById('emailReplyMode').value})});await loadEmailOutreach()}catch(e){showError(e)}}
 async function toggleEmailLiveUi(){try{const on=!!(emailOutreachState&&emailOutreachState.settings&&emailOutreachState.settings.emailLiveMode);if(!on&&!confirm('Enable LIVE autonomous email to qualified leads? Only verified emails, A/B priority, suppression checks, and the daily cap will be eligible.'))return;await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({liveMode:!on})});await loadEmailOutreach()}catch(e){showError(e)}}
 async function toggleEmailAutomationUi(){try{const on=!!(emailOutreachState&&emailOutreachState.settings&&emailOutreachState.settings.orchestratorEnabled);if(!on&&!confirm('Enable autonomous email sequences? The live-email switch must also be ON before real prospects can be enrolled/sent.'))return;await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({orchestratorEnabled:!on})});await loadEmailOutreach()}catch(e){showError(e)}}
+async function toggleWebsiteTrackUi(){try{const on=!!(emailOutreachState&&emailOutreachState.settings&&emailOutreachState.settings.websiteEnabled!==false);await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({websiteEnabled:!on})});await loadEmailOutreach()}catch(e){showError(e)}}
+async function toggleConciergeTrackUi(){try{const on=!!(emailOutreachState&&emailOutreachState.settings&&emailOutreachState.settings.conciergeEnabled!==false);await api('/api/outreach/email/settings',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({conciergeEnabled:!on})});await loadEmailOutreach()}catch(e){showError(e)}}
 async function addEmailTestAddressUi(){try{const email=document.getElementById('emailTestAddress').value.trim(),label=document.getElementById('emailTestLabel').value.trim();if(!email)throw new Error('Enter a test email address.');await api('/api/outreach/email/test-allowlist',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({email,label})});await loadEmailOutreach()}catch(e){showError(e)}}
 async function removeEmailTestAddressUi(enc){try{await api('/api/outreach/email/test-allowlist/'+encodeURIComponent(decodeURIComponent(enc)),{method:'DELETE',headers:{'X-Actor':'COMMAND_CENTER'}});await loadEmailOutreach()}catch(e){showError(e)}}
 async function sendEmailTestUi(){try{const email=document.getElementById('emailTestAddress').value.trim(),subject=document.getElementById('emailTestSubject').value.trim(),message=document.getElementById('emailTestBody').value.trim(),leadId=document.getElementById('emailTestLead').value||undefined;if(!email)throw new Error('Enter an allowlisted test email.');const d=await api('/api/outreach/email/test-send',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({email,subject,message,leadId})});alert('Test email sent'+(d.providerMessageId?' \xB7 '+d.providerMessageId:''));await loadEmailOutreach()}catch(e){showError(e)}}
@@ -309,15 +356,44 @@ async function scheduleFollowupsUi(){try{const leadId=selectedSimLead();await ap
 async function runFollowupsUi(){try{const d=await api('/api/outreach/followups/run',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({force:true})});document.getElementById('simResult').textContent='Follow-up drafts created: '+d.drafted+' \xB7 skipped '+d.skipped;await loadConversation()}catch(e){showError(e)}}
 async function draftAction(id,action){try{await api('/api/outreach/drafts/'+encodeURIComponent(id)+'/'+action,{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});await loadConversation()}catch(e){showError(e)}}
 async function resolveEscalationUi(id){try{await api('/api/outreach/escalations/'+encodeURIComponent(id)+'/resolve',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});await Promise.all([loadConversation(),loadLeads()])}catch(e){showError(e)}}
+let quoteLeads=[],quoteState=null;
+const QPILL={DRAFT:'',SENT:'READY',VIEWED:'RUNNING',ACCEPTED:'COMPLETED',DECLINED:'FAILED',VOID:'FAILED'};
+const QEVT={CREATED:'Quote created',UPDATED:'Quote edited',SENT:'Emailed',SEND_FAILED:'Email failed',EMAIL_OPENED:'Email opened',VIEWED:'Estimate viewed',PORTAL_SIGNUP:'Created client portal account',MARKED_ACCEPTED:'Marked accepted',MARKED_DECLINED:'Marked declined',MARKED_VOID:'Voided'};
+function qMoney(c){return '$'+(Number(c||0)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function qTotal(q){const a=[];if(q.one_time_cents>0||!q.monthly_cents)a.push(qMoney(q.one_time_cents));if(q.monthly_cents>0)a.push(qMoney(q.monthly_cents)+'/mo');return a.join(' + ')}
+function qWhen(v){return v?new Date(v).toLocaleString():'\u2014'}
+function qVal(id){const el=document.getElementById(id);return el?el.value.trim():''}
+function qPill(s){return '<span class="pill '+esc(QPILL[s]||'')+'">'+esc(s)+'</span>'}
+async function loadQuotes(){const d=await api('/api/quotes'),qs=d.quotes||[],rows=document.getElementById('quoteRows');rows.innerHTML=qs.map(q=>'<tr><td><b>'+esc(q.quote_number)+'</b></td><td><div class="business">'+esc(q.business_name)+'</div><div class="muted">'+esc(q.contact_name||'')+'</div></td><td>'+esc(q.title)+'</td><td>'+esc(qTotal(q))+'</td><td>'+qPill(q.status)+'</td><td class="muted">'+esc(q.sent_to||'\u2014')+'</td><td>'+esc(q.open_count||0)+'</td><td>'+esc(q.view_count||0)+'</td><td class="muted">'+esc(qWhen(q.last_viewed_at))+'</td><td class="right"><button class="btn small" data-quote="'+esc(q.id)+'">Open</button></td></tr>').join('');document.getElementById('quoteEmpty').style.display=qs.length?'none':'block';document.getElementById('quoteSummary').textContent=qs.length+' quotes \xB7 '+qs.filter(q=>q.first_sent_at).length+' sent \xB7 '+qs.filter(q=>q.view_count>0).length+' viewed';rows.querySelectorAll('[data-quote]').forEach(b=>b.addEventListener('click',()=>openQuote(b.getAttribute('data-quote'))))}
+async function loadQuoteMailbox(){const el=document.getElementById('quoteMailbox');try{const d=await api('/api/quotes/mailbox');el.innerHTML=d.connected?'<span class="dot on"></span> Sending as '+esc(d.email):'<span class="dot off"></span> Google not connected <button class="btn small primary" id="quoteConnect">Connect Google</button>';const b=document.getElementById('quoteConnect');if(b)b.onclick=connectQuoteMailbox}catch(e){el.textContent=e.message}}
+async function connectQuoteMailbox(){try{const d=await api('/api/quotes/mailbox/connect',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});window.open(d.authUrl,'_blank','noopener');document.getElementById('quoteMailbox').textContent='Finish signing in with Google in the new tab, then click Refresh.'}catch(e){showError(e)}}
+async function loadLeadQuotes(leadId){const box=document.getElementById('leadQuotes');if(!box)return;try{const d=await api('/api/quotes?leadId='+encodeURIComponent(leadId)),qs=d.quotes||[];box.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b>Quotes</b><button class="btn small primary" id="leadNewQuote">+ New quote for this lead</button></div>'+(qs.length?qs.map(q=>'<div class="event" style="cursor:pointer" data-lead-quote="'+esc(q.id)+'"><div class="eventHead"><b>'+esc(q.quote_number)+' \xB7 '+esc(q.title)+'</b>'+qPill(q.status)+'</div><div class="eventData">'+esc(qTotal(q))+' \xB7 opens '+esc(q.open_count||0)+' \xB7 views '+esc(q.view_count||0)+(q.last_viewed_at?' \xB7 last viewed '+esc(qWhen(q.last_viewed_at)):'')+'</div></div>').join(''):'<div class="muted">No quotes for this lead yet.</div>');document.getElementById('leadNewQuote').onclick=()=>openQuote(null,leadId);box.querySelectorAll('[data-lead-quote]').forEach(el=>el.addEventListener('click',()=>openQuote(el.getAttribute('data-lead-quote'))))}catch(e){box.textContent=e.message}}
+async function openQuote(id,leadId){try{const [ld,detail]=await Promise.all([api('/api/leads?limit=200'),id?api('/api/quotes/'+encodeURIComponent(id)):Promise.resolve(null)]);quoteLeads=ld.leads||[];quoteState=detail;const want=leadId||(detail&&detail.quote.lead_id);if(want&&!quoteLeads.some(l=>l.id===want)){try{quoteLeads.unshift((await api('/api/leads/'+encodeURIComponent(want))).lead)}catch(e){}}renderQuoteModal(leadId||'');document.getElementById('quoteOverlay').classList.add('open')}catch(e){showError(e)}}
+function qItemRow(it){return '<div class="qItem"><input class="qiDesc" placeholder="Description, e.g. 5-page website build" value="'+esc(it.description||'')+'"/><input class="qiQty" type="number" min="0" step="any" title="Quantity" value="'+esc(it.quantity||1)+'"/><input class="qiPrice" type="number" min="0" step="0.01" placeholder="Price $" value="'+(it.unitCents?esc((it.unitCents/100).toFixed(2)):'')+'"/><select class="qiBilling"><option value="ONE_TIME">One-time</option><option value="MONTHLY"'+(it.billing==='MONTHLY'?' selected':'')+'>Monthly</option></select><button class="btn small" data-qremove="1" title="Remove line">\xD7</button></div>'}
+function qRecalc(){let one=0,mon=0;document.querySelectorAll('#qItems .qItem').forEach(r=>{const c=Math.round(Number(r.querySelector('.qiQty').value||0)*Math.round(Number(r.querySelector('.qiPrice').value||0)*100));if(r.querySelector('.qiBilling').value==='MONTHLY')mon+=c;else one+=c});const el=document.getElementById('qTotals');if(el)el.textContent='Total: '+qMoney(one)+(mon?' + '+qMoney(mon)+'/mo':'')}
+function qLeadChanged(){const l=quoteLeads.find(x=>x.id===qVal('qLead'));if(!l)return;document.getElementById('qBusiness').value=l.business_name||'';const s=document.getElementById('qSendEmail');if(s&&l.email)s.value=l.email}
+function renderQuoteModal(prefillLeadId){const d=quoteState,q=d?d.quote:{status:'DRAFT',line_items:[]},isNew=!d,leadId=q.lead_id||prefillLeadId||'',lead=quoteLeads.find(l=>l.id===leadId),items=(q.line_items&&q.line_items.length)?q.line_items:[{description:'',quantity:1,unitCents:0,billing:'ONE_TIME'}],sends=d?d.sends||[]:[],events=d?d.events||[]:[],sendTo=sends.length?sends[0].email:((lead&&lead.email)||'');
+let h='<div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><div><h2 style="margin-bottom:6px">'+(isNew?'New quote':esc(q.quote_number)+' \xB7 '+esc(q.title))+'</h2>'+(isNew?'':qPill(q.status))+'</div><button class="btn small" id="quoteClose">Close</button></div>';
+if(!isNew){h+='<div class="qStats">'+[['Emails sent',sends.filter(s=>s.status==='SENT').length],['Email opens*',q.open_count||0],['Estimate views',q.view_count||0],['Last viewed',q.last_viewed_at?qWhen(q.last_viewed_at):'Not yet']].map(x=>'<div class="metric" style="padding:10px"><div class="n" style="font-size:17px">'+esc(x[1])+'</div><div class="l">'+esc(x[0])+'</div></div>').join('')+'</div>';if(sends.length)h+='<div class="tableWrap" style="max-height:200px"><table style="min-width:680px"><thead><tr><th>Sent to</th><th>Sent</th><th>Opens</th><th>Views</th><th>Last viewed</th><th>Portal invite</th><th></th></tr></thead><tbody>'+sends.map(s=>'<tr><td>'+esc(s.email)+(s.status==='FAILED'?' '+qPill('FAILED'):'')+'</td><td class="muted">'+esc(qWhen(s.sent_at))+'</td><td>'+esc(s.open_count||0)+'</td><td>'+esc(s.view_count||0)+'</td><td class="muted">'+esc(qWhen(s.last_viewed_at))+'</td><td>'+(s.included_invite?'Included':'\u2014')+'</td><td><button class="btn small" data-copy-link="'+esc(s.view_url)+'" title="Paste into your own email if needed. Opening it yourself counts as a view.">Copy link</button></td></tr>').join('')+'</tbody></table></div>';h+='<div class="sub" style="margin:6px 0 10px">*Opens are approximate (some email apps block or pre-load images). Estimate views are exact.</div>';if(events.length)h+='<details style="margin-bottom:6px"><summary class="sub" style="cursor:pointer">Activity timeline ('+events.length+')</summary><div class="timeline" style="max-height:220px">'+events.map(ev=>'<div class="event"><div class="eventHead"><b>'+esc(QEVT[ev.event_type]||ev.event_type)+'</b><span class="muted">'+esc(qWhen(ev.created_at))+'</span></div><div class="eventData">'+esc([ev.email,ev.source].filter(Boolean).join(' \xB7 '))+'</div></div>').join('')+'</div></details>'}
+const leadOpts='<option value="">No linked lead (enter client manually)</option>'+quoteLeads.map(l=>'<option value="'+esc(l.id)+'"'+(l.id===leadId?' selected':'')+'>'+esc(l.business_name)+' \xB7 '+esc(l.city)+', '+esc(l.state)+(l.email?' \xB7 '+esc(l.email):'')+'</option>').join('');
+h+='<label>Linked lead</label><select id="qLead">'+leadOpts+'</select><div class="grid2"><div><label>Business name</label><input id="qBusiness" value="'+esc(q.business_name||(lead?lead.business_name:''))+'"/></div><div><label>Contact name</label><input id="qContact" value="'+esc(q.contact_name||'')+'"/></div></div><label>Quote title</label><input id="qTitle" placeholder="e.g. Website build + monthly care plan" value="'+esc(q.title||'')+'"/><label>Message to client (optional)</label><textarea id="qMessage" placeholder="Thanks for the call today. Here is the estimate we discussed.">'+esc(q.message||'')+'</textarea><label>Line items (description \xB7 qty \xB7 price \xB7 billing)</label><div id="qItems">'+items.map(qItemRow).join('')+'</div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><button class="btn small" id="qAddItem">+ Add line</button><div id="qTotals" style="font-weight:800"></div></div><div class="grid2"><div><label>Valid until (optional)</label><input id="qValid" type="date" value="'+esc(q.valid_until||'')+'"/></div><div></div></div><label>Terms (optional)</label><textarea id="qTerms" style="min-height:60px" placeholder="50% deposit to start, balance at launch.">'+esc(q.terms||'')+'</textarea>';
+if(q.status!=='VOID')h+='<div style="border:1px solid var(--accent);border-radius:9px;padding:12px;margin-top:14px"><div style="font-weight:800;margin-bottom:8px">Send this quote to\u2026</div><div class="qSend"><input id="qSendEmail" type="email" placeholder="client@business.com" value="'+esc(sendTo)+'"/><input id="qSendName" placeholder="Their name (optional)" value="'+esc(q.contact_name||'')+'"/><button class="btn primary" id="quoteSaveSend">Save &amp; send</button></div><div class="sub" style="margin-top:6px">Sends from your Google Workspace mailbox, so it shows in your Sent folder and replies come straight to you. Clients without a portal account also get a pre-approved signup link.</div></div>';
+h+='<div class="modalFooter" style="justify-content:space-between"><div class="rowBtns">'+(isNew||q.status==='VOID'?'':'<button class="btn small good" data-qstatus="ACCEPTED">Mark accepted</button><button class="btn small" data-qstatus="DECLINED">Mark declined</button><button class="btn small danger" data-qstatus="VOID">Void</button>')+'</div><button class="btn" id="quoteSave">'+(isNew?'Save draft':'Save changes')+'</button></div>';
+const m=document.getElementById('quoteModal');m.innerHTML=h;m.oninput=qRecalc;m.onchange=qRecalc;m.onclick=e=>{const t=e.target;if(!(t instanceof Element))return;if(t.hasAttribute('data-qremove')){const rows=document.querySelectorAll('#qItems .qItem');if(rows.length>1)t.closest('.qItem').remove();qRecalc()}else if(t.hasAttribute('data-copy-link')){navigator.clipboard.writeText(t.getAttribute('data-copy-link')).then(()=>{t.textContent='Copied'})}else if(t.hasAttribute('data-qstatus'))quoteStatus(t.getAttribute('data-qstatus'))};document.getElementById('quoteClose').onclick=()=>closeOverlay('quoteOverlay');document.getElementById('qAddItem').onclick=()=>{document.getElementById('qItems').insertAdjacentHTML('beforeend',qItemRow({quantity:1,billing:'ONE_TIME'}));qRecalc()};document.getElementById('qLead').onchange=qLeadChanged;document.getElementById('quoteSave').onclick=()=>saveQuote(false);const ss=document.getElementById('quoteSaveSend');if(ss)ss.onclick=()=>saveQuote(true);qRecalc()}
+function quotePayload(){const lineItems=[...document.querySelectorAll('#qItems .qItem')].map(r=>({description:r.querySelector('.qiDesc').value.trim(),quantity:Number(r.querySelector('.qiQty').value||1),unitCents:Math.round(Number(r.querySelector('.qiPrice').value||0)*100),billing:r.querySelector('.qiBilling').value})).filter(i=>i.description||i.unitCents);return{leadId:qVal('qLead')||null,businessName:qVal('qBusiness'),contactName:qVal('qContact')||null,title:qVal('qTitle'),message:qVal('qMessage')||null,terms:qVal('qTerms')||null,validUntil:qVal('qValid')||null,lineItems}}
+async function saveQuote(send){const buttons=[...document.querySelectorAll('#quoteModal button')];try{const body=quotePayload(),email=qVal('qSendEmail'),name=qVal('qSendName');if(send){if(!email)throw new Error('Enter the email address to send this quote to.');if(!body.lineItems.length)throw new Error('Add at least one line item before sending.');if(!confirm('Send "'+(body.title||'this quote')+'" to '+email+'?'))return}buttons.forEach(b=>b.disabled=true);const hdr={'X-Actor':'COMMAND_CENTER'};let id=quoteState?quoteState.quote.id:null;const saved=id?await api('/api/quotes/'+encodeURIComponent(id),{method:'PATCH',headers:hdr,body:JSON.stringify(body)}):await api('/api/quotes',{method:'POST',headers:hdr,body:JSON.stringify(body)});id=saved.quote.id;let note='';if(send){try{const s=await api('/api/quotes/'+encodeURIComponent(id)+'/send',{method:'POST',headers:hdr,body:JSON.stringify({email,name:name||undefined})});note='Sent to '+s.email+(s.includedInvite?' with a pre-approved portal signup link.':'. They already have a portal account, so it is in their portal too.')}catch(e){note='Quote saved, but the email failed: '+e.message}}quoteState=await api('/api/quotes/'+encodeURIComponent(id));renderQuoteModal('');await loadQuotes();if(note)alert(note)}catch(e){alert(e.message)}finally{buttons.forEach(b=>b.disabled=false)}}
+async function quoteStatus(status){const labels={ACCEPTED:'Mark this quote accepted?',DECLINED:'Mark this quote declined?',VOID:'Void this quote? It disappears from the client portal and can no longer be sent.'};if(!confirm(labels[status]))return;try{const id=quoteState.quote.id;await api('/api/quotes/'+encodeURIComponent(id)+'/status',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({status})});quoteState=await api('/api/quotes/'+encodeURIComponent(id));renderQuoteModal('');await loadQuotes()}catch(e){alert(e.message)}}
 function debouncedLoad(){clearTimeout(timer);timer=setTimeout(loadLeads,250)}async function loadLeads(){const p=new URLSearchParams({limit:'200'}),q=document.getElementById('search').value.trim(),s=document.getElementById('stateFilter').value,pr=document.getElementById('priorityFilter').value;if(q)p.set('q',q);if(s)p.set('state',s);if(pr)p.set('priority',pr);const d=await api('/api/leads?'+p),rows=document.getElementById('leadRows');rows.innerHTML='';document.getElementById('leadEmpty').style.display=d.leads.length?'none':'block';for(const l of d.leads){const gap=l.website_gap_status||'UNKNOWN',gapClass=gap==='ELIGIBLE'?'COMPLETED':gap==='INELIGIBLE'?'FAILED':gap==='MANUAL_OVERRIDE'?'READY':'';rows.insertAdjacentHTML('beforeend','<tr><td><div class="business">'+esc(l.business_name)+'</div><div class="muted">'+esc(l.website||'No website recorded')+'</div></td><td>'+esc(l.city)+', '+esc(l.state)+'</td><td>'+esc(l.industry)+'</td><td><span class="pill '+gapClass+'">'+esc(gap)+'</span></td><td>'+esc(l.opportunity_score??'\u2014')+'</td><td><span class="pill '+esc(l.priority||'')+'">'+esc(l.priority||'\u2014')+'</span></td><td>'+esc(l.current_state)+'</td><td>'+esc(l.phone||'\u2014')+'</td><td class="muted">'+esc(l.updated_at?new Date(l.updated_at).toLocaleString():'\u2014')+'</td><td class="right"><button class="btn small" data-lead="'+esc(encodeURIComponent(l.id))+'">Open</button></td></tr>')}document.querySelectorAll('[data-lead]').forEach(b=>b.addEventListener('click',()=>openLead(b.getAttribute('data-lead'))))}
-async function openLead(enc){try{const id=decodeURIComponent(enc),[d,e]=await Promise.all([api('/api/leads/'+encodeURIComponent(id)),api('/api/leads/'+encodeURIComponent(id)+'/events')]),l=d.lead,events=e.events||[],states=d.manualStateOptions||[];const details=[['Industry',l.industry],['Location',l.city+', '+l.state],['Phone',l.phone||'\u2014'],['Email',l.email||'\u2014'],['Website',l.website||'\u2014'],['Website status',l.website_status||'UNKNOWN'],['Website quality',l.website_quality||'UNKNOWN'],['Website gap',l.website_gap_status||'UNKNOWN'],['Gap reason',l.website_gap_reason||'\u2014'],['Google rating',l.google_rating??'\u2014'],['Reviews',l.google_reviews??'\u2014'],['Validation',l.validation_status||'PENDING'],['Sources',l.research_source_count??0],['Score',l.opportunity_score??'\u2014'],['Priority',l.priority||'\u2014'],['Qualification',l.qualification_reason||'\u2014'],['Outreach',l.outreach_eligible?'Eligible':'LOCKED'],['State',l.current_state],['Last manual change',l.manual_state_reason||'\u2014']].map(x=>'<div class="detailItem"><b>'+esc(x[0])+'</b>'+esc(x[1])+'</div>').join('');const timeline=events.map(ev=>'<div class="event"><div class="eventHead"><b>'+esc(ev.event_type)+'</b><span class="muted">'+esc(new Date(ev.created_at).toLocaleString())+'</span></div><div class="eventData">'+esc(ev.old_state&&ev.new_state?(ev.old_state+' \u2192 '+ev.new_state):'')+(ev.event_data_json&&ev.event_data_json!=='{}'?'<br>'+esc(ev.event_data_json):'')+'</div></div>').join('');const opts=states.map(x=>'<option value="'+esc(x)+'" '+(x===l.current_state?'selected':'')+'>'+esc(x)+'</option>').join('');const quick=l.current_state==='DISQUALIFIED'?'<button class="btn good" id="leadRestore">Restore to human review</button>':'<button class="btn danger" id="leadDisqualify">Disqualify</button>';document.getElementById('leadDetail').innerHTML='<div style="display:flex;justify-content:space-between;gap:12px"><div><h2>'+esc(l.business_name)+'</h2><div class="muted">'+esc(l.id)+'</div></div><button class="btn small" id="leadClose">Close</button></div><div class="detailGrid">'+details+'</div><div style="border:1px solid var(--line);border-radius:9px;padding:12px;margin:12px 0"><div style="font-weight:800;margin-bottom:8px">Manual lead control</div><div class="sub">Manual changes are audited. Disqualifying cancels active outreach/follow-ups/demo jobs. Setting an advanced state can explicitly override the website-gap gate.</div><div class="grid2" style="display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-top:10px"><select id="manualLeadState" style="background:#0d0f13;border:1px solid var(--line);color:var(--text);padding:9px;border-radius:8px">'+opts+'</select><input id="manualLeadReason" style="background:#0d0f13;border:1px solid var(--line);color:var(--text);padding:9px;border-radius:8px" placeholder="Reason required, e.g. website manually verified outdated"/></div><div class="rowBtns" style="margin-top:10px"><button class="btn primary" id="applyManualState">Apply status</button>'+quick+'</div></div><div class="timeline">'+timeline+'</div>';document.getElementById('leadClose').onclick=()=>closeOverlay('leadDetailOverlay');document.getElementById('applyManualState').onclick=()=>manualLeadStateUi(id);const dq=document.getElementById('leadDisqualify');if(dq)dq.onclick=()=>disqualifyLeadUi(id);const rs=document.getElementById('leadRestore');if(rs)rs.onclick=()=>restoreLeadUi(id);document.getElementById('leadDetailOverlay').classList.add('open')}catch(e){showError(e)}}
+async function openLead(enc){try{const id=decodeURIComponent(enc),[d,e]=await Promise.all([api('/api/leads/'+encodeURIComponent(id)),api('/api/leads/'+encodeURIComponent(id)+'/events')]),l=d.lead,events=e.events||[],states=d.manualStateOptions||[];const details=[['Industry',l.industry],['Location',l.city+', '+l.state],['Phone',l.phone||'\u2014'],['Email',l.email||'\u2014'],['Website',l.website||'\u2014'],['Website status',l.website_status||'UNKNOWN'],['Website quality',l.website_quality||'UNKNOWN'],['Website gap',l.website_gap_status||'UNKNOWN'],['Gap reason',l.website_gap_reason||'\u2014'],['Google rating',l.google_rating??'\u2014'],['Reviews',l.google_reviews??'\u2014'],['Validation',l.validation_status||'PENDING'],['Sources',l.research_source_count??0],['Score',l.opportunity_score??'\u2014'],['Priority',l.priority||'\u2014'],['Qualification',l.qualification_reason||'\u2014'],['Outreach',l.outreach_eligible?'Eligible':'LOCKED'],['State',l.current_state],['Last manual change',l.manual_state_reason||'\u2014']].map(x=>'<div class="detailItem"><b>'+esc(x[0])+'</b>'+esc(x[1])+'</div>').join('');const timeline=events.map(ev=>'<div class="event"><div class="eventHead"><b>'+esc(ev.event_type)+'</b><span class="muted">'+esc(new Date(ev.created_at).toLocaleString())+'</span></div><div class="eventData">'+esc(ev.old_state&&ev.new_state?(ev.old_state+' \u2192 '+ev.new_state):'')+(ev.event_data_json&&ev.event_data_json!=='{}'?'<br>'+esc(ev.event_data_json):'')+'</div></div>').join('');const opts=states.map(x=>'<option value="'+esc(x)+'" '+(x===l.current_state?'selected':'')+'>'+esc(x)+'</option>').join('');const quick=l.current_state==='DISQUALIFIED'?'<button class="btn good" id="leadRestore">Restore to human review</button>':'<button class="btn danger" id="leadDisqualify">Disqualify</button>';document.getElementById('leadDetail').innerHTML='<div style="display:flex;justify-content:space-between;gap:12px"><div><h2>'+esc(l.business_name)+'</h2><div class="muted">'+esc(l.id)+'</div></div><button class="btn small" id="leadClose">Close</button></div><div class="detailGrid">'+details+'</div><div style="border:1px solid var(--line);border-radius:9px;padding:12px;margin:12px 0"><div style="font-weight:800;margin-bottom:8px">Manual lead control</div><div class="sub">Manual changes are audited. Disqualifying cancels active outreach/follow-ups/demo jobs. Setting an advanced state can explicitly override the website-gap gate.</div><div class="grid2" style="display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-top:10px"><select id="manualLeadState" style="background:#0d0f13;border:1px solid var(--line);color:var(--text);padding:9px;border-radius:8px">'+opts+'</select><input id="manualLeadReason" style="background:#0d0f13;border:1px solid var(--line);color:var(--text);padding:9px;border-radius:8px" placeholder="Reason required, e.g. website manually verified outdated"/></div><div class="rowBtns" style="margin-top:10px"><button class="btn primary" id="applyManualState">Apply status</button>'+quick+'</div></div><div id="leadQuotes" style="border:1px solid var(--line);border-radius:9px;padding:12px;margin:12px 0"><div class="muted">Loading quotes\u2026</div></div><div class="timeline">'+timeline+'</div>';document.getElementById('leadClose').onclick=()=>closeOverlay('leadDetailOverlay');document.getElementById('applyManualState').onclick=()=>manualLeadStateUi(id);const dq=document.getElementById('leadDisqualify');if(dq)dq.onclick=()=>disqualifyLeadUi(id);const rs=document.getElementById('leadRestore');if(rs)rs.onclick=()=>restoreLeadUi(id);loadLeadQuotes(id);document.getElementById('leadDetailOverlay').classList.add('open')}catch(e){showError(e)}}
 async function manualLeadStateUi(id){try{const to=document.getElementById('manualLeadState').value,reason=document.getElementById('manualLeadReason').value.trim();if(!reason)throw new Error('Enter a reason for the manual status change.');if(!confirm('Set this lead to '+to+'? This is an audited admin override.'))return;await api('/api/leads/'+encodeURIComponent(id)+'/manual-state',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({to,reason})});closeOverlay('leadDetailOverlay');await refreshAll()}catch(e){showError(e)}}
 async function disqualifyLeadUi(id){try{const reasons=['Modern / good website \u2014 no opportunity','Wrong industry','Outside target geography','Poor reputation','Franchise / too large','Duplicate','Closed / not operating','Bad contact information','Not a fit','Other'],choice=prompt('Disqualification reason:\\n\\n'+reasons.map((x,i)=>(i+1)+'. '+x).join('\\n')+'\\n\\nType a number or your own reason:','1');if(choice===null)return;const n=Number(choice),reason=Number.isInteger(n)&&n>=1&&n<=reasons.length?reasons[n-1]:choice.trim();if(!reason)throw new Error('A reason is required.');await api('/api/leads/'+encodeURIComponent(id)+'/manual-state',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({to:'DISQUALIFIED',reason})});closeOverlay('leadDetailOverlay');await refreshAll()}catch(e){showError(e)}}
 async function restoreLeadUi(id){try{const reason=prompt('Why are you restoring this lead?','Restore for manual review / re-check website gap');if(reason===null)return;await api('/api/leads/'+encodeURIComponent(id)+'/restore',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:JSON.stringify({reason})});closeOverlay('leadDetailOverlay');await refreshAll()}catch(e){showError(e)}}
 async function reAuditWebsiteGapsUi(){try{if(!confirm('Re-audit existing early-stage leads using the new hard website-gap rule? Modern/good sites will be disqualified. Manually overridden leads will be preserved.'))return;const d=await api('/api/leads/website-gap/re-audit',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});alert('Website-gap re-audit complete. Scanned '+d.scanned+' \xB7 eligible '+d.eligible+' \xB7 disqualified '+d.disqualified+' \xB7 review '+d.review+' \xB7 unchanged '+d.unchanged);await refreshAll()}catch(e){showError(e)}}
 function openImport(){document.getElementById('importOverlay').classList.add('open');if(!document.getElementById('importJson').value.trim())loadSampleImport()}function loadSampleImport(){document.getElementById('importJson').value=JSON.stringify({source:'MANUAL_TEST',prospects:[{externalId:'sample-tree-002',businessName:'Sample Tree Service',industry:'Tree Service',city:'Murfreesboro',state:'TN',phone:'6155550101',phoneType:'MOBILE',websiteQuality:'NONE',googleUrl:'https://example.com/google-profile',googleRating:4.9,googleReviewCount:180,isOperating:true,isLocalIndependent:true,isSupplier:false,isFranchiseHq:false,primaryService:'Tree Removal',services:['Tree Removal'],sources:[{url:'https://example.com/google-profile',type:'GOOGLE_BUSINESS'}],researchConfidence:.95}]},null,2)}async function importProspects(){try{const d=await api('/api/prospects/import',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:document.getElementById('importJson').value});closeOverlay('importOverlay');await refreshAll();alert('Received '+d.received+' \xB7 accepted '+d.accepted+' \xB7 duplicates '+d.duplicates+' \xB7 rejected '+d.rejected)}catch(e){showError(e)}}
 async function toggleGlobal(){if(!globalPaused&&!confirm('Pause ALL Trenches automation?'))return;try{await api(globalPaused?'/api/system/resume':'/api/system/pause',{method:'POST',headers:{'X-Actor':'COMMAND_CENTER'},body:'{}'});await refreshAll()}catch(e){showError(e)}}
-if(adminKey){document.getElementById('login').style.display='none';refreshAll().catch(()=>logout())}else{document.getElementById('keyInput').addEventListener('keydown',e=>{if(e.key==='Enter')login()})}setInterval(()=>{if(adminKey){loadRunner().catch(()=>{});loadCampaigns().catch(()=>{});loadProspectorJobs().catch(()=>{});loadOutreach().catch(()=>{});loadEmailOutreach().catch(()=>{});loadConversation().catch(()=>{});loadDemos().catch(()=>{});loadOperatorDesk().catch(()=>{});loadLaunchBoard().catch(()=>{})}},15000);
+(function(){try{const p=new URLSearchParams(location.search),state=p.get('state'),q=p.get('q');if(state)document.getElementById('stateFilter').value=state;if(q)document.getElementById('search').value=q}catch(e){}})();
+applyModeVisibility();
+if(adminKey){document.getElementById('login').style.display='none';refreshAll().then(applyDeepLink).catch(()=>logout())}else{document.getElementById('keyInput').addEventListener('keydown',e=>{if(e.key==='Enter')login()})}setInterval(()=>{if(adminKey){loadRunner().catch(()=>{});loadCampaigns().catch(()=>{});loadProspectorJobs().catch(()=>{});loadOutreach().catch(()=>{});loadEmailOutreach().catch(()=>{});loadConversation().catch(()=>{});loadDemos().catch(()=>{});loadOperatorDesk().catch(()=>{});loadLaunchBoard().catch(()=>{});loadQuotes().catch(()=>{})}},15000);
 <\/script>
 </body></html>`])));
 }
@@ -1546,6 +1622,10 @@ function parseDiscoveryBatch(body) {
 }
 __name(parseDiscoveryBatch, "parseDiscoveryBatch");
 function parseProspectorJobCreate(body) {
+  const offeringRaw = optionalString(body.offering, "offering", 20);
+  if (offeringRaw && !["WEBSITE", "CONCIERGE"].includes(offeringRaw.toUpperCase())) {
+    throw new HttpError(400, "VALIDATION_ERROR", "offering must be WEBSITE or CONCIERGE.");
+  }
   return {
     city: requiredString(body.city, "city", 120),
     state: requiredString(body.state, "state", 40),
@@ -1553,7 +1633,8 @@ function parseProspectorJobCreate(body) {
     radiusMiles: optionalNumber(body.radiusMiles, "radiusMiles", 1, 100),
     targetCount: optionalNumber(body.targetCount, "targetCount", 1, 300),
     cadenceDays: optionalNumber(body.cadenceDays, "cadenceDays", 1, 365),
-    active: optionalBoolean(body.active, "active")
+    active: optionalBoolean(body.active, "active"),
+    offering: offeringRaw?.toUpperCase()
   };
 }
 __name(parseProspectorJobCreate, "parseProspectorJobCreate");
@@ -1579,11 +1660,11 @@ function normalizedText2(value) {
   return (value ?? "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
 __name(normalizedText2, "normalizedText");
-function treeTargetMatch(text) {
+function treeTargetMatch(text2) {
   const exact = ["tree service", "tree removal", "tree trimming", "tree care", "arborist", "stump grinding", "stump removal", "tree surgery"];
   const adjacent = ["landscap", "land clearing", "brush clearing", "forestry", "lot clearing", "outdoor"];
-  if (exact.some((term) => text.includes(term))) return "MATCH";
-  if (adjacent.some((term) => text.includes(term))) return "ADJACENT";
+  if (exact.some((term) => text2.includes(term))) return "MATCH";
+  if (adjacent.some((term) => text2.includes(term))) return "ADJACENT";
   return "OFF_TARGET";
 }
 __name(treeTargetMatch, "treeTargetMatch");
@@ -1674,12 +1755,12 @@ async function getCampaignView(db, id) {
   return { ...row, ...metrics, geography: parseGeography(row.geography_json), provider_usage: await providerUsage(db, id) };
 }
 __name(getCampaignView, "getCampaignView");
-async function listCampaigns(db, limit = 100, archived = false) {
+async function listCampaigns(db, limit = 100, archived = false, offering) {
   const rows = await db.prepare(`
     SELECT * FROM prospecting_campaigns
-    WHERE ${archived ? "archived_at IS NOT NULL" : "archived_at IS NULL"}
+    WHERE ${archived ? "archived_at IS NOT NULL" : "archived_at IS NULL"} ${offering ? "AND offering = ?" : ""}
     ORDER BY created_at DESC LIMIT ?
-  `).bind(limit).all();
+  `).bind(...offering ? [offering, limit] : [limit]).all();
   const out = [];
   for (const row of rows.results) {
     const metrics = await campaignMetrics(db, row.id);
@@ -1698,8 +1779,8 @@ async function createCampaign(db, input, actor) {
   await db.prepare(`
     INSERT INTO prospecting_campaigns (
       id, industry, geography_json, geography_mode, center_location, radius_miles, provider, discovery_provider, enrichment_provider, fallback_enabled, status, requested_count, raw_count, ingested_count,
-      qualified_count, notes, created_at, updated_at, min_rating, min_reviews, model, updated_by, last_stage
-    ) VALUES (?, ?, ?, ?, ?, ?, 'PROVIDER_ROUTER_V19', ?, ?, ?, 'READY', ?, 0, 0, 0, ?, ?, ?, ?, ?, ?, ?, 'DISCOVERY')
+      qualified_count, notes, created_at, updated_at, min_rating, min_reviews, model, updated_by, last_stage, offering
+    ) VALUES (?, ?, ?, ?, ?, ?, 'PROVIDER_ROUTER_V19', ?, ?, ?, 'READY', ?, 0, 0, 0, ?, ?, ?, ?, ?, ?, ?, 'DISCOVERY', ?)
   `).bind(
     id,
     input.industry,
@@ -1717,7 +1798,8 @@ async function createCampaign(db, input, actor) {
     input.minRating ?? null,
     input.minReviews ?? null,
     input.model ?? "sonnet",
-    actor
+    actor,
+    input.offering ?? "WEBSITE"
   ).run();
   const campaign = await getCampaignView(db, id);
   if (!campaign) throw new Error("Campaign was not persisted.");
@@ -2063,8 +2145,8 @@ async function getFlagInt(db, key, fallback) {
   return Number.isFinite(parsed) ? parsed : fallback;
 }
 __name(getFlagInt, "getFlagInt");
-async function listProspectorJobs(db) {
-  const rows = await db.prepare("SELECT * FROM prospector_jobs ORDER BY active DESC, city ASC, category ASC").all();
+async function listProspectorJobs(db, offering) {
+  const rows = await db.prepare(`SELECT * FROM prospector_jobs ${offering ? "WHERE offering = ?" : ""} ORDER BY active DESC, city ASC, category ASC`).bind(...offering ? [offering] : []).all();
   return rows.results;
 }
 __name(listProspectorJobs, "listProspectorJobs");
@@ -2073,8 +2155,8 @@ async function createProspectorJob(db, input) {
   const now = nowIso();
   try {
     await db.prepare(`
-      INSERT INTO prospector_jobs (id, city, state, category, radius_miles, target_count, cadence_days, active, created_at, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO prospector_jobs (id, city, state, category, radius_miles, target_count, cadence_days, active, created_at, updated_at, offering)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).bind(
       id,
       input.city.trim(),
@@ -2085,7 +2167,8 @@ async function createProspectorJob(db, input) {
       input.cadenceDays ?? 21,
       input.active === false ? 0 : 1,
       now,
-      now
+      now,
+      input.offering ?? "WEBSITE"
     ).run();
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
@@ -2106,17 +2189,20 @@ async function setProspectorJobActive(db, id, active) {
   return row;
 }
 __name(setProspectorJobActive, "setProspectorJobActive");
-async function runDueProspectorJobs(db, env) {
-  const enabledRow = await db.prepare(`SELECT value FROM system_flags WHERE key = 'PROSPECTOR_ORCHESTRATOR_ENABLED'`).first();
-  if (enabledRow && enabledRow.value === "false") return { ran: false, reason: "DISABLED", created: [] };
+var OFFERING_FLAG_KEYS = {
+  WEBSITE: { dailyCap: "PROSPECTOR_JOBS_PER_DAY", maxBacklog: "PROSPECTOR_JOBS_MAX_BACKLOG" },
+  CONCIERGE: { dailyCap: "PROSPECTOR_JOBS_PER_DAY_CONCIERGE", maxBacklog: "PROSPECTOR_JOBS_MAX_BACKLOG_CONCIERGE" }
+};
+async function runDueProspectorJobsForOffering(db, offering) {
+  const flagKeys = OFFERING_FLAG_KEYS[offering];
   const [dailyCap, maxBacklog] = await Promise.all([
-    getFlagInt(db, "PROSPECTOR_JOBS_PER_DAY", 6),
-    getFlagInt(db, "PROSPECTOR_JOBS_MAX_BACKLOG", 20)
+    getFlagInt(db, flagKeys.dailyCap, 6),
+    getFlagInt(db, flagKeys.maxBacklog, 20)
   ]);
   const since = new Date(Date.now() - 24 * 60 * 60 * 1e3).toISOString();
   const [runToday, backlog] = await Promise.all([
-    db.prepare("SELECT COUNT(*) AS count FROM prospector_jobs WHERE last_run_at >= ?").bind(since).first(),
-    db.prepare(`SELECT COUNT(*) AS count FROM prospecting_campaigns WHERE status IN ('READY','RUNNING') AND archived_at IS NULL`).first()
+    db.prepare("SELECT COUNT(*) AS count FROM prospector_jobs WHERE offering = ? AND last_run_at >= ?").bind(offering, since).first(),
+    db.prepare(`SELECT COUNT(*) AS count FROM prospecting_campaigns WHERE offering = ? AND status IN ('READY','RUNNING') AND archived_at IS NULL`).bind(offering).first()
   ]);
   const runTodayCount = runToday?.count ?? 0;
   const backlogCount = backlog?.count ?? 0;
@@ -2127,10 +2213,10 @@ async function runDueProspectorJobs(db, env) {
   if (slots === 0) return { ran: false, reason: "BACKLOG_FULL", created: [] };
   const due = await db.prepare(`
     SELECT * FROM prospector_jobs
-    WHERE active = 1 AND (last_run_at IS NULL OR last_run_at <= datetime('now', '-' || cadence_days || ' days'))
+    WHERE offering = ? AND active = 1 AND (last_run_at IS NULL OR last_run_at <= datetime('now', '-' || cadence_days || ' days'))
     ORDER BY (last_run_at IS NOT NULL), last_run_at ASC
     LIMIT ?
-  `).bind(slots).all();
+  `).bind(offering, slots).all();
   const created = [];
   for (const job of due.results) {
     let campaign;
@@ -2140,7 +2226,8 @@ async function runDueProspectorJobs(db, env) {
         centerLocation: `${job.city}, ${job.state}`,
         radiusMiles: job.radius_miles,
         targetCount: job.target_count,
-        notes: `Auto-created by prospector orchestrator (job ${job.id}).`
+        notes: `Auto-created by prospector orchestrator (job ${job.id}, ${offering}).`,
+        offering
       }, "PROSPECTOR_ORCHESTRATOR");
     } catch (error) {
       await db.prepare("UPDATE prospector_jobs SET updated_at = ? WHERE id = ?").bind(nowIso(), job.id).run();
@@ -2151,6 +2238,20 @@ async function runDueProspectorJobs(db, env) {
   }
   if (created.length === 0) return { ran: false, reason: "NO_DUE_JOBS", created: [] };
   return { ran: true, created };
+}
+__name(runDueProspectorJobsForOffering, "runDueProspectorJobsForOffering");
+async function runDueProspectorJobs(db, env) {
+  void env;
+  const enabledRow = await db.prepare(`SELECT value FROM system_flags WHERE key = 'PROSPECTOR_ORCHESTRATOR_ENABLED'`).first();
+  if (enabledRow && enabledRow.value === "false") {
+    const disabled = { ran: false, reason: "DISABLED", created: [] };
+    return { website: disabled, concierge: disabled };
+  }
+  const [website, concierge] = await Promise.all([
+    runDueProspectorJobsForOffering(db, "WEBSITE"),
+    runDueProspectorJobsForOffering(db, "CONCIERGE")
+  ]);
+  return { website, concierge };
 }
 __name(runDueProspectorJobs, "runDueProspectorJobs");
 
@@ -2707,10 +2808,10 @@ function cleanNewlines(value) {
 }
 __name(cleanNewlines, "cleanNewlines");
 function stripTrailingSignoff(value) {
-  let text = cleanNewlines(value);
-  text = text.replace(/\n{0,2}(?:[-—–]\s*)?Connor\.?\s*$/i, "").trim();
-  text = text.replace(/\n{1,2}(?:best(?: regards)?|regards|sincerely|cheers|thanks|thank you)[,!]?\s*(?:\n\s*(?:[-—–]\s*)?Connor\.?)?\s*$/i, "").trim();
-  return text;
+  let text2 = cleanNewlines(value);
+  text2 = text2.replace(/\n{0,2}(?:[-—–]\s*)?Connor\.?\s*$/i, "").trim();
+  text2 = text2.replace(/\n{1,2}(?:best(?: regards)?|regards|sincerely|cheers|thanks|thank you)[,!]?\s*(?:\n\s*(?:[-—–]\s*)?Connor\.?)?\s*$/i, "").trim();
+  return text2;
 }
 __name(stripTrailingSignoff, "stripTrailingSignoff");
 function truncateWithoutBreakingWord(value, maxLength) {
@@ -2720,37 +2821,14 @@ function truncateWithoutBreakingWord(value, maxLength) {
   return (lastSpace > Math.max(12, Math.floor(maxLength * 0.65)) ? slice.slice(0, lastSpace) : slice).trimEnd();
 }
 __name(truncateWithoutBreakingWord, "truncateWithoutBreakingWord");
-function firstNameFromOwnerName(ownerName) {
-  const cleaned = (ownerName || "").trim().replace(/\s+/g, " ");
-  if (!cleaned) return void 0;
-  const first = cleaned.split(" ")[0]?.replace(/^[^A-Za-zÀ-ÖØ-öø-ÿ'-]+|[^A-Za-zÀ-ÖØ-öø-ÿ'-]+$/g, "");
-  return first || void 0;
-}
-__name(firstNameFromOwnerName, "firstNameFromOwnerName");
-function formatEmailCorrespondence(body, firstName) {
-  let text = stripTrailingSignoff(body);
-  if (firstName) {
-    text = text.replace(/^hey\s*(?:[—–-]|,)\s*/i, "").trimStart();
-    if (text) text = text.charAt(0).toUpperCase() + text.slice(1);
-    const escaped = firstName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const alreadyNamed = new RegExp(`^${escaped}\\s*,`, "i").test(text);
-    if (!alreadyNamed) text = `${firstName},
-
-${text}`;
-  }
-  return `${text.trim()}
-
-${PERSONAL_SIGNATURE}`;
-}
-__name(formatEmailCorrespondence, "formatEmailCorrespondence");
 function formatSmsCorrespondence(body, maxLength = 1600) {
-  let text = stripTrailingSignoff(body);
+  let text2 = stripTrailingSignoff(body);
   const suffix = `
 
 ${PERSONAL_SIGNATURE}`;
   const available = Math.max(0, maxLength - suffix.length);
-  text = truncateWithoutBreakingWord(text, available);
-  return `${text}${suffix}`;
+  text2 = truncateWithoutBreakingWord(text2, available);
+  return `${text2}${suffix}`;
 }
 __name(formatSmsCorrespondence, "formatSmsCorrespondence");
 
@@ -2802,22 +2880,22 @@ function formString(form, name) {
 }
 __name(formString, "formString");
 function classifyInbound(body, optOutType) {
-  const text = body.trim().toLowerCase();
+  const text2 = body.trim().toLowerCase();
   const oot = (optOutType || "").toUpperCase();
-  if (oot === "STOP" || /^(stop|stopall|unsubscribe|cancel|end|quit|revoke|optout)$/i.test(text)) return "OPT_OUT";
-  if (oot === "START" || /^(start|unstop)$/i.test(text)) return "OPT_IN";
-  if (oot === "HELP" || /^(help|info)$/i.test(text)) return "HELP";
-  if (/\b(lawyer|attorney|report you|reporting you|harassment|harassing|pissed|angry|furious|sue|lawsuit)\b/i.test(text)) return "ANGRY";
-  if (/\b(already have (a )?(website|site)|we have (a )?(website|site)|got (a )?(website|site)|have our own site)\b/i.test(text)) return "HAS_WEBSITE";
-  if (/\b(not interested|no thanks|no thank you|don't contact|do not contact|leave me alone)\b/i.test(text)) return "NOT_INTERESTED";
-  if (/\b(how much|price|pricing|cost|rate|rates)\b/i.test(text)) return "PRICE";
-  if (/\b(who is this|who are you|what company|who's this)\b/i.test(text)) return "WHO_IS_THIS";
-  if (/\b(call me|give me a call|phone me|can you call)\b/i.test(text)) return "CALL_ME";
-  if (/\b(bot|robot|automated|automation|ai|artificial intelligence|real person|human)\b/i.test(text) && /\b(are you|is this|this a|you a|automated|automation|bot|robot|ai|human|real person)\b/i.test(text)) return "AUTOMATION_QUESTION";
-  if (/\b(scam|fake|spam|legit|legitimate|what(?:'s| is) the catch|whats the catch|is there a catch|too good to be true|why (?:is|would) (?:it|this) free|why free|how do you make money|what do you get out of this)\b/i.test(text)) return "SKEPTICAL";
-  if (/^(yes|yeah|yep|yup|sure|okay|ok|absolutely|go ahead|why not|interested|sounds good|send it|please do|do it|let's do it|lets do it)\b/i.test(text)) return "INTERESTED";
-  if (text.includes("?")) return "QUESTION";
-  return text ? "UNKNOWN" : "UNKNOWN";
+  if (oot === "STOP" || /^(stop|stopall|unsubscribe|cancel|end|quit|revoke|optout)$/i.test(text2)) return "OPT_OUT";
+  if (oot === "START" || /^(start|unstop)$/i.test(text2)) return "OPT_IN";
+  if (oot === "HELP" || /^(help|info)$/i.test(text2)) return "HELP";
+  if (/\b(lawyer|attorney|report you|reporting you|harassment|harassing|pissed|angry|furious|sue|lawsuit)\b/i.test(text2)) return "ANGRY";
+  if (/\b(already have (a )?(website|site)|we have (a )?(website|site)|got (a )?(website|site)|have our own site)\b/i.test(text2)) return "HAS_WEBSITE";
+  if (/\b(not interested|no thanks|no thank you|don't contact|do not contact|leave me alone)\b/i.test(text2)) return "NOT_INTERESTED";
+  if (/\b(how much|price|pricing|cost|rate|rates)\b/i.test(text2)) return "PRICE";
+  if (/\b(who is this|who are you|what company|who's this)\b/i.test(text2)) return "WHO_IS_THIS";
+  if (/\b(call me|give me a call|phone me|can you call)\b/i.test(text2)) return "CALL_ME";
+  if (/\b(bot|robot|automated|automation|ai|artificial intelligence|real person|human)\b/i.test(text2) && /\b(are you|is this|this a|you a|automated|automation|bot|robot|ai|human|real person)\b/i.test(text2)) return "AUTOMATION_QUESTION";
+  if (/\b(scam|fake|spam|legit|legitimate|what(?:'s| is) the catch|whats the catch|is there a catch|too good to be true|why (?:is|would) (?:it|this) free|why free|how do you make money|what do you get out of this)\b/i.test(text2)) return "SKEPTICAL";
+  if (/^(yes|yeah|yep|yup|sure|okay|ok|absolutely|go ahead|why not|interested|sounds good|send it|please do|do it|let's do it|lets do it)\b/i.test(text2)) return "INTERESTED";
+  if (text2.includes("?")) return "QUESTION";
+  return text2 ? "UNKNOWN" : "UNKNOWN";
 }
 __name(classifyInbound, "classifyInbound");
 async function findLeadByPhone(db, phone) {
@@ -3028,10 +3106,10 @@ async function buildLeadOpener(db, lead) {
   const research = await db.prepare("SELECT primary_service FROM lead_research WHERE lead_id = ? LIMIT 1").bind(lead.id).first();
   let service = (research?.primary_service || lead.industry || "service").trim().toLowerCase();
   if (service.length > 44) service = service.slice(0, 44).trim();
-  let text = `Hey, do y'all still do ${service} in ${lead.city}? Found you on Google.`;
-  text = formatSmsCorrespondence(text, 160);
-  if (text.length > 160) text = formatSmsCorrespondence(`Hey, do y'all still work in ${lead.city}? Found you on Google.`, 160);
-  return text;
+  let text2 = `Hey, do y'all still do ${service} in ${lead.city}? Found you on Google.`;
+  text2 = formatSmsCorrespondence(text2, 160);
+  if (text2.length > 160) text2 = formatSmsCorrespondence(`Hey, do y'all still work in ${lead.city}? Found you on Google.`, 160);
+  return text2;
 }
 __name(buildLeadOpener, "buildLeadOpener");
 
@@ -3323,6 +3401,7 @@ async function enrollLeadInSmartlead(env, lead, track, postalAddress) {
 __name(enrollLeadInSmartlead, "enrollLeadInSmartlead");
 
 // src/concierge.ts
+var CONCIERGE_CAL_URL2 = "https://cal.com/trenchesgroup/ai-discovery-call";
 var DISQUALIFIED_FOR_GOOD_WEBSITE_PATTERNS = [
   "%Modern website%",
   "%Average functional website%",
@@ -3350,175 +3429,23 @@ async function enrollEligibleConciergeLeads(env, limit, postalAddress) {
   return enrolled;
 }
 __name(enrollEligibleConciergeLeads, "enrollEligibleConciergeLeads");
+async function conciergeStatus(db) {
+  const [eligible, sequences] = await Promise.all([
+    db.prepare(`
+      SELECT COUNT(*) AS n FROM leads l
+      WHERE l.current_state='DISQUALIFIED'
+        AND (${DISQUALIFIED_FOR_GOOD_WEBSITE_PATTERNS.map(() => "l.qualification_reason LIKE ?").join(" OR ")})
+        AND l.email IS NOT NULL AND trim(l.email)<>''
+        AND l.email_verified=1
+        AND NOT EXISTS(SELECT 1 FROM outreach_sequences q WHERE q.lead_id=l.id AND q.status IN ('ACTIVE','PAUSED'))
+    `).bind(...DISQUALIFIED_FOR_GOOD_WEBSITE_PATTERNS).first(),
+    db.prepare(`SELECT q.*, l.business_name FROM outreach_sequences q JOIN leads l ON l.id=q.lead_id WHERE q.strategy='SMARTLEAD_CONCIERGE' ORDER BY q.created_at DESC LIMIT 50`).all()
+  ]);
+  return { stillEligible: eligible?.n ?? 0, sequences: sequences.results, bookingUrl: CONCIERGE_CAL_URL2 };
+}
+__name(conciergeStatus, "conciergeStatus");
 
 // src/email.ts
-function bytesToBase64Url(bytes) {
-  let binary = "";
-  for (const byte of bytes) binary += String.fromCharCode(byte);
-  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
-}
-__name(bytesToBase64Url, "bytesToBase64Url");
-function base64UrlToArrayBuffer(value) {
-  const padded = value.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat((4 - value.length % 4) % 4);
-  const binary = atob(padded);
-  const buffer = new ArrayBuffer(binary.length);
-  const out = new Uint8Array(buffer);
-  for (let i = 0; i < binary.length; i += 1) out[i] = binary.charCodeAt(i);
-  return buffer;
-}
-__name(base64UrlToArrayBuffer, "base64UrlToArrayBuffer");
-function utf8ToBase64Url(value) {
-  return bytesToBase64Url(new TextEncoder().encode(value));
-}
-__name(utf8ToBase64Url, "utf8ToBase64Url");
-function cleanHeader(value) {
-  return value.replace(/[\r\n]+/g, " ").trim();
-}
-__name(cleanHeader, "cleanHeader");
-var GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
-var GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
-var GMAIL_API = "https://gmail.googleapis.com/gmail/v1/users/me";
-var GMAIL_SEND_SCOPE = "https://www.googleapis.com/auth/gmail.send";
-var LIVE_REPLY_CONNECTION_ID = "live_reply";
-function envSecret(env, key) {
-  const value = env[key];
-  if (!value) throw new HttpError(503, "OUTREACH_SECRET_MISSING", `${key} is not configured.`);
-  return value;
-}
-__name(envSecret, "envSecret");
-async function encryptionKey(env) {
-  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(envSecret(env, "CREDENTIAL_ENCRYPTION_KEY")));
-  return await crypto.subtle.importKey("raw", digest, { name: "AES-GCM" }, false, ["encrypt", "decrypt"]);
-}
-__name(encryptionKey, "encryptionKey");
-async function encryptSecret(env, value) {
-  const iv = crypto.getRandomValues(new Uint8Array(12));
-  const ciphertext = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await encryptionKey(env), new TextEncoder().encode(value)));
-  return `${bytesToBase64Url(iv)}.${bytesToBase64Url(ciphertext)}`;
-}
-__name(encryptSecret, "encryptSecret");
-async function decryptSecret(env, value) {
-  const [ivRaw, cipherRaw] = value.split(".");
-  if (!ivRaw || !cipherRaw) throw new HttpError(500, "CREDENTIAL_DECRYPT_FAILED", "Stored credential is invalid.");
-  const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: base64UrlToArrayBuffer(ivRaw) }, await encryptionKey(env), base64UrlToArrayBuffer(cipherRaw));
-  return new TextDecoder().decode(plain);
-}
-__name(decryptSecret, "decryptSecret");
-async function getGoogleCredentialRow(db) {
-  return await db.prepare(`SELECT client_id, encrypted_client_secret FROM outreach_provider_credentials WHERE provider='GOOGLE_GMAIL'`).first();
-}
-__name(getGoogleCredentialRow, "getGoogleCredentialRow");
-async function getLiveReplyConnection(db) {
-  return await db.prepare(`SELECT * FROM gmail_connections WHERE id=?`).bind(LIVE_REPLY_CONNECTION_ID).first();
-}
-__name(getLiveReplyConnection, "getLiveReplyConnection");
-async function startLiveReplyOAuth(db, env) {
-  const creds = await getGoogleCredentialRow(db);
-  if (!creds?.client_id || !creds.encrypted_client_secret) throw new HttpError(409, "GOOGLE_OAUTH_NOT_CONFIGURED", "Google OAuth client is not configured.");
-  const state = crypto.randomUUID();
-  const ts = nowIso();
-  const expires = new Date(Date.now() + 10 * 6e4).toISOString();
-  await db.prepare(`INSERT INTO oauth_states(state,provider,expires_at,created_at) VALUES(?,'LIVE_REPLY_GMAIL',?,?)`).bind(state, expires, ts).run();
-  const callbackUrl = `${env.PUBLIC_BASE_URL}/integrations/gmail/oauth/callback`;
-  const params = new URLSearchParams({
-    client_id: creds.client_id,
-    redirect_uri: callbackUrl,
-    response_type: "code",
-    scope: GMAIL_SEND_SCOPE,
-    access_type: "offline",
-    prompt: "consent",
-    include_granted_scopes: "true",
-    login_hint: "connor.trenches@discovertrenchesgroup.com",
-    state
-  });
-  return { authUrl: `${GOOGLE_AUTH_URL}?${params.toString()}`, callbackUrl };
-}
-__name(startLiveReplyOAuth, "startLiveReplyOAuth");
-async function exchangeLiveReplyAuthorizationCode(db, env, code) {
-  const creds = await getGoogleCredentialRow(db);
-  if (!creds?.client_id || !creds.encrypted_client_secret) throw new HttpError(409, "GOOGLE_OAUTH_NOT_CONFIGURED", "Google OAuth client is not configured.");
-  const clientSecret = await decryptSecret(env, creds.encrypted_client_secret);
-  const response = await fetch(GOOGLE_TOKEN_URL, {
-    method: "POST",
-    headers: { "content-type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({
-      code,
-      client_id: creds.client_id,
-      client_secret: clientSecret,
-      redirect_uri: `${env.PUBLIC_BASE_URL}/integrations/gmail/oauth/callback`,
-      grant_type: "authorization_code"
-    }).toString()
-  });
-  const data = await response.json();
-  if (!response.ok || typeof data.access_token !== "string") throw new HttpError(502, "GOOGLE_OAUTH_EXCHANGE_FAILED", String(data.error_description || data.error || "Google OAuth exchange failed."));
-  if (typeof data.refresh_token !== "string") throw new HttpError(409, "GOOGLE_REFRESH_TOKEN_MISSING", "Google did not return a refresh token. Reconnect and approve offline access.");
-  return { accessToken: data.access_token, refreshToken: data.refresh_token };
-}
-__name(exchangeLiveReplyAuthorizationCode, "exchangeLiveReplyAuthorizationCode");
-async function handleLiveReplyOAuthCallback(request, env) {
-  const url = new URL(request.url);
-  const state = url.searchParams.get("state") || "";
-  const code = url.searchParams.get("code") || "";
-  const error = url.searchParams.get("error");
-  if (error) return new Response(`<h1>Live-reply mailbox connection failed</h1><p>${cleanHeader(error)}</p>`, { status: 400, headers: { "content-type": "text/html; charset=utf-8" } });
-  const stateRow = await env.DB.prepare(`SELECT state,expires_at FROM oauth_states WHERE state=? AND provider='LIVE_REPLY_GMAIL'`).bind(state).first();
-  if (!stateRow || new Date(stateRow.expires_at).getTime() < Date.now()) throw new HttpError(400, "OAUTH_STATE_INVALID", "OAuth state is invalid or expired.");
-  await env.DB.prepare(`DELETE FROM oauth_states WHERE state=?`).bind(state).run();
-  if (!code) throw new HttpError(400, "OAUTH_CODE_MISSING", "Google did not provide an authorization code.");
-  const token = await exchangeLiveReplyAuthorizationCode(env.DB, env, code);
-  const profileResponse = await fetch(`${GMAIL_API}/profile`, { headers: { authorization: `Bearer ${token.accessToken}` } });
-  const profile = await profileResponse.json();
-  if (!profileResponse.ok || typeof profile.emailAddress !== "string") throw new HttpError(502, "GMAIL_PROFILE_FAILED", "Could not read the connected mailbox profile.");
-  const connectedEmail = profile.emailAddress.toLowerCase();
-  const ts = nowIso();
-  await env.DB.prepare(`
-    INSERT INTO gmail_connections(id,email_address,encrypted_refresh_token,scopes,status,connected_at,last_error,updated_at)
-    VALUES(?,?,?,?,'CONNECTED',?,NULL,?)
-    ON CONFLICT(id) DO UPDATE SET email_address=excluded.email_address,encrypted_refresh_token=excluded.encrypted_refresh_token,scopes=excluded.scopes,status='CONNECTED',last_error=NULL,updated_at=excluded.updated_at
-  `).bind(LIVE_REPLY_CONNECTION_ID, connectedEmail, await encryptSecret(env, token.refreshToken), GMAIL_SEND_SCOPE, ts, ts).run();
-  await recordEvent(env.DB, { eventId: newId("evt"), eventType: "LIVE_REPLY_MAILBOX_CONNECTED", eventData: { email: connectedEmail }, source: "LIVE_REPLY", actor: "ADMIN" });
-  const mismatchWarning = connectedEmail !== "connor.trenches@discovertrenchesgroup.com" ? `<p style="color:#b00"><strong>Warning:</strong> this connected as ${cleanHeader(connectedEmail)}, not connor.trenches@discovertrenchesgroup.com. Reconnect with the right account, or update the Smartlead mailbox setting to match.</p>` : "";
-  return new Response(`<!doctype html><meta charset="utf-8"><title>Live-reply mailbox connected</title><body style="font-family:system-ui;padding:40px"><h1>Live-reply mailbox connected</h1><p>${cleanHeader(connectedEmail)} will now send live conversational replies.</p>${mismatchWarning}<p>You can close this tab and return to the Command Center.</p></body>`, { headers: { "content-type": "text/html; charset=utf-8" } });
-}
-__name(handleLiveReplyOAuthCallback, "handleLiveReplyOAuthCallback");
-async function liveReplyAccessToken(db, env) {
-  const [creds, connection] = await Promise.all([getGoogleCredentialRow(db), getLiveReplyConnection(db)]);
-  if (!creds?.client_id || !creds.encrypted_client_secret || !connection?.encrypted_refresh_token) throw new HttpError(409, "LIVE_REPLY_MAILBOX_NOT_CONNECTED", "The live-reply mailbox is not connected.");
-  const clientSecret = await decryptSecret(env, creds.encrypted_client_secret);
-  const refreshToken = await decryptSecret(env, connection.encrypted_refresh_token);
-  const response = await fetch(GOOGLE_TOKEN_URL, {
-    method: "POST",
-    headers: { "content-type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ client_id: creds.client_id, client_secret: clientSecret, refresh_token: refreshToken, grant_type: "refresh_token" }).toString()
-  });
-  const data = await response.json();
-  if (!response.ok || typeof data.access_token !== "string") {
-    await db.prepare(`UPDATE gmail_connections SET status='ERROR',last_error=?,updated_at=? WHERE id=?`).bind(String(data.error_description || data.error || "Token refresh failed").slice(0, 1e3), nowIso(), LIVE_REPLY_CONNECTION_ID).run();
-    throw new HttpError(502, "LIVE_REPLY_TOKEN_REFRESH_FAILED", "Could not refresh the live-reply mailbox token. Reconnect it from the Command Center.");
-  }
-  return data.access_token;
-}
-__name(liveReplyAccessToken, "liveReplyAccessToken");
-function buildMime(input) {
-  const headers = [
-    `From: ${cleanHeader(input.fromName)} <${cleanHeader(input.fromEmail)}>`,
-    `To: ${cleanHeader(input.to)}`,
-    `Subject: ${cleanHeader(input.subject)}`,
-    `Date: ${(/* @__PURE__ */ new Date()).toUTCString()}`,
-    `Message-ID: ${cleanHeader(input.rfcMessageId)}`,
-    "MIME-Version: 1.0",
-    'Content-Type: text/plain; charset="UTF-8"',
-    "Content-Transfer-Encoding: 8bit"
-  ];
-  if (input.unsubscribeUrl) {
-    headers.push(`List-Unsubscribe: <${cleanHeader(input.unsubscribeUrl)}>`);
-    headers.push("List-Unsubscribe-Post: List-Unsubscribe=One-Click");
-  }
-  return `${headers.join("\r\n")}\r
-\r
-${input.body.replace(/\r?\n/g, "\r\n")}`;
-}
-__name(buildMime, "buildMime");
 function normalizedEmail(value) {
   const email = value.trim().toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new HttpError(400, "INVALID_EMAIL", "Enter a valid email address.");
@@ -3545,8 +3472,8 @@ function isBounceNotification(from, subject) {
 }
 __name(isBounceNotification, "isBounceNotification");
 function classifyEmailInbound(body) {
-  const text = body.trim().toLowerCase();
-  if (/\b(unsubscribe|remove me|take me off|stop emailing|do not email|don't email|no more emails|opt ?out)\b/i.test(text)) return "OPT_OUT";
+  const text2 = body.trim().toLowerCase();
+  if (/\b(unsubscribe|remove me|take me off|stop emailing|do not email|don't email|no more emails|opt ?out)\b/i.test(text2)) return "OPT_OUT";
   return classifyInbound(body);
 }
 __name(classifyEmailInbound, "classifyEmailInbound");
@@ -3611,19 +3538,6 @@ async function emailTestAllowed(db, email) {
   return Boolean(row);
 }
 __name(emailTestAllowed, "emailTestAllowed");
-async function emailSuppressed(db, email) {
-  const row = await db.prepare(`SELECT id FROM suppressions WHERE lower(email)=? LIMIT 1`).bind(normalizedEmail(email)).first();
-  return Boolean(row);
-}
-__name(emailSuppressed, "emailSuppressed");
-async function ensureUnsubscribeToken(db, leadId, email) {
-  const existing = await db.prepare(`SELECT token FROM outreach_unsubscribe_tokens WHERE lead_id=? AND lower(email)=? AND used_at IS NULL ORDER BY created_at DESC LIMIT 1`).bind(leadId, normalizedEmail(email)).first();
-  if (existing?.token) return existing.token;
-  const token = bytesToBase64Url(crypto.getRandomValues(new Uint8Array(24)));
-  await db.prepare(`INSERT INTO outreach_unsubscribe_tokens(token,lead_id,email,created_at) VALUES(?,?,?,?)`).bind(token, leadId, normalizedEmail(email), nowIso()).run();
-  return token;
-}
-__name(ensureUnsubscribeToken, "ensureUnsubscribeToken");
 async function storeEmailMessage(db, input) {
   if (input.providerMessageId) {
     const existing = await db.prepare(`SELECT id FROM outreach_email_messages WHERE provider_message_id=?`).bind(input.providerMessageId).first();
@@ -3635,63 +3549,49 @@ async function storeEmailMessage(db, input) {
   return id;
 }
 __name(storeEmailMessage, "storeEmailMessage");
-async function sendLiveReply(env, input) {
-  if (await globalAutomationPaused(env.DB)) throw new HttpError(409, "GLOBAL_AUTOMATION_PAUSED", "Global automation is paused.");
-  const connection = await getLiveReplyConnection(env.DB);
-  if (!connection || connection.status !== "CONNECTED") throw new HttpError(409, "LIVE_REPLY_MAILBOX_NOT_CONNECTED", "The live-reply mailbox is not connected.");
-  const mailbox = connection.email_address;
-  const to = normalizedEmail(input.to);
-  const s = await settings(env.DB);
-  const testOnly = input.testOnly !== false;
-  const allowlisted = await emailTestAllowed(env.DB, to);
-  if (await emailSuppressed(env.DB, to)) throw new HttpError(409, "CONTACT_SUPPRESSED", "This email address is suppressed.");
-  if (testOnly && !allowlisted) throw new HttpError(409, "EMAIL_TEST_MODE_LOCK", "Test email can only be sent to the email test allowlist.");
-  if (!testOnly) {
-    if (!s.emailLiveMode) throw new HttpError(409, "EMAIL_LIVE_MODE_LOCK", "Live autonomous email is not enabled.");
-    if (!s.postalAddress.trim()) throw new HttpError(409, "POSTAL_ADDRESS_REQUIRED", "Business postal address is required for live email.");
-  }
-  let lead = null;
-  if (input.leadId) {
-    lead = await getLead(env.DB, input.leadId);
-    if (!lead) throw new HttpError(404, "LEAD_NOT_FOUND", "Lead not found.");
-  }
-  let firstName;
-  if (lead) {
-    const research = await env.DB.prepare(`SELECT owner_name FROM lead_research WHERE lead_id=? LIMIT 1`).bind(lead.id).first();
-    firstName = firstNameFromOwnerName(research?.owner_name);
-  }
-  let body = formatEmailCorrespondence(input.body, firstName);
-  let unsubscribeUrl;
-  if (lead?.email && !testOnly) {
-    const token = await ensureUnsubscribeToken(env.DB, lead.id, to);
-    unsubscribeUrl = `${env.PUBLIC_BASE_URL}/unsubscribe/email/${encodeURIComponent(token)}`;
-    body += `
-
-Trenches Group
-${s.postalAddress}
-Unsubscribe: ${unsubscribeUrl}`;
-  }
-  const rfcMessageId = `<${crypto.randomUUID()}@discovertrenchesgroup.com>`;
-  const mime = buildMime({ fromName: s.fromName, fromEmail: mailbox, to, subject: input.subject, body, rfcMessageId, unsubscribeUrl });
-  try {
-    const accessToken = await liveReplyAccessToken(env.DB, env);
-    const response = await fetch(`${GMAIL_API}/messages/send`, {
-      method: "POST",
-      headers: { authorization: `Bearer ${accessToken}`, "content-type": "application/json" },
-      body: JSON.stringify({ raw: utf8ToBase64Url(mime) })
-    });
-    const data = await response.json();
-    if (!response.ok) throw new Error(String(data.error?.message || "Gmail send failed"));
-  } catch (error) {
-    const msg = error instanceof Error ? error.message : String(error);
-    const id2 = await storeEmailMessage(env.DB, { leadId: lead?.id, direction: "OUTBOUND", from: mailbox, to, subject: input.subject, body, status: "FAILED", intent: input.intent, isTest: testOnly, errorMessage: msg });
-    throw new HttpError(502, "LIVE_REPLY_SEND_FAILED", "Live reply send failed.", { messageId: id2, message: msg });
-  }
-  const id = await storeEmailMessage(env.DB, { leadId: lead?.id, direction: "OUTBOUND", rfcMessageId, from: mailbox, to, subject: input.subject, body, status: "SENT", intent: input.intent, isTest: testOnly });
-  if (lead) await recordEvent(env.DB, { eventId: newId("evt"), leadId: lead.id, eventType: testOnly ? "EMAIL_TEST_SENT" : "EMAIL_SENT", eventData: { emailMessageId: id, to }, source: "LIVE_REPLY", actor: "SYSTEM" });
-  return { id, test: testOnly };
+var NOTIFY_EMAIL = "cmckendry.ai@gmail.com";
+var NOTIFY_FROM = "replies@trenchesgroup.com";
+function isLikelyAutoresponder(subject, body) {
+  const s = `${subject} ${body}`.slice(0, 2e3).toLowerCase();
+  return /out of (the )?office|automatic reply|auto-reply|autoreply|vacation (response|reply)|away from (my |the )?(email|office)|currently unavailable|will be back (on|in)|do not reply to this (e-?mail|message)|this is an automated (message|response)/.test(s);
 }
-__name(sendLiveReply, "sendLiveReply");
+__name(isLikelyAutoresponder, "isLikelyAutoresponder");
+async function notifyConnor(env, input) {
+  try {
+    await env.EMAIL.send({
+      to: NOTIFY_EMAIL,
+      from: { email: NOTIFY_FROM, name: "Trenches Command Center" },
+      subject: input.subject,
+      text: input.text
+    });
+  } catch (error) {
+    await recordEvent(env.DB, {
+      eventId: newId("evt"),
+      leadId: input.leadId ?? void 0,
+      eventType: input.failureEventType,
+      eventData: { error: error instanceof Error ? error.message : String(error) },
+      source: "SMARTLEAD",
+      actor: "SYSTEM"
+    });
+  }
+}
+__name(notifyConnor, "notifyConnor");
+async function notifyGenuineReply(env, input) {
+  const business = input.lead?.business_name || "Unknown business";
+  const leadLink = input.lead ? `${env.PUBLIC_BASE_URL}/admin?leadId=${encodeURIComponent(input.lead.id)}` : "";
+  const text2 = [
+    `${business} (${input.fromEmail}) replied -- classified as ${input.intent}.`,
+    "",
+    `Subject: ${input.subject}`,
+    "",
+    input.body.slice(0, 2e3),
+    leadLink ? `
+Open in Command Center: ${leadLink}` : "",
+    "\nReply to this lead directly from Smartlead -- nothing here sends on your behalf."
+  ].join("\n");
+  await notifyConnor(env, { subject: `Reply from ${business}`, text: text2, leadId: input.lead?.id, failureEventType: "REPLY_NOTIFICATION_FAILED" });
+}
+__name(notifyGenuineReply, "notifyGenuineReply");
 async function findLeadByEmail(db, email) {
   return await db.prepare(`SELECT * FROM leads WHERE lower(email)=? ORDER BY updated_at DESC LIMIT 1`).bind(normalizedEmail(email)).first();
 }
@@ -3724,17 +3624,6 @@ async function safeLeadTransitionForEmail(db, lead, intent) {
   }
 }
 __name(safeLeadTransitionForEmail, "safeLeadTransitionForEmail");
-async function maybeAutoReply(env, lead, decision, subject, isTest, replyToEmail) {
-  const s = await settings(env.DB);
-  if (s.autoReplyMode !== "AUTO") return;
-  if (!decision.draft) return;
-  if (decision.action === "STOP" && decision.intent === "OPT_OUT") return;
-  if (decision.action === "ESCALATE" && !decision.draft) return;
-  const replySubject = /^re:/i.test(subject) ? subject : `Re: ${subject}`;
-  const sent = await sendLiveReply(env, { to: replyToEmail, subject: replySubject, body: decision.draft, leadId: lead.id, testOnly: isTest, intent: decision.intent });
-  if (decision.draftId) await env.DB.prepare(`UPDATE outreach_reply_drafts SET status='SENT',channel='EMAIL',updated_at=? WHERE id=?`).bind(nowIso(), decision.draftId).run();
-}
-__name(maybeAutoReply, "maybeAutoReply");
 async function processSmartleadWebhookEvent(env, payload) {
   const fromEmail = payload.lead?.email;
   if (!fromEmail) return { handled: false };
@@ -3759,6 +3648,10 @@ async function processSmartleadWebhookEvent(env, payload) {
   const rawBody = payload.reply?.body || "";
   if (isBounceNotification(fromEmail, subject)) return { handled: true };
   const body = trimQuotedReply(rawBody);
+  if (isLikelyAutoresponder(subject, body)) {
+    if (lead) await recordEvent(env.DB, { eventId: newId("evt"), leadId: lead.id, eventType: "EMAIL_AUTORESPONDER", eventData: { fromEmail, subject: subject.slice(0, 200) }, source: "SMARTLEAD", actor: "SYSTEM" });
+    return { handled: true };
+  }
   const intent = classifyEmailInbound(body);
   const isTest = await emailTestAllowed(env.DB, fromEmail);
   await storeEmailMessage(env.DB, { leadId: lead?.id, direction: "INBOUND", from: fromEmail, to: await smartleadMailboxEmail(env.DB) || "", subject, body, status: "RECEIVED", intent, isTest, raw: { campaignId: payload.campaign_id, leadId: payload.lead_id } });
@@ -3767,6 +3660,7 @@ async function processSmartleadWebhookEvent(env, payload) {
   if (intent === "OPT_OUT") await optOutLead(env.DB, { leadId: lead.id, email: fromEmail, phone: lead.phone, source: "SMARTLEAD", evidence: body.slice(0, 500) });
   await safeLeadTransitionForEmail(env.DB, lead, intent);
   await recordEvent(env.DB, { eventId: newId("evt"), leadId: lead.id, eventType: "EMAIL_INBOUND_RECEIVED", eventData: { intent, isTest, campaignId: payload.campaign_id }, source: "SMARTLEAD", actor: "SYSTEM" });
+  if (!isTest && intent !== "OPT_OUT") await notifyGenuineReply(env, { lead, fromEmail, subject, body, intent });
   if (lead.current_state === "DISQUALIFIED" && intent !== "OPT_OUT") {
     await recordEvent(env.DB, { eventId: newId("evt"), leadId: lead.id, eventType: "CONCIERGE_REPLY_RECEIVED", eventData: { intent, isTest }, source: "SMARTLEAD", actor: "SYSTEM" });
     return { handled: true };
@@ -3774,7 +3668,6 @@ async function processSmartleadWebhookEvent(env, payload) {
   const decision = await processConversationInbound(env.DB, lead, intent, body, null);
   const conversationOutcome = decision.action === "TRIGGER_DEMO" ? "DEMO_APPROVED" : decision.action;
   await recordEvent(env.DB, { eventId: newId("evt"), leadId: lead.id, eventType: "CONVERSATION_OUTCOME", eventData: { conversationOutcome }, source: "SMARTLEAD", actor: "SYSTEM" });
-  await maybeAutoReply(env, lead, decision, subject, isTest, fromEmail);
   return { handled: true };
 }
 __name(processSmartleadWebhookEvent, "processSmartleadWebhookEvent");
@@ -3838,14 +3731,13 @@ async function runAutonomousOutreach(env) {
 }
 __name(runAutonomousOutreach, "runAutonomousOutreach");
 async function emailOutreachStatus(db, env) {
-  const [allow, messages, sequences, s, campaigns, secret, liveReply] = await Promise.all([
+  const [allow, messages, sequences, s, campaigns, secret] = await Promise.all([
     db.prepare(`SELECT email,label,created_at FROM outreach_email_test_allowlist ORDER BY created_at DESC LIMIT 50`).all(),
     db.prepare(`SELECT m.*,l.business_name FROM outreach_email_messages m LEFT JOIN leads l ON l.id=m.lead_id ORDER BY m.created_at DESC LIMIT 40`).all(),
     db.prepare(`SELECT q.*,l.business_name,l.priority FROM outreach_sequences q JOIN leads l ON l.id=q.lead_id ORDER BY q.created_at DESC LIMIT 40`).all(),
     settings(db),
     campaignStatus(db),
-    webhookSecret(db),
-    getLiveReplyConnection(db)
+    webhookSecret(db)
   ]);
   return {
     smartleadConfigured: Boolean(env.SMARTLEAD_API_KEY),
@@ -3853,11 +3745,8 @@ async function emailOutreachStatus(db, env) {
     smartleadWebsiteCampaignId: campaigns.websiteCampaignId,
     smartleadConciergeCampaignId: campaigns.conciergeCampaignId,
     webhookUrl: `${env.PUBLIC_BASE_URL}/integrations/smartlead/webhook/${secret}`,
-    liveReplyConnected: liveReply?.status === "CONNECTED",
-    liveReplyEmail: liveReply?.email_address || null,
-    liveReplyStatus: liveReply?.status || "DISCONNECTED",
-    liveReplyError: liveReply?.last_error || null,
-    liveReplyCallbackUrl: `${env.PUBLIC_BASE_URL}/integrations/gmail/oauth/callback`,
+    replyModel: "HUMAN_IN_SMARTLEAD",
+    notifyEmail: NOTIFY_EMAIL,
     settings: s,
     allowlist: allow.results,
     recentMessages: messages.results,
@@ -3885,9 +3774,186 @@ async function getEmailOutreachSettings(db) {
 }
 __name(getEmailOutreachSettings, "getEmailOutreachSettings");
 async function sendEmailTest(env, input) {
-  return await sendLiveReply(env, { to: input.email, subject: input.subject || "Trenches OS email test", body: input.message || "Trenches email test.", leadId: input.leadId, testOnly: true, intent: "TEST" });
+  await notifyConnor(env, {
+    subject: input.subject || "Trenches OS notification test",
+    text: `${input.message || "Trenches notification test."}
+
+(Test requested for ${input.email}; notifications always go to ${NOTIFY_EMAIL}, never to a lead.)`,
+    leadId: input.leadId,
+    failureEventType: "TEST_NOTIFICATION_FAILED"
+  });
+  return { ok: true, notifiedEmail: NOTIFY_EMAIL };
 }
 __name(sendEmailTest, "sendEmailTest");
+
+// src/stripe.ts
+var STRIPE_API = "https://api.stripe.com/v1";
+function envSecret(env, key) {
+  const value = env[key];
+  if (!value) throw new HttpError(503, "STRIPE_NOT_CONFIGURED", `${key} is not configured.`);
+  return value;
+}
+__name(envSecret, "envSecret");
+async function priceCents(db, key, fallbackCents) {
+  const row = await db.prepare("SELECT value FROM system_flags WHERE key=?").bind(key).first();
+  const parsed = row ? Number(row.value) : NaN;
+  return Number.isFinite(parsed) && parsed > 0 ? Math.round(parsed) : fallbackCents;
+}
+__name(priceCents, "priceCents");
+async function stripeFetch(env, path, params) {
+  const response = await fetch(`${STRIPE_API}${path}`, {
+    method: "POST",
+    headers: { authorization: `Bearer ${envSecret(env, "STRIPE_SECRET_KEY")}`, "content-type": "application/x-www-form-urlencoded" },
+    body: params.toString()
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    const err = data.error;
+    throw new HttpError(502, "STRIPE_REQUEST_FAILED", String(err?.message || "Stripe request failed."));
+  }
+  return data;
+}
+__name(stripeFetch, "stripeFetch");
+async function tryTransition(db, leadId, to, reason) {
+  try {
+    await transitionLead(db, leadId, to, "SYSTEM", reason, "STRIPE");
+  } catch (error) {
+    await bumpCounter(db, "transition_refused_stripe");
+    await recordEvent(db, {
+      eventId: newId("evt"),
+      leadId,
+      eventType: "STATE_TRANSITION_REFUSED",
+      eventData: { to, reason, message: error instanceof Error ? error.message : String(error) },
+      source: "STRIPE",
+      actor: "SYSTEM"
+    });
+  }
+}
+__name(tryTransition, "tryTransition");
+var CHECKOUT_ELIGIBLE_STATES = ["DEMO_SENT", "DEMO_VIEWED", "PRICING_VIEWED", "CHECKOUT_STARTED"];
+async function createCheckoutSession(env, slug, leadId, domainAddon) {
+  const lead = await getLead(env.DB, leadId);
+  if (!lead) throw new HttpError(404, "LEAD_NOT_FOUND", "Lead not found.");
+  if (!CHECKOUT_ELIGIBLE_STATES.includes(lead.current_state)) {
+    throw new HttpError(409, "CHECKOUT_NOT_AVAILABLE", `Checkout is not available from state ${lead.current_state}.`);
+  }
+  if (lead.current_state === "DEMO_SENT" || lead.current_state === "DEMO_VIEWED") {
+    await tryTransition(env.DB, lead.id, "PRICING_VIEWED", "Prospect reached checkout.");
+  }
+  const basePriceCents = await priceCents(env.DB, "STRIPE_BASE_PRICE_CENTS", 5e4);
+  const domainPriceCents = await priceCents(env.DB, "STRIPE_DOMAIN_PRICE_CENTS", 12500);
+  const totalCents = basePriceCents + (domainAddon ? domainPriceCents : 0);
+  const params = new URLSearchParams();
+  params.set("mode", "payment");
+  params.set("managed_payments[enabled]", "false");
+  params.set("client_reference_id", lead.id);
+  params.set("success_url", `${env.PUBLIC_BASE_URL}/demo/${encodeURIComponent(slug)}/checkout/success`);
+  params.set("cancel_url", `${env.PUBLIC_BASE_URL}/demo/${encodeURIComponent(slug)}`);
+  if (lead.email) params.set("customer_email", lead.email);
+  params.set("metadata[leadId]", lead.id);
+  params.set("metadata[businessName]", lead.business_name.slice(0, 480));
+  params.set("metadata[domainAddon]", domainAddon ? "true" : "false");
+  params.set("line_items[0][quantity]", "1");
+  params.set("line_items[0][price_data][currency]", "usd");
+  params.set("line_items[0][price_data][unit_amount]", String(basePriceCents));
+  params.set("line_items[0][price_data][product_data][name]", `${lead.business_name} \u2014 Website Build`);
+  params.set("line_items[0][price_data][product_data][description]", "Full HTML website build. Includes up to 2 rounds of adjustments before launch.");
+  if (domainAddon) {
+    params.set("line_items[1][quantity]", "1");
+    params.set("line_items[1][price_data][currency]", "usd");
+    params.set("line_items[1][price_data][unit_amount]", String(domainPriceCents));
+    params.set("line_items[1][price_data][product_data][name]", "Domain setup & publishing");
+    params.set("line_items[1][price_data][product_data][description]", "One-time domain registration/connection and publishing.");
+  }
+  const session = await stripeFetch(env, "/checkout/sessions", params);
+  const sessionId = String(session.id);
+  const url = session.url;
+  if (typeof url !== "string") throw new HttpError(502, "STRIPE_SESSION_URL_MISSING", "Stripe did not return a checkout URL.");
+  const ts = nowIso();
+  await env.DB.prepare(`
+    INSERT INTO client_orders (id, lead_id, domain_addon, amount_total_cents, currency, status, stripe_checkout_session_id, created_at, updated_at)
+    VALUES (?, ?, ?, ?, 'usd', 'PENDING', ?, ?, ?)
+  `).bind(newId("order"), lead.id, domainAddon ? 1 : 0, totalCents, sessionId, ts, ts).run();
+  await recordEvent(env.DB, {
+    eventId: newId("evt"),
+    leadId: lead.id,
+    eventType: "CHECKOUT_SESSION_CREATED",
+    eventData: { sessionId, domainAddon, amountCents: totalCents },
+    source: "STRIPE",
+    actor: "SYSTEM"
+  });
+  await tryTransition(env.DB, lead.id, "CHECKOUT_STARTED", "Prospect started Stripe checkout.");
+  return url;
+}
+__name(createCheckoutSession, "createCheckoutSession");
+function timingSafeEqualHex(a, b) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i += 1) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+__name(timingSafeEqualHex, "timingSafeEqualHex");
+async function verifyStripeSignature(env, rawBody, signatureHeader) {
+  if (!signatureHeader) throw new HttpError(400, "STRIPE_SIGNATURE_MISSING", "Missing Stripe-Signature header.");
+  const parts = {};
+  for (const piece of signatureHeader.split(",")) {
+    const [key2, value] = piece.split("=");
+    if (key2 && value) parts[key2] = value;
+  }
+  const timestamp = parts.t;
+  const v1 = parts.v1;
+  if (!timestamp || !v1) throw new HttpError(400, "STRIPE_SIGNATURE_INVALID", "Malformed Stripe-Signature header.");
+  const ageSeconds = Math.abs(Date.now() / 1e3 - Number(timestamp));
+  if (!Number.isFinite(ageSeconds) || ageSeconds > 300) throw new HttpError(400, "STRIPE_SIGNATURE_STALE", "Stripe webhook timestamp is too old.");
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(envSecret(env, "STRIPE_WEBHOOK_SECRET")), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const signatureBytes = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(`${timestamp}.${rawBody}`));
+  const expectedHex = Array.from(new Uint8Array(signatureBytes), (b) => b.toString(16).padStart(2, "0")).join("");
+  if (!timingSafeEqualHex(expectedHex, v1)) throw new HttpError(400, "STRIPE_SIGNATURE_MISMATCH", "Stripe signature verification failed.");
+  return JSON.parse(rawBody);
+}
+__name(verifyStripeSignature, "verifyStripeSignature");
+async function handleStripeWebhook(env, request) {
+  const rawBody = await request.text();
+  const event = await verifyStripeSignature(env, rawBody, request.headers.get("stripe-signature"));
+  const eventId = String(event.id || "");
+  if (!eventId) throw new HttpError(400, "STRIPE_EVENT_ID_MISSING", "Stripe event is missing an id.");
+  const inserted = await env.DB.prepare(`INSERT OR IGNORE INTO stripe_webhook_events (id, event_type, received_at) VALUES (?, ?, ?)`).bind(eventId, String(event.type || "unknown"), nowIso()).run();
+  if ((inserted.meta.changes ?? 0) === 0) return new Response("ok", { status: 200 });
+  if (event.type === "checkout.session.completed") {
+    const data = event.data;
+    const session = data?.object || {};
+    const sessionId = String(session.id || "");
+    const metadata = session.metadata;
+    const leadId = String(session.client_reference_id || metadata?.leadId || "");
+    const order = await env.DB.prepare(`SELECT * FROM client_orders WHERE stripe_checkout_session_id = ?`).bind(sessionId).first();
+    if (order && leadId) {
+      const ts = nowIso();
+      const customerDetails = session.customer_details;
+      await env.DB.prepare(`
+        UPDATE client_orders SET status='PAID', stripe_payment_intent_id=?, stripe_customer_id=?, stripe_customer_email=?, paid_at=?, updated_at=? WHERE id=?
+      `).bind(String(session.payment_intent || ""), String(session.customer || ""), String(customerDetails?.email || ""), ts, ts, order.id).run();
+      await tryTransition(env.DB, leadId, "WON", "Stripe checkout completed.");
+      await tryTransition(env.DB, leadId, "ONBOARDING", "Payment confirmed; onboarding started.");
+      const domainAddon = Number(order.domain_addon) === 1;
+      await env.DB.prepare(`
+        INSERT INTO client_projects (lead_id, order_id, domain_addon, retainer_status, created_at, updated_at)
+        VALUES (?, ?, ?, 'NONE', ?, ?)
+        ON CONFLICT(lead_id) DO UPDATE SET order_id=excluded.order_id, domain_addon=excluded.domain_addon, updated_at=excluded.updated_at
+      `).bind(leadId, order.id, domainAddon ? 1 : 0, ts, ts).run();
+      await recordEvent(env.DB, {
+        eventId: newId("evt"),
+        leadId,
+        eventType: "PAYMENT_RECEIVED",
+        eventData: { sessionId, amountCents: order.amount_total_cents, domainAddon },
+        source: "STRIPE",
+        actor: "PROSPECT"
+      });
+    }
+  }
+  await env.DB.prepare(`UPDATE stripe_webhook_events SET processed_at=? WHERE id=?`).bind(nowIso(), eventId).run();
+  return new Response("ok", { status: 200 });
+}
+__name(handleStripeWebhook, "handleStripeWebhook");
 
 // src/demo.ts
 function boolFlag(value, fallback) {
@@ -3948,7 +4014,7 @@ async function uniqueSlug(db, businessName2) {
   return `${base}-${crypto.randomUUID().slice(0, 8)}`;
 }
 __name(uniqueSlug, "uniqueSlug");
-async function tryTransition(db, leadId, to, reason) {
+async function tryTransition2(db, leadId, to, reason) {
   try {
     await transitionLead(db, leadId, to, "SYSTEM", reason, "DEMO");
   } catch (error) {
@@ -3963,7 +4029,7 @@ async function tryTransition(db, leadId, to, reason) {
     });
   }
 }
-__name(tryTransition, "tryTransition");
+__name(tryTransition2, "tryTransition");
 async function demoLeadBlockReason(db, lead, stage) {
   if (await isSuppressed(db, lead.phone, lead.email)) return "Lead/contact is suppressed.";
   if (lead.automation_paused) return "Automation is paused for this lead.";
@@ -4015,14 +4081,14 @@ async function ensureDemoJob(db, leadId, actor = "SYSTEM") {
     const ts2 = nowIso();
     await db.prepare(`UPDATE demo_jobs SET status='PENDING',attempt_count=0,qa_attempt_count=0,next_retry_at=NULL,claimed_by=NULL,claimed_at=NULL,started_at=NULL,completed_at=NULL,last_error=NULL,model=?,updated_at=? WHERE id=?`).bind(settings2.builderModel, ts2, stale.id).run();
     await recordEvent(db, { eventId: newId("evt"), leadId, eventType: "DEMO_BUILD_REQUEUED", eventData: { demoJobId: stale.id, previousStatus: stale.status, model: settings2.builderModel }, source: "DEMO", actor });
-    if (lead.current_state === "DEMO_APPROVED") await tryTransition(db, leadId, "DEMO_BUILDING", "Demo build re-queued after prospect approval.");
+    if (lead.current_state === "DEMO_APPROVED") await tryTransition2(db, leadId, "DEMO_BUILDING", "Demo build re-queued after prospect approval.");
     return { jobId: stale.id, created: false, requeued: true };
   }
   const id = newId("demo");
   const ts = nowIso();
   await db.prepare(`INSERT INTO demo_jobs(id,lead_id,status,attempt_count,max_attempts,qa_attempt_count,max_qa_attempts,model,created_at,updated_at) VALUES(?,?,'PENDING',0,3,0,2,?,?,?)`).bind(id, leadId, settings2.builderModel, ts, ts).run();
   await recordEvent(db, { eventId: newId("evt"), leadId, eventType: "DEMO_BUILD_QUEUED", eventData: { demoJobId: id, model: settings2.builderModel }, source: "DEMO", actor });
-  if (lead.current_state === "DEMO_APPROVED") await tryTransition(db, leadId, "DEMO_BUILDING", "Demo build queued after prospect approval.");
+  if (lead.current_state === "DEMO_APPROVED") await tryTransition2(db, leadId, "DEMO_BUILDING", "Demo build queued after prospect approval.");
   return { jobId: id, created: true };
 }
 __name(ensureDemoJob, "ensureDemoJob");
@@ -4085,21 +4151,23 @@ async function tryDeliverDemoEmail(env, site, lead) {
   if (!lead.email) return { sent: false, reason: "Lead has no email." };
   const settings2 = await demoSettings(env.DB);
   if (!settings2.autoDeliverEmail) return { sent: false, reason: "Auto-deliver email disabled." };
-  const recent = await env.DB.prepare(`SELECT subject FROM outreach_email_messages WHERE lead_id=? ORDER BY created_at DESC LIMIT 1`).bind(lead.id).first();
   const url = `${env.PUBLIC_BASE_URL}/demo/${site.slug}`;
-  const subject = recent?.subject?.toLowerCase().startsWith("re:") ? recent.subject : `Re: ${recent?.subject || "that free website preview"}`;
-  const body = `Hey \u2014 got that preview put together for y\u2019all. Here it is:
+  try {
+    await notifyConnor(env, {
+      subject: `Demo ready: ${lead.business_name}`,
+      text: `${lead.business_name} (${lead.email}) has a QA-passed demo ready:
 
 ${url}
 
-Take a look when you get a minute and let me know what you think. \u2014 Connor`;
-  try {
-    const result = await sendLiveReply(env, { to: lead.email, subject, body, leadId: lead.id, testOnly: false, intent: "DEMO_READY" });
+Send it to them from Smartlead -- nothing here sends on your behalf.`,
+      leadId: lead.id,
+      failureEventType: "DEMO_NOTIFICATION_FAILED"
+    });
     const ts = nowIso();
     await env.DB.prepare(`UPDATE demo_sites SET status='PUBLISHED',published_at=COALESCE(published_at,?),updated_at=? WHERE id=?`).bind(ts, ts, site.id).run();
-    await env.DB.prepare(`INSERT INTO demo_events(id,demo_site_id,lead_id,event_type,metadata_json,created_at) VALUES(?,?,?,'DEMO_SENT',?,?)`).bind(newId("de"), site.id, lead.id, JSON.stringify({ email: lead.email, messageId: result.id }), ts).run();
+    await env.DB.prepare(`INSERT INTO demo_events(id,demo_site_id,lead_id,event_type,metadata_json,created_at) VALUES(?,?,?,'DEMO_SENT',?,?)`).bind(newId("de"), site.id, lead.id, JSON.stringify({ email: lead.email }), ts).run();
     await recordEvent(env.DB, { eventId: newId("evt"), leadId: lead.id, eventType: "DEMO_SENT", eventData: { demoSiteId: site.id, url, email: lead.email }, source: "DEMO", actor: "SYSTEM" });
-    if (lead.current_state === "DEMO_READY") await tryTransition(env.DB, lead.id, "DEMO_SENT", "QA-passed demo delivered by email.");
+    if (lead.current_state === "DEMO_READY") await tryTransition2(env.DB, lead.id, "DEMO_SENT", "QA-passed demo ready; Connor notified to deliver via Smartlead.");
     return { sent: true };
   } catch (error) {
     const reason = error instanceof Error ? error.message : String(error);
@@ -4137,9 +4205,9 @@ async function completeDemoJob(env, jobId, input) {
     env.DB.prepare(`INSERT INTO demo_events(id,demo_site_id,lead_id,event_type,metadata_json,created_at) VALUES(?,?,?,'QA_PASSED',?,?)`).bind(newId("de"), siteId, lead.id, JSON.stringify({ qaScore: input.qaScore }), ts)
   ]);
   await recordEvent(env.DB, { eventId: newId("evt"), leadId: lead.id, eventType: "DEMO_QA_PASSED", eventData: { demoJobId: jobId, demoSiteId: siteId, slug, qaScore: input.qaScore }, source: "DEMO", actor: "RUNNER" });
-  if (lead.current_state === "DEMO_BUILDING") await tryTransition(env.DB, lead.id, "DEMO_QA", "Demo build generated; QA passed by runner.");
+  if (lead.current_state === "DEMO_BUILDING") await tryTransition2(env.DB, lead.id, "DEMO_QA", "Demo build generated; QA passed by runner.");
   const refreshed = await getLead(env.DB, lead.id);
-  if (refreshed?.current_state === "DEMO_QA") await tryTransition(env.DB, lead.id, "DEMO_READY", "Demo QA passed and preview is published.");
+  if (refreshed?.current_state === "DEMO_QA") await tryTransition2(env.DB, lead.id, "DEMO_READY", "Demo QA passed and preview is published.");
   const site = await env.DB.prepare("SELECT * FROM demo_sites WHERE id=?").bind(siteId).first();
   if (!site) throw new Error("Demo site failed to persist.");
   const delivery = settings2.requireApproval ? { sent: false, reason: "Awaiting Command Center approval." } : await tryDeliverDemoEmail(env, site, await getLead(env.DB, lead.id) ?? lead);
@@ -4158,7 +4226,7 @@ async function failDemoJob(db, jobId, error, retryable = true) {
   await recordEvent(db, { eventId: newId("evt"), leadId: job.lead_id, eventType: canRetry ? "DEMO_BUILD_RETRY_SCHEDULED" : "DEMO_BUILD_FAILED", eventData: { demoJobId: jobId, attempt, max, nextRetryAt: next, error: error.slice(0, 800) }, source: "DEMO", actor: "RUNNER" });
   if (!canRetry) {
     const lead = await getLead(db, job.lead_id);
-    if (lead?.current_state === "DEMO_BUILDING" || lead?.current_state === "DEMO_QA") await tryTransition(db, lead.id, "HUMAN_REVIEW", "Demo builder exhausted retries.");
+    if (lead?.current_state === "DEMO_BUILDING" || lead?.current_state === "DEMO_QA") await tryTransition2(db, lead.id, "HUMAN_REVIEW", "Demo builder exhausted retries.");
   }
   return { status: canRetry ? "RETRY_SCHEDULED" : "FAILED", attempt, max, nextRetryAt: next };
 }
@@ -4214,7 +4282,7 @@ async function serveDemo(db, slug, request) {
     db.prepare(`INSERT INTO demo_events(id,demo_site_id,lead_id,event_type,metadata_json,created_at) VALUES(?,?,?,'VIEW',?,?)`).bind(newId("de"), site.id, site.lead_id, JSON.stringify({ ua: request.headers.get("user-agent")?.slice(0, 300) || null }), ts)
   ]);
   const lead = await getLead(db, site.lead_id);
-  if (lead?.current_state === "DEMO_SENT") await tryTransition(db, lead.id, "DEMO_VIEWED", "Prospect opened live demo preview.");
+  if (lead?.current_state === "DEMO_SENT") await tryTransition2(db, lead.id, "DEMO_VIEWED", "Prospect opened live demo preview.");
   return new Response(site.html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; img-src data:; font-src data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; connect-src 'none'; script-src 'none'", "x-frame-options": "DENY", "referrer-policy": "no-referrer" } });
 }
 __name(serveDemo, "serveDemo");
@@ -4227,11 +4295,23 @@ async function handleDemoCta(db, slug) {
     db.prepare(`INSERT INTO demo_events(id,demo_site_id,lead_id,event_type,metadata_json,created_at) VALUES(?,?,?,'CTA_CLICK','{}',?)`).bind(newId("de"), site.id, site.lead_id, ts)
   ]);
   const lead = await getLead(db, site.lead_id);
-  if (lead && (lead.current_state === "DEMO_SENT" || lead.current_state === "DEMO_VIEWED")) await tryTransition(db, lead.id, "PRICING_VIEWED", "Prospect clicked the demo conversion CTA.");
+  if (lead && (lead.current_state === "DEMO_SENT" || lead.current_state === "DEMO_VIEWED")) await tryTransition2(db, lead.id, "PRICING_VIEWED", "Prospect clicked the demo conversion CTA.");
   await recordEvent(db, { eventId: newId("evt"), leadId: site.lead_id, eventType: "DEMO_CTA_CLICKED", eventData: { demoSiteId: site.id, slug }, source: "DEMO", actor: "PROSPECT" });
-  return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Next step</title><body style="margin:0;background:#0b0d10;color:#f6f7f8;font-family:system-ui;display:grid;place-items:center;min-height:100vh"><main style="max-width:680px;padding:40px;text-align:center"><div style="font-size:12px;letter-spacing:.14em;color:#c9f24d">TRENCHES GROUP</div><h1 style="font-size:42px;margin:12px 0">Glad y\u2019all like it.</h1><p style="color:#aeb6c3;font-size:18px;line-height:1.6">Your interest is recorded. The next step is pricing, agreement, and launch setup. That checkout flow is the next Trenches OS phase.</p><a href="/demo/${encodeURIComponent(slug)}" style="display:inline-block;margin-top:18px;color:#0b0d10;background:#c9f24d;padding:13px 18px;border-radius:8px;text-decoration:none;font-weight:800">Back to preview</a></main></body>`, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-frame-options": "DENY", "referrer-policy": "no-referrer" } });
+  const buyBase = `/demo/${encodeURIComponent(slug)}/checkout`;
+  return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Next step</title><body style="margin:0;background:#0b0d10;color:#f6f7f8;font-family:system-ui;display:grid;place-items:center;min-height:100vh"><main style="max-width:680px;padding:40px;text-align:center"><div style="font-size:12px;letter-spacing:.14em;color:#c9f24d">TRENCHES GROUP</div><h1 style="font-size:42px;margin:12px 0">Glad y\u2019all like it.</h1><p style="color:#aeb6c3;font-size:18px;line-height:1.6">$500 flat for the full website build, including up to 2 rounds of adjustments before launch. Do you also need help setting up and publishing a domain?</p><div style="display:grid;gap:10px;max-width:380px;margin:24px auto 0"><a href="${buyBase}?domain=yes" style="display:block;padding:16px;border-radius:10px;background:#c9f24d;color:#0b0d10;text-decoration:none;font-weight:800">Yes \u2014 add domain setup ($125)</a><a href="${buyBase}?domain=no" style="display:block;padding:16px;border-radius:10px;border:1px solid #394250;color:#fff;text-decoration:none;font-weight:800">No, I already have one</a></div><a href="/demo/${encodeURIComponent(slug)}" style="display:inline-block;margin-top:22px;color:#aeb6c3;font-size:13px">Back to preview</a></main></body>`, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-frame-options": "DENY", "referrer-policy": "no-referrer" } });
 }
 __name(handleDemoCta, "handleDemoCta");
+async function startCheckout(env, slug, domainAddon) {
+  const site = await env.DB.prepare(`SELECT * FROM demo_sites WHERE slug=? AND status IN ('READY','PUBLISHED')`).bind(slug).first();
+  if (!site) return new Response("Demo not found.", { status: 404 });
+  const url = await createCheckoutSession(env, slug, site.lead_id, domainAddon);
+  return new Response(null, { status: 302, headers: { location: url } });
+}
+__name(startCheckout, "startCheckout");
+function serveCheckoutSuccess(slug) {
+  return new Response(`<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Payment received</title><body style="margin:0;background:#0b0d10;color:#f6f7f8;font-family:system-ui;display:grid;place-items:center;min-height:100vh"><main style="max-width:640px;padding:40px;text-align:center"><div style="font-size:12px;letter-spacing:.14em;color:#c9f24d">TRENCHES GROUP</div><h1 style="font-size:36px;margin:12px 0">Payment received \u2014 thank you.</h1><p style="color:#aeb6c3;font-size:18px;line-height:1.6">We'll be in touch shortly to kick off the build. You'll get up to 2 rounds of adjustments before launch.</p><a href="/demo/${encodeURIComponent(slug)}" style="display:inline-block;margin-top:18px;color:#0b0d10;background:#c9f24d;padding:13px 18px;border-radius:8px;text-decoration:none;font-weight:800">Back to preview</a></main></body>`, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-frame-options": "DENY", "referrer-policy": "no-referrer" } });
+}
+__name(serveCheckoutSuccess, "serveCheckoutSuccess");
 async function createStaticDemoPreview(db, leadId, actor = "COMMAND_CENTER") {
   const lead = await getLead(db, leadId);
   if (!lead) throw new HttpError(404, "LEAD_NOT_FOUND", "Lead not found.");
@@ -4263,6 +4343,490 @@ async function serveDemoQuote(db, slug, request) {
   return new Response(html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-frame-options": "DENY", "referrer-policy": "no-referrer" } });
 }
 __name(serveDemoQuote, "serveDemoQuote");
+
+// src/gmail.ts
+var GMAIL_SEND_SCOPE = "https://www.googleapis.com/auth/gmail.send";
+var GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
+var GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
+var GMAIL_API = "https://gmail.googleapis.com/gmail/v1/users/me";
+var SENDER_NAME = "Connor McKendry | Trenches Group";
+function bytesToBase64Url(bytes) {
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+__name(bytesToBase64Url, "bytesToBase64Url");
+function base64UrlToBytes(value) {
+  const padded = value.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat((4 - value.length % 4) % 4);
+  return Uint8Array.from(atob(padded), (c) => c.charCodeAt(0));
+}
+__name(base64UrlToBytes, "base64UrlToBytes");
+async function encryptionKey(env) {
+  if (!env.CREDENTIAL_ENCRYPTION_KEY) throw new HttpError(503, "CREDENTIAL_KEY_MISSING", "CREDENTIAL_ENCRYPTION_KEY is not configured.");
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(env.CREDENTIAL_ENCRYPTION_KEY));
+  return await crypto.subtle.importKey("raw", digest, { name: "AES-GCM" }, false, ["encrypt", "decrypt"]);
+}
+__name(encryptionKey, "encryptionKey");
+async function encryptSecret(env, value) {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const cipher = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await encryptionKey(env), new TextEncoder().encode(value)));
+  return `${bytesToBase64Url(iv)}.${bytesToBase64Url(cipher)}`;
+}
+__name(encryptSecret, "encryptSecret");
+async function decryptSecret(env, value) {
+  const [iv, cipher] = value.split(".");
+  if (!iv || !cipher) throw new HttpError(500, "CREDENTIAL_DECRYPT_FAILED", "Stored credential is invalid.");
+  const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: base64UrlToBytes(iv) }, await encryptionKey(env), base64UrlToBytes(cipher));
+  return new TextDecoder().decode(plain);
+}
+__name(decryptSecret, "decryptSecret");
+var credentials = /* @__PURE__ */ __name((db) => db.prepare(`SELECT client_id, encrypted_client_secret FROM outreach_provider_credentials WHERE provider='GOOGLE_GMAIL'`).first(), "credentials");
+var connection = /* @__PURE__ */ __name((db) => db.prepare(`SELECT email_address, encrypted_refresh_token, status, last_error, connected_at FROM gmail_connections WHERE id='primary'`).first(), "connection");
+var callbackUrl = /* @__PURE__ */ __name((env) => `${env.PUBLIC_BASE_URL}/integrations/gmail/oauth/callback`, "callbackUrl");
+async function accessToken(env) {
+  const [creds, conn] = await Promise.all([credentials(env.DB), connection(env.DB)]);
+  if (!creds?.client_id || !creds.encrypted_client_secret || !conn) throw new HttpError(409, "GMAIL_NOT_CONNECTED", 'Google Workspace is not connected. Click "Connect Google" in the Quotes panel.');
+  const response = await fetch(GOOGLE_TOKEN_URL, {
+    method: "POST",
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      client_id: creds.client_id,
+      client_secret: await decryptSecret(env, creds.encrypted_client_secret),
+      refresh_token: await decryptSecret(env, conn.encrypted_refresh_token),
+      grant_type: "refresh_token"
+    }).toString()
+  });
+  const data = await response.json();
+  if (!response.ok || typeof data.access_token !== "string") {
+    const reason = String(data.error_description || data.error || "Token refresh failed").slice(0, 500);
+    await env.DB.prepare(`UPDATE gmail_connections SET status='ERROR',last_error=?,updated_at=? WHERE id='primary'`).bind(reason, nowIso()).run();
+    throw new HttpError(409, "GMAIL_RECONNECT_REQUIRED", `Google sign-in expired (${reason}). Click "Connect Google" in the Quotes panel to reconnect.`);
+  }
+  if (conn.status !== "CONNECTED") await env.DB.prepare(`UPDATE gmail_connections SET status='CONNECTED',last_error=NULL,updated_at=? WHERE id='primary'`).bind(nowIso()).run();
+  return { token: data.access_token, email: conn.email_address };
+}
+__name(accessToken, "accessToken");
+async function mailboxStatus(env) {
+  const conn = await connection(env.DB);
+  if (!conn) return { connected: false };
+  try {
+    const { email } = await accessToken(env);
+    return { connected: true, email };
+  } catch (error) {
+    return { connected: false, email: conn.email_address, error: error instanceof Error ? error.message : String(error) };
+  }
+}
+__name(mailboxStatus, "mailboxStatus");
+async function startGmailConnect(env) {
+  const creds = await credentials(env.DB);
+  if (!creds?.client_id) throw new HttpError(409, "GOOGLE_OAUTH_NOT_CONFIGURED", "The Google OAuth client is not configured.");
+  const state = crypto.randomUUID();
+  const ts = nowIso();
+  await env.DB.prepare(`INSERT INTO oauth_states(state,provider,expires_at,created_at) VALUES(?,'GOOGLE_GMAIL',?,?)`).bind(state, new Date(Date.now() + 10 * 6e4).toISOString(), ts).run();
+  const params = new URLSearchParams({
+    client_id: creds.client_id,
+    redirect_uri: callbackUrl(env),
+    response_type: "code",
+    scope: `${GMAIL_SEND_SCOPE} openid email`,
+    access_type: "offline",
+    prompt: "consent",
+    login_hint: "connor@trenchesgroup.com",
+    state
+  });
+  return { authUrl: `${GOOGLE_AUTH_URL}?${params.toString()}` };
+}
+__name(startGmailConnect, "startGmailConnect");
+function page(title, body, status = 200) {
+  const esc2 = /* @__PURE__ */ __name((v) => v.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]), "esc");
+  return new Response(`<!doctype html><meta charset="utf-8"><title>${esc2(title)}</title><body style="font-family:system-ui;padding:40px;max-width:560px"><h1>${esc2(title)}</h1><p>${esc2(body)}</p><p>You can close this tab and return to the Command Center.</p></body>`, { status, headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" } });
+}
+__name(page, "page");
+async function handleGmailConnectCallback(request, env) {
+  const url = new URL(request.url);
+  const state = url.searchParams.get("state") || "";
+  const code = url.searchParams.get("code") || "";
+  if (url.searchParams.get("error")) return page("Google connection cancelled", `Google returned: ${url.searchParams.get("error")}`, 400);
+  const stateRow = await env.DB.prepare(`SELECT expires_at FROM oauth_states WHERE state=? AND provider='GOOGLE_GMAIL'`).bind(state).first();
+  if (!stateRow || Date.parse(stateRow.expires_at) < Date.now() || !code) return page("Connection link expired", "Start again from the Quotes panel.", 400);
+  await env.DB.prepare(`DELETE FROM oauth_states WHERE state=?`).bind(state).run();
+  const creds = await credentials(env.DB);
+  if (!creds?.client_id || !creds.encrypted_client_secret) return page("Google is not configured", "The Google OAuth client is missing.", 500);
+  const tokenResponse = await fetch(GOOGLE_TOKEN_URL, {
+    method: "POST",
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ code, client_id: creds.client_id, client_secret: await decryptSecret(env, creds.encrypted_client_secret), redirect_uri: callbackUrl(env), grant_type: "authorization_code" }).toString()
+  });
+  const token = await tokenResponse.json();
+  if (!tokenResponse.ok || typeof token.access_token !== "string") return page("Google connection failed", String(token.error_description || token.error || "Token exchange failed."), 502);
+  if (typeof token.refresh_token !== "string") return page("Google connection failed", "Google did not grant offline access. Try again and approve all requested access.", 502);
+  const info = await fetch(`https://oauth2.googleapis.com/tokeninfo?access_token=${encodeURIComponent(token.access_token)}`).then((r) => r.json()).catch(() => ({}));
+  if (typeof info.email !== "string") return page("Google connection failed", "Could not confirm which Google account signed in. Try again.", 502);
+  const email = info.email.toLowerCase();
+  const ts = nowIso();
+  await env.DB.prepare(`
+    INSERT INTO gmail_connections(id,email_address,encrypted_refresh_token,scopes,history_id,status,connected_at,last_sync_at,last_error,updated_at)
+    VALUES('primary',?,?,?,NULL,'CONNECTED',?,NULL,NULL,?)
+    ON CONFLICT(id) DO UPDATE SET email_address=excluded.email_address,encrypted_refresh_token=excluded.encrypted_refresh_token,scopes=excluded.scopes,status='CONNECTED',last_error=NULL,connected_at=excluded.connected_at,updated_at=excluded.updated_at
+  `).bind(email, await encryptSecret(env, token.refresh_token), typeof token.scope === "string" ? token.scope : GMAIL_SEND_SCOPE, ts, ts).run();
+  await recordEvent(env.DB, { eventId: newId("evt"), eventType: "GMAIL_CONNECTED", eventData: { email, purpose: "QUOTES" }, source: "GMAIL", actor: "ADMIN" });
+  return page("Google Workspace connected", `Quotes will now be sent from ${email}.`);
+}
+__name(handleGmailConnectCallback, "handleGmailConnectCallback");
+function encodeHeader(value) {
+  const clean = value.replace(/[\r\n]+/g, " ").trim();
+  return /^[\x20-\x7e]*$/.test(clean) ? clean : `=?UTF-8?B?${btoa(String.fromCharCode(...new TextEncoder().encode(clean)))}?=`;
+}
+__name(encodeHeader, "encodeHeader");
+function address(name, email) {
+  return name ? `${encodeHeader(`"${name.replace(/["\\]/g, "")}"`)} <${email}>` : email;
+}
+__name(address, "address");
+function base64Lines(value) {
+  const bytes = new TextEncoder().encode(value);
+  let binary = "";
+  for (let i = 0; i < bytes.length; i += 32768) binary += String.fromCharCode(...bytes.subarray(i, i + 32768));
+  return btoa(binary).replace(/.{1,76}/g, "$&\r\n");
+}
+__name(base64Lines, "base64Lines");
+async function sendGmail(env, input) {
+  const { token, email } = await accessToken(env);
+  const boundary = `tg_${crypto.randomUUID()}`;
+  const mime = [
+    `From: ${address(SENDER_NAME, email)}`,
+    `To: ${address(input.toName ?? null, input.to)}`,
+    `Subject: ${encodeHeader(input.subject)}`,
+    "MIME-Version: 1.0",
+    `Content-Type: multipart/alternative; boundary="${boundary}"`,
+    "",
+    `--${boundary}`,
+    'Content-Type: text/plain; charset="UTF-8"',
+    "Content-Transfer-Encoding: base64",
+    "",
+    base64Lines(input.text),
+    `--${boundary}`,
+    'Content-Type: text/html; charset="UTF-8"',
+    "Content-Transfer-Encoding: base64",
+    "",
+    base64Lines(input.html),
+    `--${boundary}--`,
+    ""
+  ].join("\r\n");
+  const response = await fetch(`${GMAIL_API}/messages/send`, {
+    method: "POST",
+    headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
+    body: JSON.stringify({ raw: bytesToBase64Url(new TextEncoder().encode(mime)) })
+  });
+  const data = await response.json();
+  if (!response.ok || typeof data.id !== "string") {
+    const error = data.error;
+    throw new HttpError(502, "GMAIL_SEND_FAILED", `Gmail rejected the email: ${error?.message || response.status}`);
+  }
+  return { messageId: data.id, from: email };
+}
+__name(sendGmail, "sendGmail");
+
+// src/quotes.ts
+var VIEW_ALERT_TO = "cmckendry.ai@gmail.com";
+function text(value, field, max, required = false) {
+  if (value === void 0 || value === null || value === "") {
+    if (required) throw new HttpError(400, "VALIDATION_ERROR", `${field} is required.`);
+    return null;
+  }
+  if (typeof value !== "string") throw new HttpError(400, "VALIDATION_ERROR", `${field} must be text.`);
+  const clean = value.trim();
+  if (required && !clean) throw new HttpError(400, "VALIDATION_ERROR", `${field} is required.`);
+  if (clean.length > max) throw new HttpError(400, "VALIDATION_ERROR", `${field} is too long (max ${max} characters).`);
+  return clean || null;
+}
+__name(text, "text");
+function parseLineItems(value) {
+  if (!Array.isArray(value)) throw new HttpError(400, "VALIDATION_ERROR", "lineItems must be a list.");
+  if (value.length > 50) throw new HttpError(400, "VALIDATION_ERROR", "A quote can have at most 50 line items.");
+  return value.map((raw, i) => {
+    if (!raw || typeof raw !== "object") throw new HttpError(400, "VALIDATION_ERROR", `Line ${i + 1} is invalid.`);
+    const item = raw;
+    const description = text(item.description, `Line ${i + 1} description`, 500, true);
+    const quantity = Number(item.quantity ?? 1);
+    const unitCents = Number(item.unitCents);
+    if (!Number.isFinite(quantity) || quantity <= 0 || quantity > 1e4) throw new HttpError(400, "VALIDATION_ERROR", `Line ${i + 1} quantity must be between 0 and 10,000.`);
+    if (!Number.isInteger(unitCents) || unitCents < 0 || unitCents > 1e8) throw new HttpError(400, "VALIDATION_ERROR", `Line ${i + 1} price is invalid.`);
+    const billing = item.billing === "MONTHLY" ? "MONTHLY" : "ONE_TIME";
+    return { description, quantity, unitCents, billing };
+  });
+}
+__name(parseLineItems, "parseLineItems");
+function parseValidUntil(value) {
+  const raw = text(value, "validUntil", 10);
+  if (!raw) return null;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(raw) || Number.isNaN(Date.parse(raw))) throw new HttpError(400, "VALIDATION_ERROR", "validUntil must be a date (YYYY-MM-DD).");
+  return raw;
+}
+__name(parseValidUntil, "parseValidUntil");
+function parseQuoteInput(body) {
+  return {
+    leadId: text(body.leadId, "leadId", 120),
+    businessName: text(body.businessName, "Business name", 180, true),
+    contactName: text(body.contactName, "Contact name", 180),
+    title: text(body.title, "Quote title", 200, true),
+    message: text(body.message, "Message", 5e3),
+    terms: text(body.terms, "Terms", 5e3),
+    lineItems: parseLineItems(body.lineItems ?? []),
+    validUntil: parseValidUntil(body.validUntil)
+  };
+}
+__name(parseQuoteInput, "parseQuoteInput");
+function totals(items) {
+  let oneTime = 0;
+  let monthly = 0;
+  for (const item of items) {
+    const amount = Math.round(item.quantity * item.unitCents);
+    if (item.billing === "MONTHLY") monthly += amount;
+    else oneTime += amount;
+  }
+  return { oneTime, monthly };
+}
+__name(totals, "totals");
+async function nextQuoteNumber(db) {
+  const row = await db.prepare(`SELECT MAX(CAST(substr(quote_number, 3) AS INTEGER)) AS n FROM quotes WHERE quote_number LIKE 'Q-%'`).first();
+  return `Q-${Math.max(1e3, row?.n ?? 1e3) + 1}`;
+}
+__name(nextQuoteNumber, "nextQuoteNumber");
+async function logQuoteEvent(db, input) {
+  await db.prepare(`INSERT INTO quote_events(id,quote_id,send_token,event_type,source,email,detail_json,created_at) VALUES(?,?,?,?,?,?,?,?)`).bind(newId("qevt"), input.quoteId, input.sendToken ?? null, input.eventType, input.source, input.email ?? null, JSON.stringify(input.detail ?? {}), nowIso()).run();
+}
+__name(logQuoteEvent, "logQuoteEvent");
+async function requireQuote(db, id) {
+  const quote = await db.prepare(`SELECT * FROM quotes WHERE id=?`).bind(id).first();
+  if (!quote) throw new HttpError(404, "QUOTE_NOT_FOUND", "Quote not found.");
+  return quote;
+}
+__name(requireQuote, "requireQuote");
+async function createQuote(db, body, actor) {
+  const input = parseQuoteInput(body);
+  if (input.leadId && !await getLead(db, input.leadId)) throw new HttpError(404, "LEAD_NOT_FOUND", "Lead not found.");
+  const { oneTime, monthly } = totals(input.lineItems);
+  const id = newId("quote");
+  const ts = nowIso();
+  for (let attempt = 0; ; attempt++) {
+    const number = await nextQuoteNumber(db);
+    try {
+      await db.prepare(`INSERT INTO quotes(id,quote_number,lead_id,business_name,contact_name,title,message,terms,line_items_json,one_time_cents,monthly_cents,valid_until,status,created_by,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,'DRAFT',?,?,?)`).bind(id, number, input.leadId, input.businessName, input.contactName, input.title, input.message, input.terms, JSON.stringify(input.lineItems), oneTime, monthly, input.validUntil, actor, ts, ts).run();
+      break;
+    } catch (error) {
+      if (attempt >= 3 || !String(error).includes("UNIQUE")) throw error;
+    }
+  }
+  await logQuoteEvent(db, { quoteId: id, eventType: "CREATED", source: "ADMIN", detail: { actor } });
+  if (input.leadId) await recordEvent(db, { eventId: newId("evt"), leadId: input.leadId, eventType: "QUOTE_CREATED", eventData: { quoteId: id, title: input.title, oneTimeCents: oneTime, monthlyCents: monthly }, source: "QUOTES", actor });
+  return await requireQuote(db, id);
+}
+__name(createQuote, "createQuote");
+async function updateQuote(db, id, body, actor) {
+  const existing = await requireQuote(db, id);
+  if (existing.status === "VOID") throw new HttpError(409, "QUOTE_VOID", "This quote was voided. Create a new quote instead.");
+  const input = parseQuoteInput(body);
+  if (input.leadId && !await getLead(db, input.leadId)) throw new HttpError(404, "LEAD_NOT_FOUND", "Lead not found.");
+  const { oneTime, monthly } = totals(input.lineItems);
+  await db.prepare(`UPDATE quotes SET lead_id=?,business_name=?,contact_name=?,title=?,message=?,terms=?,line_items_json=?,one_time_cents=?,monthly_cents=?,valid_until=?,updated_at=? WHERE id=?`).bind(input.leadId, input.businessName, input.contactName, input.title, input.message, input.terms, JSON.stringify(input.lineItems), oneTime, monthly, input.validUntil, nowIso(), id).run();
+  await logQuoteEvent(db, { quoteId: id, eventType: "UPDATED", source: "ADMIN", detail: { actor } });
+  return await requireQuote(db, id);
+}
+__name(updateQuote, "updateQuote");
+async function setQuoteStatus(db, id, status, actor) {
+  const quote = await requireQuote(db, id);
+  if (typeof status !== "string" || !["ACCEPTED", "DECLINED", "VOID"].includes(status)) {
+    throw new HttpError(400, "VALIDATION_ERROR", "status must be ACCEPTED, DECLINED, or VOID.");
+  }
+  await db.prepare(`UPDATE quotes SET status=?,updated_at=? WHERE id=?`).bind(status, nowIso(), id).run();
+  await logQuoteEvent(db, { quoteId: id, eventType: `MARKED_${status}`, source: "ADMIN", detail: { actor, from: quote.status } });
+  if (quote.lead_id) await recordEvent(db, { eventId: newId("evt"), leadId: quote.lead_id, eventType: `QUOTE_${status}`, eventData: { quoteId: id, quoteNumber: quote.quote_number }, source: "QUOTES", actor });
+  return await requireQuote(db, id);
+}
+__name(setQuoteStatus, "setQuoteStatus");
+async function listQuotes(db, leadId) {
+  const where = leadId ? "WHERE q.lead_id=?" : "";
+  const statement = db.prepare(`
+    SELECT q.id,q.quote_number,q.lead_id,q.business_name,q.contact_name,q.title,q.one_time_cents,q.monthly_cents,q.valid_until,q.status,
+      q.first_sent_at,q.last_sent_at,q.open_count,q.first_opened_at,q.last_opened_at,q.view_count,q.first_viewed_at,q.last_viewed_at,q.created_at,q.updated_at,
+      (SELECT group_concat(email, ', ') FROM (SELECT DISTINCT s.email FROM quote_sends s WHERE s.quote_id=q.id AND s.status='SENT')) AS sent_to
+    FROM quotes q ${where} ORDER BY q.updated_at DESC LIMIT 300
+  `);
+  const rows = await (leadId ? statement.bind(leadId) : statement).all();
+  return rows.results;
+}
+__name(listQuotes, "listQuotes");
+async function getQuoteDetail(env, id) {
+  const quote = await requireQuote(env.DB, id);
+  const [sends, events] = await Promise.all([
+    env.DB.prepare(`SELECT token,email,recipient_name,included_invite,status,error,open_count,first_opened_at,last_opened_at,view_count,first_viewed_at,last_viewed_at,sent_by,sent_at FROM quote_sends WHERE quote_id=? ORDER BY sent_at DESC`).bind(id).all(),
+    env.DB.prepare(`SELECT event_type,source,email,user_agent,detail_json,created_at FROM quote_events WHERE quote_id=? ORDER BY created_at DESC LIMIT 200`).bind(id).all()
+  ]);
+  const site = siteBase(env);
+  return {
+    quote: { ...quote, line_items: JSON.parse(quote.line_items_json) },
+    sends: sends.results.map((s) => ({ ...s, view_url: `${site}/estimate/?t=${encodeURIComponent(String(s.token))}` })),
+    events: events.results
+  };
+}
+__name(getQuoteDetail, "getQuoteDetail");
+function siteBase(env) {
+  return String(env.SITE_BASE_URL || "https://trenchesgroup.com").replace(/\/+$/, "");
+}
+__name(siteBase, "siteBase");
+function randomToken() {
+  const bytes = crypto.getRandomValues(new Uint8Array(24));
+  let binary = "";
+  for (const b of bytes) binary += String.fromCharCode(b);
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+__name(randomToken, "randomToken");
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+}
+__name(esc, "esc");
+function money(cents) {
+  return "$" + (cents / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+__name(money, "money");
+function formatDate(isoDate) {
+  return (/* @__PURE__ */ new Date(`${isoDate}T12:00:00Z`)).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
+}
+__name(formatDate, "formatDate");
+function totalLines(quote) {
+  const lines = [];
+  if (quote.one_time_cents > 0 || quote.monthly_cents === 0) lines.push(`One-time: ${money(quote.one_time_cents)}`);
+  if (quote.monthly_cents > 0) lines.push(`Monthly: ${money(quote.monthly_cents)}/mo`);
+  return lines;
+}
+__name(totalLines, "totalLines");
+function buildQuoteEmail(quote, input) {
+  const greetingName = input.recipientName || quote.contact_name;
+  const greeting = greetingName ? `Hi ${greetingName.split(/\s+/)[0]},` : "Hi there,";
+  const intro = quote.message || `Thanks for the conversation. Here's the estimate we discussed for ${quote.business_name}.`;
+  const validity = quote.valid_until ? `Valid through ${formatDate(quote.valid_until)}` : "";
+  const subject = `Your estimate from Trenches Group: ${quote.title} (${quote.quote_number})`;
+  const portalText = input.inviteUrl ? `Your Trenches Group client portal is ready. It's already approved, so you'll see full pricing and every estimate we send you in one place:
+${input.inviteUrl}` : `Every estimate we send you is saved in your client portal:
+${input.portalUrl}`;
+  const text2 = [
+    greeting,
+    "",
+    intro,
+    "",
+    `${quote.title} (${quote.quote_number})`,
+    ...totalLines(quote),
+    validity,
+    "",
+    `View your estimate: ${input.viewUrl}`,
+    "",
+    portalText,
+    "",
+    "Questions? Just reply to this email.",
+    "",
+    "Connor McKendry",
+    "Trenches Group"
+  ].filter((line, i, all) => line !== "" || all[i - 1] !== "").join("\n");
+  const totalsHtml = totalLines(quote).map((line) => {
+    const [label, value] = line.split(": ");
+    return `<tr><td style="padding:4px 0;color:#6D7782;font-size:14px">${esc(label)}</td><td style="padding:4px 0;text-align:right;font-size:18px;font-weight:700;color:#1B1F23">${esc(value)}</td></tr>`;
+  }).join("");
+  const button = /* @__PURE__ */ __name((href, label, bg) => `<a href="${esc(href)}" style="display:inline-block;background:${bg};color:#ffffff;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;padding:14px 26px;border-radius:3px">${esc(label)}</a>`, "button");
+  const portalHtml = input.inviteUrl ? `<div style="margin-top:28px;padding:20px;background:#F4F5F6;border-left:3px solid #375A7F;border-radius:3px">
+         <div style="font-weight:700;font-size:15px;color:#1B1F23;margin-bottom:6px">Your client portal is ready</div>
+         <div style="font-size:14px;line-height:1.6;color:#3d444b;margin-bottom:14px">We've already approved your account, so you'll see full pricing and every estimate we send you in one place.</div>
+         ${button(input.inviteUrl, "Create my portal account", "#375A7F")}
+       </div>` : `<p style="margin-top:24px;font-size:14px;line-height:1.6;color:#3d444b">Every estimate we send you is saved in your <a href="${esc(input.portalUrl)}" style="color:#C65C2E">client portal</a>.</p>`;
+  const html = `<!doctype html><html><body style="margin:0;padding:0;background:#F4F5F6">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F4F5F6;padding:24px 12px"><tr><td align="center">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:4px;overflow:hidden;font-family:Montserrat,Segoe UI,Helvetica,Arial,sans-serif">
+<tr><td style="background:#1B1F23;padding:18px 28px;color:#ffffff;font-size:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">Trenches Group</td></tr>
+<tr><td style="padding:32px 28px 8px;color:#1B1F23">
+  <p style="margin:0 0 14px;font-size:15px">${esc(greeting)}</p>
+  <p style="margin:0 0 24px;font-size:15px;line-height:1.6;white-space:pre-line">${esc(intro)}</p>
+  <div style="border-top:3px solid #C65C2E;background:#FBFBFC;padding:18px 20px;border-radius:3px">
+    <div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6D7782">Estimate ${esc(quote.quote_number)}</div>
+    <div style="font-size:18px;font-weight:700;margin:4px 0 12px">${esc(quote.title)}</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${totalsHtml}</table>
+    ${validity ? `<div style="font-size:12px;color:#6D7782;margin-top:8px">${esc(validity)}</div>` : ""}
+  </div>
+  <div style="text-align:center;margin:28px 0 4px">${button(input.viewUrl, "View your estimate", "#C65C2E")}</div>
+  ${portalHtml}
+  <p style="margin:28px 0 0;font-size:14px;line-height:1.6;color:#3d444b">Questions? Just reply to this email.</p>
+  <p style="margin:14px 0 28px;font-size:14px;line-height:1.5">Connor McKendry<br><span style="color:#6D7782">Trenches Group</span></p>
+</td></tr>
+</table>
+</td></tr></table>
+<img src="${esc(input.pixelUrl)}" width="1" height="1" alt="" style="display:block;width:1px;height:1px;border:0">
+</body></html>`;
+  return { subject, text: text2, html };
+}
+__name(buildQuoteEmail, "buildQuoteEmail");
+async function sendQuote(env, id, body, actor) {
+  const quote = await requireQuote(env.DB, id);
+  if (quote.status === "VOID") throw new HttpError(409, "QUOTE_VOID", "This quote was voided and cannot be sent.");
+  const lineItems = JSON.parse(quote.line_items_json);
+  if (!lineItems.length) throw new HttpError(409, "QUOTE_EMPTY", "Add at least one line item before sending.");
+  const email = (text(body.email, "Email", 320, true) ?? "").toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new HttpError(400, "INVALID_EMAIL", "Enter a valid email address.");
+  const recipientName = text(body.name, "Recipient name", 180);
+  const member = await env.DB.prepare(`SELECT id FROM members WHERE lower(email)=?`).bind(email).first();
+  const token = randomToken();
+  const site = siteBase(env);
+  const viewUrl = `${site}/estimate/?t=${encodeURIComponent(token)}`;
+  const inviteUrl = member ? null : `${site}/portal/?invite=${encodeURIComponent(token)}`;
+  const message = buildQuoteEmail(quote, {
+    recipientName,
+    viewUrl,
+    pixelUrl: `${site}/api/estimates/open/${encodeURIComponent(token)}.gif`,
+    inviteUrl,
+    portalUrl: `${site}/portal/`
+  });
+  const ts = nowIso();
+  await env.DB.prepare(`INSERT INTO quote_sends(token,quote_id,email,recipient_name,included_invite,status,sent_by,sent_at) VALUES(?,?,?,?,?,'SENT',?,?)`).bind(token, id, email, recipientName, inviteUrl ? 1 : 0, actor, ts).run();
+  try {
+    const result = await sendGmail(env, { to: email, toName: recipientName, subject: message.subject, text: message.text, html: message.html });
+    await env.DB.prepare(`UPDATE quote_sends SET provider_message_id=? WHERE token=?`).bind(result.messageId, token).run();
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : String(error);
+    await env.DB.prepare(`UPDATE quote_sends SET status='FAILED',error=? WHERE token=?`).bind(reason.slice(0, 1e3), token).run();
+    await logQuoteEvent(env.DB, { quoteId: id, eventType: "SEND_FAILED", source: "ADMIN", email, sendToken: token, detail: { actor, error: reason.slice(0, 500) } });
+    throw new HttpError(error instanceof HttpError ? error.status : 502, "QUOTE_SEND_FAILED", `Email could not be sent: ${reason}`, { viewUrl });
+  }
+  await env.DB.prepare(`UPDATE quotes SET status=CASE WHEN status='DRAFT' THEN 'SENT' ELSE status END,first_sent_at=COALESCE(first_sent_at,?),last_sent_at=?,updated_at=? WHERE id=?`).bind(ts, ts, ts, id).run();
+  await logQuoteEvent(env.DB, { quoteId: id, eventType: "SENT", source: "ADMIN", email, sendToken: token, detail: { actor, includedInvite: Boolean(inviteUrl) } });
+  if (quote.lead_id) await recordEvent(env.DB, { eventId: newId("evt"), leadId: quote.lead_id, eventType: "QUOTE_SENT", eventData: { quoteId: id, quoteNumber: quote.quote_number, email, includedInvite: Boolean(inviteUrl) }, source: "QUOTES", actor });
+  return { sent: true, email, viewUrl, includedInvite: Boolean(inviteUrl), quote: await requireQuote(env.DB, id) };
+}
+__name(sendQuote, "sendQuote");
+async function sendFirstViewAlerts(env) {
+  const due = await env.DB.prepare(`
+    SELECT q.id, q.quote_number, q.title, q.business_name, q.first_viewed_at,
+      (SELECT e.email FROM quote_events e WHERE e.quote_id=q.id AND e.event_type='VIEWED' ORDER BY e.created_at ASC LIMIT 1) AS viewer
+    FROM quotes q WHERE q.first_viewed_at IS NOT NULL AND q.view_alert_sent_at IS NULL LIMIT 10
+  `).all();
+  let sent = 0;
+  for (const q of due.results) {
+    const claim = await env.DB.prepare(`UPDATE quotes SET view_alert_sent_at=? WHERE id=? AND view_alert_sent_at IS NULL`).bind(nowIso(), q.id).run();
+    if ((claim.meta.changes ?? 0) !== 1) continue;
+    const link = `${env.PUBLIC_BASE_URL}/admin`;
+    const who = q.viewer || q.business_name;
+    try {
+      await sendGmail(env, {
+        to: VIEW_ALERT_TO,
+        subject: `${q.business_name} just opened estimate ${q.quote_number}`,
+        text: `${who} opened "${q.title}" (${q.quote_number}) for the first time.
+
+See every view in the Command Center: ${link}`,
+        html: `<p><b>${esc(who)}</b> opened "${esc(q.title)}" (${esc(q.quote_number)}) for the first time.</p><p><a href="${esc(link)}">See every view in the Command Center</a></p>`
+      });
+      sent += 1;
+    } catch (error) {
+      await logQuoteEvent(env.DB, { quoteId: q.id, eventType: "VIEW_ALERT_FAILED", source: "SYSTEM", detail: { error: error instanceof Error ? error.message : String(error) } });
+    }
+  }
+  return sent;
+}
+__name(sendFirstViewAlerts, "sendFirstViewAlerts");
 
 // src/routes.ts
 function actorFromRequest(request) {
@@ -4394,15 +4958,18 @@ async function handleRequest(request, env) {
   if (request.method === "POST" && path === "/integrations/twilio/status") {
     return await handleTwilioStatus(request, env);
   }
+  if (request.method === "POST" && path === "/integrations/stripe/webhook") {
+    return await handleStripeWebhook(env, request);
+  }
+  if (request.method === "GET" && path === "/integrations/gmail/oauth/callback") {
+    return await handleGmailConnectCallback(request, env);
+  }
   const smartleadWebhookMatch = path.match(/^\/integrations\/smartlead\/webhook\/([^/]+)$/);
   if (smartleadWebhookMatch && request.method === "POST") {
     const expected = await webhookSecret(env.DB);
     if (decodeURIComponent(smartleadWebhookMatch[1]) !== expected) throw new HttpError(404, "NOT_FOUND", "Not found.");
     const payload = await readJsonObject(request);
     return json(await processSmartleadWebhookEvent(env, payload));
-  }
-  if (request.method === "GET" && path === "/integrations/gmail/oauth/callback") {
-    return await handleLiveReplyOAuthCallback(request, env);
   }
   const unsubscribeMatch = path.match(/^\/unsubscribe\/email\/([^/]+)$/);
   if (unsubscribeMatch && (request.method === "GET" || request.method === "POST")) {
@@ -4415,6 +4982,15 @@ async function handleRequest(request, env) {
   const demoQuoteMatch = path.match(/^\/demo\/([^/]+)\/quote$/);
   if (demoQuoteMatch && request.method === "GET") {
     return await serveDemoQuote(env.DB, decodeURIComponent(demoQuoteMatch[1]), request);
+  }
+  const demoCheckoutSuccessMatch = path.match(/^\/demo\/([^/]+)\/checkout\/success$/);
+  if (demoCheckoutSuccessMatch && request.method === "GET") {
+    return serveCheckoutSuccess(decodeURIComponent(demoCheckoutSuccessMatch[1]));
+  }
+  const demoCheckoutMatch = path.match(/^\/demo\/([^/]+)\/checkout$/);
+  if (demoCheckoutMatch && request.method === "GET") {
+    const domainAddon = url.searchParams.get("domain") === "yes";
+    return await startCheckout(env, decodeURIComponent(demoCheckoutMatch[1]), domainAddon);
   }
   const publicDemoMatch = path.match(/^\/demo\/([^/]+)$/);
   if (publicDemoMatch && request.method === "GET") {
@@ -4534,9 +5110,9 @@ async function handleRequest(request, env) {
       FROM leads l LEFT JOIN demo_sites ds ON ds.lead_id=l.id AND ds.status IN ('READY','PUBLISHED')
       ORDER BY l.updated_at DESC`).all();
     const csvCell = /* @__PURE__ */ __name((value) => {
-      let text = String(value ?? "").replace(/[\r\n]+/g, " ").trim();
-      if (/^[=+\-@]/.test(text)) text = `'${text}`;
-      return `"${text.replaceAll('"', '""')}"`;
+      let text2 = String(value ?? "").replace(/[\r\n]+/g, " ").trim();
+      if (/^[=+\-@]/.test(text2)) text2 = `'${text2}`;
+      return `"${text2.replaceAll('"', '""')}"`;
     }, "csvCell");
     const headers = ["Name", "Category", "City", "State", "Rating", "Reviews", "Current-site URL", "Website gap", "Gap detail", "Pitch hook", "Concept link", "Stage", "Priority", "Last updated"];
     const origin = url.origin;
@@ -4567,6 +5143,21 @@ async function handleRequest(request, env) {
       "cache-control": "no-store",
       "x-content-type-options": "nosniff"
     } });
+  }
+  if (request.method === "GET" && path === "/api/quotes/mailbox") return json(await mailboxStatus(env));
+  if (request.method === "POST" && path === "/api/quotes/mailbox/connect") return json(await startGmailConnect(env));
+  if (path === "/api/quotes") {
+    if (request.method === "GET") return json({ quotes: await listQuotes(env.DB, url.searchParams.get("leadId")) });
+    if (request.method === "POST") return json({ quote: await createQuote(env.DB, await readJsonObject(request), actor) }, 201);
+  }
+  const quoteMatch = path.match(/^\/api\/quotes\/([^/]+)(?:\/(send|status))?$/);
+  if (quoteMatch) {
+    const quoteId = decodeURIComponent(quoteMatch[1]);
+    const action = quoteMatch[2];
+    if (!action && request.method === "GET") return json(await getQuoteDetail(env, quoteId));
+    if (!action && request.method === "PATCH") return json({ quote: await updateQuote(env.DB, quoteId, await readJsonObject(request), actor) });
+    if (action === "send" && request.method === "POST") return json(await sendQuote(env, quoteId, await readJsonObject(request), actor));
+    if (action === "status" && request.method === "POST") return json({ quote: await setQuoteStatus(env.DB, quoteId, (await readJsonObject(request)).status, actor) });
   }
   if (request.method === "GET" && path === "/api/demos/status") {
     return json(await demoStatus(env.DB, env));
@@ -4604,6 +5195,9 @@ async function handleRequest(request, env) {
   if (request.method === "GET" && path === "/api/outreach/email/status") {
     return json(await emailOutreachStatus(env.DB, env));
   }
+  if (request.method === "GET" && path === "/api/outreach/concierge/status") {
+    return json(await conciergeStatus(env.DB));
+  }
   if (request.method === "POST" && path === "/api/outreach/email/settings") {
     const body = await readJsonObject(request);
     await updateEmailSettings(env.DB, {
@@ -4618,9 +5212,6 @@ async function handleRequest(request, env) {
       smartleadMailbox: typeof body.smartleadMailbox === "string" ? body.smartleadMailbox : void 0
     }, actor);
     return json(await emailOutreachStatus(env.DB, env));
-  }
-  if (request.method === "POST" && path === "/api/outreach/email/live-reply/oauth/start") {
-    return json(await startLiveReplyOAuth(env.DB, env));
   }
   if (request.method === "POST" && path === "/api/outreach/email/test-allowlist") {
     const body = await readJsonObject(request);
@@ -4720,7 +5311,9 @@ async function handleRequest(request, env) {
     return json(result, result.rejected === result.received ? 422 : 202);
   }
   if (request.method === "GET" && path === "/api/campaigns") {
-    return json({ campaigns: await listCampaigns(env.DB, 100, url.searchParams.get("archived") === "true") });
+    const offeringParam = url.searchParams.get("offering");
+    const offering = offeringParam === "WEBSITE" || offeringParam === "CONCIERGE" ? offeringParam : void 0;
+    return json({ campaigns: await listCampaigns(env.DB, 100, url.searchParams.get("archived") === "true", offering) });
   }
   if (request.method === "POST" && path === "/api/campaigns") {
     const input = parseCampaignCreate(await readJsonObject(request));
@@ -4737,7 +5330,9 @@ async function handleRequest(request, env) {
     return json(await getRunnerStatus(env.DB));
   }
   if (request.method === "GET" && path === "/api/prospector-jobs") {
-    return json({ jobs: await listProspectorJobs(env.DB) });
+    const offeringParam = url.searchParams.get("offering");
+    const offering = offeringParam === "WEBSITE" || offeringParam === "CONCIERGE" ? offeringParam : void 0;
+    return json({ jobs: await listProspectorJobs(env.DB, offering) });
   }
   if (request.method === "POST" && path === "/api/prospector-jobs") {
     const input = parseProspectorJobCreate(await readJsonObject(request));
@@ -5253,13 +5848,14 @@ var index_default = {
         });
         const prospectorJobs = await runDueProspectorJobs(env.DB, env);
         await keepRunnerAlive(env);
-        const [followups, outreach, demoConsentRepair, demoApprovedRepair] = await Promise.all([
+        const [followups, outreach, demoConsentRepair, demoApprovedRepair, quoteViewAlerts] = await Promise.all([
           processDueFollowups(env.DB, false),
           runAutonomousOutreach(env),
           repairDemoConsentHandoffs(env.DB),
-          reconcileApprovedDemoJobs(env.DB)
+          reconcileApprovedDemoJobs(env.DB),
+          sendFirstViewAlerts(env)
         ]);
-        return { reaped, deferred, prospectorJobs, followups, outreach, demoConsentRepair, demoApprovedRepair };
+        return { reaped, deferred, prospectorJobs, followups, outreach, demoConsentRepair, demoApprovedRepair, quoteViewAlerts };
       });
       const repaired = outcome?.demoApprovedRepair?.requeued ?? 0;
       const reclaimed = outcome?.reaped?.reclaimed ?? 0;

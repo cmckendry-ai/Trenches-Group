@@ -18,11 +18,11 @@ function normalizedText2(value) {
   return (value ?? "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
 }
 __name(normalizedText2, "normalizedText");
-function treeTargetMatch(text) {
+function treeTargetMatch(text2) {
   const exact = ["tree service", "tree removal", "tree trimming", "tree care", "arborist", "stump grinding", "stump removal", "tree surgery"];
   const adjacent = ["landscap", "land clearing", "brush clearing", "forestry", "lot clearing", "outdoor"];
-  if (exact.some((term) => text.includes(term))) return "MATCH";
-  if (adjacent.some((term) => text.includes(term))) return "ADJACENT";
+  if (exact.some((term) => text2.includes(term))) return "MATCH";
+  if (adjacent.some((term) => text2.includes(term))) return "ADJACENT";
   return "OFF_TARGET";
 }
 __name(treeTargetMatch, "treeTargetMatch");
@@ -113,12 +113,12 @@ async function getCampaignView(db, id) {
   return { ...row, ...metrics, geography: parseGeography(row.geography_json), provider_usage: await providerUsage(db, id) };
 }
 __name(getCampaignView, "getCampaignView");
-async function listCampaigns(db, limit = 100, archived = false) {
+async function listCampaigns(db, limit = 100, archived = false, offering) {
   const rows = await db.prepare(`
     SELECT * FROM prospecting_campaigns
-    WHERE ${archived ? "archived_at IS NOT NULL" : "archived_at IS NULL"}
+    WHERE ${archived ? "archived_at IS NOT NULL" : "archived_at IS NULL"} ${offering ? "AND offering = ?" : ""}
     ORDER BY created_at DESC LIMIT ?
-  `).bind(limit).all();
+  `).bind(...offering ? [offering, limit] : [limit]).all();
   const out = [];
   for (const row of rows.results) {
     const metrics = await campaignMetrics(db, row.id);
@@ -137,8 +137,8 @@ async function createCampaign(db, input, actor) {
   await db.prepare(`
     INSERT INTO prospecting_campaigns (
       id, industry, geography_json, geography_mode, center_location, radius_miles, provider, discovery_provider, enrichment_provider, fallback_enabled, status, requested_count, raw_count, ingested_count,
-      qualified_count, notes, created_at, updated_at, min_rating, min_reviews, model, updated_by, last_stage
-    ) VALUES (?, ?, ?, ?, ?, ?, 'PROVIDER_ROUTER_V19', ?, ?, ?, 'READY', ?, 0, 0, 0, ?, ?, ?, ?, ?, ?, ?, 'DISCOVERY')
+      qualified_count, notes, created_at, updated_at, min_rating, min_reviews, model, updated_by, last_stage, offering
+    ) VALUES (?, ?, ?, ?, ?, ?, 'PROVIDER_ROUTER_V19', ?, ?, ?, 'READY', ?, 0, 0, 0, ?, ?, ?, ?, ?, ?, ?, 'DISCOVERY', ?)
   `).bind(
     id,
     input.industry,
@@ -156,7 +156,8 @@ async function createCampaign(db, input, actor) {
     input.minRating ?? null,
     input.minReviews ?? null,
     input.model ?? "sonnet",
-    actor
+    actor,
+    input.offering ?? "WEBSITE"
   ).run();
   const campaign = await getCampaignView(db, id);
   if (!campaign) throw new Error("Campaign was not persisted.");
