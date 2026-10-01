@@ -1,5 +1,8 @@
 # Trenches OS API
 
+Start with `CLAUDE.md` and `docs/SYSTEM-MAP.md`. The bundle below was re-synced
+to production on 2026-10-01; see `docs/CHANGELOG.md`.
+
 ## Provenance of this commit
 
 There was no prior git history for this project. The `smartlead-rebuild` branch

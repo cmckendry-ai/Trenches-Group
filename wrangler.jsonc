@@ -42,5 +42,14 @@
   // Secrets (already set live via `wrangler secret put`, not stored here):
   // ADMIN_API_KEY, ORGO_API_KEY, ORGO_COMPUTER_ID, PROSPECT_INGEST_KEY,
   // RUNNER_API_KEY, SMARTLEAD_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN,
-  // TWILIO_MESSAGING_SERVICE_SID
+  // TWILIO_MESSAGING_SERVICE_SID, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET,
+  // CREDENTIAL_ENCRYPTION_KEY, SITE_BASE_URL (optional)
+  //
+  // TODO (2026-10-01): the live worker also has a send_email binding named
+  // EMAIL (sender replies@trenchesgroup.com) and a cron trigger. Neither is
+  // declared here. Pull both from the dashboard before any `wrangler deploy`,
+  // or the deploy will strip the EMAIL binding and stop reply notifications.
+  // Expected shape:
+  //   "send_email": [{ "name": "EMAIL" }],
+  //   "triggers": { "crons": ["<confirm in dashboard>"] }
 }
