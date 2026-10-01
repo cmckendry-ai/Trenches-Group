@@ -14,6 +14,18 @@ overhead with no owner to serve. Split a client out the day they need access.
 Would change it: a client who needs read access to their own code, or a second
 developer.
 
+## 2026-10-01 Prospect work stays in D1; customers get a folder; a repo only on handoff
+
+Decision: prospect demos and quotes live in `demo_sites` and `quotes`, never in
+git. When a prospect pays, their worker bundle and a hand-over README go in
+`clients/<name>/`. A client gets its own repo only when they hire a developer
+who needs access, take ownership of the Cloudflare account, or buy the site
+outright.
+Reason: one operator. A separate repo is a separate session with no view of
+the shared D1, Stripe or portal state. Fenlo is the only paying client and
+none of the three triggers applies.
+Would change it: any of the three triggers.
+
 ## 2026-10-01 The repo is the memory
 
 Decision: every session reads `docs/SYSTEM-MAP.md` first, appends to
