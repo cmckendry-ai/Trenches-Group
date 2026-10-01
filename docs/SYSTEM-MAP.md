@@ -50,7 +50,7 @@ exact transition table.
 
 ## 3. Scheduled work (one cron, lease `scheduled-main`, 110 s)
 
-Order inside `scheduled()` (`src/index.js` around line 5845):
+Order inside `scheduled()` (`trenches-os-api/src/index.js` around line 5845):
 1. `reapStaleDemoJobs`
 2. `replayDeferredEvents` -> queue
 3. `runDueProspectorJobs` (creates campaigns if `PROSPECTOR_ORCHESTRATOR_ENABLED`)
@@ -98,13 +98,25 @@ Email Service), `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`,
 ```sh
 # 1. pull the live bundle (Cloudflare MCP: workers_get_worker_code trenches-os-api), save as live.js
 # 2. strip the multipart framing
+cd trenches-os-api
 sed '1,3d' live.js | sed '/^\/\/# sourceMappingURL=index.js.map$/,$d' > src/index.js
 # 3. regenerate the readable split
 rm -f recovered/*.js
 awk '/^\/\/ src\/[a-z0-9_-]*\.ts$/{ if(out) close(out); m=$0; sub(/^\/\/ src\//,"",m); sub(/\.ts$/,"",m); out="recovered/" m ".js"; next } out{ print > out }' src/index.js
+# Same recipe for the other workers: save the bundle as <worker>/dist/index.js (no split).
 ```
 
-## 7. Related reports
+## 7. Repo layout
+
+`trenches-os-api/` API worker (src, recovered, wrangler.jsonc, migrations).
+`trenches-site/dist/`, `chatbot-worker/dist/`, `clients/vivid/*/dist/`,
+`clients/fenlo/*/dist/`: live bundles recovered 2026-10-01, each with a README.
+`runner/`: placeholder until `runner.py` is committed from the Windows PC.
+Static assets behind `env.ASSETS` and per-worker binding configs are not
+recoverable through the API and still need a dashboard export.
+
+## 8. Related reports
 
 - `docs/reviews/2026-10-01-operating-review.md` — findings, numbers, and the plan.
 - `docs/CHANGELOG.md` — dated log of what changed and what is still broken.
+- `docs/DECISIONS.md` — decisions with dates and reasons, plus the open ones.
