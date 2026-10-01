@@ -5,15 +5,20 @@
   "compatibility_date": "2026-08-16",
   "compatibility_flags": ["nodejs_compat"],
 
-  // TODO: not independently verifiable this session (no Cloudflare Queues/Workflows
-  // API tool was available) -- confirm binding names/resource names against the
-  // live worker settings in the dashboard or `wrangler deployments status` before
-  // relying on this file to redeploy from scratch.
+  // ---------------------------------------------------------------------------
+  // STATUS 2026-10-01: three values below are still TODO-confirm placeholders.
+  // The deploy workflow refuses to run while any remain. Fill them from the
+  // live worker with scripts/pull-live-config.sh (needs CLOUDFLARE_API_TOKEN),
+  // never from memory. A wrong name here creates a new empty queue or
+  // workflow and silently detaches the live one.
+  // ---------------------------------------------------------------------------
+
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "trenches-production",
-      "database_id": "2261ffe8-712f-4b07-aec2-73bba0ad155e"
+      "database_id": "2261ffe8-712f-4b07-aec2-73bba0ad155e",
+      "migrations_dir": "migrations"
     }
   ],
 
@@ -22,7 +27,7 @@
       { "queue": "TODO-confirm-queue-name", "binding": "EVENTS_QUEUE" }
     ],
     "consumers": [
-      { "queue": "TODO-confirm-queue-name" },
+      { "queue": "TODO-confirm-queue-name", "dead_letter_queue": "TODO-confirm-queue-name-dlq" },
       { "queue": "TODO-confirm-queue-name-dlq" }
     ]
   },
@@ -35,21 +40,31 @@
     }
   ],
 
+  // Cloudflare Email Service send binding. The code calls env.EMAIL.send() from
+  // replies@trenchesgroup.com (notifyConnor). Confirm the exact binding config
+  // from the dashboard; a destination_address restriction may be set there.
+  "send_email": [
+    { "name": "EMAIL" }
+  ],
+
+  // The scheduled() handler runs reaper, deferred replay, prospector jobs,
+  // runner keep-alive, follow-ups, outreach, demo repair and quote alerts
+  // under a 110 s lease. The live schedule is not known; confirm it.
+  "triggers": {
+    "crons": ["TODO-confirm-cron-expression"]
+  },
+
   "vars": {
     "PUBLIC_BASE_URL": "https://trenches-os-api.cmckendry-ai.workers.dev"
-  }
+    // "SITE_BASE_URL": "https://trenchesgroup.com"  // optional; code defaults to this
+  },
 
-  // Secrets (already set live via `wrangler secret put`, not stored here):
-  // ADMIN_API_KEY, ORGO_API_KEY, ORGO_COMPUTER_ID, PROSPECT_INGEST_KEY,
-  // RUNNER_API_KEY, SMARTLEAD_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN,
+  "observability": { "enabled": true }
+
+  // Secrets (set live via `wrangler secret put`, never stored here):
+  // ADMIN_API_KEY, PROSPECT_INGEST_KEY, RUNNER_API_KEY, SMARTLEAD_API_KEY,
+  // ORGO_API_KEY, ORGO_COMPUTER_ID, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN,
   // TWILIO_MESSAGING_SERVICE_SID, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET,
-  // CREDENTIAL_ENCRYPTION_KEY, SITE_BASE_URL (optional)
-  //
-  // TODO (2026-10-01): the live worker also has a send_email binding named
-  // EMAIL (sender replies@trenchesgroup.com) and a cron trigger. Neither is
-  // declared here. Pull both from the dashboard before any `wrangler deploy`,
-  // or the deploy will strip the EMAIL binding and stop reply notifications.
-  // Expected shape:
-  //   "send_email": [{ "name": "EMAIL" }],
-  //   "triggers": { "crons": ["<confirm in dashboard>"] }
+  // CREDENTIAL_ENCRYPTION_KEY. Losing CREDENTIAL_ENCRYPTION_KEY makes every
+  // stored Gmail refresh token unrecoverable.
 }

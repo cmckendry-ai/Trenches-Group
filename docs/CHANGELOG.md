@@ -3,6 +3,21 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-01 (later still)
+
+- Repo: `trenches-os-api/wrangler.jsonc` now declares the `EMAIL` send_email
+  binding, a cron trigger block, `migrations_dir`, and observability. Queue
+  name, workflow name and cron expression remain `TODO-confirm` because no
+  Cloudflare API token is available in this environment to read them.
+  `trenches-os-api/scripts/pull-live-config.sh` prints them given a token.
+- Repo: the deploy workflow now runs on push to `main` (paths under
+  `trenches-os-api/`) and still refuses while placeholders remain.
+- Blocked on Connor: add `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`
+  to the Claude cloud environment (for the script) and to the GitHub repo
+  Actions secrets (for the deploy). Then one session runs the script, fills
+  the three values, and the next push to main deploys.
+- Prod: no changes.
+
 ## 2026-10-01 (later)
 
 - Repo: restructured as a monorepo. API moved to `trenches-os-api/`. Live
