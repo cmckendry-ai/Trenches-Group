@@ -1,0 +1,53 @@
+# Deploy trenches-os-api from main. This is the only sanctioned way to deploy.
+# Runs on every push to main that touches trenches-os-api/, and by hand.
+# It refuses to deploy while wrangler.jsonc still has TODO-confirm placeholders
+# or lacks the EMAIL send_email binding or a cron trigger, because a deploy
+# with a wrong or missing binding detaches it from the live worker.
+#
+# Repo secrets required (Settings > Secrets and variables > Actions):
+#   CLOUDFLARE_API_TOKEN   Workers Scripts:Edit, D1:Edit, Queues:Edit,
+#                          Workflows:Edit, Email Routing:Edit
+#   CLOUDFLARE_ACCOUNT_ID
+name: deploy trenches-os-api
+on:
+  push:
+    branches: [main]
+    paths:
+      - "trenches-os-api/**"
+      - ".github/workflows/deploy-trenches-os-api.yml"
+  workflow_dispatch:
+concurrency:
+  group: deploy-trenches-os-api
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: trenches-os-api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Refuse to deploy an unfinished config
+        run: |
+          fail=0
+          if grep -q "TODO-confirm" wrangler.jsonc; then
+            echo "::error::wrangler.jsonc still has TODO-confirm placeholders. Run scripts/pull-live-config.sh and fill them in."; fail=1; fi
+          if ! grep -q '"send_email"' wrangler.jsonc; then
+            echo "::error::wrangler.jsonc does not declare the EMAIL send_email binding."; fail=1; fi
+          if ! grep -q '"crons"' wrangler.jsonc; then
+            echo "::error::wrangler.jsonc does not declare the cron trigger."; fail=1; fi
+          exit $fail
+      - name: Show what would change
+        run: npx wrangler deploy --dry-run --outdir=/tmp/dry
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Deploy
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
