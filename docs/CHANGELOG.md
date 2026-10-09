@@ -5,6 +5,9 @@ the repo. Write it at the end of every session.
 
 ## 2026-10-09
 
+- Repo: added `trenches-site/public/pricing/index.html`, the public /pricing page, not deployed.
+  Blocked on exporting the live static assets (a deploy of this folder alone would
+  replace them). Prod: no changes.
 - Docs: added `docs/PRICING.md`. Proposed pricing for brand design, website design,
   social design, social management, three full startup packages, and the outreach
   agent add-on. Live prices (website $500, domain $125, care plan $100 per month,
