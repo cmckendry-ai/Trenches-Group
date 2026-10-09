@@ -1,0 +1,53 @@
+# Deploy trenches-site from main. Sanctioned way to deploy this worker.
+# Runs on push to main that touches trenches-site/, and by hand.
+# It refuses while wrangler.jsonc has TODO-confirm placeholders, or while the live
+# static assets have not been exported into trenches-site/public/. Static assets
+# deploy as a whole set: shipping public/ with only the pricing page would replace
+# the live site's pages.
+#
+# Repo secrets required (Settings > Secrets and variables > Actions):
+#   CLOUDFLARE_API_TOKEN   Workers Scripts:Edit (plus Workers Routes:Edit if routes change)
+#   CLOUDFLARE_ACCOUNT_ID
+name: deploy trenches-site
+on:
+  push:
+    branches: [main]
+    paths:
+      - "trenches-site/**"
+      - ".github/workflows/deploy-trenches-site.yml"
+  workflow_dispatch:
+concurrency:
+  group: deploy-trenches-site
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: trenches-site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Refuse to deploy an unfinished config
+        run: |
+          fail=0
+          if grep -q "TODO-confirm" wrangler.jsonc; then
+            echo "::error::wrangler.jsonc still has TODO-confirm placeholders. Run ../trenches-os-api/scripts/pull-live-config.sh trenches-site and fill them in."; fail=1; fi
+          if [ ! -f public/.EXPORTED-FROM-LIVE ]; then
+            echo "::error::public/ has not been confirmed as a full export of the live assets (public/.EXPORTED-FROM-LIVE missing). Deploying now would replace the live site's static files."; fail=1; fi
+          if [ ! -f public/pricing/index.html ]; then
+            echo "::error::public/pricing/index.html missing."; fail=1; fi
+          exit $fail
+      - name: Show what would change
+        run: npx wrangler deploy --dry-run --outdir=/tmp/dry
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Deploy
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

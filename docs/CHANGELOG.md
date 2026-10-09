@@ -5,6 +5,11 @@ the repo. Write it at the end of every session.
 
 ## 2026-10-09
 
+- Repo: added `trenches-site/wrangler.jsonc`, `trenches-site/package.json` and
+  `.github/workflows/deploy-trenches-site.yml`. Config is drafted from the bundle, not
+  the live worker. Placeholders: compatibility date, route pattern. Unconfirmed:
+  `run_worker_first`. The workflow refuses until placeholders are filled and
+  `trenches-site/public/.EXPORTED-FROM-LIVE` exists. Nothing deployed.
 - Repo: added `trenches-site/public/pricing/index.html`, the public /pricing page, not deployed.
   Blocked on exporting the live static assets (a deploy of this folder alone would
   replace them). Prod: no changes.

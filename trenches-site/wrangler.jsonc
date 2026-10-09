@@ -1,0 +1,59 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "trenches-site",
+  "main": "dist/index.js",
+  "compatibility_date": "TODO-confirm-compatibility-date",
+
+  // ---------------------------------------------------------------------------
+  // STATUS 2026-10-09: written from the bundle and docs/SYSTEM-MAP.md, NOT from
+  // the live worker. Values marked TODO-confirm must be read from the live
+  // worker with scripts/pull-live-config.sh (needs CLOUDFLARE_API_TOKEN). The
+  // deploy workflow refuses while any remain. A wrong value here can detach a
+  // live binding or take trenchesgroup.com down.
+  //
+  // ALSO BLOCKING: the live static assets are not in this repo. Workers static
+  // assets deploy as a whole set, so deploying public/ with only the pricing
+  // page would replace the live site's pages. Export the live assets into
+  // public/, then create public/.EXPORTED-FROM-LIVE (any content) to unlock the
+  // deploy workflow.
+  // ---------------------------------------------------------------------------
+
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS",
+    // The worker redirects to canonical URLs and gates /portal/proposals/* before
+    // calling env.ASSETS.fetch, so the worker must see requests first. Confirm
+    // the live value; if it was false, every static request bypassed the worker.
+    "run_worker_first": true
+  },
+
+  "d1_databases": [
+    {
+      "binding": "CLIENTS",
+      "database_name": "trenches-production",
+      "database_id": "2261ffe8-712f-4b07-aec2-73bba0ad155e"
+    }
+  ],
+
+  "r2_buckets": [
+    { "binding": "UPLOADS", "bucket_name": "trenches-uploads" }
+  ],
+
+  // Portal mail (env.EMAIL.send) from PORTAL_FROM_EMAIL. Confirm any
+  // destination_address restriction in the dashboard.
+  "send_email": [
+    { "name": "EMAIL" }
+  ],
+
+  // Routes for trenchesgroup.com. Not known from the repo. Confirm.
+  "routes": [
+    { "pattern": "TODO-confirm-route-pattern", "zone_name": "trenchesgroup.com" }
+  ],
+
+  "observability": { "enabled": true }
+
+  // Secrets (set live via `wrangler secret put`, never stored here):
+  // STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, PORTAL_STRIPE_WEBHOOK_SECRET,
+  // PORTAL_ADMIN_EMAIL, PORTAL_ADMIN_KEY, PORTAL_FROM_EMAIL. Plain vars, if any
+  // were set in the dashboard, are not known; the pull script lists them.
+}
