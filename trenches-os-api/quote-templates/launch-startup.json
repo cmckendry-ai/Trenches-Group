@@ -1,0 +1,20 @@
+{
+  "title": "Launch Startup Package",
+  "message": "Thank you for the conversation. Here is the proposal we discussed.",
+  "terms": "50% due at signing, 50% at website launch. Monthly fee starts the first posting month. Minimum term applies. Revisions beyond the stated rounds are billed at $95/hr. Pricing valid until the date shown.",
+  "lineItems": [
+    {
+      "description": "Launch Startup Package: Brand Essentials, 5-page Standard website, Social Template Kit, Core onboarding (value $4,950)",
+      "quantity": 1,
+      "unitCents": 390000,
+      "billing": "ONE_TIME"
+    },
+    {
+      "description": "Social Media Core Presence (3 month minimum, website care plan included)",
+      "quantity": 1,
+      "unitCents": 59900,
+      "billing": "MONTHLY"
+    }
+  ],
+  "_oneTimeCents": 390000
+}

@@ -1,0 +1,20 @@
+{
+  "title": "Authority Startup Package",
+  "message": "Thank you for the conversation. Here is the proposal we discussed.",
+  "terms": "50% due at signing, 50% at website launch. Monthly fee starts the first posting month. Minimum term applies. Revisions beyond the stated rounds are billed at $95/hr. Pricing valid until the date shown.",
+  "lineItems": [
+    {
+      "description": "Authority Startup Package: Brand Complete, 10-page Pro website, Social Template Kit, Local Authority onboarding (value $8,750)",
+      "quantity": 1,
+      "unitCents": 750000,
+      "billing": "ONE_TIME"
+    },
+    {
+      "description": "Social Media Local Authority (6 month minimum, website care plan included)",
+      "quantity": 1,
+      "unitCents": 159900,
+      "billing": "MONTHLY"
+    }
+  ],
+  "_oneTimeCents": 750000
+}

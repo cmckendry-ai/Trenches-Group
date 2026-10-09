@@ -9,7 +9,15 @@ the repo. Write it at the end of every session.
   social design, social management, three full startup packages, and the outreach
   agent add-on. Live prices (website $500, domain $125, care plan $100 per month,
   social $599/$999/$1,599 per month) were read from D1 on 2026-10-09.
-- Prod: no changes. No flags moved. Nothing loaded into Stripe or `addons`.
+- Prod (D1 data only, no deploy): inserted 5 `addons` rows with ids `add_b3000000-0000-4000-8000-00000000000{1..5}`.
+  Launch, Growth, Authority startup packages are `is_active=1, is_custom_quote=1`
+  (visible in the portal as "contact us"; no checkout, because addon checkout bills
+  only the monthly price and would skip the one-time fee). Outreach Starter and Pro
+  are `is_active=0` (staged) until outreach has 10 real conversations. To roll back:
+  `DELETE FROM addons WHERE id LIKE 'add_b3000000%'`.
+- Repo: added `trenches-os-api/quote-templates/*.json` (5 templates for `POST /api/quotes`).
+- Not done: no public pricing page. `trenches-site` cannot be deployed (decision
+  2026-10-01, config incomplete) and its static assets are not in the repo.
 - Still broken: outreach off, 0 genuine replies, social order setup-fee bug.
 
 ## 2026-10-01 (later still)

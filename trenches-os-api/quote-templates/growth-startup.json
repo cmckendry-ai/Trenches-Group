@@ -1,0 +1,20 @@
+{
+  "title": "Growth Startup Package",
+  "message": "Thank you for the conversation. Here is the proposal we discussed.",
+  "terms": "50% due at signing, 50% at website launch. Monthly fee starts the first posting month. Minimum term applies. Revisions beyond the stated rounds are billed at $95/hr. Pricing valid until the date shown.",
+  "lineItems": [
+    {
+      "description": "Growth Startup Package: Brand Complete, 10-page Pro website, Social Template Kit, Growth onboarding (value $8,500)",
+      "quantity": 1,
+      "unitCents": 650000,
+      "billing": "ONE_TIME"
+    },
+    {
+      "description": "Social Media Growth Engine (3 month minimum, website care plan included)",
+      "quantity": 1,
+      "unitCents": 99900,
+      "billing": "MONTHLY"
+    }
+  ],
+  "_oneTimeCents": 650000
+}

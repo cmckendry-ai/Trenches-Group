@@ -1,0 +1,20 @@
+{
+  "title": "Automated Outreach Agent: Starter",
+  "message": "Thank you for the conversation. Here is the proposal we discussed.",
+  "terms": "50% due at signing, 50% at website launch. Monthly fee starts the first posting month. Minimum term applies. Revisions beyond the stated rounds are billed at $95/hr. Pricing valid until the date shown.",
+  "lineItems": [
+    {
+      "description": "Outreach agent setup",
+      "quantity": 1,
+      "unitCents": 150000,
+      "billing": "ONE_TIME"
+    },
+    {
+      "description": "Outreach Starter: 1 mailbox, 3 markets, verified email, reply drafts, weekly report (3 month minimum)",
+      "quantity": 1,
+      "unitCents": 49700,
+      "billing": "MONTHLY"
+    }
+  ],
+  "_oneTimeCents": 150000
+}
