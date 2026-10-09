@@ -3,6 +3,15 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-09
+
+- Docs: added `docs/PRICING.md`. Proposed pricing for brand design, website design,
+  social design, social management, three full startup packages, and the outreach
+  agent add-on. Live prices (website $500, domain $125, care plan $100 per month,
+  social $599/$999/$1,599 per month) were read from D1 on 2026-10-09.
+- Prod: no changes. No flags moved. Nothing loaded into Stripe or `addons`.
+- Still broken: outreach off, 0 genuine replies, social order setup-fee bug.
+
 ## 2026-10-01 (later still)
 
 - Repo: `trenches-os-api/wrangler.jsonc` now declares the `EMAIL` send_email
