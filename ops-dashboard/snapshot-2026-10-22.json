@@ -1,41 +1,41 @@
 {
-  "generatedAt": "2026-10-22T02:45:00Z",
-  "source": "Updated by the 2026-10-22 review session after the fixes landed. The business partner routine refreshes this every morning at 6:36 Central.",
+  "generatedAt": "2026-10-22T11:45:00Z",
+  "source": "Business partner routine, 2026-10-22 (first daily run, 6:36 CT)",
   "summary": [
     {
       "label": "Days since a new lead",
       "value": "46",
-      "detail": "Last real lead 2026-09-06. The Oct 1 row is a test.",
+      "detail": "Last real lead 2026-09-06. Nothing can change this until a runner is online.",
       "tone": "crit"
     },
     {
       "label": "Campaigns waiting",
       "value": "20",
-      "detail": "Created Oct 13, never claimed. Runner offline.",
-      "tone": "crit"
-    },
-    {
-      "label": "Outreach sent this month",
-      "value": "0",
-      "detail": "Last send 2026-09-11. Orchestrator off since Sep 13.",
+      "detail": "READY since Oct 13. No runner heartbeat since Oct 3 (19 days).",
       "tone": "crit"
     },
     {
       "label": "Open quotes",
       "value": "3",
-      "detail": "$2,499 one-time + $1,150/mo. None viewed.",
+      "detail": "$2,499 one-time + $1,150/mo. Emails opened 16 times total, estimate page viewed 0 times. Follow-up drafts in Gmail.",
+      "tone": "warn"
+    },
+    {
+      "label": "Review queue",
+      "value": "348",
+      "detail": "Requalified Oct 21 night. A research problem: 236 held by validation, 86 are priority C with a phone.",
       "tone": "warn"
     },
     {
       "label": "Qualified, callable",
       "value": "22",
-      "detail": "All have a phone. Plus 86 review leads with a verified gap and a phone.",
-      "tone": "warn"
+      "detail": "All have a phone. Call sheet in today's brief.",
+      "tone": "good"
     },
     {
       "label": "Routines healthy",
-      "value": "3 of 6",
-      "detail": "Marketplace needs the desktop; Books needs Stripe reauthorized.",
+      "value": "5 of 8",
+      "detail": "Marketplace needs the desktop, Books needs Stripe, Lightscout needs the Smartlead key.",
       "tone": "warn"
     }
   ],
@@ -45,7 +45,7 @@
       "owner": "Connor",
       "business": "Trenches Group",
       "title": "The Prospector runner has been offline for 19 days",
-      "why": "connor-windows-runner-01 last heartbeat 2026-10-03 10:25 UTC. The cron created 20 campaigns (Murfreesboro and Smyrna, 10 trades) on Oct 13 and nothing has claimed them. The orchestrator now reports BACKLOG_FULL, so no new campaigns get created either. This is the mechanical reason prospecting stops.",
+      "why": "connor-windows-runner-01 last heartbeat 2026-10-03 10:25 UTC, 19 days ago. 20 campaigns sit READY. The runner guard is live, so the cron now reports NO_RUNNER_ONLINE instead of filling the backlog.",
       "action": "The code side is live. Add the TRENCHES_RUNNER_KEY repo secret in trenches-hq (same value as the worker RUNNER_API_KEY) and run the \"Prospector runner\" workflow once from the Actions tab. Until then nothing claims the 20 campaigns."
     },
     {
@@ -60,9 +60,9 @@
       "severity": "critical",
       "owner": "Connor",
       "business": "Benson Landscaping, Get Lit",
-      "title": "Three quotes sent 9 days ago, zero views",
-      "why": "Q-1004 Get Lit ($1,499 + $400/mo, sent Oct 12), Q-1005 Benson ($350 + $500/mo, Oct 13) and Q-1006 Benson ($650 + $250/mo, Oct 13). view_count is 0 on all three. Unviewed after a week usually means the email was missed, not declined.",
-      "action": "Call Patrick Benson and the Get Lit contact today. Tomorrow morning the partner will leave follow-up drafts in your Gmail Drafts in your voice; send the ones you like."
+      "title": "Three quotes opened but never clicked through, follow-ups drafted",
+      "why": "Q-1004 Get Lit opened 6 times (last Oct 13), Q-1005 Benson opened 3 (last Oct 15), Q-1006 Benson opened 7 (last Oct 19). Estimate page views: 0 on all three. They read the email and never clicked. Two reply drafts are in Gmail Drafts: one to Jeremiah (Get Lit), one to Patrick covering both Benson quotes.",
+      "action": "Open Gmail Drafts, read the two follow-ups, send the ones you like, then call Patrick."
     },
     {
       "severity": "warning",
@@ -151,6 +151,22 @@
       "severity": "warning",
       "title": "Fenlo lead tracking is live; star the two events so the portal counts leads",
       "why": "Phone and email taps on fenloservices.com now send click_to_call and click_to_email to Google Analytics (live since Oct 22). The portal Leads number only counts key events, and Google only lets you star an event after it has been seen once."
+    },
+    {
+      "severity": "warning",
+      "owner": "Connor",
+      "business": "Both",
+      "title": "The partner cannot prospect from the cloud; today's batch is a 7-row shortlist",
+      "why": "The daily batch for Murfreesboro tree service hit the network policy: expertise.com, thumbtack, lawnstarter and homeadvisor are all unreachable from the Claude cloud environment, so only search snippets were available. 7 businesses not already in the Command Center, 3 with phones, none verified. Saved to Drive, Trenches Group/Outreach/Prospector.",
+      "action": "Add TRENCHES_RUNNER_KEY and start the Prospector runner workflow; GitHub's runners can reach those sites and the real pipeline verifies and scores. Or widen the Trenches environment's network allowlist to the directory sites."
+    },
+    {
+      "severity": "warning",
+      "owner": "Connor",
+      "business": "Vivid Lightscapes",
+      "title": "Lightscout runs nightly but cannot upload: 20 emailed leads waiting for the Smartlead key",
+      "why": "A new nightly task, Lightscout Nightly Lead Sweep (created Oct 21 at 7:06 PM CT, 2:17 AM CT daily), prospects Vivid B2B leads into its own artifact database. Its Oct 22 run found 1 lead (Morning Glory Orchard, Nolensville, tier A) and skipped golf, senior living and banks for lack of verified listings. It reports about 20 emailed leads pending upload and no Smartlead API key in its run.",
+      "action": "Put the rotated Smartlead key in the Claude environment as SMARTLEAD_API_KEY. That unblocks Lightscout's uploads, its stats refresh, and the partner's Smartlead read. The partner will stop doing a Tuesday Vivid batch; Lightscout owns Vivid prospecting."
     }
   ],
   "agents": [
@@ -158,11 +174,11 @@
       "name": "Business Partner",
       "kind": "Claude scheduled task, daily 6:36 CT",
       "owns": "This page, the morning brief, prospecting push, follow-up drafts",
-      "status": "info",
-      "statusLabel": "first run tomorrow",
-      "lastRunAt": null,
-      "next": "Oct 22 06:36 CT",
-      "note": "Created 2026-10-22, bound to session session_019R634mVtEgZAVNXziMTcSb so it has Gmail, D1, Drive and Hyperagent."
+      "status": "ok",
+      "statusLabel": "ran",
+      "lastRunAt": "2026-10-22T11:36:57Z",
+      "next": "Oct 23 06:36 CT",
+      "note": "First run. Brief sent, 2 follow-up drafts, 7-row batch, dashboard refreshed."
     },
     {
       "name": "Trenches Self Evaluation",
@@ -173,6 +189,16 @@
       "lastRunAt": null,
       "next": "Oct 25 18:36 CT",
       "note": "Created 2026-10-22. Prompt in business-partner/SELF-EVALUATION-PROMPT.md."
+    },
+    {
+      "name": "Lightscout Nightly Lead Sweep",
+      "kind": "Claude scheduled task, 2:17 AM CT daily",
+      "owns": "Vivid B2B lead research into its own artifact database; Smartlead upload and stats when a key exists",
+      "status": "warning",
+      "statusLabel": "ran, no key",
+      "lastRunAt": "2026-10-22T07:20:34Z",
+      "next": "Oct 23 02:17 CT",
+      "note": "Created Oct 21 by another session. 1 lead on Oct 22, 20 emailed leads pending upload, no SMARTLEAD_API_KEY."
     },
     {
       "name": "Trenches Monday Brief",
@@ -200,9 +226,9 @@
       "owns": "Emails you when a real person replies to Vivid cold email",
       "status": "ok",
       "statusLabel": "ran",
-      "lastRunAt": "2026-10-21T22:03:41Z",
+      "lastRunAt": "2026-10-22T02:02:54Z",
       "next": "every 2 h",
-      "note": "Smartlead key is in the prompt. Rotate."
+      "note": "Ran 02:02 UTC, 2.5 min. No HOT LEAD or LS-REPLY email in the last 7 days. Smartlead key is in the prompt. Rotate."
     },
     {
       "name": "Vivid Marketplace Monitor",
@@ -240,9 +266,9 @@
       "owns": "Reaper, deferred replay, prospector jobs, follow-ups, outreach, demo repair, quote alerts",
       "status": "ok",
       "statusLabel": "running",
-      "lastRunAt": "2026-10-22T01:42:04Z",
+      "lastRunAt": "2026-10-22T11:38:04Z",
       "next": "every 2 min",
-      "note": "Deployed 01:40 UTC from GitHub Actions (version 06f3b688). Runner guard live."
+      "note": "Running on version from 02:23 UTC (commit 251dac5). Runner guard live."
     },
     {
       "name": "Prospector orchestrator",
@@ -410,19 +436,19 @@
         "display": "about 1,000"
       },
       {
-        "label": "Genuine replies",
+        "label": "Lightscout leads pending upload",
+        "value": 20,
+        "display": "about 20"
+      },
+      {
+        "label": "Genuine replies (7 d)",
         "value": 0,
-        "display": "no data"
+        "display": "0 alerts"
       },
       {
         "label": "Website leads",
         "value": 0,
         "display": "in KV, not readable"
-      },
-      {
-        "label": "Quote folders",
-        "value": 0,
-        "display": "on the PC, not readable"
       },
       {
         "label": "Booked",
@@ -434,28 +460,29 @@
   "advice": {
     "next": [
       {
-        "title": "Get the runner back today.",
-        "body": "Nothing else in the pipeline matters while 20 campaigns sit unclaimed. The PC restart takes two minutes; the GitHub Actions version takes one yes and two secrets and never sleeps."
+        "title": "Send the two follow-up drafts, then call Patrick.",
+        "body": "Opened 16 times, clicked 0 times. The quotes are being read on a phone and parked. A 15-minute walkthrough closes or kills them this week."
       },
       {
-        "title": "Build the Smartlead campaign this week.",
-        "body": "Channel is decided. One campaign, the warmed sender, the 3-step sequence Recon already wrote for property managers as the first list, the daily batch files after that. Store the campaign id as SMARTLEAD_WEBSITE_CAMPAIGN_ID."
+        "title": "Add TRENCHES_RUNNER_KEY and run the Prospector runner once.",
+        "body": "Everything else in the pipeline is now waiting on this one secret: 20 campaigns, 348 review leads that need re-enrichment, and the partner's daily batch, which cannot reach directory sites from the cloud."
       },
       {
-        "title": "Call the three open quotes before building anything new.",
-        "body": "$2,499 up front and $1,150 a month is on the table from people who already said yes to a conversation. Zero views in nine days is a delivery problem, not a no."
+        "title": "Put the Smartlead key in the Claude environment.",
+        "body": "One secret unblocks three agents: Lightscout uploads 20 Vivid leads, the reply watcher stops carrying the key in plaintext, and the partner can read campaign health."
       },
       {
-        "title": "Add one secret and start the runner.",
-        "body": "TRENCHES_RUNNER_KEY in trenches-hq Actions secrets, then run \"Prospector runner\" by hand once. The guard, the scorer fix and the security fixes are already live; this is the last step before campaigns turn into leads again."
+        "title": "Work the 22 qualified leads by phone.",
+        "body": "Top 10 are in today's brief with a 20-second opener. No website, real trades, local. This is revenue this month, not next quarter."
       },
       {
-        "title": "Let the partner clean house.",
-        "body": "Orphaned sequences, dead candidates and failed campaigns make every count on this page and in the Command Center wrong. It is a one-time SQL you approve."
+        "title": "Create the Smartlead campaign for Trenches.",
+        "body": "Channel decided. Use the property manager sequence as the first list and store the campaign id as SMARTLEAD_WEBSITE_CAMPAIGN_ID."
       }
     ],
     "decisions": [
       "Has TRENCHES_RUNNER_KEY been added to trenches-hq Actions secrets?",
+      "Is SMARTLEAD_API_KEY in the Claude environment yet?",
       "Create the Smartlead campaign for the Trenches website track and store its id?",
       "Finish the orphan cleanup from a desktop session?"
     ]
@@ -500,13 +527,18 @@
     {
       "at": "2026-10-22T02:45:00Z",
       "text": "Requalification done: 347 scored, 0 newly qualified, 5 disqualified, 342 back to review with fresh reasons. Deployed trenches-os-api again (02:23 UTC, includes PR 17)."
+    },
+    {
+      "at": "2026-10-22T11:45:00Z",
+      "text": "Daily run 1: gathered D1, routines, Hyperagent, Gmail. No client or prospect replies in 7 days. Left 2 follow-up drafts (Get Lit Q-1004, Benson Q-1005 and Q-1006). Saved a 7-row Murfreesboro tree-service shortlist to Drive (directory sites unreachable from the cloud). Did not flip PROSPECTOR_ORCHESTRATOR_ENABLED: the deployed runner guard makes that rule unnecessary. Brief emailed."
     }
   ],
   "sources": [
-    "D1 queries 2026-10-22 00:00 to 00:40 UTC",
+    "D1 queries 2026-10-22 11:37 to 11:45 UTC",
     "list_triggers",
+    "Lightscout run cse_01UY6Y6TxYHzVnno6VdRX2yt",
+    "Gmail search (7 days)",
     "Hyperagent threads",
-    "trenches-hq @ a26b666",
-    "live bundles trenches-os-api (Oct 13) and trenches-site (Oct 21)"
+    "trenches-hq main @ 251dac5"
   ]
 }

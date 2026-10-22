@@ -3,7 +3,20 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
-## 2026-10-22 (deploys, continued)
+## 2026-10-22 (first daily partner run, 06:36 CT)
+
+- Brief emailed. Two follow-up drafts left in Gmail (Q-1004, Q-1006 covering
+  Q-1005). 7-row Murfreesboro tree-service shortlist saved to Drive
+  (directory sites unreachable from the cloud, so snippet-verified only).
+  Dashboard snapshot refreshed. No flags moved; the deployed runner guard
+  replaces the routine's flag rule, prompt updated accordingly.
+- Found "Lightscout Nightly Lead Sweep" (created 2026-10-21 by another
+  session, 02:17 CT daily): Vivid B2B prospecting into its own artifact DB.
+  Its 10-22 run: 1 lead, about 20 emailed leads pending upload, no Smartlead
+  key. The partner no longer does a Vivid batch.
+- Still blocked on Connor: TRENCHES_RUNNER_KEY, SMARTLEAD_API_KEY, the
+  Smartlead campaign id, the orphan cleanup.
+
 
 - Prod: `trenches-os-api` deployed again from GitHub Actions at 02:23 UTC
   (run 39711110115, commit 251dac5, includes PR #17 failed-job logging and
