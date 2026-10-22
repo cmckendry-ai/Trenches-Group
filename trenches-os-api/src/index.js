@@ -747,6 +747,20 @@ function digitalPoints(quality) {
   }
 }
 __name(digitalPoints, "digitalPoints");
+function websiteStatusPoints(status) {
+  switch (status) {
+    case "NONE":
+    case "SOCIAL_ONLY":
+    case "PARKED":
+    case "PLACEHOLDER":
+      return 40;
+    case "BROKEN":
+      return 30;
+    default:
+      return 0;
+  }
+}
+__name(websiteStatusPoints, "websiteStatusPoints");
 function websiteGapDecision(input) {
   const quality = input.websiteQuality ?? "UNKNOWN";
   const status = input.websiteStatus ?? (quality === "NONE" ? "NONE" : "UNKNOWN");
@@ -823,8 +837,11 @@ function validateProspect(input) {
 __name(validateProspect, "validateProspect");
 function scoreProspect(input) {
   const reasons = [];
-  const digitalOpportunity = digitalPoints(input.websiteQuality);
-  if (digitalOpportunity) reasons.push(`Digital gap +${digitalOpportunity} (${input.websiteQuality.toLowerCase()} website).`);
+  const qualityPoints = digitalPoints(input.websiteQuality);
+  const statusPoints = websiteStatusPoints(input.websiteStatus);
+  const digitalOpportunity = Math.max(qualityPoints, statusPoints);
+  if (digitalOpportunity && statusPoints > qualityPoints) reasons.push(`Digital gap +${digitalOpportunity} (website status ${String(input.websiteStatus).toLowerCase().replace("_", " ")}).`);
+  else if (digitalOpportunity) reasons.push(`Digital gap +${digitalOpportunity} (${input.websiteQuality.toLowerCase()} website).`);
   let reputation = 0;
   if ((input.googleRating ?? 0) >= 4.7) {
     reputation += 10;
@@ -2240,12 +2257,23 @@ async function runDueProspectorJobsForOffering(db, offering) {
   return { ran: true, created };
 }
 __name(runDueProspectorJobsForOffering, "runDueProspectorJobsForOffering");
+async function runnerSeenRecently(db) {
+  const staleMinutes = await getFlagInt(db, "PROSPECTOR_RUNNER_STALE_MINUTES", 15);
+  const since = new Date(Date.now() - staleMinutes * 60 * 1e3).toISOString();
+  const row = await db.prepare(`SELECT COUNT(*) AS count FROM runner_status WHERE last_seen_at >= ? AND status <> 'ERROR'`).bind(since).first();
+  return (row?.count ?? 0) > 0;
+}
+__name(runnerSeenRecently, "runnerSeenRecently");
 async function runDueProspectorJobs(db, env) {
   void env;
   const enabledRow = await db.prepare(`SELECT value FROM system_flags WHERE key = 'PROSPECTOR_ORCHESTRATOR_ENABLED'`).first();
   if (enabledRow && enabledRow.value === "false") {
     const disabled = { ran: false, reason: "DISABLED", created: [] };
     return { website: disabled, concierge: disabled };
+  }
+  if (!await runnerSeenRecently(db)) {
+    const offline = { ran: false, reason: "NO_RUNNER_ONLINE", created: [] };
+    return { website: offline, concierge: offline };
   }
   const [website, concierge] = await Promise.all([
     runDueProspectorJobsForOffering(db, "WEBSITE"),
@@ -4328,11 +4356,15 @@ async function serveDemoQuote(db, slug, request) {
   if (!site) return new Response("Demo not found.", { status: 404 });
   const lead = await getLead(db, site.lead_id);
   const business = lead?.business_name || "this business";
-  const url = new URL(request.url), service = url.searchParams.get("service"), timing = url.searchParams.get("timing");
+  const url = new URL(request.url);
   const back = `/demo/${encodeURIComponent(slug)}`;
   const base = `/demo/${encodeURIComponent(slug)}/quote`;
   const choices = ["Request an estimate", "Schedule service", "Ask a question"];
-  const serviceStep = !service ? `<h1>What can we help with?</h1><p>Choose an option to see how a customer can start their request in seconds.</p><div class="choices">${choices.map((x) => `<a href="${base}?service=${encodeURIComponent(x)}">${x}</a>`).join("")}</div>` : !timing ? `<h1>When do you need help?</h1><p>For: <b>${service}</b></p><div class="choices"><a href="${base}?service=${encodeURIComponent(service)}&timing=As+soon+as+possible">As soon as possible</a><a href="${base}?service=${encodeURIComponent(service)}&timing=This+week">This week</a><a href="${base}?service=${encodeURIComponent(service)}&timing=Just+planning">Just planning</a></div>` : `<h1>Request captured.</h1><p>A real site would send this request directly into ${business}'s Command Center\u2014without staff chasing down the basics.</p><div class="summary"><b>${service}</b><br>${timing}</div><a class="primary" href="${back}">Back to website</a>`;
+  const timings = ["As soon as possible", "This week", "Just planning"];
+  const pick = /* @__PURE__ */ __name((raw, allowed) => raw && allowed.includes(raw) ? raw : null, "pick");
+  const service = pick(url.searchParams.get("service"), choices), timing = pick(url.searchParams.get("timing"), timings);
+  const esc2 = /* @__PURE__ */ __name((x) => x.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]), "esc");
+  const serviceStep = !service ? `<h1>What can we help with?</h1><p>Choose an option to see how a customer can start their request in seconds.</p><div class="choices">${choices.map((x) => `<a href="${base}?service=${encodeURIComponent(x)}">${x}</a>`).join("")}</div>` : !timing ? `<h1>When do you need help?</h1><p>For: <b>${esc2(service)}</b></p><div class="choices">${timings.map((t) => `<a href="${base}?service=${encodeURIComponent(service)}&amp;timing=${encodeURIComponent(t)}">${esc2(t)}</a>`).join("")}</div>` : `<h1>Request captured.</h1><p>A real site would send this request directly into ${esc2(business)}'s Command Center\u2014without staff chasing down the basics.</p><div class="summary"><b>${esc2(service)}</b><br>${esc2(timing)}</div><a class="primary" href="${back}">Back to website</a>`;
   const html = `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fast Quote Preview</title><style>body{margin:0;background:#0b0d10;color:#f5f6f8;font:16px/1.55 system-ui;display:grid;place-items:center;min-height:100vh}.box{width:min(620px,92vw);padding:38px;border:1px solid #303744;border-radius:16px;background:#12161d}.tag{color:#d8ff3e;font-size:12px;font-weight:800;letter-spacing:.1em}h1{font-size:34px;line-height:1.12;margin:12px 0}.choices{display:grid;gap:10px;margin:24px 0}.choices a,.primary{display:block;padding:16px;border:1px solid #394250;border-radius:10px;color:#fff;text-decoration:none;background:#171c25}.choices a:hover,.primary{border-color:#d8ff3e}.primary{background:#d8ff3e;color:#0b0d10;text-align:center;font-weight:800;margin-top:22px}.summary{padding:16px;background:#171c25;border-radius:10px;margin-top:20px}</style><main class="box"><div class="tag">SPEED-TO-QUOTE PREVIEW</div>${serviceStep}<p style="color:#9ca5b4;font-size:12px;margin-top:24px">Interactive concept by Trenches Group. This does not submit a real customer request.</p></main>`;
   return new Response(html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-frame-options": "DENY", "referrer-policy": "no-referrer" } });
 }
@@ -4938,6 +4970,13 @@ See every view in the Command Center: ${link}`,
 __name(sendFirstViewAlerts, "sendFirstViewAlerts");
 
 // src/routes.ts
+function demoCheckoutConfirmPage(slug, domainAddon) {
+  const action = `/demo/${encodeURIComponent(slug)}/checkout`;
+  const price = domainAddon ? "$625 ($500 website build + $125 domain and hosting setup)" : "$500 website build";
+  const html = `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Confirm your order</title><body style="margin:0;background:#0b0d10;color:#f6f7f8;font-family:system-ui;display:grid;place-items:center;min-height:100vh"><main style="max-width:560px;padding:40px;text-align:center"><div style="font-size:12px;letter-spacing:.14em;color:#c9f24d">TRENCHES GROUP</div><h1 style="font-size:36px;margin:12px 0">One click to secure checkout</h1><p style="color:#aeb6c3;font-size:18px;line-height:1.6">${price}. Payment is handled by Stripe. Nothing is charged until you finish there.</p><form method="post" action="${action}"><input type="hidden" name="domain" value="${domainAddon ? "yes" : "no"}"><button type="submit" style="margin-top:18px;padding:16px 28px;border:0;border-radius:10px;background:#d8ff3e;color:#0b0d10;font-size:17px;font-weight:800;cursor:pointer">Continue to checkout</button></form><p style="color:#6f7886;font-size:13px;margin-top:22px"><a href="/demo/${encodeURIComponent(slug)}" style="color:#9ca5b4">Back to the demo</a></p></main>`;
+  return new Response(html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-frame-options": "DENY", "referrer-policy": "no-referrer" } });
+}
+__name(demoCheckoutConfirmPage, "demoCheckoutConfirmPage");
 function actorFromRequest(request) {
   return request.headers.get("x-actor")?.slice(0, 120) || "ADMIN";
 }
@@ -5098,7 +5137,11 @@ async function handleRequest(request, env) {
   }
   const demoCheckoutMatch = path.match(/^\/demo\/([^/]+)\/checkout$/);
   if (demoCheckoutMatch && request.method === "GET") {
-    const domainAddon = url.searchParams.get("domain") === "yes";
+    return demoCheckoutConfirmPage(decodeURIComponent(demoCheckoutMatch[1]), url.searchParams.get("domain") === "yes");
+  }
+  if (demoCheckoutMatch && request.method === "POST") {
+    const form = await request.formData().catch(() => null);
+    const domainAddon = form?.get("domain") === "yes";
     return await startCheckout(env, decodeURIComponent(demoCheckoutMatch[1]), domainAddon);
   }
   const publicDemoMatch = path.match(/^\/demo\/([^/]+)$/);

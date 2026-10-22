@@ -67,6 +67,20 @@ function digitalPoints(quality) {
   }
 }
 __name(digitalPoints, "digitalPoints");
+function websiteStatusPoints(status) {
+  switch (status) {
+    case "NONE":
+    case "SOCIAL_ONLY":
+    case "PARKED":
+    case "PLACEHOLDER":
+      return 40;
+    case "BROKEN":
+      return 30;
+    default:
+      return 0;
+  }
+}
+__name(websiteStatusPoints, "websiteStatusPoints");
 function websiteGapDecision(input) {
   const quality = input.websiteQuality ?? "UNKNOWN";
   const status = input.websiteStatus ?? (quality === "NONE" ? "NONE" : "UNKNOWN");
@@ -143,8 +157,11 @@ function validateProspect(input) {
 __name(validateProspect, "validateProspect");
 function scoreProspect(input) {
   const reasons = [];
-  const digitalOpportunity = digitalPoints(input.websiteQuality);
-  if (digitalOpportunity) reasons.push(`Digital gap +${digitalOpportunity} (${input.websiteQuality.toLowerCase()} website).`);
+  const qualityPoints = digitalPoints(input.websiteQuality);
+  const statusPoints = websiteStatusPoints(input.websiteStatus);
+  const digitalOpportunity = Math.max(qualityPoints, statusPoints);
+  if (digitalOpportunity && statusPoints > qualityPoints) reasons.push(`Digital gap +${digitalOpportunity} (website status ${String(input.websiteStatus).toLowerCase().replace("_", " ")}).`);
+  else if (digitalOpportunity) reasons.push(`Digital gap +${digitalOpportunity} (${input.websiteQuality.toLowerCase()} website).`);
   let reputation = 0;
   if ((input.googleRating ?? 0) >= 4.7) {
     reputation += 10;

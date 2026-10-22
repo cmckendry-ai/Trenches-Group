@@ -211,3 +211,31 @@ nameservers), customer portal build spec. None of them changes the verdict in
 section 1; two of them (Laptop access, Oct 2, and Command Center
 resurrection, Sep 28) already asked the runner and email questions this
 review asks again.
+
+## 11. Update, 2026-10-22 01:45 UTC: merged and deployed
+
+[Certain] Connor decided Smartlead for Trenches outreach and asked for the
+branch to be merged and deployed. PR #15 merged into trenches-hq main
+(`0782259`). A new "Deploy app" workflow (`.github/workflows/deploy-apps.yml`)
+deployed `trenches-os-api` (version `06f3b688`, 01:40 UTC) and `trenches-site`
+(01:43 UTC) using the Workers Scripts token the site-edit runner already had.
+Both live bundles were pulled back and contain the changes (`NO_RUNNER_ONLINE`,
+`demoCheckoutConfirmPage`, `websiteStatusPoints`, `UPLOAD_MAX_BYTES`, the
+300-second Stripe check). The first trenches-os run reported failure only
+because `/health` returns 503 DEGRADED on purpose while 361 leads sit in
+HUMAN_REVIEW; PR #16 fixed the verify step. Deploy tags could not be pushed
+from this environment (the git proxy drops tag refs); the Actions job tags
+future deploys itself.
+
+[Certain] Also found: a desktop deploy of `trenches-os-api` happened at 00:06
+UTC today (version `3277e13b`), right after PR #14 merged. That is the scorer
+fix going live, and it means someone else was deploying while this review was
+running. The two-session rule in trenches-hq (`wrangler deployments list`
+before deploying) held: the Actions workflow records the previous version
+before it uploads.
+
+What is now true: campaign creation is guarded, the four security holes are
+closed, the scorer counts website status. What is still not true: no runner is
+online (add `TRENCHES_RUNNER_KEY` and run the "Prospector runner" workflow
+once), no Smartlead campaign exists for Trenches, the 361 leads have not been
+requalified, and the orphan cleanup is half done.

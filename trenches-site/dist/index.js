@@ -23529,6 +23529,8 @@ __name(pricingRoutes, "pricingRoutes");
 // src/worker.js
 var R2_PUBLIC_URL = "https://pub-c3f61584f4554fd699fb3d5dea486710.r2.dev";
 var SITE8 = "https://trenchesgroup.com";
+var UPLOAD_MAX_BYTES = 15 * 1024 * 1024;
+var UPLOAD_TYPES = /* @__PURE__ */ new Set(["image/png", "image/jpeg", "image/gif", "image/webp", "image/svg+xml", "application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "text/plain"]);
 var SETUP_FEE_CENTS = 45e3;
 var SOCIAL_PLANS = { core: { name: "Core Presence", monthlyCents: 59900, onboardingCents: 5e4 }, growth: { name: "Growth Engine", monthlyCents: 99900, onboardingCents: 75e3 }, local: { name: "Local Authority", monthlyCents: 159900, onboardingCents: 1e5 } };
 var OUTREACH_PLANS = { starter: { name: "Starter Response", monthlyCents: 5e4, onboardingCents: 49700 }, full: { name: "Full Follow-Up", monthlyCents: 75e3, onboardingCents: 89700 }, priority: { name: "Priority Pipeline", monthlyCents: 1e5, onboardingCents: 149700 } };
@@ -23552,6 +23554,7 @@ __name(stripe2, "stripe");
 async function verify(req, env, raw) {
   const h = req.headers.get("stripe-signature") || "", t = h.match(/(?:^|,)t=(\d+)/)?.[1], s = h.match(/(?:^|,)v1=([a-f0-9]+)/)?.[1];
   if (!t || !s || !env.STRIPE_WEBHOOK_SECRET) return false;
+  if (Math.abs(Date.now() / 1e3 - Number(t)) > 300) return false;
   const k = await crypto.subtle.importKey("raw", new TextEncoder().encode(env.STRIPE_WEBHOOK_SECRET), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]), a = new Uint8Array(await crypto.subtle.sign("HMAC", k, new TextEncoder().encode(t + "." + raw))), e = [...a].map((x) => x.toString(16).padStart(2, "0")).join("");
   return e.length === s.length && [...e].every((c, i) => c === s[i]);
 }
@@ -23768,8 +23771,15 @@ var worker_default = {
     if (req.method === "OPTIONS") return new Response(null, { headers: { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "POST, OPTIONS", "Access-Control-Allow-Headers": "content-type" } });
     if (req.method === "POST" && path3 === "/upload") {
       try {
-        const f = await req.formData(), file = f.get("file"), id = f.get("id") || "sub-" + Date.now(), name = String(f.get("name") || file?.name || "upload").replace(/[^a-zA-Z0-9._-]/g, "_"), key2 = "uploads/" + id + "/" + name;
-        await env.UPLOADS.put(key2, file.stream(), { httpMetadata: { contentType: file.type || "application/octet-stream" } });
+        const origin = req.headers.get("origin") || "", referer = req.headers.get("referer") || "";
+        if (!(origin === SITE8 || referer.startsWith(SITE8 + "/"))) return json14({ success: false, error: "Uploads are accepted from trenchesgroup.com only." }, 403);
+        const f = await req.formData(), file = f.get("file");
+        if (!(file instanceof File)) return json14({ success: false, error: "No file." }, 400);
+        if (file.size > UPLOAD_MAX_BYTES) return json14({ success: false, error: "Files must be under 15 MB." }, 413);
+        const type = UPLOAD_TYPES.has(file.type) ? file.type : "";
+        if (!type) return json14({ success: false, error: "Only images, PDFs, Word, Excel and plain text files are accepted." }, 415);
+        const id = String(f.get("id") || "sub-" + Date.now()).replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 64) || "sub-" + Date.now(), name = String(f.get("name") || file.name || "upload").replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 120), key2 = "uploads/" + id + "/" + crypto.randomUUID().slice(0, 8) + "-" + name;
+        await env.UPLOADS.put(key2, file.stream(), { httpMetadata: { contentType: type, contentDisposition: "attachment" } });
         return json14({ success: true, url: R2_PUBLIC_URL + "/" + key2 });
       } catch (e) {
         return json14({ success: false, error: e.message }, 500);
@@ -23790,4 +23800,4 @@ export {
 };
 //# sourceMappingURL=worker.js.map
 
---a679dcd839eeeeb460e3c3670e8e5831abdcfba2eaccfb1c1d3b18630778--
+--bd8dca5a6aed7d24610820cd13975a3cf230a332f84f0a541be6cab3d2e6--

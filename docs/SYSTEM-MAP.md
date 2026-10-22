@@ -24,6 +24,10 @@ and is kept for history.
   Marketplace Monitor, Trenches weekly books refresh, Trenches Business
   Partner (daily, new), Trenches Self Evaluation (weekly, new). Prompts:
   `business-partner/ROUTINE-PROMPT.md` and `business-partner/SELF-EVALUATION-PROMPT.md`.
+- Deploys now also run from GitHub Actions in trenches-hq ("Deploy app"
+  workflow, `wrangler versions upload` + `versions deploy`, leaves routes,
+  crons and queue consumers untouched). First deploys 2026-10-22 01:40 and
+  01:43 UTC. Config changes still deploy from Connor's machine.
 - Ops Desk: https://claude.ai/artifact/XRmBDFou4sMNkTzBpWtWRy. Source in
   `ops-dashboard/`. Refreshed by the business partner routine.
 - Vivid outreach runs in Smartlead (campaigns 3931924 and 4030240, about

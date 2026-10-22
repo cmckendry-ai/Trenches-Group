@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T01:05:00Z",
+  "generatedAt": "2026-10-22T01:50:00Z",
   "source": "Updated by the 2026-10-22 review session after the fixes landed. The business partner routine refreshes this every morning at 6:36 Central.",
   "summary": [
     {
@@ -46,7 +46,7 @@
       "business": "Trenches Group",
       "title": "The Prospector runner has been offline for 19 days",
       "why": "connor-windows-runner-01 last heartbeat 2026-10-03 10:25 UTC. The cron created 20 campaigns (Murfreesboro and Smyrna, 10 trades) on Oct 13 and nothing has claimed them. The orchestrator now reports BACKLOG_FULL, so no new campaigns get created either. This is the mechanical reason prospecting stops.",
-      "action": "Merge trenches-hq branch claude/orchestrator-guard-scorer-fix (pushed 700acb4), add the TRENCHES_RUNNER_KEY repo secret (same value as the worker RUNNER_API_KEY), run the \"Prospector runner\" workflow once from the Actions tab, then /deploy trenches-os. Or restart runner.py on the PC today while that lands."
+      "action": "The code side is live. Add the TRENCHES_RUNNER_KEY repo secret in trenches-hq (same value as the worker RUNNER_API_KEY) and run the \"Prospector runner\" workflow once from the Actions tab. Until then nothing claims the 20 campaigns."
     },
     {
       "severity": "warning",
@@ -85,8 +85,8 @@
       "owner": "Connor",
       "business": "Trenches Group",
       "title": "361 leads stuck in HUMAN_REVIEW because of the scorer bug",
-      "why": "Fixed. PR #14 (fix/score-website-status) merged to trenches-hq main 2026-10-21 19:06 CT: website status NONE, SOCIAL_ONLY, PARKED, PLACEHOLDER earn 40 points, BROKEN 30.",
-      "action": "Deploy trenches-os, then requalify the 361 (POST /api/leads/requalify) or hand-check the first 50."
+      "why": "Fixed and live (PR #14, deployed 00:06 UTC; redeployed with PR #15 at 01:40 UTC).",
+      "action": "Requalify the 361: POST /api/leads/requalify from the Command Center, or hand-check the first 50."
     },
     {
       "severity": "warning",
@@ -129,12 +129,12 @@
       "action": "Open the Marketplace Monitor task in the desktop app and turn on \"Require this computer\". Reauthorize the Stripe connector at claude.ai/customize/connectors, then fire the books refresh by hand."
     },
     {
-      "severity": "warning",
+      "severity": "done",
       "owner": "Connor",
       "business": "Trenches Group",
-      "title": "Four security findings from Oct 1 are now fixed in code and waiting on a deploy",
-      "why": "Branch claude/orchestrator-guard-scorer-fix in trenches-hq: /upload limited to trenchesgroup.com callers, 15 MB and document types; demo quote page escapes its inputs; demo checkout no longer creates a Stripe session on a GET; Stripe webhook signatures older than 5 minutes rejected. Typecheck, preflight and portal smoke pass.",
-      "action": "Merge the branch, then /deploy trenches-os and /deploy trenches-site in that order. Still open from Oct 1: Stripe webhook idempotency shared across three endpoints, and the quote view token doubling as a portal invite."
+      "title": "Four security findings from Oct 1 are fixed and live",
+      "why": "PR #15 merged and both Workers deployed from GitHub Actions at 01:40 and 01:43 UTC. Live bundles verified.",
+      "action": "Nothing. Still open from Oct 1: webhook idempotency shared across three endpoints, and the quote view token doubling as a portal invite."
     },
     {
       "severity": "info",
@@ -232,9 +232,9 @@
       "owns": "Reaper, deferred replay, prospector jobs, follow-ups, outreach, demo repair, quote alerts",
       "status": "ok",
       "statusLabel": "running",
-      "lastRunAt": "2026-10-22T00:00:05Z",
+      "lastRunAt": "2026-10-22T01:42:04Z",
       "next": "every 2 min",
-      "note": "Worker last deployed Oct 13."
+      "note": "Deployed 01:40 UTC from GitHub Actions (version 06f3b688). Runner guard live."
     },
     {
       "name": "Prospector orchestrator",
@@ -281,10 +281,10 @@
       "kind": "Cloudflare Worker, 07:15 and 15:00 UTC",
       "owns": "Client analytics sync, renewal reminder drafts and sends",
       "status": "ok",
-      "statusLabel": "deployed Oct 21",
-      "lastRunAt": "2026-10-21T23:46:58Z",
+      "statusLabel": "deployed Oct 22",
+      "lastRunAt": "2026-10-22T01:43:41Z",
       "next": "daily",
-      "note": "Renewal reminders switch is off."
+      "note": "Upload limits and Stripe timestamp check live. Renewal reminders switch is off."
     },
     {
       "name": "Site-edit runner",
@@ -294,7 +294,7 @@
       "statusLabel": "on demand",
       "lastRunAt": null,
       "next": "on demand",
-      "note": "Has ANTHROPIC_API_KEY and CLOUDFLARE_API_TOKEN. Can host the prospector runner too."
+      "note": "Also hosts the new \"Deploy app\" workflow and the \"Prospector runner\" (needs TRENCHES_RUNNER_KEY)."
     },
     {
       "name": "Hyperagent Prospector",
@@ -438,8 +438,8 @@
         "body": "$2,499 up front and $1,150 a month is on the table from people who already said yes to a conversation. Zero views in nine days is a delivery problem, not a no."
       },
       {
-        "title": "Merge and deploy the fix branch.",
-        "body": "claude/orchestrator-guard-scorer-fix in trenches-hq carries the runner guard, the Actions runner, and four security fixes. The scorer fix is already on main. One /deploy trenches-os and one /deploy trenches-site, then requalify the 361."
+        "title": "Add one secret and start the runner.",
+        "body": "TRENCHES_RUNNER_KEY in trenches-hq Actions secrets, then run \"Prospector runner\" by hand once. The guard, the scorer fix and the security fixes are already live; this is the last step before campaigns turn into leads again."
       },
       {
         "title": "Let the partner clean house.",
@@ -480,6 +480,10 @@
     {
       "at": "2026-10-22T01:40:00Z",
       "text": "Created the weekly Trenches Self Evaluation task (Sunday 6:36 PM CT). Recorded the Smartlead decision. Added a GitHub Actions deploy workflow to trenches-hq."
+    },
+    {
+      "at": "2026-10-22T01:45:00Z",
+      "text": "Merged PR #15 and #16 in trenches-hq. Deployed trenches-os-api (06f3b688) and trenches-site from GitHub Actions. Verified both live bundles. Synced them into Trenches-Group."
     }
   ],
   "sources": [

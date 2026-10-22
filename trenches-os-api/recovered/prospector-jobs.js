@@ -99,12 +99,23 @@ async function runDueProspectorJobsForOffering(db, offering) {
   return { ran: true, created };
 }
 __name(runDueProspectorJobsForOffering, "runDueProspectorJobsForOffering");
+async function runnerSeenRecently(db) {
+  const staleMinutes = await getFlagInt(db, "PROSPECTOR_RUNNER_STALE_MINUTES", 15);
+  const since = new Date(Date.now() - staleMinutes * 60 * 1e3).toISOString();
+  const row = await db.prepare(`SELECT COUNT(*) AS count FROM runner_status WHERE last_seen_at >= ? AND status <> 'ERROR'`).bind(since).first();
+  return (row?.count ?? 0) > 0;
+}
+__name(runnerSeenRecently, "runnerSeenRecently");
 async function runDueProspectorJobs(db, env) {
   void env;
   const enabledRow = await db.prepare(`SELECT value FROM system_flags WHERE key = 'PROSPECTOR_ORCHESTRATOR_ENABLED'`).first();
   if (enabledRow && enabledRow.value === "false") {
     const disabled = { ran: false, reason: "DISABLED", created: [] };
     return { website: disabled, concierge: disabled };
+  }
+  if (!await runnerSeenRecently(db)) {
+    const offline = { ran: false, reason: "NO_RUNNER_ONLINE", created: [] };
+    return { website: offline, concierge: offline };
   }
   const [website, concierge] = await Promise.all([
     runDueProspectorJobsForOffering(db, "WEBSITE"),

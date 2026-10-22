@@ -3,6 +3,31 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-22 (deploys)
+
+- Decision: Smartlead is the Trenches outreach channel (Connor). See DECISIONS.md.
+- trenches-hq: PR #15 merged (runner guard, Actions prospector runner, demo
+  quote escaping, checkout GET to POST, Stripe signature age check, /upload
+  limits, GitHub deploy workflow). PR #16 merged (deploy verify accepts a
+  DEGRADED /health).
+- Prod: `trenches-os-api` deployed from GitHub Actions at 01:40 UTC, version
+  `06f3b688`, commit 0782259. Previous version `3277e13b` had been deployed
+  from the desktop at 00:06 UTC (the PR #14 scorer fix). `/health` answers
+  503 DEGRADED by design (361 leads in HUMAN_REVIEW over 48 h); the cron
+  lease updated at 01:42 UTC on the new version.
+- Prod: `trenches-site` deployed from GitHub Actions at 01:43 UTC, commit
+  0782259 (run 39707290569 succeeded). Live bundle carries the /upload
+  limits and the Stripe timestamp check.
+- Repo: both bundles re-synced into `trenches-os-api/src/index.js`
+  (6,050 lines) and `trenches-site/dist/index.js` (23,806 lines);
+  `recovered/` regenerated.
+- claude.ai: weekly scheduled task "Trenches Self Evaluation" created
+  (Sunday 18:36 CT, `trig_01TZAtk3yYH2bQ6yUSwhQbd7`), bound to the partner
+  session. Prompt in `business-partner/SELF-EVALUATION-PROMPT.md`.
+- Flags: none moved. Still off: OUTREACH_AUTONOMOUS_ORCHESTRATOR_ENABLED
+  (needs a Smartlead campaign id first). Runner still offline until
+  TRENCHES_RUNNER_KEY is added and the Actions runner is started.
+
 ## 2026-10-22 (later)
 
 - trenches-hq: pushed branch `claude/orchestrator-guard-scorer-fix` (700acb4):

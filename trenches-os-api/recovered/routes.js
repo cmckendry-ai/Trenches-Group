@@ -1,3 +1,10 @@
+function demoCheckoutConfirmPage(slug, domainAddon) {
+  const action = `/demo/${encodeURIComponent(slug)}/checkout`;
+  const price = domainAddon ? "$625 ($500 website build + $125 domain and hosting setup)" : "$500 website build";
+  const html = `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Confirm your order</title><body style="margin:0;background:#0b0d10;color:#f6f7f8;font-family:system-ui;display:grid;place-items:center;min-height:100vh"><main style="max-width:560px;padding:40px;text-align:center"><div style="font-size:12px;letter-spacing:.14em;color:#c9f24d">TRENCHES GROUP</div><h1 style="font-size:36px;margin:12px 0">One click to secure checkout</h1><p style="color:#aeb6c3;font-size:18px;line-height:1.6">${price}. Payment is handled by Stripe. Nothing is charged until you finish there.</p><form method="post" action="${action}"><input type="hidden" name="domain" value="${domainAddon ? "yes" : "no"}"><button type="submit" style="margin-top:18px;padding:16px 28px;border:0;border-radius:10px;background:#d8ff3e;color:#0b0d10;font-size:17px;font-weight:800;cursor:pointer">Continue to checkout</button></form><p style="color:#6f7886;font-size:13px;margin-top:22px"><a href="/demo/${encodeURIComponent(slug)}" style="color:#9ca5b4">Back to the demo</a></p></main>`;
+  return new Response(html, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store", "x-frame-options": "DENY", "referrer-policy": "no-referrer" } });
+}
+__name(demoCheckoutConfirmPage, "demoCheckoutConfirmPage");
 function actorFromRequest(request) {
   return request.headers.get("x-actor")?.slice(0, 120) || "ADMIN";
 }
@@ -158,7 +165,11 @@ async function handleRequest(request, env) {
   }
   const demoCheckoutMatch = path.match(/^\/demo\/([^/]+)\/checkout$/);
   if (demoCheckoutMatch && request.method === "GET") {
-    const domainAddon = url.searchParams.get("domain") === "yes";
+    return demoCheckoutConfirmPage(decodeURIComponent(demoCheckoutMatch[1]), url.searchParams.get("domain") === "yes");
+  }
+  if (demoCheckoutMatch && request.method === "POST") {
+    const form = await request.formData().catch(() => null);
+    const domainAddon = form?.get("domain") === "yes";
     return await startCheckout(env, decodeURIComponent(demoCheckoutMatch[1]), domainAddon);
   }
   const publicDemoMatch = path.match(/^\/demo\/([^/]+)$/);
