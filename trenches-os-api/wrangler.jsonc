@@ -6,11 +6,11 @@
   "compatibility_flags": ["nodejs_compat"],
 
   // ---------------------------------------------------------------------------
-  // STATUS 2026-10-01: three values below are still TODO-confirm placeholders.
-  // The deploy workflow refuses to run while any remain. Fill them from the
-  // live worker with scripts/pull-live-config.sh (needs CLOUDFLARE_API_TOKEN),
-  // never from memory. A wrong name here creates a new empty queue or
-  // workflow and silently detaches the live one.
+  // STATUS 2026-10-22: queue, workflow and cron names below were copied from
+  // trenches-hq/apps/trenches-os/wrangler.jsonc, which is the config that
+  // actually deploys this worker (verified against the live bundle there on
+  // 2026-10-11). This file is kept for the record only. Do not deploy from
+  // this repo; see docs/DECISIONS.md, 2026-10-22.
   // ---------------------------------------------------------------------------
 
   "d1_databases": [
@@ -24,17 +24,17 @@
 
   "queues": {
     "producers": [
-      { "queue": "TODO-confirm-queue-name", "binding": "EVENTS_QUEUE" }
+      { "queue": "trenches-events", "binding": "EVENTS_QUEUE" }
     ],
     "consumers": [
-      { "queue": "TODO-confirm-queue-name", "dead_letter_queue": "TODO-confirm-queue-name-dlq" },
-      { "queue": "TODO-confirm-queue-name-dlq" }
+      { "queue": "trenches-events", "max_batch_size": 10, "max_batch_timeout": 5, "max_retries": 5, "dead_letter_queue": "trenches-events-dlq" },
+      { "queue": "trenches-events-dlq", "max_batch_size": 10, "max_batch_timeout": 30, "max_retries": 1 }
     ]
   },
 
   "workflows": [
     {
-      "name": "TODO-confirm-workflow-name",
+      "name": "trenches-lead-lifecycle",
       "binding": "LEAD_WORKFLOW",
       "class_name": "LeadLifecycleWorkflow"
     }
@@ -49,14 +49,15 @@
 
   // The scheduled() handler runs reaper, deferred replay, prospector jobs,
   // runner keep-alive, follow-ups, outreach, demo repair and quote alerts
-  // under a 110 s lease. The live schedule is not known; confirm it.
+  // under a 110 s lease, every two minutes.
   "triggers": {
-    "crons": ["TODO-confirm-cron-expression"]
+    "crons": ["*/2 * * * *"]
   },
 
   "vars": {
-    "PUBLIC_BASE_URL": "https://trenches-os-api.cmckendry-ai.workers.dev"
-    // "SITE_BASE_URL": "https://trenchesgroup.com"  // optional; code defaults to this
+    "ENVIRONMENT": "production",
+    "PUBLIC_BASE_URL": "https://trenches-os-api.cmckendry-ai.workers.dev",
+    "SITE_BASE_URL": "https://trenchesgroup.com"
   },
 
   "observability": { "enabled": true }

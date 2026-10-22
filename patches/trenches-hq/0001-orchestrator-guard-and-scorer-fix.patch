@@ -1,0 +1,106 @@
+--- a/apps/trenches-os/src/prospector-jobs.ts	2026-10-22 00:03:03.655634986 +0000
++++ b/apps/trenches-os/src/prospector-jobs.ts	2026-10-22 00:15:08.573083153 +0000
+@@ -68,7 +68,7 @@
+ 
+ export type ProspectorOrchestrationResult = {
+   ran: boolean;
+-  reason?: 'DISABLED' | 'DAILY_CAP_REACHED' | 'BACKLOG_FULL' | 'NO_DUE_JOBS';
++  reason?: 'DISABLED' | 'DAILY_CAP_REACHED' | 'BACKLOG_FULL' | 'NO_DUE_JOBS' | 'NO_RUNNER_ONLINE';
+   created: Array<{ jobId: string; city: string; state: string; category: string; campaignId: string }>;
+ };
+ 
+@@ -138,6 +138,19 @@
+   return { ran: true, created };
+ }
+ 
++// A campaign only turns into leads when a runner claims it. Between 2026-09-21
++// and 2026-10-13 the cron created 240 campaigns that no runner ever picked up
++// (Orgo OAuth expired, then the Windows runner went offline), which filled the
++// backlog and silently stopped prospecting. Creating campaigns while nobody can
++// run them only hides that. Default 15 minutes; override with the
++// PROSPECTOR_RUNNER_STALE_MINUTES flag.
++async function runnerSeenRecently(db: D1Database): Promise<boolean> {
++  const staleMinutes = await getFlagInt(db, 'PROSPECTOR_RUNNER_STALE_MINUTES', 15);
++  const since = new Date(Date.now() - staleMinutes * 60 * 1000).toISOString();
++  const row = await db.prepare(`SELECT COUNT(*) AS count FROM runner_status WHERE last_seen_at >= ? AND status <> 'ERROR'`).bind(since).first<{ count: number }>();
++  return (row?.count ?? 0) > 0;
++}
++
+ export async function runDueProspectorJobs(db: D1Database, env: Env): Promise<{ website: ProspectorOrchestrationResult; concierge: ProspectorOrchestrationResult }> {
+   void env;
+   const enabledRow = await db.prepare(`SELECT value FROM system_flags WHERE key = 'PROSPECTOR_ORCHESTRATOR_ENABLED'`).first<{ value: string }>();
+@@ -145,6 +158,10 @@
+     const disabled: ProspectorOrchestrationResult = { ran: false, reason: 'DISABLED', created: [] };
+     return { website: disabled, concierge: disabled };
+   }
++  if (!(await runnerSeenRecently(db))) {
++    const offline: ProspectorOrchestrationResult = { ran: false, reason: 'NO_RUNNER_ONLINE', created: [] };
++    return { website: offline, concierge: offline };
++  }
+   const [website, concierge] = await Promise.all([
+     runDueProspectorJobsForOffering(db, 'WEBSITE'),
+     runDueProspectorJobsForOffering(db, 'CONCIERGE')
+--- a/apps/trenches-os/src/phase2.ts	2026-10-22 00:03:03.655634986 +0000
++++ b/apps/trenches-os/src/phase2.ts	2026-10-22 00:15:33.913226908 +0000
+@@ -9,7 +9,8 @@
+   ProspectValidationResult,
+   ScoreBreakdown,
+   ValidationStatus,
+-  WebsiteQuality
++  WebsiteQuality,
++  WebsiteStatus
+ } from './types';
+ 
+ const HIGH_TICKET_TERMS = [
+@@ -48,14 +49,32 @@
+   return ageMs >= 0 && ageMs <= 180 * 24 * 60 * 60 * 1000;
+ }
+ 
+-function digitalPoints(quality: WebsiteQuality): number {
+-  switch (quality) {
+-    case 'NONE': return 40;
+-    case 'POOR': return 30;
+-    case 'OUTDATED': return 20;
+-    case 'AVERAGE': return 5;
+-    default: return 0;
+-  }
++// A business with no site, a dead site, a parked domain or a Facebook-only
++// presence is exactly the target, so it earns the gap points whether or not
++// enrichment managed to grade a website's quality. Before 2026-10 only the
++// quality grade counted, so a no-website lead with quality UNKNOWN scored 0 of
++// 40 and landed in HUMAN_REVIEW (361 leads by 2026-10-22).
++function digitalPoints(quality: WebsiteQuality, status?: WebsiteStatus): number {
++  const byStatus = (() => {
++    switch (status) {
++      case 'NONE': return 40;
++      case 'BROKEN': return 35;
++      case 'PARKED': return 35;
++      case 'PLACEHOLDER': return 35;
++      case 'SOCIAL_ONLY': return 30;
++      default: return 0;
++    }
++  })();
++  const byQuality = (() => {
++    switch (quality) {
++      case 'NONE': return 40;
++      case 'POOR': return 30;
++      case 'OUTDATED': return 20;
++      case 'AVERAGE': return 5;
++      default: return 0;
++    }
++  })();
++  return Math.max(byStatus, byQuality);
+ }
+ 
+ 
+@@ -167,8 +186,8 @@
+ 
+ export function scoreProspect(input: ProspectResearchInput): ScoreBreakdown {
+   const reasons: string[] = [];
+-  const digitalOpportunity = digitalPoints(input.websiteQuality);
+-  if (digitalOpportunity) reasons.push(`Digital gap +${digitalOpportunity} (${input.websiteQuality.toLowerCase()} website).`);
++  const digitalOpportunity = digitalPoints(input.websiteQuality, input.websiteStatus);
++  if (digitalOpportunity) reasons.push(`Digital gap +${digitalOpportunity} (quality ${input.websiteQuality.toLowerCase()}, status ${(input.websiteStatus ?? 'UNKNOWN').toLowerCase()}).`);
+ 
+   let reputation = 0;
+   if ((input.googleRating ?? 0) >= 4.7) { reputation += 10; reasons.push('Reputation +10 (4.7+ Google rating).'); }

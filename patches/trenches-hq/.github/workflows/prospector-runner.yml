@@ -1,0 +1,89 @@
+# Prospector runner on GitHub Actions. Replaces the laptop.
+#
+# Every hour it starts apps/trenches-os/runner/runner.py for up to 50 minutes.
+# The runner heartbeats to trenches-os-api, claims READY campaigns, runs
+# discovery and enrichment through the Claude Code CLI (API key, not a Pro
+# login, so nothing expires at 2 a.m.), posts prospects, and exits when the
+# timeout hits. Overlapping runs are prevented by the concurrency group.
+#
+# Repo secrets (Settings > Secrets and variables > Actions), added by Connor:
+#   ANTHROPIC_API_KEY      already present for the site-edit runner
+#   TRENCHES_RUNNER_KEY    the trenches-os-api RUNNER_API_KEY secret (same value)
+#
+# Turn it off by disabling the workflow in the Actions tab. Turn campaign
+# creation back on with PROSPECTOR_ORCHESTRATOR_ENABLED=true once this runs.
+
+name: Prospector runner
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+    inputs:
+      minutes:
+        description: How long to run before stopping (minutes)
+        default: "50"
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prospector-runner
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 58
+    env:
+      TRENCHES_BASE_URL: https://trenches-os-api.cmckendry-ai.workers.dev
+      TRENCHES_RUNNER_KEY: ${{ secrets.TRENCHES_RUNNER_KEY }}
+      TRENCHES_RUNNER_ID: github-actions-runner-01
+      TRENCHES_POLL_SECONDS: "30"
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Refuse to run without the runner key
+        run: |
+          if [ -z "$TRENCHES_RUNNER_KEY" ]; then
+            echo "::error::TRENCHES_RUNNER_KEY secret is not set. Add the trenches-os-api RUNNER_API_KEY value under Settings > Secrets > Actions."; exit 1; fi
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::ANTHROPIC_API_KEY secret is not set."; exit 1; fi
+
+      - name: Run the prospector for a bounded window
+        env:
+          CLAUDE_BIN: claude
+          TRENCHES_LOG_DIR: ${{ runner.temp }}/trenches-logs
+          MINUTES: ${{ github.event.inputs.minutes || '50' }}
+        run: |
+          mkdir -p "$HOME/trenches/runner" "$TRENCHES_LOG_DIR"
+          claude --version
+          set +e
+          timeout --signal=INT "${MINUTES}m" python apps/trenches-os/runner/runner.py
+          code=$?
+          set -e
+          # 124 = the window ended, which is the normal way this job stops.
+          if [ "$code" = "124" ] || [ "$code" = "130" ] || [ "$code" = "0" ]; then echo "runner stopped after ${MINUTES} minutes"; exit 0; fi
+          echo "::error::runner exited with $code"; exit "$code"
+
+      - name: Keep the log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prospector-log-${{ github.run_id }}
+          path: ${{ runner.temp }}/trenches-logs/prospector.jsonl
+          if-no-files-found: ignore
+          retention-days: 14

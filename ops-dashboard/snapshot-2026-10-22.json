@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-10-22T00:40:00Z",
+  "source": "Seeded by the 2026-10-22 review session. The business partner routine refreshes this every morning at 6:36 Central.",
+  "summary": [
+    {"label": "Days since a new lead", "value": "46", "detail": "Last real lead 2026-09-06. The Oct 1 row is a test.", "tone": "crit"},
+    {"label": "Campaigns waiting", "value": "20", "detail": "Created Oct 13, never claimed. Runner offline.", "tone": "crit"},
+    {"label": "Outreach sent this month", "value": "0", "detail": "Last send 2026-09-11. Orchestrator off since Sep 13.", "tone": "crit"},
+    {"label": "Open quotes", "value": "3", "detail": "$2,499 one-time + $1,150/mo. None viewed.", "tone": "warn"},
+    {"label": "Qualified, callable", "value": "19", "detail": "All have a phone. None has a verified email.", "tone": "warn"},
+    {"label": "Routines healthy", "value": "3 of 6", "detail": "Reply check, Monday brief, weekly insights.", "tone": "good"}
+  ],
+  "attention": [
+    {"severity": "critical", "owner": "Connor", "business": "Trenches Group", "title": "The Prospector runner has been offline for 19 days", "why": "connor-windows-runner-01 last heartbeat 2026-10-03 10:25 UTC. The cron created 20 campaigns (Murfreesboro and Smyrna, 10 trades) on Oct 13 and nothing has claimed them. The orchestrator now reports BACKLOG_FULL, so no new campaigns get created either. This is the mechanical reason prospecting stops.", "action": "Start runner.py on the office PC today (python runner.py in C:\\dev\\trenches-hq\\apps\\trenches-os\\runner with the .env), or say yes to the GitHub Actions runner patch in Trenches-Group/patches/trenches-hq so it never depends on the PC again."},
+    {"severity": "critical", "owner": "Connor", "business": "Trenches Group", "title": "Outreach is switched off and pointed at a dead provider", "why": "OUTREACH_AUTONOMOUS_ORCHESTRATOR_ENABLED has been false since 2026-09-13 (CLAUDE_SAFETY_PAUSE). 90 emails went out Aug 31 to Sep 11, zero since. The Smartlead sender connor.trenches@discovertrenchesgroup.com is warmed at 50/day and has never been used for a campaign.", "action": "Reply with one sentence: 'Use Smartlead for Trenches outreach' or 'Use Gmail for Trenches outreach'. The partner will prepare the first campaign the same day. Sends still wait for your click."},
+    {"severity": "critical", "owner": "Connor", "business": "Benson Landscaping, Get Lit", "title": "Three quotes sent 9 days ago, zero views", "why": "Q-1004 Get Lit ($1,499 + $400/mo, sent Oct 12), Q-1005 Benson ($350 + $500/mo, Oct 13) and Q-1006 Benson ($650 + $250/mo, Oct 13). view_count is 0 on all three. Unviewed after a week usually means the email was missed, not declined.", "action": "Call Patrick Benson and the Get Lit contact today. Tomorrow morning the partner will leave follow-up drafts in your Gmail Drafts in your voice; send the ones you like."},
+    {"severity": "warning", "owner": "Connor", "business": "Trenches Group", "title": "Property manager campaign built Oct 13, never launched", "why": "Recon found 29 verified PM and HOA firms and drafted a 3-email sequence. It is blocked on your mailing address, a subject line, and permission to create the Smartlead draft. Files are in OneDrive Clients/Trenches Group/Outreach/Property Managers Murfreesboro.", "action": "Send the partner the mailing address line and the subject you want. It will build the Smartlead draft campaign, paused, for your one click."},
+    {"severity": "warning", "owner": "Connor", "business": "Trenches Group", "title": "19 qualified leads have a phone and nobody has called them", "why": "Plumbers, HVAC, roofers and tree services around Murfreesboro, Smyrna, Columbia and Spring Hill, scored 65 to 80, no website or a broken one. Website-track email outreach requires a verified email, which none of them has, so they sit in QUALIFIED forever.", "action": "Block 45 minutes and call the top 10. Ask the partner for the call sheet and a 20-second opener; it is in tomorrow's brief."},
+    {"severity": "warning", "owner": "Forge", "business": "Trenches Group", "title": "361 leads stuck in HUMAN_REVIEW because of the scorer bug", "why": "The digital-gap score only awards points for website_quality, so a lead with no website at all (website_status NONE, quality UNKNOWN) scores 0 of 40 and lands in review. That is the queue you keep clearing by hand. Known since the Oct 1 review, still unfixed in trenches-hq apps/trenches-os/src.", "action": "Say yes to the scorer fix (website_status NONE, BROKEN, PARKED, SOCIAL_ONLY, PLACEHOLDER earn the gap points) and a requalify run on the 361. Expect 100 to 150 to qualify."},
+    {"severity": "warning", "owner": "Connor", "business": "Trenches Group", "title": "Two repos both claim to be the source of truth", "why": "Trenches-Group (this review's repo) holds the recovered bundle and docs; trenches-hq holds the TypeScript source, agents, skills and client logs, and is what actually deploys. Trenches-Group has not been pushed since Oct 9. Keeping both means every fix has to land twice.", "action": "Confirm: trenches-hq is the code; Trenches-Group keeps only docs/reviews and the dashboard. The partner will then stop syncing bundles into Trenches-Group."},
+    {"severity": "warning", "owner": "Connor", "business": "Vivid Lightscapes", "title": "Smartlead API key is sitting in plaintext in a routine prompt", "why": "The Vivid Outreach Reply Check prompt contains the full api_key. The Smartlead webhook secret is also plaintext in system_flags. House rule 13 says rotate on sight.", "action": "Rotate the key in Smartlead, add it to the Claude environment as SMARTLEAD_API_KEY, and the partner will update the reply-check routine to read it from the environment."},
+    {"severity": "info", "owner": "Connor", "business": "Trenches Group", "title": "Stripe secret key was invalid on Oct 9; status unknown", "why": "The _trenches log says prod STRIPE_SECRET_KEY was an mk_ key id, breaking checkout. No later entry says it was rotated.", "action": "Confirm the rotation happened, then run docs/pricing-gate/smoke-live-stripe.mjs in trenches-hq."},
+    {"severity": "info", "owner": "Partner", "business": "Trenches Group", "title": "Orphaned pipeline state makes every dashboard lie", "why": "111 ACTIVE concierge sequences with no reader since Sep 13, 83 QUEUED and 73 FAILED candidates on dead campaigns, 3 FAILED demo jobs, 7 test reply drafts from August.", "action": "Say 'clean it up' and the partner cancels the sequences with stop_reason ORPHANED_2026-09-13, fails the dead candidates and archives the 258 failed campaigns. Nothing customer-facing changes."},
+    {"severity": "info", "owner": "Connor", "business": "Vivid Lightscapes", "title": "Marketplace monitor and books refresh finish in under 30 seconds", "why": "Both routines report success but ran 23 s and 18 s on Oct 19. The marketplace monitor needs Chrome on your desktop, which a cloud run cannot reach. [Guessing] Both are exiting early on a missing tool and reporting success.", "action": "Open the Oct 19 run of each in claude.ai/code and read the final message. If they bailed, the partner will rewrite them to fail loudly."}
+  ],
+  "agents": [
+    {"name": "Business Partner", "kind": "Claude scheduled task, daily 6:36 CT", "owns": "This page, the morning brief, prospecting push, follow-up drafts", "status": "info", "statusLabel": "first run tomorrow", "lastRunAt": null, "next": "Oct 22 06:36 CT", "note": "Created 2026-10-22."},
+    {"name": "Trenches Monday Brief", "kind": "Claude scheduled task, Mon 7:00 CT", "owns": "Weekly client-by-client brief by email", "status": "ok", "statusLabel": "ran", "lastRunAt": "2026-10-19T12:16:23Z", "next": "Oct 26", "note": "Read-only. Overlaps the partner brief on Mondays."},
+    {"name": "Trenches HQ Weekly Insights", "kind": "Claude scheduled task, Fri 4:00 CT", "owns": "Weekly insight report and suggestions", "status": "ok", "statusLabel": "ran", "lastRunAt": "2026-10-16T21:07:21Z", "next": "Oct 23", "note": ""},
+    {"name": "Vivid Outreach Reply Check", "kind": "Claude scheduled task, every 2 h, 7 to 21 CT", "owns": "Emails you when a real person replies to Vivid cold email", "status": "ok", "statusLabel": "ran", "lastRunAt": "2026-10-21T22:03:41Z", "next": "every 2 h", "note": "Smartlead key is in the prompt. Rotate."},
+    {"name": "Vivid Marketplace Monitor", "kind": "Claude scheduled task, Mon 7:50 CT", "owns": "Facebook Marketplace listing stats to the tracker sheet", "status": "warning", "statusLabel": "ran 23 s", "lastRunAt": "2026-10-19T12:51:22Z", "next": "Oct 26", "note": "Needs Chrome on the desktop. Probably exiting early."},
+    {"name": "Trenches weekly books refresh", "kind": "Claude scheduled task, Mon 13:00 UTC", "owns": "Stripe and vendor bills into the Books sheet", "status": "warning", "statusLabel": "ran 18 s", "lastRunAt": "2026-10-19T13:06:15Z", "next": "Oct 26", "note": "18 seconds is too fast to have done the work."},
+    {"name": "Vivid Weekly Ad Copy", "kind": "Claude scheduled task", "owns": "Meta ad copy by persona", "status": "idle", "statusLabel": "paused", "lastRunAt": "2026-10-05T13:05:57Z", "next": "paused Oct 11", "note": "Predates the house rules."},
+    {"name": "trenches-os-api cron", "kind": "Cloudflare Worker, every 2 min", "owns": "Reaper, deferred replay, prospector jobs, follow-ups, outreach, demo repair, quote alerts", "status": "ok", "statusLabel": "running", "lastRunAt": "2026-10-22T00:00:05Z", "next": "every 2 min", "note": "Worker last deployed Oct 13."},
+    {"name": "Prospector orchestrator", "kind": "inside the cron, flag PROSPECTOR_ORCHESTRATOR_ENABLED=true", "owns": "Creates campaigns from 140 city x trade jobs, 21-day cadence", "status": "warning", "statusLabel": "backlog full", "lastRunAt": "2026-10-13T00:00:23Z", "next": "blocked", "note": "20 READY campaigns nobody claims."},
+    {"name": "connor-windows-runner-01", "kind": "Python runner on the office PC", "owns": "Discovery, enrichment, demo builds via Claude Code CLI", "status": "critical", "statusLabel": "offline 19 d", "lastRunAt": "2026-10-03T10:25:32Z", "next": "needs a restart", "note": "The only thing that turns campaigns into leads."},
+    {"name": "orgo-trenches-runner-01", "kind": "Orgo cloud desktop", "owns": "Former runner", "status": "critical", "statusLabel": "dead", "lastRunAt": "2026-09-28T01:52:38Z", "next": "retire", "note": "OAuth expired, no credits."},
+    {"name": "Outreach orchestrator", "kind": "inside the cron, flag OUTREACH_AUTONOMOUS_ORCHESTRATOR_ENABLED=false", "owns": "Enrolls qualified leads into email sequences", "status": "critical", "statusLabel": "off since Sep 13", "lastRunAt": "2026-09-11T13:00:47Z", "next": "needs your decision", "note": "Last real send Sep 11."},
+    {"name": "trenches-site cron", "kind": "Cloudflare Worker, 07:15 and 15:00 UTC", "owns": "Client analytics sync, renewal reminder drafts and sends", "status": "ok", "statusLabel": "deployed Oct 21", "lastRunAt": "2026-10-21T23:46:58Z", "next": "daily", "note": "Renewal reminders switch is off."},
+    {"name": "Site-edit runner", "kind": "GitHub Actions in trenches-hq", "owns": "Approve plan and Publish from /hq", "status": "ok", "statusLabel": "on demand", "lastRunAt": null, "next": "on demand", "note": "Has ANTHROPIC_API_KEY and CLOUDFLARE_API_TOKEN. Can host the prospector runner too."},
+    {"name": "Hyperagent Prospector", "kind": "Hyperagent agent", "owns": "Lead research threads", "status": "idle", "statusLabel": "idle", "lastRunAt": "2026-08-21T03:11:56Z", "next": "on demand", "note": "Last used for Murfreesboro tree services."},
+    {"name": "Hyperagent Site Builder", "kind": "Hyperagent agent", "owns": "Concept sites", "status": "idle", "statusLabel": "idle", "lastRunAt": "2026-09-03T01:22:25Z", "next": "on demand", "note": ""},
+    {"name": "Vivid Lead Intake", "kind": "Windows task on the office PC, every 10 min", "owns": "Quote folder per website lead", "status": "idle", "statusLabel": "unverifiable from cloud", "lastRunAt": null, "next": "every 10 min while logged in", "note": "Check the 1-Quotes folder for the newest lead."},
+    {"name": "vivid-weekly-social-batch", "kind": "Local scheduled task, Sundays", "owns": "Three social posts drafted to Gmail", "status": "info", "statusLabel": "first unattended run Oct 25", "lastRunAt": "2026-10-13T00:00:00Z", "next": "Oct 25", "note": "Check a Gmail draft appears Sunday evening."},
+    {"name": "Vivid Smartlead campaigns 3931924 and 4030240", "kind": "Smartlead", "owns": "About 1,000 cold email leads for Vivid", "status": "idle", "statusLabel": "not checked", "lastRunAt": null, "next": "", "note": "Could not read status without the key in a secret. Add SMARTLEAD_API_KEY to the environment."}
+  ],
+  "funnels": {
+    "trenches": [
+      {"label": "Campaigns created", "value": 292, "display": "292 (258 failed)"},
+      {"label": "Candidates found", "value": 1149, "display": "1,149"},
+      {"label": "Leads", "value": 730, "display": "730"},
+      {"label": "Human review", "value": 361, "display": "361"},
+      {"label": "Qualified", "value": 19, "display": "19"},
+      {"label": "Emails sent", "value": 90, "display": "90"},
+      {"label": "Real replies", "value": 0, "display": "0"},
+      {"label": "Quotes sent", "value": 3, "display": "3 open"},
+      {"label": "Paid", "value": 0, "display": "0"}
+    ],
+    "vivid": [
+      {"label": "Smartlead leads enrolled", "value": 1000, "display": "about 1,000"},
+      {"label": "Genuine replies", "value": 0, "display": "no data"},
+      {"label": "Website leads", "value": 0, "display": "in KV, not readable"},
+      {"label": "Quote folders", "value": 0, "display": "on the PC, not readable"},
+      {"label": "Booked", "value": 0, "display": "no data"}
+    ]
+  },
+  "advice": {
+    "next": [
+      {"title": "Get the runner back today.", "body": "Nothing else in the pipeline matters while 20 campaigns sit unclaimed. The PC restart takes two minutes; the GitHub Actions version takes one yes and two secrets and never sleeps."},
+      {"title": "Make the Trenches outreach decision in one sentence.", "body": "Smartlead already has a warmed Trenches sender and the Vivid reply watcher proves the API works. Gmail caps you at 10 a day and needs the reply code restored. Pick Smartlead unless you want to stay under the radar at low volume."},
+      {"title": "Call the three open quotes before building anything new.", "body": "$2,499 up front and $1,150 a month is on the table from people who already said yes to a conversation. Zero views in nine days is a delivery problem, not a no."},
+      {"title": "Approve the scorer fix and the orchestrator guard together.", "body": "One PR in trenches-hq: gap points for no-website leads, no campaign creation while no runner has heartbeated in 15 minutes, stale READY campaigns expire after 7 days. The 361-lead review queue mostly disappears."},
+      {"title": "Let the partner clean house.", "body": "Orphaned sequences, dead candidates and failed campaigns make every count on this page and in the Command Center wrong. It is a one-time SQL you approve."}
+    ],
+    "decisions": [
+      "Smartlead or Gmail for Trenches Group outreach?",
+      "Runner on the office PC permanently, or move it to GitHub Actions (needs RUNNER_API_KEY as a repo secret)?",
+      "Is trenches-hq the only code repo from now on, with Trenches-Group kept for docs and this dashboard?",
+      "May the partner write to D1 for internal bookkeeping only (flags, events, orphan cleanup), never to leads or customers?"
+    ]
+  },
+  "actions": [
+    {"at": "2026-10-22T00:40:00Z", "text": "Review session: pulled live worker bundles, diffed them against the repo, queried D1, read trenches-hq. Wrote docs/reviews/2026-10-22-operating-review.md."},
+    {"at": "2026-10-22T00:40:00Z", "text": "Published this page and created the daily Business Partner routine (6:36 CT)."},
+    {"at": "2026-10-22T00:40:00Z", "text": "Wrote the orchestrator guard, scorer fix and GitHub Actions runner as a patch set for trenches-hq. Nothing deployed."}
+  ],
+  "sources": ["D1 queries 2026-10-22 00:00 to 00:40 UTC", "list_triggers", "Hyperagent threads", "trenches-hq @ a26b666", "live bundles trenches-os-api (Oct 13) and trenches-site (Oct 21)"]
+}

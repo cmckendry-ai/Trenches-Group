@@ -1,0 +1,204 @@
+<title>Trenches Ops Desk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single scanning column. Attention queue first, then the agent roster, then the numbers.
+   Status is encoded in form (stripes, pills) so the page reads at a glance in the morning. */
+:root{
+  --bg:#F7F6F2; --panel:#FFFFFF; --ink:#1C2126; --ink-2:#4F5A64; --ink-3:#7C8792; --line:#E2E0D8;
+  --accent:#1F6F8B; --accent-ink:#FFFFFF;
+  --crit:#B3261E; --crit-bg:#FBEAE8; --warn:#9A6400; --warn-bg:#FBF1DC; --good:#1E7A4B; --good-bg:#E3F3EA; --idle:#6B7280; --idle-bg:#ECEEF1;
+  --bar:#1F6F8B; --bar-track:#E8EEF1;
+  --display:"Archivo",ui-sans-serif,system-ui,sans-serif; --body:"Source Sans 3",ui-sans-serif,system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141719; --panel:#1C2024; --ink:#ECEFF1; --ink-2:#B4BCC4; --ink-3:#7F8993; --line:#2C3238;
+  --accent:#6FB7D1; --accent-ink:#0F1A1F;
+  --crit:#F28B82; --crit-bg:#3A1F1D; --warn:#E6B65C; --warn-bg:#3A2F16; --good:#7CD39A; --good-bg:#17301F; --idle:#9AA3AC; --idle-bg:#262B30;
+  --bar:#6FB7D1; --bar-track:#262B30; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#141719; --panel:#1C2024; --ink:#ECEFF1; --ink-2:#B4BCC4; --ink-3:#7F8993; --line:#2C3238;
+  --accent:#6FB7D1; --accent-ink:#0F1A1F;
+  --crit:#F28B82; --crit-bg:#3A1F1D; --warn:#E6B65C; --warn-bg:#3A2F16; --good:#7CD39A; --good-bg:#17301F; --idle:#9AA3AC; --idle-bg:#262B30;
+  --bar:#6FB7D1; --bar-track:#262B30; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.45;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+.wrap{max-width:1080px;margin:0 auto}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;padding-block:28px 18px;border-bottom:1px solid var(--line)}
+h1{font-family:var(--display);font-size:clamp(24px,4vw,32px);font-weight:700;letter-spacing:-.01em;margin:0;text-wrap:balance}
+.sub{color:var(--ink-2);margin:4px 0 0;font-size:15px}
+.asof{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.asof b{color:var(--ink-2);font-weight:500}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:18px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;min-width:0}
+.tile .k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.tile .v{font-family:var(--display);font-size:26px;font-weight:600;line-height:1.1;margin-top:6px;font-variant-numeric:tabular-nums}
+.tile .d{font-size:13px;color:var(--ink-2);margin-top:4px}
+.tile.crit .v{color:var(--crit)} .tile.warn .v{color:var(--warn)} .tile.good .v{color:var(--good)}
+section{margin-top:30px}
+h2{font-family:var(--display);font-size:18px;font-weight:600;margin:0 0 4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+h2 .n{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);font-weight:400}
+.lead{color:var(--ink-2);margin:0 0 12px;font-size:15px;max-width:70ch}
+.queue{display:flex;flex-direction:column;gap:8px}
+.item{background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--idle);border-radius:6px;padding:12px 14px 12px 14px;display:grid;grid-template-columns:1fr auto;gap:4px 16px;min-width:0}
+.item.critical{border-left-color:var(--crit)} .item.warning{border-left-color:var(--warn)} .item.info{border-left-color:var(--accent)} .item.done{border-left-color:var(--good);opacity:.75}
+.item .t{font-weight:600;font-size:16px}
+.item .w{color:var(--ink-2);font-size:14.5px;grid-column:1/-1}
+.item .a{grid-column:1/-1;font-size:14.5px;margin-top:4px;padding-top:8px;border-top:1px dashed var(--line)}
+.item .a b{font-weight:600}
+.item .meta{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;align-items:flex-start}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:.03em;padding:3px 9px;border-radius:999px;white-space:nowrap;background:var(--idle-bg);color:var(--idle)}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.critical{background:var(--crit-bg);color:var(--crit)} .pill.warning{background:var(--warn-bg);color:var(--warn)} .pill.good,.pill.ok{background:var(--good-bg);color:var(--good)} .pill.info{background:var(--bar-track);color:var(--accent)}
+.pill.owner{background:transparent;border:1px solid var(--line);color:var(--ink-2)} .pill.owner::before{display:none}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:640px}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);font-weight:600;white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.name{font-weight:600;white-space:nowrap} td .sm{display:block;color:var(--ink-3);font-size:12.5px;font-weight:400;margin-top:2px}
+td.mono{font-family:var(--mono);font-size:12.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;min-width:0}
+.card h3{font-family:var(--display);font-size:15px;font-weight:600;margin:0 0 10px}
+.funnel{display:grid;grid-template-columns:max-content 1fr max-content;gap:6px 10px;align-items:center;font-size:14px}
+.funnel .lab{color:var(--ink-2);white-space:nowrap} .funnel .val{font-family:var(--mono);font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
+.funnel .track{height:12px;background:var(--bar-track);border-radius:3px;overflow:hidden;min-width:60px}
+.funnel .fill{height:100%;background:var(--bar);border-radius:0 3px 3px 0;min-width:2px;transition:width .3s}
+@media (prefers-reduced-motion:reduce){.funnel .fill{transition:none}}
+.advice ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px}
+.advice li{padding-left:4px} .advice li b{font-weight:600}
+.advice .q{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.advice .q p{margin:0 0 6px;font-weight:600}
+.advice .q ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.log{font-size:14px;display:flex;flex-direction:column;gap:6px}
+.log div{display:grid;grid-template-columns:max-content 1fr;gap:12px} .log .ts{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+.empty{background:var(--panel);border:1px dashed var(--line);border-radius:8px;padding:28px 16px;color:var(--ink-2);text-align:center}
+.empty b{color:var(--ink)}
+.foot{margin-top:36px;color:var(--ink-3);font-size:13px;display:flex;flex-wrap:wrap;gap:6px 18px}
+.chip{font-family:var(--mono);font-size:12px;background:var(--idle-bg);color:var(--ink-2);padding:2px 7px;border-radius:4px}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:560px){.item{grid-template-columns:1fr}.item .meta{justify-content:flex-start}.asof{align-items:flex-start}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Trenches Ops Desk</h1>
+      <p class="sub">Everything that needs you, who is working, and what the partner did overnight. Trenches Group and Vivid Lightscapes.</p>
+    </div>
+    <div class="asof" id="asof"><span>Loading the latest snapshot</span></div>
+  </header>
+
+  <div class="summary" id="summary"></div>
+
+  <section id="attention">
+    <h2>Needs you <span class="n" id="attnCount"></span></h2>
+    <p class="lead">Ranked by what it costs to leave alone. Each item says why it is here and the one thing that clears it.</p>
+    <div class="queue" id="queue"><div class="empty"><b>No snapshot yet.</b> The business partner routine writes one here each morning at 6:36 Central. Until then this page stays empty.</div></div>
+  </section>
+
+  <section id="agents">
+    <h2>Who is working <span class="n" id="agentCount"></span></h2>
+    <p class="lead">Every routine, runner, agent and worker that is supposed to be doing something on its own, with when it last did.</p>
+    <div class="tablewrap"><table id="agentTable"><thead><tr><th>Agent</th><th>Owns</th><th>Status</th><th>Last run</th><th>Next</th><th>Note</th></tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <section>
+    <div class="two">
+      <div class="card">
+        <h3>Trenches Group pipeline</h3>
+        <div class="funnel" id="funnelTG"></div>
+      </div>
+      <div class="card">
+        <h3>Vivid Lightscapes pipeline</h3>
+        <div class="funnel" id="funnelVL"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="advice">
+    <div class="two">
+      <div class="card">
+        <h3>Partner's advice: do these next</h3>
+        <ol id="advice"></ol>
+        <div class="q"><p>Decisions only you can make</p><ul id="decisions"></ul></div>
+      </div>
+      <div class="card">
+        <h3>What the partner did</h3>
+        <div class="log" id="log"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<script>
+(function(){
+  const $=(s)=>document.querySelector(s);
+  const esc=(s)=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const fmtWhen=(iso)=>{ if(!iso) return 'never'; const d=new Date(iso); if(isNaN(d)) return esc(iso);
+    const diff=(Date.now()-d.getTime())/1000; const a=Math.abs(diff); const past=diff>=0;
+    let s; if(a<90) s='just now'; else if(a<5400) s=Math.round(a/60)+' min'; else if(a<129600) s=Math.round(a/3600)+' h'; else s=Math.round(a/86400)+' d';
+    if(s==='just now') return s; return past? s+' ago' : 'in '+s; };
+  const fmtDate=(iso)=>{ if(!iso) return ''; const d=new Date(iso); if(isNaN(d)) return esc(iso);
+    return d.toLocaleString('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' CT'; };
+  const sevOrder={critical:0,warning:1,info:2,done:3};
+
+  function render(snap){
+    const s=snap||{};
+    const asof=$('#asof');
+    if(!s.generatedAt){ asof.innerHTML='<span>No snapshot yet</span>'; return; }
+    const stale=(Date.now()-new Date(s.generatedAt).getTime())>36*3600*1000;
+    asof.innerHTML='<span>Snapshot <b>'+fmtDate(s.generatedAt)+'</b> ('+fmtWhen(s.generatedAt)+')</span><span>'+esc(s.source||'business partner routine')+'</span>'+(stale?'<span class="pill warning">snapshot is stale, routine may have failed</span>':'');
+
+    // Summary tiles
+    const tiles=(s.summary||[]).map(t=>'<div class="tile '+esc(t.tone||'')+'"><div class="k">'+esc(t.label)+'</div><div class="v">'+esc(t.value)+'</div><div class="d">'+esc(t.detail||'')+'</div></div>').join('');
+    $('#summary').innerHTML=tiles;
+
+    // Attention queue
+    const items=(s.attention||[]).slice().sort((a,b)=>(sevOrder[a.severity]??9)-(sevOrder[b.severity]??9));
+    $('#attnCount').textContent=items.length? items.filter(i=>i.severity!=='done').length+' open' : '';
+    $('#queue').innerHTML=items.length? items.map(i=>'<div class="item '+esc(i.severity||'info')+'">'
+      +'<div class="t">'+esc(i.title)+'</div>'
+      +'<div class="meta"><span class="pill '+esc(i.severity||'info')+'">'+esc(i.severity||'info')+'</span>'+(i.owner?'<span class="pill owner">'+esc(i.owner)+'</span>':'')+(i.business?'<span class="pill owner">'+esc(i.business)+'</span>':'')+'</div>'
+      +(i.why?'<div class="w">'+esc(i.why)+'</div>':'')
+      +(i.action?'<div class="a"><b>Do this:</b> '+esc(i.action)+'</div>':'')
+      +'</div>').join('') : '<div class="empty"><b>Nothing waiting on you.</b></div>';
+
+    // Agents
+    const agents=(s.agents||[]);
+    $('#agentCount').textContent=agents.length? agents.filter(a=>a.status==='ok').length+' of '+agents.length+' healthy' : '';
+    $('#agentTable tbody').innerHTML=agents.map(a=>'<tr>'
+      +'<td class="name">'+esc(a.name)+(a.kind?'<span class="sm">'+esc(a.kind)+'</span>':'')+'</td>'
+      +'<td>'+esc(a.owns||'')+'</td>'
+      +'<td><span class="pill '+esc(a.status||'idle')+'">'+esc(a.statusLabel||a.status||'')+'</span></td>'
+      +'<td class="mono" title="'+esc(a.lastRunAt||'')+'">'+fmtWhen(a.lastRunAt)+'</td>'
+      +'<td class="mono">'+esc(a.next||'')+'</td>'
+      +'<td>'+esc(a.note||'')+'</td>'
+      +'</tr>').join('') || '<tr><td colspan="6" class="empty">No agents reported.</td></tr>';
+
+    // Funnels
+    const funnel=(el,rows)=>{ const max=Math.max(1,...(rows||[]).map(r=>Number(r.value)||0));
+      el.innerHTML=(rows||[]).map(r=>'<div class="lab">'+esc(r.label)+'</div><div class="track"><div class="fill" style="width:'+Math.max(1,100*(Number(r.value)||0)/max).toFixed(1)+'%"></div></div><div class="val">'+esc(r.display??r.value)+'</div>').join('') || '<div class="lab">No data</div><div></div><div></div>'; };
+    funnel($('#funnelTG'), (s.funnels||{}).trenches); funnel($('#funnelVL'), (s.funnels||{}).vivid);
+
+    // Advice, decisions, log
+    $('#advice').innerHTML=((s.advice||{}).next||[]).map(x=>'<li>'+(x.title?'<b>'+esc(x.title)+'</b> ':'')+esc(x.body||'')+'</li>').join('') || '<li>No advice recorded.</li>';
+    $('#decisions').innerHTML=((s.advice||{}).decisions||[]).map(x=>'<li>'+esc(x)+'</li>').join('') || '<li>None pending.</li>';
+    $('#log').innerHTML=(s.actions||[]).map(x=>'<div><span class="ts">'+esc(x.at? fmtDate(x.at):'')+'</span><span>'+esc(x.text)+'</span></div>').join('') || '<div><span class="ts"></span><span>Nothing recorded yet.</span></div>';
+
+    $('#foot').innerHTML='<span>Numbers come from D1 queries at snapshot time, never from memory.</span>'+(s.sources||[]).map(x=>'<span class="chip">'+esc(x)+'</span>').join('');
+  }
+
+  render(null);
+  (async()=>{
+    let db=null; try{ db=await window.claude?.use?.('db'); }catch(e){}
+    if(!db){ $('#asof').innerHTML='<span>Open this page signed in to see the live snapshot.</span>'; return; }
+    try{ db.doc('snapshots/latest').onSnapshot(snap=>{ render(snap.exists? snap.data() : null); }, err=>{ $('#asof').innerHTML='<span class="pill warning">Could not read the snapshot ('+esc(err.code)+')</span>'; }); }
+    catch(e){ $('#asof').innerHTML='<span class="pill warning">Could not read the snapshot</span>'; }
+  })();
+})();
+</script>

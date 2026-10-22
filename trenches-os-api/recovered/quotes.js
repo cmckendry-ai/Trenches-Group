@@ -14,17 +14,26 @@ __name(text, "text");
 function parseLineItems(value) {
   if (!Array.isArray(value)) throw new HttpError(400, "VALIDATION_ERROR", "lineItems must be a list.");
   if (value.length > 50) throw new HttpError(400, "VALIDATION_ERROR", "A quote can have at most 50 line items.");
-  return value.map((raw, i) => {
+  const items = value.map((raw, i) => {
     if (!raw || typeof raw !== "object") throw new HttpError(400, "VALIDATION_ERROR", `Line ${i + 1} is invalid.`);
     const item = raw;
     const description = text(item.description, `Line ${i + 1} description`, 500, true);
     const quantity = Number(item.quantity ?? 1);
     const unitCents = Number(item.unitCents);
     if (!Number.isFinite(quantity) || quantity <= 0 || quantity > 1e4) throw new HttpError(400, "VALIDATION_ERROR", `Line ${i + 1} quantity must be between 0 and 10,000.`);
-    if (!Number.isInteger(unitCents) || unitCents < 0 || unitCents > 1e8) throw new HttpError(400, "VALIDATION_ERROR", `Line ${i + 1} price is invalid.`);
+    if (!Number.isInteger(unitCents) || unitCents < -1e8 || unitCents > 1e8) throw new HttpError(400, "VALIDATION_ERROR", `Line ${i + 1} price is invalid.`);
     const billing = item.billing === "MONTHLY" ? "MONTHLY" : "ONE_TIME";
-    return { description, quantity, unitCents, billing };
+    const optional = item.optional === true;
+    if (optional && unitCents < 0) throw new HttpError(400, "VALIDATION_ERROR", `Line ${i + 1}: a discount can't be optional.`);
+    if (!optional) return { description, quantity, unitCents, billing };
+    const group = text(item.group, `Line ${i + 1} option name`, 80);
+    const details = (Array.isArray(item.details) ? item.details : []).map((d) => typeof d === "string" ? d.trim().slice(0, 160) : "").filter(Boolean).slice(0, 10);
+    return { description, quantity, unitCents, billing, optional, ...group ? { group } : {}, ...details.length ? { details } : {} };
   });
+  const t = totals(items);
+  if (t.oneTime < 0) throw new HttpError(400, "VALIDATION_ERROR", "One-time discounts are larger than the one-time charges.");
+  if (t.monthly < 0) throw new HttpError(400, "VALIDATION_ERROR", "Monthly discounts are larger than the monthly charges.");
+  return items;
 }
 __name(parseLineItems, "parseLineItems");
 function parseValidUntil(value) {
@@ -51,6 +60,7 @@ function totals(items) {
   let oneTime = 0;
   let monthly = 0;
   for (const item of items) {
+    if (item.optional) continue;
     const amount = Math.round(item.quantity * item.unitCents);
     if (item.billing === "MONTHLY") monthly += amount;
     else oneTime += amount;
@@ -157,7 +167,7 @@ function esc(value) {
 }
 __name(esc, "esc");
 function money(cents) {
-  return "$" + (cents / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return (cents < 0 ? "-$" : "$") + (Math.abs(cents) / 100).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 __name(money, "money");
 function formatDate(isoDate) {
@@ -171,12 +181,53 @@ function totalLines(quote) {
   return lines;
 }
 __name(totalLines, "totalLines");
+function optionLines(quote) {
+  let items = [];
+  try {
+    items = JSON.parse(quote.line_items_json);
+  } catch {
+    return [];
+  }
+  const price = /* @__PURE__ */ __name((i) => `${money(Math.round(i.quantity * i.unitCents))}${i.billing === "MONTHLY" ? "/mo" : ""}`, "price");
+  const out = [];
+  const groups = /* @__PURE__ */ new Map();
+  for (const i of items.filter((x) => x.optional)) {
+    if (!i.group) {
+      out.push(`${i.description}: ${price(i)}`);
+      continue;
+    }
+    if (!groups.has(i.group)) {
+      groups.set(i.group, []);
+      out.push(`\0${i.group}`);
+    }
+    groups.get(i.group).push(i);
+  }
+  return out.map((line) => {
+    if (!line.startsWith("\0")) return line;
+    const name = line.slice(1);
+    const lines = groups.get(name);
+    const one = lines.filter((x) => x.billing !== "MONTHLY").map(price);
+    const mo = lines.filter((x) => x.billing === "MONTHLY").map(price);
+    return `${name}: ${[...one.map((p) => `${p} setup`), ...mo].join(" + ")}`;
+  });
+}
+__name(optionLines, "optionLines");
+var CLIENT_BENEFITS = [
+  { title: "Your own client portal", body: "Request changes, track every update, and see your estimates, invoices and subscriptions in one place." },
+  { title: "Website analytics you can actually read", body: "See how many people visit, where they come from and what they do on your site, right in your portal." },
+  { title: "A site that stays fresh", body: "With the Website Care Plan we make updates every month, so your site never feels stale." }
+];
 function buildQuoteEmail(quote, input) {
   const greetingName = input.recipientName || quote.contact_name;
   const greeting = greetingName ? `Hi ${greetingName.split(/\s+/)[0]},` : "Hi there,";
   const intro = quote.message || `Thanks for the conversation. Here's the estimate we discussed for ${quote.business_name}.`;
   const validity = quote.valid_until ? `Valid through ${formatDate(quote.valid_until)}` : "";
   const subject = `Your estimate from Trenches Group: ${quote.title} (${quote.quote_number})`;
+  const options = optionLines(quote);
+  const onlyOptions = options.length > 0 && !quote.one_time_cents && !quote.monthly_cents;
+  const totalsList = onlyOptions ? [] : totalLines(quote);
+  const viewLabel = options.length ? "Compare options and view your estimate" : "View your estimate";
+  const optionsTitle = onlyOptions ? "Your options (pick the one that fits)" : "Options you can add (not included above)";
   const portalText = input.inviteUrl ? `Your Trenches Group client portal is ready. It's already approved, so you'll see full pricing and every estimate we send you in one place:
 ${input.inviteUrl}` : `Every estimate we send you is saved in your client portal:
 ${input.portalUrl}`;
@@ -186,10 +237,14 @@ ${input.portalUrl}`;
     intro,
     "",
     `${quote.title} (${quote.quote_number})`,
-    ...totalLines(quote),
+    ...totalsList,
+    ...options.length ? ["", `${optionsTitle}:`, ...options.map((o) => `- ${o}`)] : [],
     validity,
     "",
-    `View your estimate: ${input.viewUrl}`,
+    `${viewLabel}: ${input.viewUrl}`,
+    "",
+    "Every Trenches Group client gets:",
+    ...CLIENT_BENEFITS.map((b) => `- ${b.title}: ${b.body}`),
     "",
     portalText,
     "",
@@ -198,7 +253,7 @@ ${input.portalUrl}`;
     "Connor McKendry",
     "Trenches Group"
   ].filter((line, i, all) => line !== "" || all[i - 1] !== "").join("\n");
-  const totalsHtml = totalLines(quote).map((line) => {
+  const totalsHtml = totalsList.map((line) => {
     const [label, value] = line.split(": ");
     return `<tr><td style="padding:4px 0;color:#6D7782;font-size:14px">${esc(label)}</td><td style="padding:4px 0;text-align:right;font-size:18px;font-weight:700;color:#1B1F23">${esc(value)}</td></tr>`;
   }).join("");
@@ -219,9 +274,14 @@ ${input.portalUrl}`;
     <div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6D7782">Estimate ${esc(quote.quote_number)}</div>
     <div style="font-size:18px;font-weight:700;margin:4px 0 12px">${esc(quote.title)}</div>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${totalsHtml}</table>
+    ${options.length ? `<div style="margin-top:12px;padding-top:10px;border-top:1px solid #E3E6E9"><div style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6D7782;margin-bottom:4px">${esc(optionsTitle)}</div>${options.map((o) => `<div style="font-size:14px;line-height:1.6;color:#3d444b">${esc(o)}</div>`).join("")}</div>` : ""}
     ${validity ? `<div style="font-size:12px;color:#6D7782;margin-top:8px">${esc(validity)}</div>` : ""}
   </div>
-  <div style="text-align:center;margin:28px 0 4px">${button(input.viewUrl, "View your estimate", "#C65C2E")}</div>
+  <div style="text-align:center;margin:28px 0 4px">${button(input.viewUrl, viewLabel, "#C65C2E")}</div>
+  <div style="margin-top:28px">
+    <div style="font-weight:700;font-size:15px;color:#1B1F23;margin-bottom:10px">Every Trenches Group client gets</div>
+    ${CLIENT_BENEFITS.map((b) => `<div style="padding:10px 0 10px 14px;border-left:3px solid #C65C2E;margin-bottom:8px"><div style="font-weight:700;font-size:14px;color:#1B1F23">${esc(b.title)}</div><div style="font-size:14px;line-height:1.55;color:#3d444b">${esc(b.body)}</div></div>`).join("")}
+  </div>
   ${portalHtml}
   <p style="margin:28px 0 0;font-size:14px;line-height:1.6;color:#3d444b">Questions? Just reply to this email.</p>
   <p style="margin:14px 0 28px;font-size:14px;line-height:1.5">Connor McKendry<br><span style="color:#6D7782">Trenches Group</span></p>
@@ -237,6 +297,61 @@ async function sendQuote(env, id, body, actor) {
   const quote = await requireQuote(env.DB, id);
   if (quote.status === "VOID") throw new HttpError(409, "QUOTE_VOID", "This quote was voided and cannot be sent.");
   const lineItems = JSON.parse(quote.line_items_json);
+  return sendQuoteRow(env, id, quote, lineItems, body, actor);
+}
+__name(sendQuote, "sendQuote");
+async function previewQuote(env, body) {
+  const input = parseQuoteInput(body);
+  const email = (text(body.email, "Email", 320) ?? "").toLowerCase();
+  const recipientName = text(body.name, "Recipient name", 180);
+  const t = totals(input.lineItems);
+  const quote = {
+    id: "preview",
+    quote_number: text(body.quoteNumber, "Quote number", 20) || "Q-PREVIEW",
+    lead_id: null,
+    business_name: input.businessName,
+    contact_name: input.contactName,
+    title: input.title,
+    message: input.message,
+    terms: input.terms,
+    line_items_json: JSON.stringify(input.lineItems),
+    one_time_cents: t.oneTime,
+    monthly_cents: t.monthly,
+    valid_until: input.validUntil
+  };
+  const member = email ? await env.DB.prepare(`SELECT id FROM members WHERE lower(email)=?`).bind(email).first() : null;
+  const site = siteBase(env);
+  const message = buildQuoteEmail(quote, {
+    recipientName,
+    viewUrl: `${site}/estimate/?t=preview`,
+    pixelUrl: "",
+    inviteUrl: member ? null : `${site}/portal/?invite=preview`,
+    portalUrl: `${site}/portal/`
+  });
+  return {
+    subject: message.subject,
+    html: message.html,
+    text: message.text,
+    includesPortalInvite: !member,
+    estimate: {
+      number: quote.quote_number,
+      title: input.title,
+      businessName: input.businessName,
+      contactName: recipientName || input.contactName,
+      message: input.message,
+      terms: input.terms,
+      lineItems: input.lineItems,
+      oneTimeCents: t.oneTime,
+      monthlyCents: t.monthly,
+      validUntil: input.validUntil,
+      status: "SENT",
+      sentAt: (/* @__PURE__ */ new Date()).toISOString()
+    },
+    account: { exists: !!member, loggedIn: false, email }
+  };
+}
+__name(previewQuote, "previewQuote");
+async function sendQuoteRow(env, id, quote, lineItems, body, actor) {
   if (!lineItems.length) throw new HttpError(409, "QUOTE_EMPTY", "Add at least one line item before sending.");
   const email = (text(body.email, "Email", 320, true) ?? "").toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new HttpError(400, "INVALID_EMAIL", "Enter a valid email address.");
@@ -269,7 +384,7 @@ async function sendQuote(env, id, body, actor) {
   if (quote.lead_id) await recordEvent(env.DB, { eventId: newId("evt"), leadId: quote.lead_id, eventType: "QUOTE_SENT", eventData: { quoteId: id, quoteNumber: quote.quote_number, email, includedInvite: Boolean(inviteUrl) }, source: "QUOTES", actor });
   return { sent: true, email, viewUrl, includedInvite: Boolean(inviteUrl), quote: await requireQuote(env.DB, id) };
 }
-__name(sendQuote, "sendQuote");
+__name(sendQuoteRow, "sendQuoteRow");
 async function sendFirstViewAlerts(env) {
   const due = await env.DB.prepare(`
     SELECT q.id, q.quote_number, q.title, q.business_name, q.first_viewed_at,

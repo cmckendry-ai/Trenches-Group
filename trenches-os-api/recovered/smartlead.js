@@ -101,7 +101,7 @@ ${postalAddress.trim()}` : "";
       webhook_url: `${env.PUBLIC_BASE_URL}/integrations/smartlead/webhook/${secret}`,
       email_campaign_id: campaignId,
       association_type: 3,
-      event_type_map: { EMAIL_REPLIED: true, EMAIL_BOUNCED: true, EMAIL_UNSUBSCRIBED: true }
+      event_type_map: { EMAIL_SENT: true, EMAIL_OPENED: true, EMAIL_CLICKED: true, EMAIL_REPLIED: true, EMAIL_BOUNCED: true, EMAIL_UNSUBSCRIBED: true }
     })
   });
   await setFlag(env.DB, flagKey, String(campaignId));

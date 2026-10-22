@@ -1,5 +1,11 @@
 # Trenches Group monorepo
 
+> **2026-10-22:** the code that deploys lives in `cmckendry-ai/trenches-hq`.
+> This repo keeps the operating reviews (`docs/`), the Ops Desk page
+> (`ops-dashboard/`), the business partner routine (`business-partner/`) and
+> patches prepared for trenches-hq (`patches/`). The worker bundles here are
+> recovered copies for reading. Do not deploy from here.
+
 Everything Trenches Group owns and operates, in one place. Start with
 `CLAUDE.md`, then `docs/SYSTEM-MAP.md`, then the newest file in `docs/reviews/`.
 

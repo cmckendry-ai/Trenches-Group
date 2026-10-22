@@ -3,6 +3,33 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-22
+
+- Found: the code that deploys lives in `cmckendry-ai/trenches-hq` (created
+  2026-10-10, TypeScript source, agents, skills, client logs). This repo had
+  not been pushed since 2026-10-09. See `docs/DECISIONS.md` 2026-10-22.
+- Repo: `trenches-os-api/src/index.js` and `recovered/` synced to the bundle
+  live on 2026-10-13 (6,007 lines: quote optional lines and discounts,
+  `/api/quotes/preview`, wider Smartlead event map, `autoReplyMode` removed).
+  `trenches-site/dist/index.js` synced to the 2026-10-21 bundle (23,793
+  lines: /hq Command Center, portal overhaul, analytics, renewals).
+- Repo: `wrangler.jsonc` placeholders filled from trenches-hq (queue
+  `trenches-events`, workflow `trenches-lead-lifecycle`, cron `*/2 * * * *`).
+  Deploy workflow retired to manual-only with a typed confirmation.
+- Repo: added `ops-dashboard/` (Ops Desk page and today's snapshot),
+  `business-partner/ROUTINE-PROMPT.md`, `patches/trenches-hq/` (orchestrator
+  runner guard, scorer fix, GitHub Actions prospector runner; typecheck and
+  preflight pass), `docs/reviews/2026-10-22-operating-review.md`.
+- claude.ai: published the Ops Desk
+  (https://claude.ai/artifact/XRmBDFou4sMNkTzBpWtWRy) and created the daily
+  scheduled task "Trenches Business Partner" (06:36 CT,
+  `trig_01N6MkUMur9PQuEBxHS2G3o7`), bound to session
+  `session_019R634mVtEgZAVNXziMTcSb` because fresh-session tasks cannot be
+  given connectors from this API.
+- Prod: no changes. No flags moved. Nothing deployed.
+- Still broken: runner offline since 2026-10-03, 20 READY campaigns unclaimed,
+  outreach off since 2026-09-13, 3 quotes unviewed, scorer bug, see the review.
+
 ## 2026-10-01 (later still)
 
 - Repo: `trenches-os-api/wrangler.jsonc` now declares the `EMAIL` send_email

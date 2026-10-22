@@ -30,14 +30,13 @@ function classifyEmailInbound(body) {
 }
 __name(classifyEmailInbound, "classifyEmailInbound");
 async function settings(db) {
-  const rows = await db.prepare(`SELECT key,value FROM system_flags WHERE key IN ('OUTREACH_AUTONOMOUS_ORCHESTRATOR_ENABLED','OUTREACH_EMAIL_TEST_MODE','OUTREACH_EMAIL_LIVE_MODE','OUTREACH_EMAIL_AUTO_REPLY_MODE','OUTREACH_DAILY_EMAIL_CAP','OUTREACH_FROM_NAME','OUTREACH_BUSINESS_POSTAL_ADDRESS','OUTREACH_WEBSITE_ENABLED','OUTREACH_CONCIERGE_ENABLED')`).all();
+  const rows = await db.prepare(`SELECT key,value FROM system_flags WHERE key IN ('OUTREACH_AUTONOMOUS_ORCHESTRATOR_ENABLED','OUTREACH_EMAIL_TEST_MODE','OUTREACH_EMAIL_LIVE_MODE','OUTREACH_DAILY_EMAIL_CAP','OUTREACH_FROM_NAME','OUTREACH_BUSINESS_POSTAL_ADDRESS','OUTREACH_WEBSITE_ENABLED','OUTREACH_CONCIERGE_ENABLED')`).all();
   const map = new Map(rows.results.map((r) => [r.key, r.value]));
   const capRaw = Number(map.get("OUTREACH_DAILY_EMAIL_CAP") || 10);
   return {
     orchestratorEnabled: map.get("OUTREACH_AUTONOMOUS_ORCHESTRATOR_ENABLED") === "true",
     emailTestMode: map.get("OUTREACH_EMAIL_TEST_MODE") !== "false",
     emailLiveMode: map.get("OUTREACH_EMAIL_LIVE_MODE") === "true",
-    autoReplyMode: map.get("OUTREACH_EMAIL_AUTO_REPLY_MODE") || "DRAFT_ONLY",
     dailyCap: Number.isFinite(capRaw) ? Math.max(1, Math.min(100, Math.floor(capRaw))) : 10,
     fromName: map.get("OUTREACH_FROM_NAME") || "Connor | Trenches Group",
     postalAddress: map.get("OUTREACH_BUSINESS_POSTAL_ADDRESS") || "",
@@ -63,11 +62,6 @@ async function updateEmailSettings(db, input, actor) {
       if (!s.postalAddress.trim()) throw new HttpError(409, "POSTAL_ADDRESS_REQUIRED", "Set the business postal address before enabling live email.");
     }
     updates.push(["OUTREACH_EMAIL_LIVE_MODE", String(input.liveMode)]);
-  }
-  if (typeof input.autoReplyMode === "string") {
-    const mode = input.autoReplyMode.toUpperCase();
-    if (!["DRAFT_ONLY", "AUTO"].includes(mode)) throw new HttpError(400, "INVALID_REPLY_MODE", "Email auto reply mode must be DRAFT_ONLY or AUTO.");
-    updates.push(["OUTREACH_EMAIL_AUTO_REPLY_MODE", mode]);
   }
   if (typeof input.websiteEnabled === "boolean") updates.push(["OUTREACH_WEBSITE_ENABLED", String(input.websiteEnabled)]);
   if (typeof input.conciergeEnabled === "boolean") updates.push(["OUTREACH_CONCIERGE_ENABLED", String(input.conciergeEnabled)]);

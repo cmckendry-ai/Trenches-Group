@@ -315,6 +315,7 @@ async function handleRequest(request, env) {
   }
   if (request.method === "GET" && path === "/api/quotes/mailbox") return json(await mailboxStatus(env));
   if (request.method === "POST" && path === "/api/quotes/mailbox/connect") return json(await startGmailConnect(env));
+  if (request.method === "POST" && path === "/api/quotes/preview") return json(await previewQuote(env, await readJsonObject(request)));
   if (path === "/api/quotes") {
     if (request.method === "GET") return json({ quotes: await listQuotes(env.DB, url.searchParams.get("leadId")) });
     if (request.method === "POST") return json({ quote: await createQuote(env.DB, await readJsonObject(request), actor) }, 201);
@@ -375,7 +376,6 @@ async function handleRequest(request, env) {
       dailyCap: typeof body.dailyCap === "number" ? body.dailyCap : void 0,
       orchestratorEnabled: typeof body.orchestratorEnabled === "boolean" ? body.orchestratorEnabled : void 0,
       liveMode: typeof body.liveMode === "boolean" ? body.liveMode : void 0,
-      autoReplyMode: typeof body.autoReplyMode === "string" ? body.autoReplyMode : void 0,
       websiteEnabled: typeof body.websiteEnabled === "boolean" ? body.websiteEnabled : void 0,
       conciergeEnabled: typeof body.conciergeEnabled === "boolean" ? body.conciergeEnabled : void 0,
       smartleadMailbox: typeof body.smartleadMailbox === "string" ? body.smartleadMailbox : void 0

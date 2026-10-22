@@ -3,6 +3,32 @@
 As found on 2026-10-01. Every fact below comes from the live Cloudflare account,
 the D1 database, or the deployed worker bundles, not from chat memory.
 
+## 0. Corrections as of 2026-10-22
+
+Read this before the rest. Everything below section 0 was true on 2026-10-01
+and is kept for history.
+
+- The source of truth for all three workers is `cmckendry-ai/trenches-hq`
+  (`apps/trenches-os`, `apps/trenches-site`, `apps/chatbot-widget`). Its
+  `CLAUDE.md` has the agent roster, skills, house rules and client roster.
+  The bundles in this repo are recovered copies for reading.
+- Cron is `*/2 * * * *`. Queue `trenches-events` (DLQ `trenches-events-dlq`).
+  Workflow `trenches-lead-lifecycle`. From `trenches-hq/apps/trenches-os/wrangler.jsonc`.
+- trenches-site now serves the Command Center at trenchesgroup.com/hq
+  (`hq_clients`, `hq_jobs`, `hq_notes`, `hq_settings`, change log, analytics,
+  renewals, Drive uploads) and a site-edit runner on GitHub Actions.
+- Runner `connor-windows-runner-01` last heartbeat 2026-10-03 10:25 UTC. No
+  runner has been online since. 20 campaigns created 2026-10-13 sit READY.
+- Scheduled tasks on claude.ai (not in any repo until today): Trenches Monday
+  Brief, Trenches HQ Weekly Insights, Vivid Outreach Reply Check, Vivid
+  Marketplace Monitor, Trenches weekly books refresh, Trenches Business
+  Partner (new). Prompts for the new one: `business-partner/ROUTINE-PROMPT.md`.
+- Ops Desk: https://claude.ai/artifact/XRmBDFou4sMNkTzBpWtWRy. Source in
+  `ops-dashboard/`. Refreshed by the business partner routine.
+- Vivid outreach runs in Smartlead (campaigns 3931924 and 4030240, about
+  1,000 leads) with a reply watcher every two hours. Trenches has a warmed
+  Smartlead sender that has never been used.
+
 ## 1. What exists
 
 | Component | Where | State on 2026-10-01 |

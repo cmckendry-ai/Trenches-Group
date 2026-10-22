@@ -1,7 +1,14 @@
 # Trenches Group — working rules for Claude sessions
 
-Read `docs/SYSTEM-MAP.md` first. It is the only durable description of what is
-deployed. Then read the newest file in `docs/reviews/`.
+Read `docs/SYSTEM-MAP.md` first (section 0 has the 2026-10-22 corrections).
+Then read the newest file in `docs/reviews/`.
+
+Since 2026-10-22: code changes for the workers go to `cmckendry-ai/trenches-hq`
+(TypeScript source, `/deploy` skill, agents). This repo holds docs, the Ops
+Desk (`ops-dashboard/`), the business partner routine prompt
+(`business-partner/`) and patch sets for trenches-hq (`patches/`). Do not
+deploy from this repo. The bundle-sync rules below still apply when a session
+touches `trenches-os-api/src/index.js`, so the reading copy stays equal to prod.
 
 ## Layout
 

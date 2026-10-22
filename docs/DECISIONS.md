@@ -3,6 +3,30 @@
 Dated. One entry per decision that a future session should not re-litigate.
 Format: date, decision, reason, what would change it.
 
+## 2026-10-22 trenches-hq is the code repo; this repo keeps docs, the dashboard and patches (recommended, awaiting Connor)
+
+Decision (recommended by the 2026-10-22 review, not yet confirmed): the
+TypeScript source in `cmckendry-ai/trenches-hq/apps/*` is the only thing that
+deploys. `Trenches-Group` stops syncing bundles after this session and keeps
+`docs/`, `ops-dashboard/`, `business-partner/` and `patches/`. Code changes for
+the workers are written against trenches-hq.
+Reason: trenches-hq has the source, the agents, the skills, the client logs,
+the site-edit runner with deploy secrets, and every session since 2026-10-10.
+Two repos claiming to be the source of truth means every fix lands twice or
+not at all. The 2026-10-01 "monorepo" decision below was made before
+trenches-hq existed.
+Would change it: Connor says otherwise.
+
+## 2026-10-22 The business partner runs daily and never contacts a prospect
+
+Decision: a scheduled task runs every morning, queries state, pushes
+prospecting as far as drafts and lead files, refreshes the Ops Desk, and emails
+Connor. It never emails a prospect, never touches Smartlead, and writes to D1
+only the orchestrator flag and an audit event.
+Reason: campaigns stop because nobody watches the joints. The partner watches
+them. Sends stay human because house rule 4 and 10 in trenches-hq say so.
+Would change it: Connor's explicit say-so for a specific channel, recorded here.
+
 ## 2026-10-01 Monorepo for everything Trenches operates
 
 Decision: one repo (`cmckendry-ai/Trenches-Group`) holds the API, the site, the
@@ -48,6 +72,10 @@ Would change it: nothing.
 
 ## Open (need Connor)
 
+- Confirm trenches-hq as the only code repo (2026-10-22).
+- Runner: office PC, or the GitHub Actions workflow in `patches/trenches-hq/`.
+- May the partner clean up orphaned pipeline rows (sequences, candidates,
+  failed campaigns, test drafts).
 - Gmail or Smartlead for outreach.
 - Windows runner permanent or a bridge to an API-key runner.
 - Concierge offering real or experiment.

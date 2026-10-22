@@ -1,8 +1,8 @@
-# Deploy trenches-os-api from main. This is the only sanctioned way to deploy.
-# Runs on every push to main that touches trenches-os-api/, and by hand.
-# It refuses to deploy while wrangler.jsonc still has TODO-confirm placeholders
-# or lacks the EMAIL send_email binding or a cron trigger, because a deploy
-# with a wrong or missing binding detaches it from the live worker.
+# RETIRED 2026-10-22. trenches-os-api deploys from cmckendry-ai/trenches-hq
+# (apps/trenches-os, TypeScript source) with /deploy trenches-os. The bundle in
+# this repo is a recovered copy kept for reading, and deploying it would roll
+# production back. This workflow is manual-only and refuses unless you type
+# the confirmation input. See docs/DECISIONS.md, 2026-10-22.
 #
 # Repo secrets required (Settings > Secrets and variables > Actions):
 #   CLOUDFLARE_API_TOKEN   Workers Scripts:Edit, D1:Edit, Queues:Edit,
@@ -10,12 +10,11 @@
 #   CLOUDFLARE_ACCOUNT_ID
 name: deploy trenches-os-api
 on:
-  push:
-    branches: [main]
-    paths:
-      - "trenches-os-api/**"
-      - ".github/workflows/deploy-trenches-os-api.yml"
   workflow_dispatch:
+    inputs:
+      confirm:
+        description: Type "trenches-hq is the source and I still want this" to proceed
+        required: true
 concurrency:
   group: deploy-trenches-os-api
   cancel-in-progress: false
@@ -31,6 +30,10 @@ jobs:
         with:
           node-version: 20
       - run: npm install
+      - name: Refuse unless explicitly confirmed
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "trenches-hq is the source and I still want this" ]; then
+            echo "::error::This repo no longer deploys trenches-os-api. Use /deploy trenches-os in cmckendry-ai/trenches-hq."; exit 1; fi
       - name: Refuse to deploy an unfinished config
         run: |
           fail=0
