@@ -22,7 +22,8 @@ and is kept for history.
 - Scheduled tasks on claude.ai (not in any repo until today): Trenches Monday
   Brief, Trenches HQ Weekly Insights, Vivid Outreach Reply Check, Vivid
   Marketplace Monitor, Trenches weekly books refresh, Trenches Business
-  Partner (new). Prompts for the new one: `business-partner/ROUTINE-PROMPT.md`.
+  Partner (daily, new), Trenches Self Evaluation (weekly, new). Prompts:
+  `business-partner/ROUTINE-PROMPT.md` and `business-partner/SELF-EVALUATION-PROMPT.md`.
 - Ops Desk: https://claude.ai/artifact/XRmBDFou4sMNkTzBpWtWRy. Source in
   `ops-dashboard/`. Refreshed by the business partner routine.
 - Vivid outreach runs in Smartlead (campaigns 3931924 and 4030240, about

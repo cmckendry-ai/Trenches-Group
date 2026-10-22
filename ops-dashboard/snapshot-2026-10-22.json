@@ -157,6 +157,16 @@
       "note": "Created 2026-10-22, bound to session session_019R634mVtEgZAVNXziMTcSb so it has Gmail, D1, Drive and Hyperagent."
     },
     {
+      "name": "Trenches Self Evaluation",
+      "kind": "Claude scheduled task, Sunday 6:36 PM CT",
+      "owns": "Weekly review of repos, production, every routine run and every session; writes docs/reviews/<date>-weekly.md and grades the partner",
+      "status": "info",
+      "statusLabel": "first run Oct 25",
+      "lastRunAt": null,
+      "next": "Oct 25 18:36 CT",
+      "note": "Created 2026-10-22. Prompt in business-partner/SELF-EVALUATION-PROMPT.md."
+    },
+    {
       "name": "Trenches Monday Brief",
       "kind": "Claude scheduled task, Mon 7:00 CT",
       "owns": "Weekly client-by-client brief by email",
@@ -466,6 +476,10 @@
     {
       "at": "2026-10-22T01:00:00Z",
       "text": "Read all 45 Claude sessions back to Aug 30 and the Oct 19 runs of the Marketplace Monitor and Books refresh. Both routines stop on purpose and say why."
+    },
+    {
+      "at": "2026-10-22T01:40:00Z",
+      "text": "Created the weekly Trenches Self Evaluation task (Sunday 6:36 PM CT). Recorded the Smartlead decision. Added a GitHub Actions deploy workflow to trenches-hq."
     }
   ],
   "sources": [
