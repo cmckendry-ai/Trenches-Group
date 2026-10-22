@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T02:30:00Z",
+  "generatedAt": "2026-10-22T02:45:00Z",
   "source": "Updated by the 2026-10-22 review session after the fixes landed. The business partner routine refreshes this every morning at 6:36 Central.",
   "summary": [
     {
@@ -28,8 +28,8 @@
     },
     {
       "label": "Qualified, callable",
-      "value": "19",
-      "detail": "All have a phone. None has a verified email.",
+      "value": "22",
+      "detail": "All have a phone. Plus 86 review leads with a verified gap and a phone.",
       "tone": "warn"
     },
     {
@@ -85,8 +85,8 @@
       "owner": "Connor",
       "business": "Trenches Group",
       "title": "Review queue is a research problem, not a scoring problem",
-      "why": "Requalification of 347 leads is running through the real workflow (25 every 2 minutes). The scorer fix lands (40 gap points), but validation keeps most leads in HUMAN_REVIEW: research confidence under 0.70, no listing evidence, or contradictory website research. Those need re-enrichment, which needs a runner.",
-      "action": "Start the runner (TRENCHES_RUNNER_KEY, then the Prospector runner workflow). Then the partner will hand you the review queue sorted by score so you clear the top 20 by hand while the rest get re-researched."
+      "why": "Requalification finished: 347 leads re-scored through the real workflow. 0 qualified, 5 disqualified (modern site), 342 back to review. The gap points land, but a 65 needs rating, reviews, a verified mobile or an email on record, and validation holds 236 for confidence, contradictions or missing listing evidence. Only re-enrichment supplies those.",
+      "action": "Start the runner (TRENCHES_RUNNER_KEY, then the Prospector runner workflow) so re-enrichment runs. Meanwhile the 86 priority-C leads with a verified gap and a phone are the call list; the morning brief carries the top 20."
     },
     {
       "severity": "warning",
@@ -488,6 +488,10 @@
     {
       "at": "2026-10-22T02:30:00Z",
       "text": "Queued 347 HUMAN_REVIEW leads for requalification through deferred_events. Retired the desktop deploy path in trenches-hq (branch claude/retire-desktop-deploy)."
+    },
+    {
+      "at": "2026-10-22T02:45:00Z",
+      "text": "Requalification done: 347 scored, 0 newly qualified, 5 disqualified, 342 back to review with fresh reasons. Deployed trenches-os-api again (02:23 UTC, includes PR 17)."
     }
   ],
   "sources": [

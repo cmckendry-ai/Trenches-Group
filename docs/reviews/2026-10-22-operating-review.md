@@ -239,3 +239,39 @@ closed, the scorer counts website status. What is still not true: no runner is
 online (add `TRENCHES_RUNNER_KEY` and run the "Prospector runner" workflow
 once), no Smartlead campaign exists for Trenches, the 361 leads have not been
 requalified, and the orphan cleanup is half done.
+
+## 12. Requalification of the review queue, 2026-10-22 02:00 to 02:40 UTC
+
+[Certain] Method: 347 `deferred_events` rows with the same
+`PROSPECT_RESEARCH_RECEIVED` event the `/api/leads/requalify` endpoint emits,
+replayed by the cron 25 per tick into `LeadLifecycleWorkflow`. 14 of the 361
+HUMAN_REVIEW leads have no `lead_research` row and were not eligible (the
+endpoint skips them too). All 347 were scored.
+
+| Outcome | Leads |
+|---|---|
+| HUMAN_REVIEW, research confidence under 0.70 | 123 |
+| HUMAN_REVIEW, contradictory website research | 75 |
+| HUMAN_REVIEW, gap verified, score 50 to 60 (priority C) | 86 |
+| HUMAN_REVIEW, no listing evidence or no verified contact | 31 |
+| HUMAN_REVIEW, gap could not be verified | 7 |
+| DISQUALIFIED, average or modern website found | 5 |
+| QUALIFIED by this run | 0 |
+
+Lead states after: 348 HUMAN_REVIEW (from 361), 357 DISQUALIFIED (from 347),
+22 QUALIFIED (from 19). The three new QUALIFIED leads and five of the ten new
+DISQUALIFIED came from a desktop session at 00:09 UTC, right after the PR #14
+deploy, not from this run.
+
+[Certain] Reading: the scorer fix works (every no-website lead now carries 40
+gap points) and it does not empty the queue. A score of 65 needs reputation,
+economics or contactability points on top of the gap, and these leads have no
+rating, review count, verified mobile or email on record. Validation holds
+another 236 for research confidence, contradictions or missing listing
+evidence, and validation outranks the score. The 2026-10-01 estimate of 100
+to 150 qualifying was [Guessing] and wrong.
+
+What clears the queue: re-enrichment, which writes exactly the fields the
+score and validation are missing. That is the runner (`TRENCHES_RUNNER_KEY`,
+then the Prospector runner workflow). Until then the 86 priority-C leads with
+a verified gap and a phone number are the best manual call list.

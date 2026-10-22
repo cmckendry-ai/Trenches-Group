@@ -18,7 +18,8 @@ the repo. Write it at the end of every session.
   25 per cron tick. 14 have no research row and were not eligible. Early
   readout: gap points now land, but validation (confidence under 0.70,
   missing listing evidence, contradictions) keeps most in review; a few
-  DISQUALIFIED (modern site found). Final tally in the review, section 12.
+  DISQUALIFIED (modern site found). Final: 347 scored, 342 back to review
+  with refreshed reasons, 5 DISQUALIFIED, 0 QUALIFIED. Review, section 12.
 - trenches-hq main also took PR #17 (log and count failed prospector jobs),
   not yet deployed.
 
