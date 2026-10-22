@@ -143,6 +143,14 @@
       "title": "Eight older Claude sessions are parked waiting on a one-line answer from you",
       "why": "From the full session list (45 sessions back to Aug 30): Fenlo site polish (two unsourced stats; PRs 11 and 12 unmerged), Benson Q-1003 send decision, trenches-site dashboard settings for the Startup package session, the Laptop access runner question, Claude session review step 3 or 4, Benson social media package source, Command Center resurrection (Zapmail nameservers), customer portal build spec.",
       "action": "Answer or archive them. Each one that stays open is a decision the partner cannot make for you."
+    },
+    {
+      "action": "Merge PR #12, then tell the Fenlo site session to deploy PR #19. Tap the phone number and a Request a site assessment button once on fenloservices.com, then have the session star click_to_call and click_to_email under Admin, Data display, Events (can take a few hours to appear).",
+      "business": "Fenlo Property Services",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "Fenlo lead tracking is built but not live, so the portal Leads number stays at 0",
+      "why": "PR #19 makes phone and email taps on fenloservices.com show up in Google Analytics as click_to_call and click_to_email. The portal only counts key events, and Google only lets you star an event after the site has sent it once."
     }
   ],
   "agents": [
