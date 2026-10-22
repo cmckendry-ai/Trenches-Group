@@ -145,14 +145,6 @@
       "action": "Answer or archive them. Each one that stays open is a decision the partner cannot make for you."
     },
     {
-      "action": "Merge PR #12, then tell the Fenlo site session to deploy PR #19. Tap the phone number and a Request a site assessment button once on fenloservices.com, then have the session star click_to_call and click_to_email under Admin, Data display, Events (can take a few hours to appear).",
-      "business": "Fenlo Property Services",
-      "owner": "Connor",
-      "severity": "warning",
-      "title": "Fenlo lead tracking is built but not live, so the portal Leads number stays at 0",
-      "why": "PR #19 makes phone and email taps on fenloservices.com show up in Google Analytics as click_to_call and click_to_email. The portal only counts key events, and Google only lets you star an event after the site has sent it once."
-    },
-    {
       "action": "Tap the phone number and a Request a site assessment button once on fenloservices.com from your phone. A few hours later, have the Fenlo site session star click_to_call and click_to_email under Admin, Data display, Events (property 555311551).",
       "business": "Fenlo Property Services",
       "owner": "Connor",
