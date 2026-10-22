@@ -3,6 +3,23 @@
 Dated. One entry per decision that a future session should not re-litigate.
 Format: date, decision, reason, what would change it.
 
+## 2026-10-22 Smartlead is the outreach channel for Trenches Group
+
+Decision (Connor, 2026-10-22): Trenches Group cold outreach goes through
+Smartlead, not Gmail. The warmed sender is connor.trenches@discovertrenchesgroup.com.
+Reason: the sender is already warmed at 50/day, the Vivid reply watcher
+proves the API works from the cloud, and Gmail would cap volume at 10/day and
+need the deleted reply stack restored.
+What it still needs before a send: a Smartlead campaign for the website
+track and its id in `system_flags` as `SMARTLEAD_WEBSITE_CAMPAIGN_ID`
+(and `SMARTLEAD_CONCIERGE_CAMPAIGN_ID` if the concierge track is ever used),
+the Smartlead API key in the Claude environment as `SMARTLEAD_API_KEY` so the
+partner can read campaign health, and Connor's explicit say-so in a session
+before `OUTREACH_AUTONOMOUS_ORCHESTRATOR_ENABLED` moves to true. Campaign
+launches stay Connor's click (house rule 4).
+Would change it: Smartlead deliverability collapses, or a second channel is
+needed after ten real conversations.
+
 ## 2026-10-22 trenches-hq is the code repo; this repo keeps docs, the dashboard and patches (recommended, awaiting Connor)
 
 Decision (recommended by the 2026-10-22 review, not yet confirmed): the
@@ -76,7 +93,6 @@ Would change it: nothing.
 - Runner: office PC, or the GitHub Actions workflow in `patches/trenches-hq/`.
 - May the partner clean up orphaned pipeline rows (sequences, candidates,
   failed campaigns, test drafts).
-- Gmail or Smartlead for outreach.
 - Windows runner permanent or a bridge to an API-key runner.
 - Concierge offering real or experiment.
 - Fenlo: client, or something else.

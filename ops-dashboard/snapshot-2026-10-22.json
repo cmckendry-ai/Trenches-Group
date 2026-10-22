@@ -49,12 +49,12 @@
       "action": "Merge trenches-hq branch claude/orchestrator-guard-scorer-fix (pushed 700acb4), add the TRENCHES_RUNNER_KEY repo secret (same value as the worker RUNNER_API_KEY), run the \"Prospector runner\" workflow once from the Actions tab, then /deploy trenches-os. Or restart runner.py on the PC today while that lands."
     },
     {
-      "severity": "critical",
+      "severity": "warning",
       "owner": "Connor",
       "business": "Trenches Group",
-      "title": "Outreach is switched off and pointed at a dead provider",
-      "why": "OUTREACH_AUTONOMOUS_ORCHESTRATOR_ENABLED has been false since 2026-09-13 (CLAUDE_SAFETY_PAUSE). 90 emails went out Aug 31 to Sep 11, zero since. The Smartlead sender connor.trenches@discovertrenchesgroup.com is warmed at 50/day and has never been used for a campaign.",
-      "action": "Reply with one sentence: 'Use Smartlead for Trenches outreach' or 'Use Gmail for Trenches outreach'. The partner will prepare the first campaign the same day. Sends still wait for your click."
+      "title": "Smartlead chosen for Trenches outreach; the campaign does not exist yet",
+      "why": "Decided 2026-10-22. The orchestrator is already wired to Smartlead but there is no campaign id in system_flags (SMARTLEAD_WEBSITE_CAMPAIGN_ID), so turning it on would enroll nobody. Qualified leads also still lack verified emails.",
+      "action": "Create the Trenches website-track campaign in Smartlead with the warmed sender, paste its id into system_flags as SMARTLEAD_WEBSITE_CAMPAIGN_ID, and add SMARTLEAD_API_KEY to the Claude environment. The partner will then hand you a lead list per day and the flag flip is one sentence from you."
     },
     {
       "severity": "critical",
@@ -420,8 +420,8 @@
         "body": "Nothing else in the pipeline matters while 20 campaigns sit unclaimed. The PC restart takes two minutes; the GitHub Actions version takes one yes and two secrets and never sleeps."
       },
       {
-        "title": "Make the Trenches outreach decision in one sentence.",
-        "body": "Smartlead already has a warmed Trenches sender and the Vivid reply watcher proves the API works. Gmail caps you at 10 a day and needs the reply code restored. Pick Smartlead unless you want to stay under the radar at low volume."
+        "title": "Build the Smartlead campaign this week.",
+        "body": "Channel is decided. One campaign, the warmed sender, the 3-step sequence Recon already wrote for property managers as the first list, the daily batch files after that. Store the campaign id as SMARTLEAD_WEBSITE_CAMPAIGN_ID."
       },
       {
         "title": "Call the three open quotes before building anything new.",
@@ -437,10 +437,9 @@
       }
     ],
     "decisions": [
-      "Smartlead or Gmail for Trenches Group outreach?",
-      "Runner on the office PC permanently, or the GitHub Actions workflow (add TRENCHES_RUNNER_KEY)?",
-      "Is trenches-hq the only code repo from now on, with Trenches-Group kept for docs and this dashboard?",
-      "Finish the orphan cleanup from a desktop session (the cloud guard blocks bulk updates)?"
+      "Has TRENCHES_RUNNER_KEY been added to trenches-hq Actions secrets?",
+      "Create the Smartlead campaign for the Trenches website track and store its id?",
+      "Finish the orphan cleanup from a desktop session?"
     ]
   },
   "actions": [

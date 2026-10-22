@@ -36,7 +36,7 @@ b. One lead batch per run. Pick the oldest READY campaign (industry, center_loca
 c. Follow-up drafts: for every quote SENT with 0 views for 5+ days, or VIEWED with no reply for 7+ days, create one Gmail draft to the quote's sent_to address, in Connor's voice, three to five sentences, no prices beyond what the quote says, subject "Re: " plus the quote title. Do not send. Name each draft in the brief.
 d. Reply triage: for every prospect or client email where the other party wrote last, draft a reply as a Gmail draft (same rules) and list it as critical in the attention list if it is older than 2 business days.
 e. Call sheet: when QUALIFIED priority A or B leads with phones exist, put the top 10 in the brief as a call sheet (name, trade, city, phone, what is wrong with their web presence, 20-second opener).
-f. If Smartlead is readable and a Vivid campaign shows no leads left or is paused, say so as a warning and point to the newest Vivid batch file.
+f. If Smartlead is readable: for Vivid, warn when a campaign is paused or out of leads and point to the newest Vivid batch file. For Trenches, check whether a campaign exists for the website track; if not, the daily brief says so and the batch file from step b is the lead list for it. Never create or start a campaign yourself.
 
 STEP 4. UPDATE THE DASHBOARD. The page is https://claude.ai/artifact/XRmBDFou4sMNkTzBpWtWRy. Use the ArtifactData tool. First get collection "snapshots" doc "latest" to read its version, then set it (pin if_version) with this shape, every field present:
 {generatedAt (ISO now), source ("Business partner routine, <date>"), summary: [6 tiles {label, value, detail, tone: crit|warn|good|""}], attention: [{severity: critical|warning|info|done, owner, business, title, why, action}], agents: [{name, kind, owns, status: ok|warning|critical|idle|info, statusLabel, lastRunAt (ISO or null), next, note}], funnels: {trenches: [{label, value (number), display}], vivid: [...]}, advice: {next: [{title, body}] (3 to 5, ranked by payoff), decisions: [strings, yes/no questions, at most 4]}, actions: [{at, text}] (what you did this run), sources: [strings]}.
@@ -47,7 +47,7 @@ STEP 5. THE BRIEF. Send one email to cmckendry.ai@gmail.com. Subject: "Trenches 
 1. Needs you today: at most 5 lines, most expensive first, each with the one action.
 2. What I did overnight: the batch file names, the drafts I left, flag changes, with links.
 3. Numbers: a tiny table, this run versus the last OPS_PARTNER_ACTION snapshot if one exists (campaigns waiting, new leads 7d, emails sent 7d, replies 7d, open quotes and their value, days since last new lead).
-4. Decisions: up to 4 yes/no questions. Include the standing ones until answered: Smartlead or Gmail for Trenches outreach; runner on the PC or in GitHub Actions; may the partner clean up orphaned pipeline rows.
+4. Decisions: up to 4 yes/no questions. Standing facts, do not re-ask: Smartlead is the Trenches outreach channel (decided 2026-10-22); the runner moves to GitHub Actions (workflow prospector-runner.yml in trenches-hq). Standing questions until answered: has TRENCHES_RUNNER_KEY been added to trenches-hq secrets; has a Smartlead campaign for the website track been created and its id stored as SMARTLEAD_WEBSITE_CAMPAIGN_ID; may the partner finish the orphan cleanup.
 5. One line: the dashboard link https://claude.ai/artifact/XRmBDFou4sMNkTzBpWtWRy.
 Never invent a number. Write "no data" where a source failed and say which source in one line at the bottom.
 
