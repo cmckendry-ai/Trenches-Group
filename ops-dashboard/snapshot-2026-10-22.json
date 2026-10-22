@@ -151,6 +151,14 @@
       "severity": "warning",
       "title": "Fenlo lead tracking is built but not live, so the portal Leads number stays at 0",
       "why": "PR #19 makes phone and email taps on fenloservices.com show up in Google Analytics as click_to_call and click_to_email. The portal only counts key events, and Google only lets you star an event after the site has sent it once."
+    },
+    {
+      "action": "Tap the phone number and a Request a site assessment button once on fenloservices.com from your phone. A few hours later, have the Fenlo site session star click_to_call and click_to_email under Admin, Data display, Events (property 555311551).",
+      "business": "Fenlo Property Services",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "Fenlo lead tracking is live; star the two events so the portal counts leads",
+      "why": "Phone and email taps on fenloservices.com now send click_to_call and click_to_email to Google Analytics (live since Oct 22). The portal Leads number only counts key events, and Google only lets you star an event after it has been seen once."
     }
   ],
   "agents": [
