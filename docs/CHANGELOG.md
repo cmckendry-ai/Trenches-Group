@@ -5,6 +5,11 @@ the repo. Write it at the end of every session.
 
 ## 2026-10-22 (deploys, continued)
 
+- Prod: `trenches-os-api` deployed again from GitHub Actions at 02:23 UTC
+  (run 39711110115, commit 251dac5, includes PR #17 failed-job logging and
+  PR #18). Workflow tagged `deploy/trenches-os/2026-10-22-0223`. Live bundle
+  (6,079 lines) synced into `trenches-os-api/src/index.js`.
+
 - Decision: GitHub Actions is the only deploy path (Connor). trenches-hq
   `/deploy` skill rewritten to dispatch the workflow; chatbot-widget added;
   `mode=full` for config changes. See DECISIONS.md.

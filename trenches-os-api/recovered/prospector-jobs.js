@@ -89,6 +89,7 @@ async function runDueProspectorJobsForOffering(db, offering) {
         offering
       }, "PROSPECTOR_ORCHESTRATOR");
     } catch (error) {
+      await recordProspectorJobFailure(db, job, offering, error);
       await db.prepare("UPDATE prospector_jobs SET updated_at = ? WHERE id = ?").bind(nowIso(), job.id).run();
       continue;
     }
@@ -99,6 +100,34 @@ async function runDueProspectorJobsForOffering(db, offering) {
   return { ran: true, created };
 }
 __name(runDueProspectorJobsForOffering, "runDueProspectorJobsForOffering");
+var PROSPECTOR_JOB_FAILED_COUNTER = "prospector_job_failed";
+async function recordProspectorJobFailure(db, job, offering, error) {
+  const message = error instanceof Error ? error.message : String(error);
+  console.error(JSON.stringify({
+    level: "error",
+    event: "PROSPECTOR_JOB_FAILED",
+    jobId: job.id,
+    offering,
+    city: job.city,
+    state: job.state,
+    category: job.category,
+    error: message,
+    timestamp: (/* @__PURE__ */ new Date()).toISOString()
+  }));
+  try {
+    await bumpCounter(db, PROSPECTOR_JOB_FAILED_COUNTER);
+  } catch (counterError) {
+    console.error(JSON.stringify({
+      level: "error",
+      event: "HEALTH_COUNTER_FAILED",
+      counter: PROSPECTOR_JOB_FAILED_COUNTER,
+      jobId: job.id,
+      error: counterError instanceof Error ? counterError.message : String(counterError),
+      timestamp: (/* @__PURE__ */ new Date()).toISOString()
+    }));
+  }
+}
+__name(recordProspectorJobFailure, "recordProspectorJobFailure");
 async function runnerSeenRecently(db) {
   const staleMinutes = await getFlagInt(db, "PROSPECTOR_RUNNER_STALE_MINUTES", 15);
   const since = new Date(Date.now() - staleMinutes * 60 * 1e3).toISOString();

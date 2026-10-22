@@ -1656,6 +1656,51 @@ function parseProspectorJobCreate(body) {
 }
 __name(parseProspectorJobCreate, "parseProspectorJobCreate");
 
+// src/leases.ts
+async function acquireLease(db, name, holder, ttlSeconds) {
+  const now = nowIso();
+  const expires = new Date(Date.now() + ttlSeconds * 1e3).toISOString();
+  const result = await db.prepare(`
+    INSERT INTO cron_leases(name, holder, expires_at, updated_at)
+    VALUES(?, ?, ?, ?)
+    ON CONFLICT(name) DO UPDATE
+      SET holder = excluded.holder,
+          expires_at = excluded.expires_at,
+          updated_at = excluded.updated_at
+    WHERE cron_leases.expires_at <= ?
+  `).bind(name, holder, expires, now, now).run();
+  return (result.meta.changes ?? 0) === 1;
+}
+__name(acquireLease, "acquireLease");
+async function releaseLease(db, name, holder) {
+  await db.prepare(
+    `UPDATE cron_leases SET expires_at = ?, updated_at = ? WHERE name = ? AND holder = ?`
+  ).bind(nowIso(), nowIso(), name, holder).run();
+}
+__name(releaseLease, "releaseLease");
+async function withLease(db, name, ttlSeconds, fn) {
+  const holder = crypto.randomUUID();
+  if (!await acquireLease(db, name, holder, ttlSeconds)) {
+    return { skipped: true, reason: `lease ${name} held by another invocation` };
+  }
+  try {
+    return await fn();
+  } finally {
+    await releaseLease(db, name, holder);
+  }
+}
+__name(withLease, "withLease");
+async function bumpCounter(db, name, by = 1) {
+  await db.prepare(`
+    INSERT INTO health_counters(name, value, last_incremented_at)
+    VALUES(?, ?, ?)
+    ON CONFLICT(name) DO UPDATE
+      SET value = health_counters.value + excluded.value,
+          last_incremented_at = excluded.last_incremented_at
+  `).bind(name, by, nowIso()).run();
+}
+__name(bumpCounter, "bumpCounter");
+
 // src/campaigns.ts
 function normalizeLocationItem(value) {
   return value.replace(/\\n/g, "\n").split(/\r?\n/).map((x) => x.trim()).filter(Boolean);
@@ -2247,6 +2292,7 @@ async function runDueProspectorJobsForOffering(db, offering) {
         offering
       }, "PROSPECTOR_ORCHESTRATOR");
     } catch (error) {
+      await recordProspectorJobFailure(db, job, offering, error);
       await db.prepare("UPDATE prospector_jobs SET updated_at = ? WHERE id = ?").bind(nowIso(), job.id).run();
       continue;
     }
@@ -2257,6 +2303,34 @@ async function runDueProspectorJobsForOffering(db, offering) {
   return { ran: true, created };
 }
 __name(runDueProspectorJobsForOffering, "runDueProspectorJobsForOffering");
+var PROSPECTOR_JOB_FAILED_COUNTER = "prospector_job_failed";
+async function recordProspectorJobFailure(db, job, offering, error) {
+  const message = error instanceof Error ? error.message : String(error);
+  console.error(JSON.stringify({
+    level: "error",
+    event: "PROSPECTOR_JOB_FAILED",
+    jobId: job.id,
+    offering,
+    city: job.city,
+    state: job.state,
+    category: job.category,
+    error: message,
+    timestamp: (/* @__PURE__ */ new Date()).toISOString()
+  }));
+  try {
+    await bumpCounter(db, PROSPECTOR_JOB_FAILED_COUNTER);
+  } catch (counterError) {
+    console.error(JSON.stringify({
+      level: "error",
+      event: "HEALTH_COUNTER_FAILED",
+      counter: PROSPECTOR_JOB_FAILED_COUNTER,
+      jobId: job.id,
+      error: counterError instanceof Error ? counterError.message : String(counterError),
+      timestamp: (/* @__PURE__ */ new Date()).toISOString()
+    }));
+  }
+}
+__name(recordProspectorJobFailure, "recordProspectorJobFailure");
 async function runnerSeenRecently(db) {
   const staleMinutes = await getFlagInt(db, "PROSPECTOR_RUNNER_STALE_MINUTES", 15);
   const since = new Date(Date.now() - staleMinutes * 60 * 1e3).toISOString();
@@ -2368,51 +2442,6 @@ async function wakeOrgoProspector(env) {
   }
 }
 __name(wakeOrgoProspector, "wakeOrgoProspector");
-
-// src/leases.ts
-async function acquireLease(db, name, holder, ttlSeconds) {
-  const now = nowIso();
-  const expires = new Date(Date.now() + ttlSeconds * 1e3).toISOString();
-  const result = await db.prepare(`
-    INSERT INTO cron_leases(name, holder, expires_at, updated_at)
-    VALUES(?, ?, ?, ?)
-    ON CONFLICT(name) DO UPDATE
-      SET holder = excluded.holder,
-          expires_at = excluded.expires_at,
-          updated_at = excluded.updated_at
-    WHERE cron_leases.expires_at <= ?
-  `).bind(name, holder, expires, now, now).run();
-  return (result.meta.changes ?? 0) === 1;
-}
-__name(acquireLease, "acquireLease");
-async function releaseLease(db, name, holder) {
-  await db.prepare(
-    `UPDATE cron_leases SET expires_at = ?, updated_at = ? WHERE name = ? AND holder = ?`
-  ).bind(nowIso(), nowIso(), name, holder).run();
-}
-__name(releaseLease, "releaseLease");
-async function withLease(db, name, ttlSeconds, fn) {
-  const holder = crypto.randomUUID();
-  if (!await acquireLease(db, name, holder, ttlSeconds)) {
-    return { skipped: true, reason: `lease ${name} held by another invocation` };
-  }
-  try {
-    return await fn();
-  } finally {
-    await releaseLease(db, name, holder);
-  }
-}
-__name(withLease, "withLease");
-async function bumpCounter(db, name, by = 1) {
-  await db.prepare(`
-    INSERT INTO health_counters(name, value, last_incremented_at)
-    VALUES(?, ?, ?)
-    ON CONFLICT(name) DO UPDATE
-      SET value = health_counters.value + excluded.value,
-          last_incremented_at = excluded.last_incremented_at
-  `).bind(name, by, nowIso()).run();
-}
-__name(bumpCounter, "bumpCounter");
 
 // src/optout.ts
 function toE164Safe(value) {
