@@ -3,6 +3,20 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-22 (deploys, continued)
+
+- Decision: GitHub Actions is the only deploy path (Connor). trenches-hq
+  `/deploy` skill rewritten to dispatch the workflow; chatbot-widget added;
+  `mode=full` for config changes. See DECISIONS.md.
+- Requalification: 347 of 361 HUMAN_REVIEW leads re-driven through
+  LeadLifecycleWorkflow via `deferred_events` (reason REQUALIFY_2026-10-22),
+  25 per cron tick. 14 have no research row and were not eligible. Early
+  readout: gap points now land, but validation (confidence under 0.70,
+  missing listing evidence, contradictions) keeps most in review; a few
+  DISQUALIFIED (modern site found). Final tally in the review, section 12.
+- trenches-hq main also took PR #17 (log and count failed prospector jobs),
+  not yet deployed.
+
 ## 2026-10-22 (deploys)
 
 - Decision: Smartlead is the Trenches outreach channel (Connor). See DECISIONS.md.

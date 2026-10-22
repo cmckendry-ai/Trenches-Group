@@ -3,6 +3,20 @@
 Dated. One entry per decision that a future session should not re-litigate.
 Format: date, decision, reason, what would change it.
 
+## 2026-10-22 Deploys run only from GitHub Actions in trenches-hq
+
+Decision (Connor, 2026-10-22): the "Deploy app" workflow in trenches-hq
+(`.github/workflows/deploy-apps.yml`) is the only way trenches-os-api,
+trenches-site and chatbot-worker reach production. The `/deploy` skill
+dispatches it. No `wrangler deploy` from a laptop, worktree or cloud session.
+Reason: on 2026-10-21/22 one session deployed trenches-os-api from a desktop
+at 00:06 UTC and another from Actions at 01:40 UTC. One path, from `main`,
+with the previous version recorded and a tag on every deploy.
+What still needs a desktop: remote D1 migrations (by hand, before the deploy),
+and `mode=full` deploys until the Cloudflare token also has Workers Routes,
+Queues and Workflows edit scopes.
+Would change it: GitHub Actions unavailable for more than a day.
+
 ## 2026-10-22 Smartlead is the outreach channel for Trenches Group
 
 Decision (Connor, 2026-10-22): Trenches Group cold outreach goes through

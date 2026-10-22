@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T01:50:00Z",
+  "generatedAt": "2026-10-22T02:30:00Z",
   "source": "Updated by the 2026-10-22 review session after the fixes landed. The business partner routine refreshes this every morning at 6:36 Central.",
   "summary": [
     {
@@ -81,12 +81,12 @@
       "action": "Block 45 minutes and call the top 10. Ask the partner for the call sheet and a 20-second opener; it is in tomorrow's brief."
     },
     {
-      "severity": "done",
+      "severity": "warning",
       "owner": "Connor",
       "business": "Trenches Group",
-      "title": "361 leads stuck in HUMAN_REVIEW because of the scorer bug",
-      "why": "Fixed and live (PR #14, deployed 00:06 UTC; redeployed with PR #15 at 01:40 UTC).",
-      "action": "Requalify the 361: POST /api/leads/requalify from the Command Center, or hand-check the first 50."
+      "title": "Review queue is a research problem, not a scoring problem",
+      "why": "Requalification of 347 leads is running through the real workflow (25 every 2 minutes). The scorer fix lands (40 gap points), but validation keeps most leads in HUMAN_REVIEW: research confidence under 0.70, no listing evidence, or contradictory website research. Those need re-enrichment, which needs a runner.",
+      "action": "Start the runner (TRENCHES_RUNNER_KEY, then the Prospector runner workflow). Then the partner will hand you the review queue sorted by score so you clear the top 20 by hand while the rest get re-researched."
     },
     {
       "severity": "warning",
@@ -484,6 +484,10 @@
     {
       "at": "2026-10-22T01:45:00Z",
       "text": "Merged PR #15 and #16 in trenches-hq. Deployed trenches-os-api (06f3b688) and trenches-site from GitHub Actions. Verified both live bundles. Synced them into Trenches-Group."
+    },
+    {
+      "at": "2026-10-22T02:30:00Z",
+      "text": "Queued 347 HUMAN_REVIEW leads for requalification through deferred_events. Retired the desktop deploy path in trenches-hq (branch claude/retire-desktop-deploy)."
     }
   ],
   "sources": [
