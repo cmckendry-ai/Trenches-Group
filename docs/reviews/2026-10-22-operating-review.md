@@ -141,3 +141,73 @@ What I would stop. [Guessing] The concierge offering (half the outreach code, ze
 - Reach `trenches-os-api` or `trenchesgroup.com` over HTTP: the cloud environment's network policy blocks both hosts, so the API's `/health` and `/api/*` were not exercised. The runner workflow runs from GitHub, which can reach them.
 - Deploy anything: no Cloudflare token here, and the deploy workflow in this repo still refuses on placeholders. The real `wrangler.jsonc` with queue `trenches-events`, workflow `trenches-lead-lifecycle` and cron `*/2 * * * *` is in `trenches-hq`; this repo's copy is now updated from it for the record.
 - Push to `trenches-hq`: not authorized in this session, so the patch set is delivered as files.
+
+## 10. Update, later on 2026-10-22: fixes landed, sessions reviewed
+
+**Fixes.** [Certain] Pushed to `cmckendry-ai/trenches-hq` on branch
+`claude/orchestrator-guard-scorer-fix` (commit `700acb4`, on top of main
+`d1441ab`). Not merged, not deployed. Checks: `npm run typecheck`, `npm test`
+(preflight) in `apps/trenches-os`, `node scripts/portal-smoke.mjs` in
+`apps/trenches-site`, all pass.
+
+| Change | File | Review item |
+|---|---|---|
+| No campaign creation when no runner heartbeat in 15 min (`NO_RUNNER_ONLINE`) | `apps/trenches-os/src/prospector-jobs.ts` | section 4, step 1 |
+| Hourly GitHub Actions prospector runner (needs `TRENCHES_RUNNER_KEY`) | `.github/workflows/prospector-runner.yml` | section 6, item 1 |
+| Demo quote page accepts only the fixed choices and escapes output | `apps/trenches-os/src/demo.ts` | 2026-10-01 item 8 |
+| `GET /demo/:slug/checkout` renders a confirm page; `POST` starts Stripe | `apps/trenches-os/src/routes.ts` | 2026-10-01 item 12 |
+| Stripe webhook signature older than 5 minutes rejected | `apps/trenches-site/src/worker.js` | 2026-10-01 item 9 (partial) |
+| `/upload` same-origin only, 15 MB, document and image types, random key prefix | `apps/trenches-site/src/worker.js` | 2026-10-01 item 7 |
+
+The scorer fix was already on main: PR #14 `fix/score-website-status`, merged
+2026-10-21 19:06 CT, gives NONE, SOCIAL_ONLY, PARKED and PLACEHOLDER 40 points
+and BROKEN 30. The copy in `patches/trenches-hq/` is superseded by that PR
+and by the branch above; it is kept for the record.
+
+Still open from 2026-10-01: webhook idempotency shared across three
+endpoints (events recorded before processing), the quote view token doubling
+as a portal invite, and the social order setup fee (the cart has since been
+rebuilt around a "Shared Setup Credit" with a floor at zero, so this one is
+[Likely] gone; confirm with a test order).
+
+**D1 cleanup.** [Certain] Done: 75 QUEUED/ENRICHING candidates whose
+campaign was already FAILED or COMPLETED set to FAILED with
+`last_error='CAMPAIGN_DEAD'`; 3 FAILED demo jobs set to CANCELLED. Blocked by
+the session permission guard (bulk updates on shared tables): cancelling 111
+ACTIVE sequences and 255 pending steps, archiving 256 FAILED campaigns,
+cancelling 7 test reply drafts, and the audit event. Run these from a desktop
+session or the Command Center:
+
+```sql
+UPDATE outreach_sequences SET status='CANCELLED', stop_reason='ORPHANED_2026-09-13', updated_at=datetime('now') WHERE status='ACTIVE';
+UPDATE outreach_sequence_steps SET status='CANCELLED', updated_at=datetime('now') WHERE status='PENDING';
+UPDATE prospecting_campaigns SET archived_at=datetime('now'), archived_by='CLEANUP_2026-10-22', updated_at=datetime('now') WHERE status='FAILED' AND archived_at IS NULL;
+UPDATE outreach_reply_drafts SET status='CANCELLED', updated_at=datetime('now') WHERE status='DRAFT' AND is_test=1;
+```
+(Check `outreach_sequence_steps` has a `status` column before running the second line; it was not inspected.)
+
+**Routines.** [Certain] The two short runs were not silent failures. The
+Marketplace Monitor's Oct 19 run ends: "Claude in Chrome isn't available to
+this scheduled task because it runs in the cloud"; the tracker sheet has
+nothing after the Sep 26 baseline. The Books refresh's Oct 19 run ends:
+"Stripe isn't authorized in this session", and it stopped before touching the
+books as its runbook requires. Both pushed a notification. Fixes are Connor's:
+turn on "Require this computer" for the Marketplace Monitor, reauthorize the
+Stripe connector and fire the Books refresh by hand.
+
+**Sessions.** [Certain] All 45 Claude Code sessions on the account from
+2026-08-30 to today were listed and their last-turn summaries read; the two
+routine runs above were read in full. Three eras: Trenches-Group cloud
+sessions (Sep 28 to Oct 9: bundle recovery, quoting, portal planning, the
+Oct 1 review), trenches-hq desktop sessions (Oct 10 onward: HQ, portal
+overhaul, Vivid lead intake, social batch, property manager outreach, Fenlo
+site, analytics, renewals), and unrelated work (safety_program OSHA platform,
+US-Dock-Door sites, personal). Eight sessions are parked on a question for
+Connor: Fenlo site polish (two unsourced stats, PRs 11 and 12 unmerged),
+Benson Q-1003 send decision, Startup package pricing (four trenches-site
+dashboard settings), Laptop access (runner), Claude session review (step 3 or
+4), Benson social package source, Command Center resurrection (Zapmail
+nameservers), customer portal build spec. None of them changes the verdict in
+section 1; two of them (Laptop access, Oct 2, and Command Center
+resurrection, Sep 28) already asked the runner and email questions this
+review asks again.

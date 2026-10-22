@@ -3,6 +3,20 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-22 (later)
+
+- trenches-hq: pushed branch `claude/orchestrator-guard-scorer-fix` (700acb4):
+  runner guard in `prospector-jobs.ts`, Actions prospector runner workflow,
+  demo quote escaping, checkout GET to POST, Stripe signature age check,
+  `/upload` limits. Not merged, not deployed. Scorer fix was already merged
+  as trenches-hq PR #14.
+- Prod D1: 75 dead-campaign candidates set FAILED, 3 FAILED demo jobs set
+  CANCELLED. Sequences, failed-campaign archive and test drafts still open
+  (permission guard); SQL in the review, section 10.
+- Dashboard snapshot updated. Review section 10 added (fixes, cleanup,
+  routine findings, full session list).
+- Flags: none moved.
+
 ## 2026-10-22
 
 - Found: the code that deploys lives in `cmckendry-ai/trenches-hq` (created

@@ -1,5 +1,7 @@
 # Patch set for trenches-hq (prepared 2026-10-22)
 
+> **Landed later the same day.** The scorer change was superseded by trenches-hq PR #14 (merged 2026-10-21 19:06 CT). The orchestrator guard, the workflow and four security fixes are on trenches-hq branch `claude/orchestrator-guard-scorer-fix` (700acb4), waiting for merge and deploy. This folder is the record of what was prepared.
+
 These changes belong in `cmckendry-ai/trenches-hq`, which is the repo that
 actually deploys `trenches-os-api`. They were written and typechecked against
 trenches-hq `main` at `a26b666` (2026-10-21) but not pushed there, because this
