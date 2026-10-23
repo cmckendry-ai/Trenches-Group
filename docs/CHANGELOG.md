@@ -3,6 +3,21 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-23 (daily partner run 2, 06:36 CT)
+
+- Brief emailed. No client or prospect replies in 7 days; the two Oct 22
+  follow-up drafts are still unsent. 12-row Murfreesboro roofing shortlist
+  saved to Drive (snippet-verified only, 1 phone). Dashboard snapshot
+  refreshed (ops-dashboard/snapshot-2026-10-23.json). No flags moved.
+- Found: the trenches-hq "Prospector runner" workflow has failed 6 times on
+  its hourly schedule since 2026-10-22 07:37 UTC because TRENCHES_RUNNER_KEY
+  is empty. PR #20 (The Door Crew proposal and demo site) merged to main
+  2026-10-22 18:44 CT by another session and is not deployed; no client
+  folder or roster entry exists for The Door Crew.
+- Lightscout 10-23 run: email backfill, 87 checked, 7 emails, 27 pending
+  upload, still no Smartlead key.
+- OPS_PARTNER_ACTION event written to D1 (first one; yesterday's was not).
+
 ## 2026-10-22 (first daily partner run, 06:36 CT)
 
 - Brief emailed. Two follow-up drafts left in Gmail (Q-1004, Q-1006 covering
