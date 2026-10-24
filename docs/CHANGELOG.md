@@ -3,6 +3,22 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-24 (daily partner run 3, 06:36 CT)
+
+- The GitHub Prospector runner is alive: TRENCHES_RUNNER_KEY was added on
+  2026-10-23 evening. Runs at 23:10 (manual), 00:44 and 05:56 UTC each used
+  the full 50-minute window; Electrical and Fencing Murfreesboro were worked
+  and at least 7 leads saved (first new leads since 2026-09-06). Logs show
+  discovery calls returning mostly duplicates (0 to 2 new names per call);
+  an exclusion list in the discovery prompt is the next fix.
+- D1 could not be read this run: the Cloudflare connector lost its
+  authorization. Snapshot numbers from D1 are carried from 2026-10-23 and
+  marked as such. Connor must reconnect the connector.
+- Brief emailed. 11-row Murfreesboro HVAC shortlist saved to Drive (not
+  deduped, 6 phones). Both Oct 22 follow-up drafts still unsent. Weekly
+  Insights ran 2026-10-23 16:05 CT. Lightscout: 1 lead, about 21 pending
+  upload, no key. No OPS_PARTNER_ACTION event written (D1 unavailable).
+
 ## 2026-10-23 (daily partner run 2, 06:36 CT)
 
 - Brief emailed. No client or prospect replies in 7 days; the two Oct 22
