@@ -3,6 +3,15 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-25 (first weekly self evaluation, 18:36 CT)
+
+- Wrote docs/reviews/2026-10-25-weekly.md: runner alive (13 green windows),
+  partner blind for two days (Cloudflare connector), one of five standing
+  asks cleared this week, fenloservices.com runs code not on main (PR #19
+  open), discovery loop wastes most of each runner window. Three changes
+  and three decisions put to Connor. Daily prompt changes proposed, not yet
+  applied.
+
 ## 2026-10-25 (daily partner run 4, 06:36 CT)
 
 - D1 unreadable for the second day (Cloudflare connector not authorized).

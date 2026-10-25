@@ -55,35 +55,31 @@
     {
       "at": "2026-10-25T11:50:00Z",
       "text": "Daily run 4: D1 unreadable for the second day. Prospector runner: 10 green windows since Oct 23, now on Smyrna campaigns; discovery tail is all duplicates. No client or prospect replies in 7 days; both Oct 22 drafts still unsent (72 h). Lightscout: 0 emails found, about 28 pending. Saved a 12-row Murfreesboro plumbing shortlist to Drive (not deduped, campaign unconfirmed). Dashboard refreshed, brief emailed. Self Evaluation fires tonight."
+    },
+    {
+      "at": "2026-10-25T23:50:00Z",
+      "text": "Weekly self evaluation: read both repos, 47 sessions, all routine runs, 22 runner runs and four days of dashboard history. Wrote docs/reviews/2026-10-25-weekly.md. Verdict: pipeline alive, partner blind two days, one of five asks cleared, Fenlo live code not on main, runner discovery loop wasteful. Dashboard refreshed, review emailed."
     }
   ],
   "advice": {
     "decisions": [
-      "Reauthorize the Cloudflare connector now?",
-      "Is SMARTLEAD_API_KEY in the Claude environment yet?",
-      "Deploy trenches-site now so The Door Crew proposal is live?",
-      "May Forge change the runner discovery prompt (exclusion list plus stop rule) and ship it through the deploy workflow?"
+      "May Forge change the runner discovery prompt and ship it through the deploy workflow?",
+      "Stop the daily cloud batch while the runner is alive and use runner logs instead?",
+      "PRs #11, #12 and #19: merge, or close and log the live Fenlo version?",
+      "Reauthorize the Cloudflare connector and add SMARTLEAD_API_KEY now?"
     ],
     "next": [
       {
-        "body": "Two days blind on the one week the pipeline came back to life. Two clicks in Settings, Connectors.",
-        "title": "Reauthorize the Cloudflare connector."
+        "body": "Five minutes. Unblocks the partner's counts, Lightscout's 28 uploads, the reply watcher's plaintext key and the Books and Insights money lines. Change 1 of 3 in the weekly review.",
+        "title": "Reauthorize the Cloudflare connector and put the Smartlead key in the environment."
       },
       {
-        "body": "72 hours in Drafts. The quotes are 12 and 13 days old with zero clicks the last time anyone could look.",
-        "title": "Send the two follow-up drafts, then call Patrick."
+        "body": "Exclusion list of known businesses per city and trade, stop after three all-duplicate calls, RUN_SUMMARY line at the end of each window. Small. Leads per window go from a handful to dozens. Change 2 of 3.",
+        "title": "Fix the runner's discovery loop (Forge)."
       },
       {
-        "body": "Lightscout has about 28 Vivid leads ready to upload and has been over its threshold four nights running.",
-        "title": "Put the rotated Smartlead key in the Claude environment as SMARTLEAD_API_KEY."
-      },
-      {
-        "body": "Every window ends in a loop of all-duplicate discovery calls. An exclusion list and a stop rule turn 50 minutes of churn into leads.",
-        "title": "Fix the runner's discovery prompt (Forge)."
-      },
-      {
-        "body": "PR #20 merged Oct 22, still dead. One deploy and one /new-client.",
-        "title": "Say \"deploy trenches-site\" and tell me who The Door Crew is."
+        "body": "No cloud batch while the runner is alive, runner logs as the fallback when D1 is down, one ask at the top, open PRs checked daily. Partner does it before Tuesday once you say go. Change 3 of 3.",
+        "title": "Rewrite the daily routine."
       }
     ]
   },
@@ -100,20 +96,20 @@
     },
     {
       "kind": "Claude scheduled task, Sunday 6:36 PM CT",
-      "lastRunAt": null,
+      "lastRunAt": "2026-10-25T23:36:35Z",
       "name": "Trenches Self Evaluation",
-      "next": "tonight Oct 25 18:36 CT",
-      "note": "First run tonight. It will have to grade this week with two days of missing D1 data; it will say so.",
+      "next": "Nov 1 18:36 CT",
+      "note": "First run. Review at docs/reviews/2026-10-25-weekly.md in Trenches-Group. Grades the partner in section 7; proposes daily prompt changes.",
       "owns": "Weekly review of repos, production, every routine run and every session; writes docs/reviews/<date>-weekly.md and grades the partner",
-      "status": "info",
-      "statusLabel": "first run Oct 25"
+      "status": "ok",
+      "statusLabel": "ran"
     },
     {
       "kind": "Claude scheduled task, 2:17 AM CT daily",
       "lastRunAt": "2026-10-25T07:17:16Z",
       "name": "Lightscout Nightly Lead Sweep",
       "next": "Oct 26 02:17 CT",
-      "note": "Oct 25 email backfill: 45 checked, 0 new emails (one dead domain and one placeholder skipped), 3 sites blocked. About 28 pending upload, no key. Ran 114 s.",
+      "note": "4 runs this week: 1 lead, 7 emails, 1 lead, 0 emails. Pending-upload count unreliable (20, 27, 21, 28). No key.",
       "owns": "Vivid B2B lead research into its own artifact database; Smartlead upload and stats when a key exists",
       "status": "warning",
       "statusLabel": "ran, no key"
@@ -133,7 +129,7 @@
       "lastRunAt": "2026-10-23T21:05:34Z",
       "name": "Trenches HQ Weekly Insights",
       "next": "Oct 30 16:00 CT",
-      "note": "Ran and emailed (week ending Oct 23). Stripe not authorized, so revenue shows no data. Its five suggestions overlap this page; it asks three yes/no questions.",
+      "note": "Ran Oct 23, no Stripe. Three questions to Connor, unanswered.",
       "owns": "Weekly insight report and suggestions",
       "status": "ok",
       "statusLabel": "ran"
@@ -143,7 +139,7 @@
       "lastRunAt": "2026-10-25T02:03:15Z",
       "name": "Vivid Outreach Reply Check",
       "next": "every 2 h",
-      "note": "Ran 02:03 UTC, 2 min. No HOT LEAD or LS-REPLY email in 7 days. Smartlead key is in the prompt. Rotate.",
+      "note": "About 56 runs this week, 2 to 3.5 min each, no alert emails. Smartlead key is in the prompt. Rotate.",
       "owns": "Emails you when a real person replies to Vivid cold email",
       "status": "ok",
       "statusLabel": "ran"
@@ -240,10 +236,10 @@
     },
     {
       "kind": "GitHub Actions workflow, hourly schedule",
-      "lastRunAt": "2026-10-25T09:50:11Z",
+      "lastRunAt": "2026-10-25T21:48:47Z",
       "name": "Prospector runner (GitHub Actions)",
       "next": "about every 5 h (GitHub delays the hourly cron)",
-      "note": "Runs 10 to 19 all succeeded, each the full 50 minutes, roughly every 5 hours. Run 16 (Oct 24 20:52 UTC) worked Tree Service Smyrna, run 19 (today 09:50 UTC) Electrical Smyrna. The tail of every log is discovery calls returning only duplicates.",
+      "note": "Runs 10 to 22 all green since Oct 23 23:10 UTC, 13 windows, about every 5 h. Every log tail is all-duplicate discovery calls.",
       "owns": "Claims READY campaigns and runs discovery, enrichment and scoring with Claude",
       "status": "ok",
       "statusLabel": "running"
@@ -317,6 +313,22 @@
       "severity": "critical",
       "title": "Second day blind: the Cloudflare connector is still not authorized",
       "why": "Every D1 query has been refused since the Oct 24 run. The runner has completed 10 windows in that time and nobody can count what it added, see whether the orchestrator is creating new campaigns, or refresh the quote numbers. Tonight's weekly self evaluation will be graded on two days of missing data."
+    },
+    {
+      "action": "Merge #19 (and #11, #12) or close them and tell the partner to log version 74724898 as the live state.",
+      "business": "Fenlo Property Services",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "fenloservices.com runs code that is not on main",
+      "why": "The Fenlo website session reports lead tracking live as Worker version 74724898, shipped by another session on Oct 22, while PR #19 with the same change is still open. Main does not describe what is live for Fenlo."
+    },
+    {
+      "action": "Answer or archive. The PR decision is also decision 3 in the weekly review.",
+      "business": "Both",
+      "owner": "Connor",
+      "severity": "info",
+      "title": "Four sessions parked on you this week, plus six older ones",
+      "why": "Customer portal GA4 session: star click_to_call and click_to_email in GA admin after tapping them on fenloservices.com. Fenlo website edits: PRs #11, #12 and #19 need merging or closing. OSHA platform research (not Trenches): pick an email provider and domain. Session review and workflow optimization: still working today, no summary. Six older sessions from the Oct 22 review had no activity this week."
     },
     {
       "action": "Shut down the office runner when convenient. Then the discovery prompt fix (below).",
@@ -531,8 +543,8 @@
       }
     ]
   },
-  "generatedAt": "2026-10-25T11:50:00Z",
-  "source": "Business partner routine, 2026-10-25 (daily run 4, 6:36 CT). D1 unavailable for the second day: Cloudflare connector needs reauthorization.",
+  "generatedAt": "2026-10-25T23:50:00Z",
+  "source": "Weekly self evaluation, 2026-10-25 18:36 CT (on top of the daily run 4 snapshot). D1 still unreadable.",
   "sources": [
     "D1: NOT READ (second day; Cloudflare connector not authorized). Figures marked \"Oct 23\" are the last real read.",
     "list_triggers",
