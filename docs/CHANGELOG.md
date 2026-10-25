@@ -3,6 +3,21 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-25 (daily partner run 4, 06:36 CT)
+
+- D1 unreadable for the second day (Cloudflare connector not authorized).
+  Snapshot D1 figures still carry the 2026-10-23 read.
+- Prospector runner: runs 10 to 19 all green, each the full 50 minutes,
+  about every 5 hours. Log tails show Tree Service Smyrna (run 16) and
+  Electrical Smyrna (run 19), campaigns that were not in the Oct 13 backlog,
+  so the orchestrator is likely creating campaigns again. Every log ends in
+  all-duplicate discovery calls; an exclusion list plus a stop rule is the
+  proposed fix (decision put to Connor).
+- Brief emailed. 12-row Murfreesboro plumbing shortlist saved to Drive (not
+  deduped, campaign unconfirmed, 4 phones). Both Oct 22 follow-up drafts
+  still unsent (72 h). Lightscout: 45 checked, 0 emails, about 28 pending,
+  no key. Self Evaluation fires tonight 18:36 CT.
+
 ## 2026-10-24 (daily partner run 3, 06:36 CT)
 
 - The GitHub Prospector runner is alive: TRENCHES_RUNNER_KEY was added on
