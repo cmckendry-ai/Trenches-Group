@@ -3,6 +3,21 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-26 (daily partner run 5, 06:36 CT)
+
+- Prospector runner out of Anthropic API credit: run 24 (06:17 UTC) logged
+  "Credit balance is too low" on every discovery call (Pest Control
+  Eagleville, camp_64a46f5a) and idled to the end of its window; the
+  workflow still reports success. The orchestrator is confirmed creating
+  new campaigns while the runner heartbeats without working.
+- D1 unreadable for the third day (Cloudflare connector). No cloud batch
+  today: no campaign can be chosen without D1 and the weekly review called
+  the batches make-work.
+- vivid-weekly-social-batch left no Gmail draft after its first unattended
+  run (Oct 25). Lightscout: Franklin, 1 lead, 0 emails, about 28 pending.
+  Both Oct 22 follow-up drafts still unsent (4 days). Brief emailed with one
+  ask at the top (credit top-up), per the weekly review.
+
 ## 2026-10-25 (first weekly self evaluation, 18:36 CT)
 
 - Wrote docs/reviews/2026-10-25-weekly.md: runner alive (13 green windows),
