@@ -3,6 +3,19 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-27 (daily partner run 6, 06:36 CT)
+
+- Runner credit restored: run 29 (10:37 UTC) saved leads again. The
+  Cloudflare connector is unauthorized account-wide (the Monday Brief
+  session reported the same on 10-26), so D1 is unread for a fourth day.
+- Skyler McLain (Overhead Door Systems, skylerm@odsinc.net) replied on
+  10-26: missed call, will find time. Reply drafted in Gmail (not sent).
+  The ODS contact is still NEEDS HUMAN INPUT in the trenches-hq roster.
+- Lightscout found 18 emails (about 46 pending upload, no key). Marketplace
+  Monitor and Books refresh stopped again on 10-26 for the same reasons as
+  10-19. vivid-weekly-social-batch still produced no draft. Both Oct 22
+  follow-up drafts still unsent (5 days). No cloud batch. Brief emailed.
+
 ## 2026-10-26 (daily partner run 5, 06:36 CT)
 
 - Prospector runner out of Anthropic API credit: run 24 (06:17 UTC) logged
