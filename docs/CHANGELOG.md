@@ -3,6 +3,21 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-28 (daily partner run 7, 06:36 CT)
+
+- trenches-hq: PR #21 (Vivid Light Show page, guestbook, deploy workflow
+  now covers vivid-lightscapes and vivid-leads-worker) merged 2026-10-27
+  21:25 CT and both Vivid Workers deployed at 02:26 UTC. PR #22 (restart
+  Trenches outreach with a 4-email sequence, hot lead alerts, EMAIL_SENT
+  webhook storage, webhook secret moved to a Cloudflare secret, runner
+  backoff and varied discovery terms, 350-minute chained prospector
+  windows) opened 02:40 UTC, mergeable, not merged. Its deploy order needs
+  Connor for the secret, merge, deploys and flags; step 3 is live sending.
+- D1 unread for the fifth day (Cloudflare connector). Runner: 24 green
+  windows, credit holding. Lightscout: 0 leads, 0 emails, 46 pending.
+  Three drafts unsent (ODS 1 day, Get Lit and Benson 6 days). No cloud
+  batch. Brief emailed.
+
 ## 2026-10-27 (daily partner run 6, 06:36 CT)
 
 - Runner credit restored: run 29 (10:37 UTC) saved leads again. The
