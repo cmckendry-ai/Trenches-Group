@@ -3,6 +3,19 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-29 (daily partner run 8, 06:36 CT)
+
+- Connor sent the ODS reply (Skyler McLain) and the Benson follow-up at
+  05:23 CT; the Get Lit follow-up draft is the only one left. PR #22 got a
+  fifth commit at 05:29 CT: the outreach sequence is now a two-step soft
+  opener (day 0 check-in, day 3 bump, no pitch), demo offer by hand after
+  an interested reply. Still unmerged; same deploy order.
+- Two new routines created through the Claude app at 05:00 CT ("Morning
+  brief" daily 08:23 CT, "Heartbeat" every 3 h) overlap the partner brief
+  and the Monday Brief; put to Connor which one to keep.
+- D1 unread for the sixth day. Runner: 28 green windows. Lightscout: 57
+  checked, 1 email, about 47 pending, no key. No cloud batch. Brief emailed.
+
 ## 2026-10-28 (daily partner run 7, 06:36 CT)
 
 - trenches-hq: PR #21 (Vivid Light Show page, guestbook, deploy workflow
