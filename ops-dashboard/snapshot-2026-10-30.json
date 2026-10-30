@@ -1,0 +1,691 @@
+{
+  "actions": [
+    {
+      "at": "2026-10-22T00:40:00Z",
+      "text": "Review session: pulled live worker bundles, diffed them against the repo, queried D1, read trenches-hq. Wrote docs/reviews/2026-10-22-operating-review.md."
+    },
+    {
+      "at": "2026-10-22T00:40:00Z",
+      "text": "Published this page and created the daily Business Partner routine (6:36 CT)."
+    },
+    {
+      "at": "2026-10-22T00:40:00Z",
+      "text": "Wrote the orchestrator guard, scorer fix and GitHub Actions runner as a patch set for trenches-hq. Nothing deployed."
+    },
+    {
+      "at": "2026-10-22T00:52:00Z",
+      "text": "Closed 75 queued candidates on dead campaigns and cancelled 3 failed demo jobs in D1. Four more cleanup updates were blocked by the permission guard."
+    },
+    {
+      "at": "2026-10-22T00:58:00Z",
+      "text": "Pushed trenches-hq branch claude/orchestrator-guard-scorer-fix (700acb4): runner guard, Actions prospector runner, upload hardening, demo quote escaping, checkout GET to POST, Stripe signature age check. Checks pass. Not deployed."
+    },
+    {
+      "at": "2026-10-22T01:00:00Z",
+      "text": "Read all 45 Claude sessions back to Aug 30 and the Oct 19 runs of the Marketplace Monitor and Books refresh. Both routines stop on purpose and say why."
+    },
+    {
+      "at": "2026-10-22T01:40:00Z",
+      "text": "Created the weekly Trenches Self Evaluation task (Sunday 6:36 PM CT). Recorded the Smartlead decision. Added a GitHub Actions deploy workflow to trenches-hq."
+    },
+    {
+      "at": "2026-10-22T01:45:00Z",
+      "text": "Merged PR #15 and #16 in trenches-hq. Deployed trenches-os-api (06f3b688) and trenches-site from GitHub Actions. Verified both live bundles. Synced them into Trenches-Group."
+    },
+    {
+      "at": "2026-10-22T02:30:00Z",
+      "text": "Queued 347 HUMAN_REVIEW leads for requalification through deferred_events. Retired the desktop deploy path in trenches-hq (branch claude/retire-desktop-deploy)."
+    },
+    {
+      "at": "2026-10-22T02:45:00Z",
+      "text": "Requalification done: 347 scored, 0 newly qualified, 5 disqualified, 342 back to review with fresh reasons. Deployed trenches-os-api again (02:23 UTC, includes PR 17)."
+    },
+    {
+      "at": "2026-10-22T11:45:00Z",
+      "text": "Daily run 1: gathered D1, routines, Hyperagent, Gmail. No client or prospect replies in 7 days. Left 2 follow-up drafts (Get Lit Q-1004, Benson Q-1005 and Q-1006). Saved a 7-row Murfreesboro tree-service shortlist to Drive (directory sites unreachable from the cloud). Did not flip PROSPECTOR_ORCHESTRATOR_ENABLED: the deployed runner guard makes that rule unnecessary. Brief emailed."
+    },
+    {
+      "at": "2026-10-23T11:55:00Z",
+      "text": "Daily run 2: gathered D1, routines, GitHub Actions, Gmail, Hyperagent. Found the Prospector runner workflow failing hourly (secret empty) and PR #20 (Door Crew) merged but not deployed. No client or prospect replies in 7 days; both Oct 22 drafts still unsent. Saved a 12-row Murfreesboro roofing shortlist to Drive (snippet-verified only). Dashboard refreshed, brief emailed."
+    },
+    {
+      "at": "2026-10-24T11:50:00Z",
+      "text": "Daily run 3: D1 unreadable (Cloudflare connector lost authorization). Read three successful Prospector runner logs: the runner is alive since Oct 23 23:10 UTC, Electrical and Fencing Murfreesboro worked, at least 7 leads saved. Weekly Insights ran Fri and emailed. No client or prospect replies in 7 days; both Oct 22 drafts still unsent. Saved an 11-row Murfreesboro HVAC shortlist to Drive (not deduped). Dashboard refreshed, brief emailed."
+    },
+    {
+      "at": "2026-10-25T11:50:00Z",
+      "text": "Daily run 4: D1 unreadable for the second day. Prospector runner: 10 green windows since Oct 23, now on Smyrna campaigns; discovery tail is all duplicates. No client or prospect replies in 7 days; both Oct 22 drafts still unsent (72 h). Lightscout: 0 emails found, about 28 pending. Saved a 12-row Murfreesboro plumbing shortlist to Drive (not deduped, campaign unconfirmed). Dashboard refreshed, brief emailed. Self Evaluation fires tonight."
+    },
+    {
+      "at": "2026-10-25T23:50:00Z",
+      "text": "Weekly self evaluation: read both repos, 47 sessions, all routine runs, 22 runner runs and four days of dashboard history. Wrote docs/reviews/2026-10-25-weekly.md. Verdict: pipeline alive, partner blind two days, one of five asks cleared, Fenlo live code not on main, runner discovery loop wasteful. Dashboard refreshed, review emailed."
+    },
+    {
+      "at": "2026-10-26T11:55:00Z",
+      "text": "Daily run 5: D1 unreadable (day 3). Found the Prospector runner out of Anthropic API credit in run 24 while GitHub shows green; the orchestrator is creating new campaigns (Pest Control Eagleville). No social draft from the first unattended vivid-weekly-social-batch run. No client or prospect replies; both Oct 22 drafts still unsent. No cloud batch (no campaign can be chosen without D1). Dashboard refreshed, brief emailed."
+    },
+    {
+      "at": "2026-10-27T11:55:00Z",
+      "text": "Daily run 6: D1 unreadable (day 4), confirmed account-wide by the Monday Brief session. Runner credit restored (run 29 saved JB Tree Service). ODS (Skyler McLain) replied Oct 26; reply drafted in Gmail. Lightscout found 18 emails, 46 pending upload. Marketplace Monitor and Books stopped again. No cloud batch. Dashboard refreshed, brief emailed."
+    },
+    {
+      "at": "2026-10-28T11:55:00Z",
+      "text": "Daily run 7: D1 unreadable (day 5). Read PR #22 (outreach restart, hot lead alerts, continuous prospector; merge-ready, needs the secret, merge, two deploys and four flags from Connor) and PR #21 (Vivid Light Show, deployed 02:26 UTC). Runner 24 green windows. Lightscout found nothing. No client mail; three drafts unsent. No cloud batch. Dashboard refreshed, brief emailed."
+    },
+    {
+      "at": "2026-10-29T11:55:00Z",
+      "text": "Daily run 8: D1 unreadable (day 6). Connor sent the ODS reply and the Benson follow-up at 05:23 CT; Get Lit draft remains. PR #22 reworked to a two-step soft opener (5 commits). Two new Claude app routines (Morning brief, Heartbeat) created today. Runner 28 green windows. Lightscout 1 email, 47 pending. No cloud batch. Dashboard refreshed, brief emailed."
+    },
+    {
+      "at": "2026-10-30T12:05:00Z",
+      "text": "Daily run 9: D1 unreadable (day 7). Runner API credit out again from 01:52 UTC (runs 40 and 41 green but every call failed). PR #22 unchanged. Lightscout 0 leads, no browser tool two nights running. Get Lit draft still unsent, no replies from ODS or Benson. No cloud batch. Dashboard refreshed, brief emailed."
+    }
+  ],
+  "advice": {
+    "decisions": [
+      "Top up the API credit now and set auto-reload?",
+      "Reauthorize the Cloudflare and Stripe connectors now?",
+      "Merge and deploy PR #22 this week, and flip outreach on with the cap of 50?",
+      "Which morning brief do you read: the Claude app one at 08:23, this one at 06:36, or the Monday Brief?"
+    ],
+    "next": [
+      {
+        "body": "The runner has been burning 50-minute windows on a dead key since 20:52 CT last night. This is the second time in four days. Auto-reload ends it.",
+        "title": "Top up the Anthropic API credit and turn on auto-reload."
+      },
+      {
+        "body": "Seven days blind. Four clicks.",
+        "title": "Reauthorize the Cloudflare connector."
+      },
+      {
+        "body": "Nothing has moved on it in 24 hours. Step 2 also takes the Door Crew proposal live.",
+        "title": "Finish PR #22: secret, merge, two deploys, four flags."
+      },
+      {
+        "body": "The draft is 8 days old. 47 Vivid leads are waiting on SMARTLEAD_API_KEY.",
+        "title": "Send the Get Lit follow-up, then put the Smartlead key in the environment."
+      },
+      {
+        "body": "Three briefs before 08:30 on Mondays is two too many.",
+        "title": "Pick one morning brief."
+      }
+    ]
+  },
+  "agents": [
+    {
+      "kind": "Claude scheduled task, daily 6:36 CT",
+      "lastRunAt": "2026-10-30T11:37:00Z",
+      "name": "Business Partner",
+      "next": "Oct 31 06:36 CT",
+      "note": "Run 9. D1 unreadable (day 7). Found the second API credit outage in the runner logs. No new client mail. No cloud batch. Brief sent, dashboard refreshed.",
+      "owns": "This page, the morning brief, prospecting push, follow-up drafts",
+      "status": "ok",
+      "statusLabel": "ran"
+    },
+    {
+      "kind": "Claude scheduled task, Sunday 6:36 PM CT",
+      "lastRunAt": "2026-10-25T23:36:35Z",
+      "name": "Trenches Self Evaluation",
+      "next": "Nov 1 18:36 CT",
+      "note": "First run. Review at docs/reviews/2026-10-25-weekly.md in Trenches-Group. Grades the partner in section 7; proposes daily prompt changes.",
+      "owns": "Weekly review of repos, production, every routine run and every session; writes docs/reviews/<date>-weekly.md and grades the partner",
+      "status": "ok",
+      "statusLabel": "ran"
+    },
+    {
+      "kind": "Hearth routine, daily 08:23 CT, created Oct 29 05:00 CT",
+      "lastRunAt": "2026-10-29T13:48:00Z",
+      "name": "Morning brief (Claude app)",
+      "next": "today 08:23 CT",
+      "note": "First run Oct 29 13:48 UTC, 3 min. Overlaps this brief and the Monday Brief.",
+      "owns": "Claude's own morning brief over mail, invites and documents",
+      "status": "info",
+      "statusLabel": "ran once"
+    },
+    {
+      "kind": "Hearth routine, every 3 h from 09:00 to 22:00 CT, created Oct 29 05:00 CT",
+      "lastRunAt": "2026-10-30T00:53:00Z",
+      "name": "Heartbeat (Claude app)",
+      "next": "today 07:53 CT",
+      "note": "Runs 5 times a day, about 30 s each. Last run 00:53 UTC Oct 30.",
+      "owns": "Check-ins over the last and next 3 hours",
+      "status": "info",
+      "statusLabel": "running"
+    },
+    {
+      "kind": "Claude scheduled task, 2:17 AM CT daily",
+      "lastRunAt": "2026-10-30T07:18:00Z",
+      "name": "Lightscout Nightly Lead Sweep",
+      "next": "Oct 31 02:17 CT",
+      "note": "Oct 30 new-leads night (Smyrna, La Vergne, portfolio and beacon categories): 0 leads, 0 emails. Second night with no browser or Maps tool; search and fetch only. Candidates failed verification. Ran 59 s. About 47 pending upload, no key.",
+      "owns": "Vivid B2B lead research into its own artifact database; Smartlead upload and stats when a key exists",
+      "status": "warning",
+      "statusLabel": "ran, 0 leads"
+    },
+    {
+      "kind": "Claude scheduled task, Mon 7:00 CT",
+      "lastRunAt": "2026-10-26T12:08:32Z",
+      "name": "Trenches Monday Brief",
+      "next": "Nov 2 07:00 CT",
+      "note": "Ran Oct 26, 40 s, emailed. Only the repo and Gmail worked: Stripe and Cloudflare D1 were not authorized in its session either. Quote totals copied from earlier briefs.",
+      "owns": "Weekly client-by-client brief by email",
+      "status": "warning",
+      "statusLabel": "ran, two sources down"
+    },
+    {
+      "kind": "Claude scheduled task, Fri 4:00 CT",
+      "lastRunAt": "2026-10-23T21:05:34Z",
+      "name": "Trenches HQ Weekly Insights",
+      "next": "Oct 30 16:00 CT",
+      "note": "Ran Oct 23, no Stripe. Three questions to Connor, unanswered.",
+      "owns": "Weekly insight report and suggestions",
+      "status": "ok",
+      "statusLabel": "ran"
+    },
+    {
+      "kind": "Claude scheduled task, every 2 h, 7 to 21 CT",
+      "lastRunAt": "2026-10-30T02:03:00Z",
+      "name": "Vivid Outreach Reply Check",
+      "next": "every 2 h",
+      "note": "Ran 02:03 UTC, 4 min. No HOT LEAD or LS-REPLY email in 7 days. Smartlead API key still in the prompt.",
+      "owns": "Emails you when a real person replies to Vivid cold email",
+      "status": "ok",
+      "statusLabel": "ran"
+    },
+    {
+      "kind": "Claude scheduled task, Mon 7:50 CT",
+      "lastRunAt": "2026-10-26T12:56:15Z",
+      "name": "Vivid Marketplace Monitor",
+      "next": "Nov 2 07:50 CT",
+      "note": "Ran Oct 26, 22 s, stopped: no Chrome in the cloud. Tracker sheet still has only the Sep 26 baseline. It said the same thing on Oct 19.",
+      "owns": "Facebook Marketplace listing stats to the tracker sheet",
+      "status": "warning",
+      "statusLabel": "stopped again"
+    },
+    {
+      "kind": "Claude scheduled task, Mon 13:00 UTC",
+      "lastRunAt": "2026-10-26T13:26:29Z",
+      "name": "Trenches weekly books refresh",
+      "next": "Nov 2 13:00 UTC",
+      "note": "Ran Oct 26, 38 s, stopped: Stripe not authorized. Also warns Drive tools cannot edit a Sheet in place, so its next real run will create a new file.",
+      "owns": "Stripe and vendor bills into the Books sheet",
+      "status": "warning",
+      "statusLabel": "stopped again"
+    },
+    {
+      "kind": "Claude scheduled task",
+      "lastRunAt": "2026-10-05T13:05:57Z",
+      "name": "Vivid Weekly Ad Copy",
+      "next": "paused Oct 11",
+      "note": "Predates the house rules.",
+      "owns": "Meta ad copy by persona",
+      "status": "idle",
+      "statusLabel": "paused"
+    },
+    {
+      "kind": "Cloudflare Worker, every 2 min",
+      "lastRunAt": null,
+      "name": "trenches-os-api cron",
+      "next": "every 2 min",
+      "note": "Not checked for a second day: D1 unreadable. The runner is talking to the API every 30 s, so the Worker is up.",
+      "owns": "Reaper, deferred replay, prospector jobs, follow-ups, outreach, demo repair, quote alerts",
+      "status": "ok",
+      "statusLabel": "up (indirect)"
+    },
+    {
+      "kind": "inside the cron, flag PROSPECTOR_ORCHESTRATOR_ENABLED=true",
+      "lastRunAt": "2026-10-13T00:00:23Z",
+      "name": "Prospector orchestrator",
+      "next": "runner claims",
+      "note": "Creating new campaigns (Pest Control Eagleville, a new Tree Service campaign camp_b29d0bae seen today). The runner is draining them again now that credit is back.",
+      "owns": "Creates campaigns from 140 city x trade jobs, 21-day cadence",
+      "status": "ok",
+      "statusLabel": "creating, runner working"
+    },
+    {
+      "kind": "Python runner on the office PC",
+      "lastRunAt": "2026-10-03T10:25:32Z",
+      "name": "connor-windows-runner-01",
+      "next": "retire",
+      "note": "Replaced by github-actions-runner-01. Can be shut down.",
+      "owns": "Discovery, enrichment, demo builds via Claude Code CLI",
+      "status": "idle",
+      "statusLabel": "offline 21 d, superseded"
+    },
+    {
+      "kind": "Orgo cloud desktop",
+      "lastRunAt": "2026-09-28T01:52:38Z",
+      "name": "orgo-trenches-runner-01",
+      "next": "retire",
+      "note": "OAuth expired, no credits.",
+      "owns": "Former runner",
+      "status": "critical",
+      "statusLabel": "dead"
+    },
+    {
+      "kind": "inside the cron, flag OUTREACH_AUTONOMOUS_ORCHESTRATOR_ENABLED=false",
+      "lastRunAt": "2026-09-11T13:00:47Z",
+      "name": "Outreach orchestrator",
+      "next": "needs your decision",
+      "note": "Last real send Sep 11.",
+      "owns": "Enrolls qualified leads into email sequences",
+      "status": "critical",
+      "statusLabel": "off since Sep 13"
+    },
+    {
+      "kind": "Cloudflare Worker, 07:15 and 15:00 UTC",
+      "lastRunAt": "2026-10-22T01:43:41Z",
+      "name": "trenches-site cron",
+      "next": "daily",
+      "note": "Still on the Oct 22 01:43 UTC deploy. main is ahead by PR #20 (Door Crew) and, once merged, PR #22 (hot lead alerts, /pricing quote alerts). The two Oct 28 deploys were the Vivid Workers, not this one.",
+      "owns": "Client analytics sync, renewal reminder drafts and sends",
+      "status": "ok",
+      "statusLabel": "behind main"
+    },
+    {
+      "kind": "GitHub Actions workflow, hourly schedule",
+      "lastRunAt": "2026-10-30T07:10:00Z",
+      "name": "Prospector runner (GitHub Actions)",
+      "next": "about every 5 h (GitHub delays the hourly cron)",
+      "note": "Runs 38 and 39 (Oct 29) ran discovery normally. Run 40 hit \"Credit balance is too low\" at 01:52 UTC Oct 30; run 41 failed every call for 50 minutes and still exited 0. Same failure as run 24 on Oct 26.",
+      "owns": "Claims READY campaigns and runs discovery, enrichment and scoring with Claude",
+      "status": "warning",
+      "statusLabel": "green, credit out"
+    },
+    {
+      "kind": "GitHub Actions in trenches-hq",
+      "lastRunAt": null,
+      "name": "Site-edit runner",
+      "next": "on demand",
+      "note": "Deploy app workflow now covers five apps (trenches-os, trenches-site, chatbot-widget, vivid-lightscapes, vivid-leads-worker). Runs 4 and 5 on Oct 28 deployed the two Vivid Workers.",
+      "owns": "Approve plan and Publish from /hq",
+      "status": "ok",
+      "statusLabel": "on demand"
+    },
+    {
+      "kind": "Hyperagent agent",
+      "lastRunAt": "2026-08-21T03:11:56Z",
+      "name": "Hyperagent Prospector",
+      "next": "on demand",
+      "note": "Last used for Murfreesboro tree services.",
+      "owns": "Lead research threads",
+      "status": "idle",
+      "statusLabel": "idle"
+    },
+    {
+      "kind": "Hyperagent agent",
+      "lastRunAt": "2026-09-03T01:22:25Z",
+      "name": "Hyperagent Site Builder",
+      "next": "on demand",
+      "note": "",
+      "owns": "Concept sites",
+      "status": "idle",
+      "statusLabel": "idle"
+    },
+    {
+      "kind": "Windows task on the office PC, every 10 min",
+      "lastRunAt": null,
+      "name": "Vivid Lead Intake",
+      "next": "every 10 min while logged in",
+      "note": "Check the 1-Quotes folder for the newest lead.",
+      "owns": "Quote folder per website lead",
+      "status": "idle",
+      "statusLabel": "unverifiable from cloud"
+    },
+    {
+      "kind": "Local scheduled task, Sundays",
+      "lastRunAt": null,
+      "name": "vivid-weekly-social-batch",
+      "next": "Nov 1",
+      "note": "Three mornings after its first unattended run, still no Gmail draft newer than Oct 22. Check the PC task.",
+      "owns": "Three social posts drafted to Gmail",
+      "status": "warning",
+      "statusLabel": "no draft seen"
+    },
+    {
+      "kind": "Smartlead",
+      "lastRunAt": null,
+      "name": "Vivid Smartlead campaigns 3931924 and 4030240",
+      "next": "",
+      "note": "Still not readable: no SMARTLEAD_API_KEY in the environment.",
+      "owns": "About 1,000 cold email leads for Vivid",
+      "status": "idle",
+      "statusLabel": "not checked"
+    }
+  ],
+  "attention": [
+    {
+      "action": "Top up the Anthropic API account (console.anthropic.com, Billing) and set auto-reload so this stops recurring. Then let Forge make the runner fail on api_error so the next outage goes red.",
+      "business": "Trenches Group",
+      "owner": "Connor",
+      "severity": "critical",
+      "title": "Runner API credit is out again (second outage in four days)",
+      "why": "Run 40 logged \"Credit balance is too low\" at 01:52 UTC Oct 30 and run 41 (07:10 to 08:00 UTC) failed every discovery call, five failures on Columbia HVAC alone. Both runs exited 0 and show green on Actions. The Oct 27 top-up lasted about 2.5 days of 50-minute windows. Nothing is being prospected until this is fixed."
+    },
+    {
+      "action": "Same order: (1) set the SMARTLEAD_WEBHOOK_SECRET Cloudflare secret, (2) merge, /deploy trenches-os, /deploy trenches-site, (3) D1 flags: cap 50, concierge off, delete the secret row, orchestrator on. Step 3 is live sending and stays yours. Reauthorize Cloudflare before step 3.",
+      "business": "Trenches Group",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "PR #22 still waiting: secret, merge, two deploys, four flags",
+      "why": "No commits since Oct 29 05:29 CT. Mergeable. Two-step soft opener, hot lead alerts, EMAIL_SENT storage, webhook secret moved out of D1, runner backoff and 350-minute windows. Not yet run against live Smartlead or on Actions."
+    },
+    {
+      "action": "Nothing. [Likely] the page is live at vividlightscapes.com/lightshow; the partner cannot open it from the cloud.",
+      "business": "Vivid Lightscapes",
+      "owner": "Connor",
+      "severity": "done",
+      "title": "Vivid Light Show page shipped and deployed through the workflow",
+      "why": "PR #21 merged Oct 27 21:25 CT: /lightshow page (88.5 FM, over 40,000 lights, directions, guestbook, donations to Monroe Carell Jr. Children's Hospital at Vanderbilt), guestbook endpoint in the leads worker, and the deploy workflow now knows vivid-lightscapes and vivid-leads-worker. Both deployed at 02:26 and 02:27 UTC (runs 4 and 5), verified by the workflow."
+    },
+    {
+      "action": "Decide which brief carries the Trenches asks. If the app brief is the one you read, the partner can move to 05:30 CT so its numbers feed it, or drop its email and only update the dashboard.",
+      "business": "Both",
+      "owner": "Connor",
+      "severity": "info",
+      "title": "Two new Claude app routines overlap the partner brief",
+      "why": "\"Morning brief\" (daily 08:23 CT) and \"Heartbeat\" (every 3 h, 09:00 to 22:00 CT) were created at 05:00 CT today through the Claude app in session_01DFNLARnAgQQVhyYCRtxyEe. They read mail, invites and documents. The partner brief (06:36 CT) and the Monday Brief (07:00 CT) already cover Trenches mail, so three briefs now land before 08:30 on Mondays."
+    },
+    {
+      "action": "Nothing until he answers. The partner watches the thread. The roster still needs his contact: Skyler McLain, skylerm@odsinc.net.",
+      "business": "Overhead Door Systems",
+      "owner": "Connor",
+      "severity": "done",
+      "title": "ODS reply sent",
+      "why": "Connor sent the drafted reply to Skyler McLain at 05:23 CT today (15-minute walkthrough or three-point email, certificate warning first). Ball is with Skyler."
+    },
+    {
+      "action": "claude.ai, Settings, Connectors, Cloudflare Developer Platform, reconnect (Stripe too). Reply \"connector back\".",
+      "business": "Both",
+      "owner": "Connor",
+      "severity": "critical",
+      "title": "Seventh day blind: the Cloudflare connector is still unauthorized",
+      "why": "No D1 read since Oct 24. The partner cannot see leads, campaigns, quotes or the audit log. When PR #22 turns outreach on, the first sends and replies will be invisible."
+    },
+    {
+      "action": "Merge #19 (and #11, #12) or close them and tell the partner to log version 74724898 as the live state.",
+      "business": "Fenlo Property Services",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "fenloservices.com runs code that is not on main",
+      "why": "The Fenlo website session reports lead tracking live as Worker version 74724898, shipped by another session on Oct 22, while PR #19 with the same change is still open. Main does not describe what is live for Fenlo."
+    },
+    {
+      "action": "Open Task Scheduler on the office PC and read the last run result for vivid-weekly-social-batch. If the PC was off, the task needs \"run as soon as possible after a missed start\".",
+      "business": "Vivid Lightscapes",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "vivid-weekly-social-batch left no draft after its first unattended run",
+      "why": "Due Sunday Oct 25 evening. Five mornings later there is still no Gmail draft newer than Oct 22 from it."
+    },
+    {
+      "action": "Answer or archive. The PR decision is also decision 3 in the weekly review.",
+      "business": "Both",
+      "owner": "Connor",
+      "severity": "info",
+      "title": "Four sessions parked on you this week, plus six older ones",
+      "why": "Customer portal GA4 session: star click_to_call and click_to_email in GA admin after tapping them on fenloservices.com. Fenlo website edits: PRs #11, #12 and #19 need merging or closing. OSHA platform research (not Trenches): pick an email provider and domain. Session review and workflow optimization: still working today, no summary. Six older sessions from the Oct 22 review had no activity this week."
+    },
+    {
+      "action": "See the credit item above. Shut down the office runner when convenient.",
+      "business": "Trenches Group",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "Runner history: 15 green windows, now stalled on credit",
+      "why": "Runs 10 to 24 all succeeded by GitHub's definition. Campaigns seen: Electrical and Fencing Murfreesboro, Tree Service and Electrical Smyrna, Pest Control Eagleville. At least 7 leads saved in runs 10 and 12; later runs uncounted. Run 24 did nothing useful (credit)."
+    },
+    {
+      "action": "Merge PR #22 per its deploy order. The partner checks the first long-window log after the deploy and reports whether the duplicate loop and the api_error case are gone.",
+      "business": "Trenches Group",
+      "owner": "Forge",
+      "severity": "info",
+      "title": "Runner discovery loop: PR #22 carries a fix",
+      "why": "PR #22 says discovery varies search terms, saturated markets complete, API outages back off instead of failing the campaign, and a no-geography campaign fails once. That covers most of what the weekly review asked for. Whether it also exits non-zero on \"Credit balance is too low\" is not stated in the PR body."
+    },
+    {
+      "action": "None beyond PR #22.",
+      "business": "Trenches Group",
+      "owner": "Partner",
+      "severity": "info",
+      "title": "Orchestrator creating campaigns; runner draining them again",
+      "why": "Credit restored Oct 27. New campaigns keep appearing in the logs (camp_54dc27d6 today). PR #22 caps the backlog (\"cap 50\" in its flag step)."
+    },
+    {
+      "action": "Say \"deploy trenches-site\" and I run the Deploy app workflow (version mode) and verify the proposal URL. Then run /new-client The Door Crew with the contact and what the proposal offers, or tell me and I will.",
+      "business": "The Door Crew (prospect)",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "The Door Crew proposal is merged but not live, and the client has no folder or roster entry",
+      "why": "PR #20 (claude/door-crew-proposal) merged to trenches-hq main on Oct 22 18:44 CT by another session: a private proposal page and a concept demo site under apps/trenches-site portal/proposals/the-door-crew, plus a proposals.js entry. trenches-site was last deployed at 01:43 UTC that morning, so the proposal URL does not resolve yet. There is no clients/the-door-crew folder and no roster line in CLAUDE.md, so no agent knows who the contact is or what was promised."
+    },
+    {
+      "action": "Create the Trenches website-track campaign in Smartlead with the warmed sender, paste its id into system_flags as SMARTLEAD_WEBSITE_CAMPAIGN_ID, and add SMARTLEAD_API_KEY to the Claude environment. The partner will then hand you a lead list per day and the flag flip is one sentence from you.",
+      "business": "Trenches Group",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "Smartlead chosen for Trenches outreach; the campaign does not exist yet",
+      "why": "Decided 2026-10-22. The orchestrator is already wired to Smartlead but there is no campaign id in system_flags (SMARTLEAD_WEBSITE_CAMPAIGN_ID), so turning it on would enroll nobody. Qualified leads also still lack verified emails."
+    },
+    {
+      "action": "Send the Get Lit draft or tell me to drop it.",
+      "business": "Benson Landscaping, Get Lit",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "Benson follow-up sent; the Get Lit follow-up is the one draft left",
+      "why": "The Get Lit Q-1004 draft from Oct 22 is still in Drafts, 8 days old. No reply yet from Patrick (Benson) or Skyler (ODS) to the Oct 29 sends."
+    },
+    {
+      "action": "Send the partner the mailing address line and the subject you want. It will build the Smartlead draft campaign, paused, for your one click.",
+      "business": "Trenches Group",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "Property manager campaign built Oct 13, never launched",
+      "why": "Recon found 29 verified PM and HOA firms and drafted a 3-email sequence. It is blocked on your mailing address, a subject line, and permission to create the Smartlead draft. Files are in OneDrive Clients/Trenches Group/Outreach/Property Managers Murfreesboro."
+    },
+    {
+      "action": "Block 45 minutes and call the top 10. Ask the partner for the call sheet and a 20-second opener; it is in tomorrow's brief.",
+      "business": "Trenches Group",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "19 qualified leads have a phone and nobody has called them",
+      "why": "Plumbers, HVAC, roofers and tree services around Murfreesboro, Smyrna, Columbia and Spring Hill, scored 65 to 80, no website or a broken one. Website-track email outreach requires a verified email, which none of them has, so they sit in QUALIFIED forever."
+    },
+    {
+      "action": "Start the runner (TRENCHES_RUNNER_KEY, then the Prospector runner workflow) so re-enrichment runs. Meanwhile the 86 priority-C leads with a verified gap and a phone are the call list; the morning brief carries the top 20.",
+      "business": "Trenches Group",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "Review queue is a research problem, not a scoring problem",
+      "why": "348 in HUMAN_REVIEW as of Oct 23. The runner is now online, so re-enrichment can happen; whether it picks up HUMAN_REVIEW leads or only new campaigns needs a D1 check once the connector is back."
+    },
+    {
+      "action": "Rotate the key in Smartlead, add it to the Claude environment as SMARTLEAD_API_KEY, and the partner will update the reply-check routine to read it from the environment.",
+      "business": "Vivid Lightscapes",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "Smartlead API key is sitting in plaintext in a routine prompt",
+      "why": "The Vivid Outreach Reply Check prompt contains the full api_key. The Smartlead webhook secret is also plaintext in system_flags. House rule 13 says rotate on sight."
+    },
+    {
+      "action": "Confirm the rotation happened, then run docs/pricing-gate/smoke-live-stripe.mjs in trenches-hq.",
+      "business": "Trenches Group",
+      "owner": "Connor",
+      "severity": "info",
+      "title": "Stripe secret key was invalid on Oct 9; status unknown",
+      "why": "The _trenches log says prod STRIPE_SECRET_KEY was an mk_ key id, breaking checkout. No later entry says it was rotated."
+    },
+    {
+      "action": "From a desktop session or the Command Center: cancel the sequences with stop_reason ORPHANED_2026-09-13, archive the FAILED campaigns, cancel the test drafts. The SQL is in docs/reviews/2026-10-22-operating-review.md section 10.",
+      "business": "Trenches Group",
+      "owner": "Partner",
+      "severity": "warning",
+      "title": "Orphaned pipeline state makes every dashboard lie",
+      "why": "Half done. 75 queued candidates on dead campaigns closed and 3 failed demo jobs cancelled on 2026-10-22. The session permission guard blocked the rest: 111 ACTIVE sequences and 255 pending steps, 256 FAILED campaigns to archive, 7 test reply drafts."
+    },
+    {
+      "action": "Open the Marketplace Monitor task in the desktop app and turn on \"Require this computer\". Reauthorize the Stripe connector at claude.ai/customize/connectors, then fire the books refresh by hand.",
+      "business": "Vivid Lightscapes",
+      "owner": "Connor",
+      "severity": "info",
+      "title": "Two routines are stopping on purpose and telling you why",
+      "why": "Read their Oct 19 runs. Marketplace Monitor: \"Claude in Chrome isn't available to this scheduled task because it runs in the cloud\"; the tracker sheet has nothing after the Sep 26 baseline. Books refresh: \"Stripe isn't authorized in this session\", so it stopped before touching the books, as its runbook says."
+    },
+    {
+      "action": "Answer or archive them. Each one that stays open is a decision the partner cannot make for you.",
+      "business": "Both",
+      "owner": "Connor",
+      "severity": "info",
+      "title": "Eight older Claude sessions are parked waiting on a one-line answer from you",
+      "why": "From the full session list (45 sessions back to Aug 30): Fenlo site polish (two unsourced stats; PRs 11 and 12 unmerged), Benson Q-1003 send decision, trenches-site dashboard settings for the Startup package session, the Laptop access runner question, Claude session review step 3 or 4, Benson social media package source, Command Center resurrection (Zapmail nameservers), customer portal build spec."
+    },
+    {
+      "action": "Tap the phone number and a Request a site assessment button once on fenloservices.com from your phone. A few hours later, have the Fenlo site session star click_to_call and click_to_email under Admin, Data display, Events (property 555311551).",
+      "business": "Fenlo Property Services",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "Fenlo lead tracking is live; star the two events so the portal counts leads",
+      "why": "Phone and email taps on fenloservices.com now send click_to_call and click_to_email to Google Analytics (live since Oct 22). The portal Leads number only counts key events, and Google only lets you star an event after it has been seen once."
+    },
+    {
+      "action": "None. Decision 2 in the weekly review covers whether batches resume.",
+      "business": "Both",
+      "owner": "Connor",
+      "severity": "info",
+      "title": "No cloud batch today",
+      "why": "Without D1 the partner cannot pick a campaign or dedupe, and the weekly review called the last four batches make-work. Yesterday's plumbing file stands if anyone wants it."
+    },
+    {
+      "action": "Put SMARTLEAD_API_KEY in the Claude environment (rotate first; the current key sits in plaintext in the Reply Check prompt). Then check why the Lightscout session lost its browser tools.",
+      "business": "Vivid Lightscapes",
+      "owner": "Connor",
+      "severity": "warning",
+      "title": "Lightscout: about 47 emailed Vivid leads waiting for the Smartlead key, and the easy emails are gone",
+      "why": "Oct 30 new-leads night: 0 leads, 0 emails. Second night in a row the routine had no browser or Maps tool, so it could only search and fetch, and every candidate failed verification. Pending upload about 47. No SMARTLEAD_API_KEY."
+    }
+  ],
+  "funnels": {
+    "trenches": [
+      {
+        "display": "292 (258 failed)",
+        "label": "Campaigns created",
+        "value": 292
+      },
+      {
+        "display": "1,149",
+        "label": "Candidates found",
+        "value": 1149
+      },
+      {
+        "display": "730",
+        "label": "Leads",
+        "value": 730
+      },
+      {
+        "display": "348",
+        "label": "Human review",
+        "value": 348
+      },
+      {
+        "display": "22",
+        "label": "Qualified",
+        "value": 22
+      },
+      {
+        "display": "90",
+        "label": "Emails sent",
+        "value": 90
+      },
+      {
+        "display": "0",
+        "label": "Real replies",
+        "value": 0
+      },
+      {
+        "display": "3 open",
+        "label": "Quotes sent",
+        "value": 3
+      },
+      {
+        "display": "0",
+        "label": "Paid",
+        "value": 0
+      }
+    ],
+    "vivid": [
+      {
+        "display": "about 1,000",
+        "label": "Smartlead leads enrolled",
+        "value": 1000
+      },
+      {
+        "display": "27",
+        "label": "Lightscout leads pending upload",
+        "value": 27
+      },
+      {
+        "display": "0 alerts",
+        "label": "Genuine replies (7 d)",
+        "value": 0
+      },
+      {
+        "display": "in KV, not readable",
+        "label": "Website leads",
+        "value": 0
+      },
+      {
+        "display": "no data",
+        "label": "Booked",
+        "value": 0
+      }
+    ]
+  },
+  "generatedAt": "2026-10-30T12:05:00Z",
+  "source": "Business partner routine, 2026-10-30 (daily run 9, 6:36 CT). D1 unavailable for the seventh day. Runner API credit out again.",
+  "sources": [
+    "D1: NOT READ (seventh day; Cloudflare connector not authorized). Figures marked \"Oct 23\" are the last real read.",
+    "list_triggers",
+    "Lightscout run cse_01DFNLARzemL5KReSvKCzaVU",
+    "GitHub Actions runs 38 to 41 of the Prospector runner and their job logs",
+    "trenches-hq main @ 265a549 and open PRs 22, 19, 12, 11",
+    "Gmail search and Drafts",
+    "Hyperagent threads"
+  ],
+  "summary": [
+    {
+      "detail": "Run 40 hit \"Credit balance is too low\" at 20:52 CT Oct 29 and run 41 (02:10 to 03:00 CT) failed every discovery call. Both runs show green. Second outage in four days.",
+      "label": "Runner API credit",
+      "tone": "crit",
+      "value": "out again"
+    },
+    {
+      "detail": "Cloudflare connector still not authorized. One week blind.",
+      "label": "Command Center (D1)",
+      "tone": "crit",
+      "value": "unread 7 d"
+    },
+    {
+      "detail": "No change since the fifth commit on Oct 29. Mergeable. Needs the secret, merge, two deploys and four flags.",
+      "label": "PR #22",
+      "tone": "warn",
+      "value": "waiting"
+    },
+    {
+      "detail": "Lightscout Oct 30: 0 leads, 0 emails, second night without a browser or Maps tool. Still no SMARTLEAD_API_KEY.",
+      "label": "Vivid leads pending upload",
+      "tone": "warn",
+      "value": "about 47"
+    },
+    {
+      "detail": "Get Lit follow-up (Q-1004) from Oct 22, 8 days old. No reply yet from Skyler at ODS or Patrick at Benson.",
+      "label": "Drafts waiting",
+      "tone": "warn",
+      "value": "1"
+    },
+    {
+      "detail": "Runs 38 and 39 worked (discovery against camp_54dc27d6). Runs 40 and 41 burned 100 minutes on a dead key. Runner still reports green.",
+      "label": "Prospector runner",
+      "tone": "warn",
+      "value": "32 windows"
+    }
+  ]
+}

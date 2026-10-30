@@ -3,6 +3,16 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-30 (daily partner run 9, 06:36 CT)
+
+- Runner API credit ran out again: run 40 logged "Credit balance is too
+  low" at 01:52 UTC and run 41 (07:10 to 08:00 UTC) failed every discovery
+  call while exiting 0. Second outage since Oct 26. Asked Connor to top up
+  and set auto-reload; the fail-on-api_error runner change is still owed.
+- D1 unread for the seventh day. PR #22 unchanged since Oct 29. Lightscout
+  Oct 30: 0 leads, second night without browser tools. Get Lit draft still
+  unsent; no replies yet from ODS or Benson. No cloud batch. Brief emailed.
+
 ## 2026-10-29 (daily partner run 8, 06:36 CT)
 
 - Connor sent the ODS reply (Skyler McLain) and the Benson follow-up at
