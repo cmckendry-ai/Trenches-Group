@@ -3,6 +3,20 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-10-31 (daily partner run 10, 06:36 CT)
+
+- Runner API credit still out: runs 40 to 45 (Oct 30 01:02 UTC to Oct 31
+  06:35 UTC) failed every Claude call and all exited 0. Run 45 claimed a
+  new Pest Control Mt. Juliet campaign and failed it six times. Asked
+  Connor again for a top-up with auto-reload.
+- D1 unread for the eighth day. Weekly Insights ran Oct 30 without Stripe
+  or D1; it lists Q-1003, Q-1004 and Q-1005 as expiring Nov 8 to 10 and
+  asks whether ODS is a client, whether to void Q-1003, and whether the
+  Fenlo Buford bid is live.
+- Lightscout Oct 31 backfill: 66 checked, 12 emails, about 59 pending
+  upload, no key. Get Lit draft 9 days old. No client mail. No cloud
+  batch. Brief emailed.
+
 ## 2026-10-30 (daily partner run 9, 06:36 CT)
 
 - Runner API credit ran out again: run 40 logged "Credit balance is too
