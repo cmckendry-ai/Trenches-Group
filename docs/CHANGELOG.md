@@ -3,6 +3,18 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-01 (daily partner run 11, 06:36 CT)
+
+- Runner API credit still out (54 h at run 50, 07:36 to 08:26 UTC, which
+  failed a new Pest Control Tullahoma campaign six times). Run 48 (Oct 31
+  21:37 UTC) is red: GitHub lost the job in 2 s before any step. Run 49
+  claimed nothing. Ten windows since Oct 29 evening, zero leads.
+- D1 unread for the ninth day; the three Monday routines will hit the same
+  wall tomorrow. Lightscout Nov 1 backfill: 36 checked, 0 emails, about
+  230 email-blank leads left with little yield; about 59 pending upload, no
+  key. No client mail in 2 days. PR #22 unchanged 3 days. No cloud batch.
+  Brief emailed. Self evaluation fires tonight 18:36 CT.
+
 ## 2026-10-31 (daily partner run 10, 06:36 CT)
 
 - Runner API credit still out: runs 40 to 45 (Oct 30 01:02 UTC to Oct 31
