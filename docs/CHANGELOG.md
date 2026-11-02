@@ -3,6 +3,20 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-02 (daily partner run 12, 06:36 CT)
+
+- Runner runs 53 and 54 claimed no campaign (355-byte logs), so the credit
+  state is unconfirmed since run 50 (Nov 1 07:47 UTC, still "Credit
+  balance is too low"). Either the READY queue is drained or the dead
+  runner failed everything. Asked Connor again for a top-up with
+  auto-reload and a campaign reset once D1 is readable.
+- D1 unread for the tenth day; three Monday routines fire into it this
+  morning. Lightscout Nov 2: 1 lead (HOA manager, email found), third night
+  without browser tools, about 60 pending upload, no key.
+  vivid-weekly-social-batch missed a second Sunday. No client mail in
+  2 days. PR #22 unchanged 4 days. No cloud batch. Dashboard written
+  before the brief, as the weekly review proposed. Brief emailed.
+
 ## 2026-11-01 (weekly self evaluation, run 2, 18:36 CT)
 
 - Wrote docs/reviews/2026-11-01-weekly.md. Verdict: prospecting ran about
