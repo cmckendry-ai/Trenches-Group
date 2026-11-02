@@ -3,6 +3,18 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-01 (weekly self evaluation, run 2, 18:36 CT)
+
+- Wrote docs/reviews/2026-11-01-weekly.md. Verdict: prospecting ran about
+  36 h of 168 (API credit out 10-26 and again from 10-30, runner green while
+  dead); Connor acted on two drafts and none of four standing decisions;
+  the partner dropped the 11-01 dashboard write (worker restart), let the
+  attention list grow to 27 with 16 unchanged items, and drifted its daily
+  practice from the committed prompt. Three changes proposed: runner exits
+  red on api_error plus auto-reload, push notifications and a 12-item cap,
+  Lightscout new-leads mode plus SMARTLEAD_API_KEY. Dashboard refreshed
+  (the missed 11-01 write was also caught up at 00:40 UTC), review emailed.
+
 ## 2026-11-01 (daily partner run 11, 06:36 CT)
 
 - Runner API credit still out (54 h at run 50, 07:36 to 08:26 UTC, which
