@@ -3,6 +3,21 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-03 (daily partner run 13, 06:36 CT)
+
+- Runner runs 53 to 57 claimed no campaign (355-byte logs), so the credit
+  state is still unknown since run 50. Monday routines: the Monday Brief
+  emailed without Stripe or D1, the Books refresh stopped (Stripe not
+  signed in, fourth week), the Marketplace Monitor stopped (no Chrome)
+  and pushed a warning about unread Marketplace messages.
+- D1 unread for the eleventh day. Lightscout Nov 3: 40 checked, 2 emails,
+  about 62 pending upload, no key. Social batch still no draft. No client
+  mail in 2 days. PR #22 unchanged 5 days.
+- Weekly review decision 3 unanswered by the Nov 3 deadline, so the
+  partner is back on the committed ROUTINE-PROMPT.md; its cloud batch
+  step stays blocked by D1. Dashboard written before the brief. Brief
+  emailed.
+
 ## 2026-11-02 (daily partner run 12, 06:36 CT)
 
 - Runner runs 53 and 54 claimed no campaign (355-byte logs), so the credit
