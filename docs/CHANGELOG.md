@@ -3,6 +3,17 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-04 (daily partner run 14, 06:36 CT)
+
+- Runner run 61 (09:17 to 10:07 UTC) claimed Painting Smyrna and failed it
+  six times on "Credit balance is too low": the credit has been out since
+  Oct 30 and five markets are now burned. Runs 58 to 60 claimed nothing.
+- D1 unread for the twelfth day. Lightscout Nov 4: 0 leads, fourth night
+  without browser tools, about 62 pending upload, no key. No client mail.
+  PR #22 unchanged 6 days. Weekly review decisions unanswered 3 days. No
+  cloud batch (blocked by D1). Dashboard written before the brief. Brief
+  emailed.
+
 ## 2026-11-03 (daily partner run 13, 06:36 CT)
 
 - Runner runs 53 to 57 claimed no campaign (355-byte logs), so the credit
