@@ -3,6 +3,15 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-05 (daily partner run 15, 06:36 CT)
+
+- Runner runs 62 to 64 claimed nothing; the last Claude call (run 61,
+  Nov 4) failed on credit. Credit out since Oct 30, five markets burned.
+- D1 unread for the thirteenth day. Lightscout Nov 5 backfill: 53 checked,
+  8 emails, about 70 pending upload, no key. No client mail. PR #22
+  unchanged 7 days. Weekly review decisions unanswered 4 days. No cloud
+  batch (blocked by D1). Dashboard written before the brief. Brief emailed.
+
 ## 2026-11-04 (daily partner run 14, 06:36 CT)
 
 - Runner run 61 (09:17 to 10:07 UTC) claimed Painting Smyrna and failed it
