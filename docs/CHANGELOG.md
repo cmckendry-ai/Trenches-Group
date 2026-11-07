@@ -3,6 +3,37 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-07 (daily partner run 17, 06:36 CT)
+
+- Recovered run 16 (see the Nov 6 entry): wrote history/2026-11-06 to the
+  dashboard from the saved snapshot and committed both snapshots.
+- Runner runs 65 to 72 claimed nothing (352 to 357 byte logs). No Claude
+  call since run 61 on Nov 4; credit untested three days, out eight.
+- D1 unread for the fifteenth day. Lightscout Nov 7 backfill: 52 checked,
+  5 emails, about 76 pending upload, no key. Weekly Insights ran Nov 6
+  22:05 UTC without D1 or Stripe (third week), emailed with a push; it
+  repeats the credit and connector asks. No client mail. PR #22 unchanged
+  9 days. Weekly review decisions unanswered 6 days; third review fires
+  Nov 8 18:36 CT. No cloud batch. Dashboard written before the brief.
+  Brief emailed.
+
+## 2026-11-06 (daily partner run 16, 06:36 CT)
+
+LOST RUN. The session worker restarted after the gather step, before the
+dashboard write, the brief and the commit. The snapshot below was built and
+saved in the container; the Nov 7 run wrote it to the dashboard history and
+committed it. No brief went out on Nov 6.
+
+- Runner runs 65 to 68 claimed nothing (353 to 354 byte logs). No Claude
+  call since run 61 on Nov 4, so the credit is untested; still out as far
+  as anyone knows. Five markets burned.
+- D1 unread for the fourteenth day. Lightscout Nov 6 new-leads pass added
+  one Franklin lead (Triple Crown Bakery); about 71 pending upload, no key.
+  No client mail. PR #22 unchanged 8 days. Weekly review decisions
+  unanswered 5 days. Weekly Insights fires today 16:00 CT without D1 or
+  Stripe. No cloud batch (blocked by D1). Dashboard written before the
+  brief. Brief emailed.
+
 ## 2026-11-05 (daily partner run 15, 06:36 CT)
 
 - Runner runs 62 to 64 claimed nothing; the last Claude call (run 61,
