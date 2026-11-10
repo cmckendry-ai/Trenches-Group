@@ -3,6 +3,29 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-10 (daily partner run 20, 06:36 CT)
+
+- LOST RUNS: Nov 8 (run 18), Nov 8 weekly self evaluation, and Nov 9
+  (run 19) all died in session worker restarts before their output; the
+  Nov 9 dashboard write was also held for an approval nobody answered. No
+  brief went out Nov 6 through Nov 9 and no weekly review was written.
+  The Nov 8 snapshot (ops-dashboard/snapshot-2026-11-08.json) is committed
+  here; it is the last state the partner gathered.
+- Nov 10: brief emailed FIRST ("Trenches partner brief, November 10"),
+  then this commit, then the dashboard write. Runner runs 77 to 83 (Nov 8
+  15:14 UTC to Nov 10 10:44 UTC) all 50-minute idle windows; no Claude call
+  since Nov 4; credit out 11 days. D1 unread day 18. Monday Brief (Nov 9)
+  and Weekly Insights (Nov 6) went out without D1 or Stripe. Q-1004 and
+  Q-1005 expire today; Get Lit draft 19 days old. Lightscout about 76
+  pending as of Nov 8; Nov 9 and 10 runs not read. No client mail.
+  PR #22 unchanged 12 days. New decision 4: a 07:36 CT retry trigger.
+
+## 2026-11-08 (daily partner run 18, 06:36 CT)
+
+LOST RUN (see 2026-11-10). Runner runs 69 to 76 claimed nothing. D1 unread
+day 16. Lightscout Nov 7 backfill 5 emails, Nov 8 Franklin pass 0 leads,
+about 76 pending. Q-1003 expired. Snapshot built and committed on Nov 10.
+
 ## 2026-11-07 (daily partner run 17, 06:36 CT)
 
 - Recovered run 16 (see the Nov 6 entry): wrote history/2026-11-06 to the
