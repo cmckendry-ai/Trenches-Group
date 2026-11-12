@@ -3,6 +3,16 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-12
+
+- Repo: added `docs/reviews/2026-11-12-unified-review.md`. It is redacted
+  because this repo was public on GitHub on 2026-11-12.
+- Repo: `README.md` now says this repo is superseded by the private
+  `trenches-hq` repo (active since 2026-10-10) and must not be deployed from.
+- Prod: no changes. No flags moved. Live systems were not inspected.
+- Still broken: see the review. Owner action needed today: make this repo
+  private.
+
 ## 2026-10-01 (later still)
 
 - Repo: `trenches-os-api/wrangler.jsonc` now declares the `EMAIL` send_email

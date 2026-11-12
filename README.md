@@ -1,5 +1,9 @@
 # Trenches Group monorepo
 
+> **Superseded, 2026-11-12.** Active work moved to the private `trenches-hq`
+> repo on 2026-10-10. This repo is a snapshot from 2026-10-01. Do not deploy
+> from it. See `docs/reviews/2026-11-12-unified-review.md`.
+
 Everything Trenches Group owns and operates, in one place. Start with
 `CLAUDE.md`, then `docs/SYSTEM-MAP.md`, then the newest file in `docs/reviews/`.
 
