@@ -3,6 +3,23 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-12 (daily partner run 22, 06:36 CT)
+
+- Brief emailed first ("Trenches partner brief, November 12"), then the
+  dashboard tiles, advice and actions merged (version 30) and
+  history/2026-11-12 written. Attention list on the page still the Nov 5 one.
+- trenches-hq: seven PRs opened Nov 11 21:53 to 22:07 CT by four sessions:
+  23 (portal invites split from estimate links, tokens off the URL, hashed
+  sessions), 24 (Stripe webhooks retry safe), 25 (portal links need a
+  verified email, confirmation and reset), 26 (tighten Claude permissions,
+  deploy gate, site-edit runner), 27 and 29 (two competing enrollment gate
+  and Smartlead opt-out sync PRs), 28 (decision cap rule). Nothing deployed.
+- GitHub Actions: Prospector runner runs 89 and 90 and both Test apps jobs
+  on PRs 23 and 24 failed in under 4 seconds with no runner and no log
+  (404). [Likely] the month's Actions minutes are exhausted. Runner runs
+  87 and 88 (Nov 11) were normal idle 50-minute windows. Credit out 13 days.
+- D1 unread day 20. No client mail. Lightscout Nov 9 to 12 not read.
+
 ## 2026-11-11 (daily partner run 21, 06:36 CT)
 
 - Brief emailed first ("Trenches partner brief, November 11"), then the
