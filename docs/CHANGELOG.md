@@ -3,6 +3,20 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-11 (daily partner run 21, 06:36 CT)
+
+- Brief emailed first ("Trenches partner brief, November 11"), then the
+  dashboard tiles, advice and actions merged (version 29) and
+  history/2026-11-11 written. The attention list on the page is still the
+  Nov 5 list: its Nov 10 rewrite was held for an approval and lost.
+- Found the Claude app routines "Morning brief" and "Heartbeat" auto-paused
+  on Nov 10 with reason owner_idle. Nothing from Connor since Oct 29.
+- Runner runs 84 to 86 (Nov 10 17:52 UTC to Nov 11 07:17 UTC) idle 50-minute
+  windows; no Claude call since Nov 4; credit out 12 days. D1 unread day 19.
+  Q-1004 and Q-1005 expired Nov 10 (per Weekly Insights). No client mail.
+  PR #22 unchanged 13 days. Lightscout Nov 9 to 11 results not read.
+  New decision 5: is Connor away; if so drop to two briefs a week.
+
 ## 2026-11-10 (daily partner run 20, 06:36 CT)
 
 - LOST RUNS: Nov 8 (run 18), Nov 8 weekly self evaluation, and Nov 9
