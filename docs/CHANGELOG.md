@@ -3,6 +3,18 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-13 (partner, PR 29 merged on Connor's request)
+
+- trenches-hq PR 29 (claude/outreach-gates): renamed the migration
+  0019_smartlead_optout_sync.sql to 0020 and updated every reference
+  (gate comment, status error text, preflight check, app CLAUDE.md);
+  typecheck and 31 gate checks pass; pushed as 89f79c4; merged to main as
+  95056b2 with a merge commit. PR 27 is still open and should be closed.
+- NOT deployed. Migration 0020 is NOT applied to remote trenches-production.
+  Deploying trenches-os before applying it blocks every enrollment on
+  purpose. Flags untouched. GitHub Actions still cannot start jobs, so the
+  deploy workflow is blocked until the Actions billing question is settled.
+
 ## 2026-11-13 (partner, PR 27 vs PR 29 review, on Connor's request)
 
 - Fetched both trenches-hq branches, read the diffs, ran typecheck and
