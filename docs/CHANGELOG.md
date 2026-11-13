@@ -3,6 +3,18 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-13 (partner, PR 27 vs PR 29 review, on Connor's request)
+
+- Fetched both trenches-hq branches, read the diffs, ran typecheck and
+  tests for each in a worktree: PR 27 124 of 124 pass, PR 29 31 of 31 pass.
+- Recommendation sent in chat: merge PR 29 (claude/outreach-gates), close
+  PR 27. Reasons: PR 29 pushes every existing suppression row to Smartlead
+  (PR 27 only syncs opt-outs that happen after deploy), fails closed when
+  the sync is behind, refuses unverified emails, and replaces a campaign
+  whose copy is stale instead of documenting a manual step. Two fixes before
+  merge: rename its migration (PR 24 also uses 0019) and verify the
+  add-domain-block-list call against a test address. Nothing merged here.
+
 ## 2026-11-12 (daily partner run 22, 06:36 CT)
 
 - Brief emailed first ("Trenches partner brief, November 12"), then the
