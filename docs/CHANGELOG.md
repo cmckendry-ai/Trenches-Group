@@ -9,7 +9,7 @@ the repo. Write it at the end of every session.
   0019_smartlead_optout_sync.sql to 0020 and updated every reference
   (gate comment, status error text, preflight check, app CLAUDE.md);
   typecheck and 31 gate checks pass; pushed as 89f79c4; merged to main as
-  95056b2 with a merge commit. PR 27 is still open and should be closed.
+  95056b2 with a merge commit. PR 27 closed unmerged the same day as superseded by 29.
 - NOT deployed. Migration 0020 is NOT applied to remote trenches-production.
   Deploying trenches-os before applying it blocks every enrollment on
   purpose. Flags untouched. GitHub Actions still cannot start jobs, so the
