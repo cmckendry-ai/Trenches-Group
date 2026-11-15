@@ -3,6 +3,28 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-15 (daily partner run 25, 06:36 CT)
+
+- Brief emailed ("Trenches partner brief, November 15"). Runner runs 98 to
+  101 failed in 4 seconds with no runner (eleven straight since Nov 11).
+  D1 unread day 23. No client mail. Nine PRs open, untouched since Nov 12.
+  Weekly self evaluation fires tonight 18:36 CT; the last two Sunday runs
+  were lost. Dashboard merge attempted after this commit.
+
+## 2026-11-14 (daily partner run 24, 06:36 CT)
+
+- Brief emailed. Runner runs 94 to 97 failed instantly. Weekly Insights ran
+  Nov 13 22:07 UTC without D1 or Stripe (fourth week). No client mail.
+  Dashboard merge held for an unanswered approval and lost; CHANGELOG
+  entry written Nov 15.
+
+## 2026-11-13 (daily partner run 23, 06:36 CT)
+
+- Brief emailed. Runner runs 91 to 93 failed instantly. Morning brief and
+  Heartbeat came off the owner-idle pause at 04:44 UTC; new iPhone sign-in
+  02:55 UTC. No client mail. Dashboard merge held for an unanswered
+  approval and lost; CHANGELOG entry written Nov 15.
+
 ## 2026-11-13 (partner, PR 29 merged on Connor's request)
 
 - trenches-hq PR 29 (claude/outreach-gates): renamed the migration
