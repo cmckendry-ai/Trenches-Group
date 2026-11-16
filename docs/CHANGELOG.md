@@ -3,6 +3,15 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-16 (daily partner run 26, 06:36 CT)
+
+- Brief emailed ("Trenches partner brief, November 16"). vivid-weekly-social-batch
+  ran Nov 15 18:14 CT after three missed Sundays and left the Gmail draft
+  "Vivid social batch: week of Nov 16" (three yellow posts, three questions
+  for Connor). Runner runs 104 and 105 failed instantly (fifteen straight).
+  D1 unread day 24. No client mail. Nine PRs open. Dashboard merged in the
+  same round as this commit.
+
 ## 2026-11-15 (weekly self evaluation 3, 18:36 CT)
 
 - Wrote docs/reviews/2026-11-15-weekly.md covering partner runs 12 to 25
