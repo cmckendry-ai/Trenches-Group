@@ -3,6 +3,16 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-15 (weekly self evaluation 3, 18:36 CT)
+
+- Wrote docs/reviews/2026-11-15-weekly.md covering partner runs 12 to 25
+  (the Nov 8 review was lost). Verdict: five lost runs and three lost
+  dashboard writes in two weeks, all to worker restarts and unanswered
+  approvals; runner dead 16 days on credit and blocked since Nov 11 by
+  Actions jobs that never start; Connor merged PR 29 but the credit and
+  connector asks are still open. Three changes: partner prompt ordering,
+  cut the runner schedule, Connor's two clicks. Emailed and dashboard merged.
+
 ## 2026-11-15 (daily partner run 25, 06:36 CT)
 
 - Brief emailed ("Trenches partner brief, November 15"). Runner runs 98 to
