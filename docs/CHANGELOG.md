@@ -3,6 +3,15 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-17 (daily partner run 27, 06:36 CT)
+
+- Prospector runner runs 106 (2026-11-16 22:06 UTC) and 107 (2026-11-17 04:30 UTC) failed in 3 seconds with no runner assigned. Nineteen instant failures since 2026-11-12 and no Claude call since run 61 (2026-11-04). Still read as the Actions spending limit; nothing changed in the workflow.
+- Monday routines on 2026-11-16: Monday Brief sent 13:07 UTC from repo logs only (D1 and Stripe blind, cites the Fenlo Buford bid from Sept 23). Marketplace Monitor fired 13:51 UTC and finished in 14 seconds (no Chrome). Vivid Reply Check ran 2026-11-17 03:03 UTC for 4.5 minutes, no hot lead or error mail seen.
+- Lightscout fired 2026-11-17 08:17 UTC (odd day, email backfill). Result not read; task record carries no session id.
+- Vivid social batch draft (week of Nov 16, Gmail draft r3286281129733430944) still unanswered; the Tuesday Nov 17 post stays yellow.
+- D1 unread day 25. No client or prospect mail in two days. trenches-hq: nine PRs open, unchanged; PR 29 merged, not deployed, migration 0020 not applied.
+- Brief emailed. Dashboard snapshots/latest merged (summary, advice) plus history/2026-11-17. No prompt file edits.
+
 ## 2026-11-16 (daily partner run 26, 06:36 CT)
 
 - Brief emailed ("Trenches partner brief, November 16"). vivid-weekly-social-batch
