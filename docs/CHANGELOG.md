@@ -3,6 +3,15 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-18 (daily partner run 28, 06:36 CT)
+
+- Prospector runner runs 108 (2026-11-17 14:27 UTC), 109 (22:53 UTC) and 110 (2026-11-18 04:24 UTC) failed in 4 seconds with no runner assigned. Twenty-two instant failures since 2026-11-12; no Claude call since run 61 (2026-11-04).
+- Vivid social batch draft (week of Nov 16) still untouched since 2026-11-15; no "posted" reply, so the Tuesday Nov 17 post is presumed missed. Thursday post needs the crop answer.
+- Lightscout fired 2026-11-18 08:18 UTC (even day, new leads). Result not read.
+- No client or prospect mail in two days. Get Lit draft 27 days old, Overhead Door draft 35 days old.
+- D1 unread day 26. trenches-hq: nine PRs open, unchanged since 2026-11-12; PR 29 merged, not deployed, migration 0020 not applied.
+- Brief emailed with a recommendation to pause the runner schedule if billing is not fixed. Dashboard snapshots/latest merged (summary, advice) plus history/2026-11-18. No prompt file edits, no schedule changes.
+
 ## 2026-11-17 (daily partner run 27, 06:36 CT)
 
 - Prospector runner runs 106 (2026-11-16 22:06 UTC) and 107 (2026-11-17 04:30 UTC) failed in 3 seconds with no runner assigned. Nineteen instant failures since 2026-11-12 and no Claude call since run 61 (2026-11-04). Still read as the Actions spending limit; nothing changed in the workflow.
