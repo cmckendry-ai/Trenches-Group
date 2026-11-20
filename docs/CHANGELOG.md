@@ -3,6 +3,15 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-20 (daily partner run 30, 06:36 CT)
+
+- Prospector runner runs 114 (2026-11-19 13:13 UTC), 115 (21:38 UTC) and 116 (2026-11-20 03:19 UTC) failed in 4 seconds with no runner assigned. Twenty-eight instant failures since 2026-11-12; no Claude call since run 61 (2026-11-04).
+- Zero inbound mail for a third day. Vivid social batch draft untouched since 2026-11-15; Tuesday and Thursday posts missed, Saturday post still needs an answer. No reply to the Nov 19 one-word cadence ask.
+- Lightscout fired 2026-11-20 08:19 UTC (even day, new leads). Result not read.
+- D1 unread day 28. trenches-hq: nine PRs open, unchanged since 2026-11-12; PR 29 merged, not deployed, migration 0020 not applied.
+- Weekly Insights fires today 22:04 UTC without D1 or Stripe (fourth blind week). Weekly self evaluation fires 2026-11-23 00:36 UTC.
+- Brief emailed. No prompt file edits, no schedule changes. Dashboard snapshots/latest merged (summary, advice) plus history/2026-11-20.
+
 ## 2026-11-19 (daily partner run 29, 06:36 CT)
 
 - Prospector runner runs 111 (2026-11-18 14:01 UTC), 112 (21:58 UTC) and 113 (2026-11-19 03:30 UTC) failed in 4 seconds with no runner assigned. Twenty-five instant failures since 2026-11-12; no Claude call since run 61 (2026-11-04).
