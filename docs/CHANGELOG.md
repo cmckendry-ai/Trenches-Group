@@ -3,6 +3,19 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-22 (evening, Cloudflare connector restored)
+
+- Connor reauthorized the Cloudflare connector; first D1 read since 2026-10-23. All queries SELECT only.
+- events: 0 rows in the last 7 days. Last 30 days: 1,897 STATE_CHANGED, 570 PROSPECT_RESEARCH_RECEIVED, 567 QUALIFICATION_WORKFLOW_REQUESTED, 474 PROSPECT_SCORED, 422 LEAD_CREATED, 92 RESEARCH_REFRESHED_NO_STATE_RESET, all from the Oct 23 to 29 runner window. Last OPS_PARTNER_ACTION 2026-10-23.
+- leads: 1,242 total, 0 in 7 days, 422 in 30 days, last 2026-10-29 15:09 UTC. States: HUMAN_REVIEW 739, DISQUALIFIED 476, QUALIFIED 23, NEW 3, AWAITING_REPLY 1. prospect_candidates 2,391.
+- prospecting_campaigns: FAILED 394 (last 2026-11-04 09:32 UTC), COMPLETED 56 (last 2026-10-27), PAUSED 2, READY 0. prospector_jobs: 140 active, last_run 2026-11-04 01:26 UTC.
+- runner_status: github-actions-runner-01 last seen 2026-11-11 22:51 UTC; connor-windows-runner-01 2026-10-03; orgo-trenches-runner-01 2026-09-28.
+- system_flags: nothing moved since 2026-09-16. OUTREACH_EMAIL_LIVE_MODE true (since Aug 30), OUTREACH_LIVE_MODE false, OUTREACH_AUTONOMOUS_ORCHESTRATOR_ENABLED false, OUTREACH_ENABLED false, PROSPECTOR_ORCHESTRATOR_ENABLED true, SMARTLEAD_WEBHOOK_SECRET still a plaintext flag.
+- quotes: Q-1004 Get Lit SENT ($1,499 plus $400/mo, expired 2026-11-10, 0 views); Q-1005 Benson SENT ($350 plus $500/mo, expired 2026-11-10, 0 views); Q-1006 Benson SENT ($650 plus $250/mo, no expiry, 0 views); Q-1003 Benson Lawns DRAFT (expired 2026-11-08). No quote viewed since creation.
+- outreach_email_messages: 0 rows in 30 days. suppressions: 0 rows. subscriptions: 0 rows. change_requests open: 1.
+- d1_migrations: last applied 0021_renewal_reminders.sql (2026-10-21), 0020_portal_change_log.sql, 0019_google_drive_connection.sql, all from apps/trenches-site. trenches-os 0020_smartlead_optout_sync.sql (PR 29) not applied; its name does not collide in the shared table but the two apps now number migrations independently against one database.
+- Workers: trenches-os-api modified 2026-10-22 02:23 UTC, trenches-site 2026-10-22 01:43, fenloservices-site 2026-10-22 02:31, vivid-lightscapes and vivid-leads-worker 2026-10-28. No deploy since the Oct 22 Actions deploys, so no prod drift against the Oct 22 bundle.
+
 ## 2026-11-22 (weekly self evaluation 4, 18:36 CT)
 
 - docs/reviews/2026-11-22-weekly.md written. Verdict: partner 7 of 7 runs landed; Connor active on 2026-11-18 (two desktop sessions) but no ask moved; runner 22 more instant failures (37 in a row), D1 unread 30 days, Vivid 0 of 3 posts. New social batch draft landed 2026-11-23 00:13 UTC. Three changes: partner commits ROUTINE-PROMPT.md as documentation of current practice, Connor answers the Nov 18 session with "runner PR" plus Actions billing and API credit, Connor gives one word on brief cadence. Dashboard merged, email sent. No prompt file edited tonight.
