@@ -3,6 +3,10 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-22 (weekly self evaluation 4, 18:36 CT)
+
+- docs/reviews/2026-11-22-weekly.md written. Verdict: partner 7 of 7 runs landed; Connor active on 2026-11-18 (two desktop sessions) but no ask moved; runner 22 more instant failures (37 in a row), D1 unread 30 days, Vivid 0 of 3 posts. New social batch draft landed 2026-11-23 00:13 UTC. Three changes: partner commits ROUTINE-PROMPT.md as documentation of current practice, Connor answers the Nov 18 session with "runner PR" plus Actions billing and API credit, Connor gives one word on brief cadence. Dashboard merged, email sent. No prompt file edited tonight.
+
 ## 2026-11-22 (daily partner run 32, 06:36 CT)
 
 - Prospector runner runs 121 (2026-11-21 17:58 UTC), 122 (23:20 UTC) and 123 (2026-11-22 06:52 UTC) failed in 3 seconds with no runner assigned. Thirty-five instant failures since 2026-11-12; no Claude call since run 61 (2026-11-04).
