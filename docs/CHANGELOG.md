@@ -3,6 +3,16 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-24 (daily partner run 34, 06:36 CT; covers the lost 2026-11-23 run 33)
+
+- Run 33 (2026-11-23 12:36 UTC) was lost: the session was blocked on an unanswered Stripe credential form from the evening of 2026-11-22, so the trigger queued and was delivered with today's at 12:36 UTC. No brief, commit or dashboard write on 2026-11-23. Stated in the first line of today's brief.
+- Stripe: the restricted key form (request_credential for api.stripe.com) opened twice on 2026-11-22 evening and was closed both times by worker restarts before a key was entered. Stripe still unreachable from this session. Connor was in the Stripe dashboard (notifications@stripe.com "Your backup email has been updated", 2026-11-23).
+- D1 (live): 0 events since 2026-10-29, 0 leads in 7 days, 0 outreach emails in 7 days, 0 READY campaigns, runner last seen 2026-11-11 22:51 UTC, flags unchanged since 2026-09-16, 3 quotes SENT with last view 2026-10-09, 739 HUMAN_REVIEW, 23 QUALIFIED.
+- Prospector runner runs 126 (2026-11-23 02:47 UTC), 127 (12:49 UTC), 128 (2026-11-24 00:54 UTC) and 129 (10:57 UTC) failed in 4 seconds with no runner. Forty-one instant failures since 2026-11-12.
+- Monday Brief fired 2026-11-23 13:08 UTC and sent; content not read. Lightscout fired 2026-11-23 and 2026-11-24 08:17 UTC; results not read.
+- Vivid social batch for the week of Nov 23 (draft r6519621162672821053) untouched; Tuesday post unanswered on its day. Nov 16 draft still present.
+- trenches-hq: nine PRs open, unchanged since 2026-11-12. Brief emailed. Dashboard snapshots/latest merged plus history/2026-11-23 (lost) and history/2026-11-24.
+
 ## 2026-11-22 (evening, Cloudflare connector restored)
 
 - Connor reauthorized the Cloudflare connector; first D1 read since 2026-10-23. All queries SELECT only.
