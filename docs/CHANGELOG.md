@@ -3,6 +3,14 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-25 (daily partner run 35, 06:36 CT)
+
+- D1 (live): 0 events in 24 h, last event 2026-10-29; 0 leads and 0 outreach emails in 7 days; 0 READY campaigns; runner last seen 2026-11-11; flags unchanged since 2026-09-16; last quote update 2026-10-13; 739 HUMAN_REVIEW, 23 QUALIFIED.
+- Prospector runner runs 130 (2026-11-24 21:13 UTC) and 131 (2026-11-25 04:16 UTC) failed in 4 seconds with no runner. Forty-three instant failures since 2026-11-12.
+- Stripe: still no restricted key entered. Stripe notified Connor of an unrecognized device sign in on 2026-11-24. Form not reopened; waiting on "key ready".
+- Vivid social batch week of Nov 23 untouched; Tuesday post presumed missed. Nov 16 draft still present. Lightscout fired 2026-11-25 08:18 UTC, result not read.
+- No client or prospect mail. trenches-hq: nine PRs open, unchanged since 2026-11-12. Brief emailed. Dashboard snapshots/latest merged plus history/2026-11-25.
+
 ## 2026-11-24 (daily partner run 34, 06:36 CT; covers the lost 2026-11-23 run 33)
 
 - Run 33 (2026-11-23 12:36 UTC) was lost: the session was blocked on an unanswered Stripe credential form from the evening of 2026-11-22, so the trigger queued and was delivered with today's at 12:36 UTC. No brief, commit or dashboard write on 2026-11-23. Stated in the first line of today's brief.
