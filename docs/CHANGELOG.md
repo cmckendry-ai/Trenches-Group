@@ -3,6 +3,14 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-26 (daily partner run 36, 06:36 CT, Thanksgiving)
+
+- D1 (live): unchanged. 0 events in 24 h, last event 2026-10-29; 0 leads and 0 outreach emails in 7 days; 0 READY campaigns; runner last seen 2026-11-11; flags unchanged since 2026-09-16; last quote update 2026-10-13; 739 HUMAN_REVIEW, 23 QUALIFIED.
+- Prospector runner runs 132 (2026-11-25 14:35 UTC), 133 (23:39 UTC) and 134 (2026-11-26 08:23 UTC) failed in 4 seconds with no runner. Forty-six instant failures since 2026-11-12.
+- Stripe: no key entered, no reply to the ask. Vivid batch drafts (Nov 16, Nov 23) untouched; Thursday post presumed missed. Lightscout fired 2026-11-26 08:17 UTC, result not read.
+- Inbound: one vendor cold pitch (systatopro.com), Squarespace promo, Google Workspace pricing notice. No client or prospect mail.
+- trenches-hq: nine PRs open, unchanged since 2026-11-12. Brief emailed. Dashboard snapshots/latest merged plus history/2026-11-26.
+
 ## 2026-11-25 (daily partner run 35, 06:36 CT)
 
 - D1 (live): 0 events in 24 h, last event 2026-10-29; 0 leads and 0 outreach emails in 7 days; 0 READY campaigns; runner last seen 2026-11-11; flags unchanged since 2026-09-16; last quote update 2026-10-13; 739 HUMAN_REVIEW, 23 QUALIFIED.
