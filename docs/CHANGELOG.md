@@ -3,6 +3,15 @@
 Dated, newest first. One line per thing that changed in prod, in flags, or in
 the repo. Write it at the end of every session.
 
+## 2026-11-28 (daily partner run 38, 06:36 CT; covers the lost 2026-11-27 run 37)
+
+- Run 37 (2026-11-27 12:36 UTC) was lost: the trigger reached this session on 2026-11-28 at 12:37 UTC, a day late, alongside run 38. The session was idle; cause of the delayed delivery unknown. No brief, commit or dashboard write on 2026-11-27.
+- D1 (live): unchanged. 0 events in 48 h, last event 2026-10-29; 0 leads and 0 outreach emails in 7 days; 0 READY campaigns; runner last seen 2026-11-11; flags unchanged since 2026-09-16; last quote update 2026-10-13; 739 HUMAN_REVIEW, 23 QUALIFIED.
+- Prospector runner runs 135 (2026-11-26 19:03 UTC) through 140 (2026-11-28 11:50 UTC) failed in 4 seconds with no runner. Fifty-two instant failures since 2026-11-12.
+- Weekly Insights fired 2026-11-27 22:05 UTC, ran 74 seconds (54 s last week), sent. Content not read. Hearth Morning brief failed 2026-11-27 14:12 UTC with ACCESS_DENIED (first failure seen on that routine).
+- Stripe: no key entered, no reply. Vivid batch drafts (Nov 16, Nov 23) untouched; Saturday post presumed missed. Lightscout fired 2026-11-27 and 2026-11-28 08:17 UTC, results not read.
+- No client or prospect mail. trenches-hq: nine PRs open, unchanged since 2026-11-12. Brief emailed. Dashboard snapshots/latest merged plus history/2026-11-27 (lost) and history/2026-11-28.
+
 ## 2026-11-26 (daily partner run 36, 06:36 CT, Thanksgiving)
 
 - D1 (live): unchanged. 0 events in 24 h, last event 2026-10-29; 0 leads and 0 outreach emails in 7 days; 0 READY campaigns; runner last seen 2026-11-11; flags unchanged since 2026-09-16; last quote update 2026-10-13; 739 HUMAN_REVIEW, 23 QUALIFIED.
